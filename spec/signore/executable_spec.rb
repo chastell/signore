@@ -24,4 +24,11 @@ module Signore describe Executable do
     stderr.should match /usage: signore prego\|pronto \[label, …\]/
   end
 
+  it 'should connect to the database provided with the --database option, defaulting to ~/.signore/signore.db' do
+    Signore.should_receive(:connect).with 'signore.db'
+    Executable.new ['-d', 'signore.db', 'prego']
+    Signore.should_receive(:connect).with File.expand_path('~/.signore/signore.db')
+    Executable.new ['prego']
+  end
+
 end end
