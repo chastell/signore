@@ -3,6 +3,7 @@ module Signore describe Signature do
 
   it 'should return a proper random signature based on the provided labels' do
     Signore.db.transaction do
+      lambda { Signature.find_random_by_labels([]) }.should_not raise_error
       Signature.find_random_by_labels(['programming']).text.should == '// sometimes I believe compiler ignores all my comments'
       Signature.find_random_by_labels(['programming', 'tech']).text.should == '// sometimes I believe compiler ignores all my comments'
       srand 1981
