@@ -11,6 +11,8 @@ module Signore
       FileUtils.mkpath File.dirname file
       Sequel::Migrator.apply @db, "#{File.dirname __FILE__}/signore/migrations"
     end
+    require_relative 'signore/label'
+    require_relative 'signore/signature'
   end
 
   def self.connected?
