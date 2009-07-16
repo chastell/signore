@@ -10,8 +10,8 @@ module Signore class Executable
     @labels = args
   end
 
-  def run output, sig_class
-    output.puts sig_class.find_random_by_labels @labels
+  def run output
+    output.puts Signature.find_random_by_labels @labels
   end
 
 end end
