@@ -9,6 +9,7 @@ describe Signore do
   end
 
   it 'should setup the database connection, creating the database and migrating it to the current schema if required' do
+    pending if Signore.connected?
     File.exists?(@file).should be_false
     Signore.connect @file
     File.exists?(@file).should be_true
