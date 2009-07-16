@@ -9,6 +9,7 @@ module Signore describe Signature do
       Signature.find_random_by_labels(['tech']).text.should == '// sometimes I believe compiler ignores all my comments'
       srand 1979
       Signature.find_random_by_labels(['tech']).text.force_encoding('UTF-8').should == 'You do have to be mad to work here, but it doesn’t help.'
+      srand
       raise Sequel::Rollback
     end
   end
