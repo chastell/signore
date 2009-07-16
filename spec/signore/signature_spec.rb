@@ -14,5 +14,12 @@ module Signore describe Signature do
     end
   end
 
+  it 'should properly display signatures with (and without) author/source' do
+    Signature[1].display.should == '// sometimes I believe compiler ignores all my comments'
+    Signature[2].display.should == 'stay-at-home executives vs. wallstreet dads [kodz]'
+    Signature[3].display.should == 'You do have to be mad to work here, but it doesn’t help. [Gary Barnes, asr]'
+    Signature[4].display.should == 'Bruce Schneier knows Alice and Bob’s shared secret. [Bruce Schneier Facts]'
+  end
+
 end end
 end
