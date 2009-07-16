@@ -32,8 +32,10 @@ module Signore describe Executable do
   end
 
   it 'should print a random signature based on the provided labels' do
-    Signore.should_receive :connect
-    Signature.should_receive(:find_random_by_labels).with(['tech', 'programming']).and_return '// sometimes I believe compiler ignores all my comments'
+    sig = mock Signature
+    Signore.should_receive :connect # added only so that we don’t actually connect for this spec
+    Signature.should_receive(:find_random_by_labels).with(['tech', 'programming']).and_return sig
+    sig.should_receive(:display).and_return '// sometimes I believe compiler ignores all my comments'
     Executable.new(['prego', 'tech', 'programming']).run output = StringIO.new
     output.rewind
     output.read.should == "// sometimes I believe compiler ignores all my comments\n"

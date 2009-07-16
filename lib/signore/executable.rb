@@ -11,7 +11,7 @@ module Signore class Executable
   end
 
   def run output
-    output.puts Signature.find_random_by_labels @labels
+    output.puts Signature.find_random_by_labels(@labels).display
   end
 
 end end
