@@ -3,7 +3,7 @@ module Signore class Signature < Sequel::Model
   many_to_many :labels, :class => 'Signore::Label'
 
   def self.find_random_by_labels labels
-    sigs = labels.empty? ? all : labels.map { |label| Label[:name => label].signatures }.inject(:&)
+    sigs = labels.empty? ? all : labels.map { |label| Label[:name => label].signatures rescue [] }.inject(:&)
     sigs.sort_by { rand }.first
   end
 
