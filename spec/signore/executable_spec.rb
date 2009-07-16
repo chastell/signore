@@ -31,4 +31,13 @@ module Signore describe Executable do
     Executable.new ['prego']
   end
 
+  it 'should print a random signature based on the provided labels' do
+    Signore.should_receive :connect
+    sig_class = mock Class
+    sig_class.should_receive(:find_random_by_labels).with(['tech', 'programming']).and_return '// sometimes I believe compiler ignores all my comments'
+    Executable.new(['prego', 'tech', 'programming']).run output = StringIO.new, sig_class
+    output.rewind
+    output.read.should == "// sometimes I believe compiler ignores all my comments\n"
+  end
+
 end end

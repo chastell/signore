@@ -6,6 +6,12 @@ module Signore class Executable
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
     Signore.connect opts[:database]
+    args.shift
+    @labels = args
+  end
+
+  def run output, sig_class
+    output.puts sig_class.find_random_by_labels @labels
   end
 
 end end
