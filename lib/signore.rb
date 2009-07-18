@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'sequel'
 require 'sequel/extensions/migration'
 require 'trollop'
