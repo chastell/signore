@@ -6,7 +6,8 @@ module Signore
 
   def self.connect file
     return if connected?
-    @db = Sequel.amalgalite file
+    # FIXME: make this optionally work with Amalgalite
+    @db = Sequel.sqlite file
     unless File.exists? file
       FileUtils.mkpath File.dirname file
       Sequel::Migrator.apply @db, "#{File.dirname __FILE__}/signore/migrations"
