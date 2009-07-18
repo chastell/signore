@@ -6,12 +6,23 @@ module Signore class Executable
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
     Signore.connect opts[:database]
-    args.shift
+    @action = args.shift
     @labels = args
   end
 
-  def run output = $stdout
-    output.puts Signature.find_random_by_labels(@labels).display
+  def run output = $stdout, input = $stdin
+    case @action
+    when 'prego'
+      sig = Signature.find_random_by_labels @labels
+    when 'pronto'
+      params = {:labels => @labels}
+      [:text, :author, :source].each do |elem|
+        output << "#{elem}? "
+        params[elem] = input.gets.chomp
+      end
+      sig = Signature.create_with_labels params
+    end
+    output.puts sig.display
   end
 
 end end

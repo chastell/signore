@@ -41,4 +41,16 @@ module Signore describe Executable do
     output.read.should == "// sometimes I believe compiler ignores all my comments\n"
   end
 
+  it 'should add a signature with the provided labels' do
+    in_transaction do
+      input = StringIO.new "the meaning of life\nDouglas Adams\nHHTG\n"
+      Executable.new(['pronto', 'life', '42']).run output = StringIO.new, input
+      output.rewind
+      output.read.should == "text? author? source? the meaning of life [Douglas Adams, HHTG]\n"
+      Executable.new(['prego', 'life', '42']).run output = StringIO.new
+      output.rewind
+      output.read.should == "the meaning of life [Douglas Adams, HHTG]\n"
+    end
+  end
+
 end end
