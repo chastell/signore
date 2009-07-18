@@ -19,4 +19,21 @@ module Signore describe Signature do
     Signature[4].display.should == 'Bruce Schneier knows Alice and Bob’s shared secret. [Bruce Schneier Facts]'
   end
 
+  it 'should properly create a signature with the provided labels, setting author/source to NULL if empty' do
+    Signore.db.transaction do
+      random = rand.to_s
+      sig = Signature.create_with_labels :text => 'Nostalgia is a symptom of amnesia.', :author => 'Fletch', :source => 'Oh Word', :labels => ['life', random]
+      sig.display.should == 'Nostalgia is a symptom of amnesia. [Fletch, Oh Word]'
+      Signature.find_random_by_labels(['life', random]).should == sig
+      raise Sequel::Rollback
+    end
+    Signore.db.transaction do
+      random = rand.to_s
+      sig = Signature.create_with_labels :text => 'Sleep is just a drug.', :labels => ['life', random]
+      sig.display.should == 'Sleep is just a drug.'
+      Signature.find_random_by_labels(['life', random]).should == sig
+      raise Sequel::Rollback
+    end
+  end
+
 end end

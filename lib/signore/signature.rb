@@ -7,6 +7,14 @@ module Signore class Signature < Sequel::Model
     sigs.sort_by { rand }.first
   end
 
+  def self.create_with_labels params
+    labels = params[:labels]
+    params.delete_if { |key, value| not [:text, :author, :source].include? key }
+    sig = self.create params
+    labels.each { |label| sig.add_label Label.find_or_create :name => label }
+    sig
+  end
+
   def display
     # FIXME: figure out how to drop the force_encoding call
     case
