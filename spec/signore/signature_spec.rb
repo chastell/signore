@@ -1,4 +1,3 @@
-inside_connection do
 module Signore describe Signature do
 
   it 'should return a proper random signature based on the provided labels' do
@@ -24,4 +23,3 @@ module Signore describe Signature do
   end
 
 end end
-end
