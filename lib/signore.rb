@@ -17,7 +17,7 @@ module Signore
   end
 
   def self.connected?
-    !!@db
+    not @db.nil?
   end
 
   def self.db
