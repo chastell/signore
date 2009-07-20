@@ -30,4 +30,13 @@ module Signore describe Signature do
     end
   end
 
+  it 'should wrap signatures properly' do
+    in_transaction do
+      pairs = YAML.load File.read 'spec/fixtures/wrapping.yaml'
+      pairs.each do |pair|
+        Signature.create(pair[:orig]).display.should == pair[:wrapped]
+      end
+    end
+  end
+
 end end

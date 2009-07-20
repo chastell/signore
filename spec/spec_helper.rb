@@ -1,4 +1,5 @@
 require 'tmpdir'
+require 'yaml'
 
 require 'lib/signore'
 
