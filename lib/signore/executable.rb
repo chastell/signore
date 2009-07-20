@@ -15,8 +15,11 @@ module Signore class Executable
     when 'prego'
       sig = Signature.find_random_by_labels @labels
     when 'pronto'
-      params = {:labels => @labels}
-      [:text, :author, :source].each do |elem|
+      params = {:labels => @labels, :text => ''}
+      output.puts 'text?'
+      params[:text] << input.gets until params[:text].lines.to_a.last == "\n"
+      params[:text].rstrip!
+      [:author, :source].each do |elem|
         output << "#{elem}? "
         params[elem] = input.gets.chomp
       end
