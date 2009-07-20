@@ -16,13 +16,28 @@ module Signore class Signature < Sequel::Model
   end
 
   def display
-    # FIXME: figure out how to drop the force_encoding call
-    case
-    when author && source then "#{text} [#{author}, #{source}]"
-    when author           then "#{text} [#{author}]"
-    when source           then "#{text} [#{source}]"
-    else text
-    end.force_encoding 'UTF-8'
+    # FIXME: figure out how to drop the force_encoding calls
+    meta = case
+           when author && source then "[#{author}, #{source}]"
+           when author           then "[#{author}]"
+           when source           then "[#{source}]"
+           else ''
+           end.force_encoding 'UTF-8'
+    line = text.force_encoding 'UTF-8'
+    line += " #{meta}" unless meta.empty?
+    wrap line
+  end
+
+  private
+
+  def wrap text
+    best = text.gsub /(.{1,80})( |$\n?)/, "\\1\n"
+    best_size = best.count "\n"
+    79.downto 1 do |size|
+      new = text.gsub /(.{1,#{size}})( |$\n?)/, "\\1\n"
+      new.count("\n") > best_size ? break : best = new
+    end
+    best.chomp
   end
 
 end end
