@@ -9,6 +9,7 @@ module Signore class Signature < Sequel::Model
 
   def self.create_with_labels params
     labels = params.delete :labels
+    params.delete_if { |key, value| value.empty? }
     sig = self.create params
     labels.each { |label| sig.add_label Label.find_or_create :name => label }
     sig

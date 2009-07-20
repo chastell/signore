@@ -27,7 +27,7 @@ module Signore describe Signature do
       Signature.find_random_by_labels(['life', random]).should == sig
     end
     in_transaction do
-      sig = Signature.create_with_labels :text => 'Sleep is just a drug.', :labels => ['life', random]
+      sig = Signature.create_with_labels :text => 'Sleep is just a drug.', :author => '', :source => '', :labels => ['life', random]
       sig.display.should == 'Sleep is just a drug.'
       Signature.find_random_by_labels(['life', random]).should == sig
     end
