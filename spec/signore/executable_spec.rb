@@ -58,7 +58,7 @@ module Signore describe Executable do
       input = StringIO.new "I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n\nSimon Burr, Kyle Hearn\n\n"
       Executable.new(['pronto']).run output = StringIO.new, input
       output.rewind
-      output.read.should == "text?\nauthor? source? I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’ [Simon Burr, Kyle Hearn]\n"
+      output.read.should == "text?\nauthor? source? I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’                                    [Simon Burr, Kyle Hearn]\n"
     end
   end
 

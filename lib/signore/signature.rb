@@ -25,10 +25,19 @@ module Signore class Signature < Sequel::Model
            end.force_encoding 'UTF-8'
     line = text.force_encoding 'UTF-8'
     line += " #{meta}" unless meta.empty?
-    wrap line
+    line = wrap line
+    line = fix_meta line, meta unless meta.empty?
+    line
   end
 
   private
+
+  def fix_meta text, meta
+    longest = text.split("\n").map(&:size).max
+    last = text.lines.to_a.last.size
+    text[-meta.size..-1] = ' ' * (longest - last) + meta
+    text
+  end
 
   def wrap text
     best = text.gsub /(.{1,80})( |$\n?)/, "\\1\n"
