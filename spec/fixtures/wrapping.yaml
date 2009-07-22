@@ -12,3 +12,11 @@
   :wrapped: |-
     No, no, it’s spelled Raymond Luxury Yacht, but it’s
     pronounced Throatwobbler Mangrove.   [Monty Python]
+
+# meta-info on multi-line sigs shouldn’t make the last line the longest
+- :orig:
+    :text: Clojure Creator Admits Unfortunate Spelling Error in Original Whitepaper
+    :author: Patently False
+  :wrapped: |-
+    Clojure Creator Admits Unfortunate Spelling Error
+    in Original Whitepaper           [Patently False]
