@@ -39,13 +39,17 @@ module Signore class Signature < Sequel::Model
     text
   end
 
+  def has_meta?
+    author or source
+  end
+
   def wrap text
     best = text.gsub /(.{1,80})( |$\n?)/, "\\1\n"
     best_size = best.count "\n"
     79.downto 1 do |size|
       new = text.gsub /(.{1,#{size}})( |$\n?)/, "\\1\n"
       lengths = new.split("\n").map(&:size)
-      break if lengths.last == lengths.max and lengths.count(lengths.max) == 1
+      break if has_meta? and lengths.last == lengths.max and lengths.count(lengths.max) == 1
       new.count("\n") > best_size ? break : best = new
     end
     best.chomp
