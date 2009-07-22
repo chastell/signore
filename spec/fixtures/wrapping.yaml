@@ -1,7 +1,11 @@
 ---
+
+# wrapping shouldn’t affect one-liners
 - :orig:
     :text: Patches are like Free Software love letters.
   :wrapped: Patches are like Free Software love letters.
+
+# meta info on multi-line signatures should be right-aligned
 - :orig:
     :text: No, no, it’s spelled Raymond Luxury Yacht, but it’s pronounced Throatwobbler Mangrove.
     :author: Monty Python
