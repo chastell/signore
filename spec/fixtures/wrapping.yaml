@@ -27,3 +27,18 @@
   :wrapped: |-
     It may look like I’m just sitting here doing nothing. But
     I’m really actively waiting for all my problems to go away.
+
+# multi-line signatures should be wrapped properly
+- :orig:
+    :text: |-
+      ‘The Ruby community should proceed with all deliberate speed towards ISO standardization of the language.’
+      ‘Yeah, look what it did to Forth.’
+      ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
+    :author: M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown
+    :source: ruby-talk
+  :wrapped: |-
+    ‘The Ruby community should proceed with all deliberate
+    speed towards ISO standardization of the language.’
+    ‘Yeah, look what it did to Forth.’
+    ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
+                [M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]
