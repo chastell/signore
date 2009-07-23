@@ -20,7 +20,7 @@ module Signore class Signature < Sequel::Model
     lines = text.force_encoding 'UTF-8'
     lines += " #{meta}" if has_meta?
     lines = wrap lines
-    lines = right_align_meta lines, meta if has_meta?
+    lines = right_align_meta lines
     lines
   end
 
@@ -40,10 +40,10 @@ module Signore class Signature < Sequel::Model
     end.force_encoding 'UTF-8'
   end
 
-  def right_align_meta lines, meta
-    longest = lines.split("\n").map(&:size).max
-    last = lines.lines.to_a.last.size
-    lines[-meta.size..-1] = ' ' * (longest - last) + meta
+  def right_align_meta lines
+    return lines unless has_meta?
+    lenghts = lines.split("\n").map(&:size)
+    lines[-meta.size..-1] = ' ' * (lenghts.max - lenghts.last) + meta
     lines
   end
 
