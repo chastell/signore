@@ -16,17 +16,11 @@ module Signore class Signature < Sequel::Model
   end
 
   def display
-    # FIXME: figure out how to drop the force_encoding calls
-    meta = case
-           when author && source then "[#{author}, #{source}]"
-           when author           then "[#{author}]"
-           when source           then "[#{source}]"
-           else ''
-           end.force_encoding 'UTF-8'
+    # FIXME: figure out how to drop the force_encoding call
     line = text.force_encoding 'UTF-8'
-    line += " #{meta}" unless meta.empty?
+    line += " #{meta}" if has_meta?
     line = wrap line
-    line = fix_meta line, meta unless meta.empty?
+    line = fix_meta line, meta if has_meta?
     line
   end
 
@@ -41,6 +35,16 @@ module Signore class Signature < Sequel::Model
 
   def has_meta?
     author or source
+  end
+
+  def meta
+    # FIXME: figure out how to drop the force_encoding call
+    case
+    when author && source then "[#{author}, #{source}]"
+    when author           then "[#{author}]"
+    when source           then "[#{source}]"
+    else ''
+    end.force_encoding 'UTF-8'
   end
 
   def wrap text
