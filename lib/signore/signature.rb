@@ -17,20 +17,20 @@ module Signore class Signature < Sequel::Model
 
   def display
     # FIXME: figure out how to drop the force_encoding call
-    line = text.force_encoding 'UTF-8'
-    line += " #{meta}" if has_meta?
-    line = wrap line
-    line = fix_meta line, meta if has_meta?
-    line
+    lines = text.force_encoding 'UTF-8'
+    lines += " #{meta}" if has_meta?
+    lines = wrap lines
+    lines = fix_meta lines, meta if has_meta?
+    lines
   end
 
   private
 
-  def fix_meta text, meta
-    longest = text.split("\n").map(&:size).max
-    last = text.lines.to_a.last.size
-    text[-meta.size..-1] = ' ' * (longest - last) + meta
-    text
+  def fix_meta lines, meta
+    longest = lines.split("\n").map(&:size).max
+    last = lines.lines.to_a.last.size
+    lines[-meta.size..-1] = ' ' * (longest - last) + meta
+    lines
   end
 
   def has_meta?
@@ -47,11 +47,11 @@ module Signore class Signature < Sequel::Model
     end.force_encoding 'UTF-8'
   end
 
-  def wrap text
-    best = text.gsub /(.{1,80})( |$\n?)/, "\\1\n"
+  def wrap lines
+    best = lines.gsub /(.{1,80})( |$\n?)/, "\\1\n"
     best_size = best.count "\n"
     79.downto 1 do |size|
-      new = text.gsub /(.{1,#{size}})( |$\n?)/, "\\1\n"
+      new = lines.gsub /(.{1,#{size}})( |$\n?)/, "\\1\n"
       lengths = new.split("\n").map(&:size)
       break if has_meta? and lengths.last == lengths.max and lengths.count(lengths.max) == 1
       new.count("\n") > best_size ? break : best = new
