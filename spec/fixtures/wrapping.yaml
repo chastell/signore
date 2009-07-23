@@ -42,3 +42,16 @@
     ‘Yeah, look what it did to Forth.’
     ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
                 [M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]
+
+# …with non-last-lines wrapped like ‘bare’ signatures and meta moved to next line if necessary
+- :orig:
+    :text: |-
+      ‘Indeed, I know many people who believe that the universe is the offspring of the sexual union of the God and the Goddess.’
+      ‘You mean the “big bang” theory?’
+    :author: Dana Carpender, Charles Wm. Dimmick
+    :source: afca
+  :wrapped: |-
+    ‘Indeed, I know many people who believe that the universe is
+    the offspring of the sexual union of the God and the Goddess.’
+    ‘You mean the “big bang” theory?’
+                       [Dana Carpender, Charles Wm. Dimmick, afca]
