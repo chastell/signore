@@ -48,15 +48,15 @@ module Signore class Signature < Sequel::Model
   end
 
   def wrap lines
-    best = lines.gsub /(.{1,80})( |$\n?)/, "\\1\n"
-    best_size = best.count "\n"
+    best_wrap = lines.gsub /(.{1,80})( |$\n?)/, "\\1\n"
+    max_height = best_wrap.count "\n"
     79.downto 1 do |size|
-      new = lines.gsub /(.{1,#{size}})( |$\n?)/, "\\1\n"
-      lengths = new.split("\n").map(&:size)
+      new_wrap = lines.gsub /(.{1,#{size}})( |$\n?)/, "\\1\n"
+      lengths = new_wrap.split("\n").map(&:size)
       break if has_meta? and lengths.last == lengths.max and lengths.count(lengths.max) == 1
-      new.count("\n") > best_size ? break : best = new
+      new_wrap.count("\n") > max_height ? break : best_wrap = new_wrap
     end
-    best.chomp
+    best_wrap.chomp
   end
 
 end end
