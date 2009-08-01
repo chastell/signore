@@ -55,3 +55,23 @@
     the offspring of the sexual union of the God and the Goddess.’
     ‘You mean the “big bang” theory?’
                        [Dana Carpender, Charles Wm. Dimmick, afca]
+
+# …and never wrapping meta information
+- :orig:
+    :text: |-
+      ‘The Guardian also had a pre-election column, in which an allegedly “ironic joke” was open to other interpretations: “John Wilkes Booth, Lee Harvey Oswald, John Hinckley Jr., where are you now that we need you?” They removed the column from on-line access and apologized.’
+      ‘They should have. Hinckley missed the vital spot, so who needs him?’
+      ‘As everybody knows, Reagan was killed in that attack and a lookalike was substituted.’
+      ‘You mean we were governed all those years by an ACTOR!’
+    :author: Spehro Pefhany, CyberCypher, Jess Askin, don groves
+    :source: alt.usage.english
+  :wrapped: |-
+    ‘The Guardian also had a pre-election column, in which an allegedly
+    “ironic joke” was open to other interpretations: “John Wilkes Booth,
+    Lee Harvey Oswald, John Hinckley Jr., where are you now that we need
+    you?” They removed the column from on-line access and apologized.’
+    ‘They should have. Hinckley missed the vital spot, so who needs him?’
+    ‘As everybody knows, Reagan was killed in
+    that attack and a lookalike was substituted.’
+    ‘You mean we were governed all those years by an ACTOR!’
+    [Spehro Pefhany, CyberCypher, Jess Askin, don groves, alt.usage.english]

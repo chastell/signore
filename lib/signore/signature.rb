@@ -21,7 +21,7 @@ module Signore class Signature < Sequel::Model
     lines += " #{meta}" if has_meta?
     lines = wrap lines
     lines = right_align_meta lines
-    lines
+    lines.tr ' ', ' '
   end
 
   private
@@ -37,7 +37,7 @@ module Signore class Signature < Sequel::Model
     when author           then "[#{author}]"
     when source           then "[#{source}]"
     else ''
-    end.force_encoding 'UTF-8'
+    end.force_encoding('UTF-8').tr ' ', ' '
   end
 
   def right_align_meta lines
