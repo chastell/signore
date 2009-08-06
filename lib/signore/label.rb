@@ -1,5 +1,5 @@
 module Signore class Label < Sequel::Model
 
-  many_to_many :signatures, :class => 'Signore::Signature'
+  many_to_many :signatures
 
 end end
