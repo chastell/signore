@@ -1,5 +1,7 @@
 module Signore class Signature < Sequel::Model
 
+  NBSP = ' '
+
   many_to_many :labels
 
   def self.find_random_by_labels labels
@@ -21,7 +23,7 @@ module Signore class Signature < Sequel::Model
     lines += " #{meta}" if has_meta?
     lines = wrap lines
     lines = right_align_meta lines
-    lines.tr ' ', ' '
+    lines.tr NBSP, ' '
   end
 
   private
@@ -37,7 +39,7 @@ module Signore class Signature < Sequel::Model
     when author           then "[#{author}]"
     when source           then "[#{source}]"
     else ''
-    end.force_encoding('UTF-8').tr ' ', ' '
+    end.force_encoding('UTF-8').tr ' ', NBSP
   end
 
   def right_align_meta lines
