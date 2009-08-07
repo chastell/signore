@@ -28,3 +28,4 @@ module Signore
 end
 
 require_relative 'signore/executable'
+require_relative 'signore/wrapper'

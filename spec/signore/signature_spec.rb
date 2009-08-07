@@ -30,6 +30,16 @@ module Signore describe Signature do
     end
   end
 
+  it 'should use the Wrapper class for wrapping signatures' do
+    in_transaction do
+      wrapper = mock Wrapper
+      Wrapper.should_receive(:new).with('Nostalgia is a symptom of amnesia.', '[Fletch, Oh Word]').and_return wrapper
+      wrapper.should_receive(:display).and_return 'Nostalgia is a symptom of amnesia. [Fletch, Oh Word]'
+      sig = Signature.create :text => 'Nostalgia is a symptom of amnesia.', :author => 'Fletch', :source => 'Oh Word'
+      sig.display.should == 'Nostalgia is a symptom of amnesia. [Fletch, Oh Word]'
+    end
+  end
+
   it 'should wrap signatures properly' do
     in_transaction do
       pairs = YAML.load File.read 'spec/fixtures/wrapping.yaml'
