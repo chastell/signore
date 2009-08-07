@@ -6,14 +6,14 @@
 
 # meta info on multi-line signatures should be right-aligned
 - :text: No, no, it’s spelled Raymond Luxury Yacht, but it’s pronounced Throatwobbler Mangrove.
-  :meta: '[Monty Python]'
+  :meta: Monty Python
   :wrapped: |-
     No, no, it’s spelled Raymond Luxury Yacht, but it’s
     pronounced Throatwobbler Mangrove.   [Monty Python]
 
 # meta-info on multi-line sigs shouldn’t make the last line the longest
 - :text: Clojure Creator Admits Unfortunate Spelling Error in Original Whitepaper
-  :meta: '[Patently False]'
+  :meta: Patently False
   :wrapped: |-
     Clojure Creator Admits Unfortunate Spelling Error
     in Original Whitepaper           [Patently False]
@@ -29,7 +29,7 @@
       ‘The Ruby community should proceed with all deliberate speed towards ISO standardization of the language.’
       ‘Yeah, look what it did to Forth.’
       ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
-  :meta: '[M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]'
+  :meta: M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk
   :wrapped: |-
     ‘The Ruby community should proceed with all deliberate
     speed towards ISO standardization of the language.’
@@ -41,7 +41,7 @@
 - :text: |-
       ‘Indeed, I know many people who believe that the universe is the offspring of the sexual union of the God and the Goddess.’
       ‘You mean the “big bang” theory?’
-  :meta: '[Dana Carpender, Charles Wm. Dimmick, afca]'
+  :meta: Dana Carpender, Charles Wm. Dimmick, afca
   :wrapped: |-
     ‘Indeed, I know many people who believe that the universe is
     the offspring of the sexual union of the God and the Goddess.’
@@ -54,7 +54,7 @@
       ‘They should have. Hinckley missed the vital spot, so who needs him?’
       ‘As everybody knows, Reagan was killed in that attack and a lookalike was substituted.’
       ‘You mean we were governed all those years by an ACTOR!’
-  :meta: '[Spehro Pefhany, CyberCypher, Jess Askin, don groves, alt.usage.english]'
+  :meta: Spehro Pefhany, CyberCypher, Jess Askin, don groves, alt.usage.english
   :wrapped: |-
     ‘The Guardian also had a pre-election column, in which an allegedly
     “ironic joke” was open to other interpretations: “John Wilkes Booth,

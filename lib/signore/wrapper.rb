@@ -4,7 +4,7 @@ module Signore class Wrapper
 
   def initialize text, meta
     @text = text
-    @meta = meta.nil? ? '' : meta
+    @meta = (meta.nil? or meta.empty?) ? '' : '[' + meta + ']'
   end
 
   def display
