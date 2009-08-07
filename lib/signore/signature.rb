@@ -25,12 +25,12 @@ module Signore class Signature < Sequel::Model
 
   def meta
     # FIXME: figure out how to drop the force_encoding call
-    case
-    when author && source then "#{author}, #{source}"
-    when author           then "#{author}"
-    when source           then "#{source}"
-    else ''
-    end.force_encoding 'UTF-8'
+    meta = case
+           when author && source then "#{author}, #{source}"
+           when author           then "#{author}"
+           when source           then "#{source}"
+           end
+    meta.force_encoding 'UTF-8' if meta
   end
 
 end end
