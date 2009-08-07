@@ -62,12 +62,11 @@ module Signore class Signature < Sequel::Model
 
   def wrap_line line, is_last
     best_wrap = line.gsub /(.{1,80})( |$\n?)/, "\\1\n"
-    max_height = best_wrap.count "\n"
     79.downto 1 do |size|
       new_wrap = line.gsub /(.{1,#{size}})( |$\n?)/, "\\1\n"
+      break if new_wrap.count("\n") > best_wrap.count("\n")
       lengths = new_wrap.split("\n").map(&:size)
       break if has_meta? and is_last and lengths.last == lengths.max and lengths.count(lengths.max) == 1
-      break if new_wrap.count("\n") > max_height
       best_wrap = new_wrap
     end
     best_wrap.chomp
