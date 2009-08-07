@@ -3,7 +3,8 @@ module Signore class Wrapper
   NBSP = ' '
 
   def initialize text, meta
-    @text, @meta = text, meta
+    @text = text
+    @meta = meta.nil? ? '' : meta
   end
 
   def display

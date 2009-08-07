@@ -1,41 +1,35 @@
 ---
 
 # wrapping shouldn’t affect one-liners
-- :orig:
-    :text: Patches are like Free Software love letters.
+- :text: Patches are like Free Software love letters.
   :wrapped: Patches are like Free Software love letters.
 
 # meta info on multi-line signatures should be right-aligned
-- :orig:
-    :text: No, no, it’s spelled Raymond Luxury Yacht, but it’s pronounced Throatwobbler Mangrove.
-    :author: Monty Python
+- :text: No, no, it’s spelled Raymond Luxury Yacht, but it’s pronounced Throatwobbler Mangrove.
+  :meta: '[Monty Python]'
   :wrapped: |-
     No, no, it’s spelled Raymond Luxury Yacht, but it’s
     pronounced Throatwobbler Mangrove.   [Monty Python]
 
 # meta-info on multi-line sigs shouldn’t make the last line the longest
-- :orig:
-    :text: Clojure Creator Admits Unfortunate Spelling Error in Original Whitepaper
-    :author: Patently False
+- :text: Clojure Creator Admits Unfortunate Spelling Error in Original Whitepaper
+  :meta: '[Patently False]'
   :wrapped: |-
     Clojure Creator Admits Unfortunate Spelling Error
     in Original Whitepaper           [Patently False]
 
 # …although ‘bare’ signatures can sport a longest last line
-- :orig:
-    :text: It may look like I’m just sitting here doing nothing. But I’m really actively waiting for all my problems to go away.
+- :text: It may look like I’m just sitting here doing nothing. But I’m really actively waiting for all my problems to go away.
   :wrapped: |-
     It may look like I’m just sitting here doing nothing. But
     I’m really actively waiting for all my problems to go away.
 
 # multi-line signatures should be wrapped properly
-- :orig:
-    :text: |-
+- :text: |-
       ‘The Ruby community should proceed with all deliberate speed towards ISO standardization of the language.’
       ‘Yeah, look what it did to Forth.’
       ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
-    :author: M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown
-    :source: ruby-talk
+  :meta: '[M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]'
   :wrapped: |-
     ‘The Ruby community should proceed with all deliberate
     speed towards ISO standardization of the language.’
@@ -44,12 +38,10 @@
                 [M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]
 
 # …with non-last-lines wrapped like ‘bare’ signatures and meta moved to next line if necessary
-- :orig:
-    :text: |-
+- :text: |-
       ‘Indeed, I know many people who believe that the universe is the offspring of the sexual union of the God and the Goddess.’
       ‘You mean the “big bang” theory?’
-    :author: Dana Carpender, Charles Wm. Dimmick
-    :source: afca
+  :meta: '[Dana Carpender, Charles Wm. Dimmick, afca]'
   :wrapped: |-
     ‘Indeed, I know many people who believe that the universe is
     the offspring of the sexual union of the God and the Goddess.’
@@ -57,14 +49,12 @@
                        [Dana Carpender, Charles Wm. Dimmick, afca]
 
 # …and never wrapping meta information
-- :orig:
-    :text: |-
+- :text: |-
       ‘The Guardian also had a pre-election column, in which an allegedly “ironic joke” was open to other interpretations: “John Wilkes Booth, Lee Harvey Oswald, John Hinckley Jr., where are you now that we need you?” They removed the column from on-line access and apologized.’
       ‘They should have. Hinckley missed the vital spot, so who needs him?’
       ‘As everybody knows, Reagan was killed in that attack and a lookalike was substituted.’
       ‘You mean we were governed all those years by an ACTOR!’
-    :author: Spehro Pefhany, CyberCypher, Jess Askin, don groves
-    :source: alt.usage.english
+  :meta: '[Spehro Pefhany, CyberCypher, Jess Askin, don groves, alt.usage.english]'
   :wrapped: |-
     ‘The Guardian also had a pre-election column, in which an allegedly
     “ironic joke” was open to other interpretations: “John Wilkes Booth,
