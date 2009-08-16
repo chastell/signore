@@ -30,9 +30,8 @@ module Signore class Wrapper
   end
 
   def wrap
-    last_line = @lines.last
-    @lines = @lines.map do |line|
-      wrap_line line, line == last_line
+    @lines.map! do |line|
+      wrap_line line, line == @lines.last
     end
   end
 
