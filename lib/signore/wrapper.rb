@@ -24,7 +24,7 @@ module Signore class Wrapper
       lines[-@meta.size-1] = "\n"
     end
     lenghts = lines.split("\n").map(&:size)
-    lines[-@meta.size..-1] = ' ' * (lenghts.max - lenghts.last) + @meta
+    lines.insert -@meta.size - 1, ' ' * (lenghts.max - lenghts.last)
     lines
   end
 
