@@ -10,21 +10,23 @@ module Signore class Wrapper
 
   def display
     wrap
-    lines = right_align_meta @lines.join "\n"
-    lines.tr NBSP, ' '
+    right_align_meta
+    @lines.join("\n").tr NBSP, ' '
   end
 
   private
 
-  def right_align_meta lines
-    return lines unless @meta
-    lenghts = lines.split("\n").map(&:size)
-    if lenghts.size > 1 and lenghts.last == lenghts.max and lenghts.count(lenghts.last) == 1
-      lines[-@meta-1] = "\n"
+  def right_align_meta
+    return unless @meta
+    @lines.map! { |l| l.split "\n" }.flatten!
+    lenghts = @lines.map(&:size)
+    if lenghts.size > 1 and lenghts.last == lenghts.max and lenghts.count(lenghts.last) == 1 and lenghts.last != @meta
+      last = @lines.pop
+      @lines << last[0...-@meta-1]
+      @lines << last[-@meta..-1]
     end
-    lenghts = lines.split("\n").map(&:size)
-    lines.insert -@meta - 1, ' ' * (lenghts.max - lenghts.last)
-    lines
+    width = @lines.map(&:size).max
+    @lines.last.insert -@meta - 1, ' ' * (width - @lines.last.size)
   end
 
   def wrap
