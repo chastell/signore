@@ -9,9 +9,8 @@ module Signore class Wrapper
   end
 
   def display
-    lines = @lines.join "\n"
-    lines = wrap lines
-    lines = right_align_meta lines
+    wrap
+    lines = right_align_meta @lines.join "\n"
     lines.tr NBSP, ' '
   end
 
@@ -28,11 +27,11 @@ module Signore class Wrapper
     lines
   end
 
-  def wrap lines
-    last_line = lines.split("\n").last
-    lines.split("\n").map do |line|
+  def wrap
+    last_line = @lines.last
+    @lines = @lines.map do |line|
       wrap_line line, line == last_line
-    end.join "\n"
+    end
   end
 
   def wrap_line line, is_last
