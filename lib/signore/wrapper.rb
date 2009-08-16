@@ -3,13 +3,13 @@ module Signore class Wrapper
   NBSP = ' '
 
   def initialize text, meta
-    @text = text
-    @meta = meta ? ('[' + meta + ']').tr(' ', NBSP) : nil
+    @lines = text.split "\n"
+    @lines.last << " [#{meta.tr ' ', NBSP}]" if meta
+    @meta = meta ? (meta.size + 2) : nil
   end
 
   def display
-    lines = @text
-    lines += " #{@meta}" if @meta
+    lines = @lines.join "\n"
     lines = wrap lines
     lines = right_align_meta lines
     lines.tr NBSP, ' '
@@ -21,10 +21,10 @@ module Signore class Wrapper
     return lines unless @meta
     lenghts = lines.split("\n").map(&:size)
     if lenghts.size > 1 and lenghts.last == lenghts.max and lenghts.count(lenghts.last) == 1
-      lines[-@meta.size-1] = "\n"
+      lines[-@meta-1] = "\n"
     end
     lenghts = lines.split("\n").map(&:size)
-    lines.insert -@meta.size - 1, ' ' * (lenghts.max - lenghts.last)
+    lines.insert -@meta - 1, ' ' * (lenghts.max - lenghts.last)
     lines
   end
 
