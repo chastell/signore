@@ -21,7 +21,7 @@ module Signore class Wrapper
     lines = wrapped.split "\n"
     lines.each_with_index do |line, nr|
       next unless line.include? ' '
-      if (nr > 0 and line.rindex(' ') > lines[nr - 1].size) or (nr < lines.size - 2 and line.rindex(' ') > lines[nr + 1].size)
+      if (nr > 0 and line.rindex(' ') >= lines[nr - 1].size) or (nr < lines.size - 2 and line.rindex(' ') >= lines[nr + 1].size)
         lines[nr] << NBSP
         return lines.join(' ').gsub("#{NBSP} ", NBSP).rstrip
       end
