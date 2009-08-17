@@ -16,6 +16,21 @@ module Signore class Wrapper
 
   private
 
+  def find_hangouts wrapped
+    # FIXME: make it less ugly
+    lines = wrapped.split "\n"
+    lines.each_with_index do |line, nr|
+      next unless line.include? ' '
+      if (nr > 0 and line.rindex(' ') > lines[nr - 1].size) or (nr < lines.size - 2 and line.rindex(' ') > lines[nr + 1].size)
+        lines.each_with_index do |line, i|
+          i == nr ? line << NBSP : line << ' '
+        end
+        return lines.join.rstrip
+      end
+    end
+    nil
+  end
+
   def right_align_meta
     return unless @meta
     @lines.map! { |l| l.split "\n" }.flatten!
@@ -31,7 +46,11 @@ module Signore class Wrapper
 
   def wrap
     @lines.map! do |line|
-      wrap_line line, line == @lines.last
+      wrapped = wrap_line line, line == @lines.last
+      while fixed = find_hangouts(wrapped)
+        wrapped = wrap_line fixed, line == @lines.last
+      end
+      wrapped
     end
   end
 
