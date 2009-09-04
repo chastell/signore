@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Signore describe Signature do
 
   it 'should return a proper random signature based on the provided labels' do
