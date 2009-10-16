@@ -7,7 +7,7 @@ module Signore class Wrapper
   def initialize text, meta
     @lines = text.split "\n"
     @lines << "[#{meta.tr ' ', NBSP}]" if meta
-    @meta_size = meta ? (meta.size + 2) : nil
+    @meta  = meta
   end
 
   def display
@@ -32,9 +32,9 @@ module Signore class Wrapper
   end
 
   def right_align_meta
-    return unless @meta_size
+    return unless @meta
     @lines.map! { |l| l.split "\n" }.flatten!
-    @lines.last.insert 0, ' ' * (@lines.map(&:size).max - @meta_size)
+    @lines.last.insert 0, ' ' * (@lines.map(&:size).max - @meta.size - 2)
   end
 
   def wrap
@@ -53,7 +53,7 @@ module Signore class Wrapper
       new_wrap = line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")
       break if new_wrap.count("\n") > best_wrap.count("\n")
       lengths = new_wrap.split("\n").map(&:size)
-      break if @meta_size and is_last and lengths.last == lengths.max and lengths.count(lengths.max) == 1
+      break if @meta and is_last and lengths.last == lengths.max and lengths.count(lengths.max) == 1
       best_wrap = new_wrap
     end
     best_wrap.chomp
