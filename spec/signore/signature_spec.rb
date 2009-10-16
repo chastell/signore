@@ -19,6 +19,7 @@ module Signore describe Signature do
     Signature[2].display.should == "stay-at-home executives vs. wallstreet dads\n                                     [kodz]"
     Signature[3].display.should == "You do have to be mad to work here, but it doesn’t help.\n                                      [Gary Barnes, asr]"
     Signature[4].display.should == "Bruce Schneier knows Alice and Bob’s shared secret.\n                             [Bruce Schneier Facts]"
+    Signature[5].display.should == "She was good at playing abstract confusion in\nthe same way a midget is good at being short.\n              [Clive James on Marilyn Monroe]"
   end
 
   it 'should properly create a signature with the provided labels, setting author/source to NULL if empty' do

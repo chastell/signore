@@ -45,10 +45,10 @@ module Signore describe Executable do
 
   it 'should add a signature with the provided labels' do
     in_transaction do
-      input = StringIO.new "the meaning of life\n\nDouglas Adams\nHHGG\n"
+      input = StringIO.new "the meaning of life\n\nDouglas Adams\n\nHHGG\n"
       Executable.new(['pronto', 'life', '42']).run output = StringIO.new, input
       output.rewind
-      output.read.should == "text?\nauthor? source? the meaning of life\n[Douglas Adams, HHGG]\n"
+      output.read.should == "text?\nauthor? subject? source? the meaning of life\n[Douglas Adams, HHGG]\n"
       Executable.new(['prego', 'life', '42']).run output = StringIO.new
       output.rewind
       output.read.should == "the meaning of life\n[Douglas Adams, HHGG]\n"
@@ -57,10 +57,10 @@ module Signore describe Executable do
 
   it 'should handle multi-line signatures' do
     in_transaction do
-      input = StringIO.new "‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n\nSimon Burr, Kyle Hearn\n\n"
+      input = StringIO.new "‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n\nSimon Burr, Kyle Hearn\n\n\n"
       Executable.new(['pronto']).run output = StringIO.new, input
       output.rewind
-      output.read.should == "text?\nauthor? source? ‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n                                               [Simon Burr, Kyle Hearn]\n"
+      output.read.should == "text?\nauthor? subject? source? ‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n                                               [Simon Burr, Kyle Hearn]\n"
     end
   end
 

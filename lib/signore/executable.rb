@@ -21,7 +21,7 @@ module Signore class Executable
       output.puts 'text?'
       params[:text] << input.gets until params[:text].lines.to_a.last == "\n"
       params[:text].rstrip!
-      [:author, :source].each do |elem|
+      [:author, :subject, :source].each do |elem|
         output << "#{elem}? "
         params[elem] = input.gets.chomp
       end

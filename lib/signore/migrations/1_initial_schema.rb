@@ -3,9 +3,10 @@ Class.new Sequel::Migration do
   def up
     create_table :signatures do
       primary_key :id
-      String :text,   :text => true
-      String :author, :text => true
-      String :source, :text => true
+      String :text,    :text => true
+      String :author,  :text => true
+      String :source,  :text => true
+      String :subject, :text => true
     end
 
     create_table :labels do
