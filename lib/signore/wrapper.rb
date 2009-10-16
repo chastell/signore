@@ -11,7 +11,7 @@ module Signore class Wrapper
 
   def display
     wrap
-    right_align_meta
+    add_meta if @meta
     @lines.join("\n").tr NBSP, ' '
   end
 
@@ -30,8 +30,7 @@ module Signore class Wrapper
     nil
   end
 
-  def right_align_meta
-    return unless @meta
+  def add_meta
     @lines << "[#{@meta}]"
     @lines.map! { |l| l.split "\n" }.flatten!
     @lines.last.insert 0, ' ' * (@lines.map(&:size).max - @meta.size - 2)
