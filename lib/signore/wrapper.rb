@@ -39,15 +39,13 @@ module Signore class Wrapper
 
   def wrap
     @lines.map! do |line|
-      wrapped = wrap_line line, line == @lines.last
-      while fixed = find_hangouts(wrapped)
-        wrapped = wrap_line fixed, line == @lines.last
-      end
+      wrapped = wrap_line line
+      wrapped = wrap_line fixed while fixed = find_hangouts(wrapped)
       wrapped
     end
   end
 
-  def wrap_line line, is_last
+  def wrap_line line
     best_wrap = line.gsub(/(.{1,80})( |$\n?)/, "\\1\n")
     79.downto 1 do |size|
       new_wrap = line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")
