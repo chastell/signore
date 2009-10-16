@@ -16,16 +16,16 @@ module Signore describe Signature do
 
   it 'should properly display signatures with (and without) author/source' do
     Signature[1].display.should == '// sometimes I believe compiler ignores all my comments'
-    Signature[2].display.should == 'stay-at-home executives vs. wallstreet dads [kodz]'
-    Signature[3].display.should == 'You do have to be mad to work here, but it doesn’t help. [Gary Barnes, asr]'
-    Signature[4].display.should == 'Bruce Schneier knows Alice and Bob’s shared secret. [Bruce Schneier Facts]'
+    Signature[2].display.should == "stay-at-home executives vs. wallstreet dads\n                                     [kodz]"
+    Signature[3].display.should == "You do have to be mad to work here, but it doesn’t help.\n                                      [Gary Barnes, asr]"
+    Signature[4].display.should == "Bruce Schneier knows Alice and Bob’s shared secret.\n                             [Bruce Schneier Facts]"
   end
 
   it 'should properly create a signature with the provided labels, setting author/source to NULL if empty' do
     in_transaction do
       random = rand.to_s
       sig = Signature.create_with_labels :text => 'Nostalgia is a symptom of amnesia.', :author => 'Fletch', :source => 'Oh Word', :labels => ['life', random]
-      sig.display.should == 'Nostalgia is a symptom of amnesia. [Fletch, Oh Word]'
+      sig.display.should == "Nostalgia is a symptom of amnesia.\n                 [Fletch, Oh Word]"
       Signature.find_random_by_labels(['life', random]).should == sig
       sig = Signature.create_with_labels :text => 'Sleep is just a drug.', :author => '', :source => ''
       sig.display.should == 'Sleep is just a drug.'

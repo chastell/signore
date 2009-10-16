@@ -8,15 +8,16 @@
 - :text: No, no, it’s spelled Raymond Luxury Yacht, but it’s pronounced Throatwobbler Mangrove.
   :meta: Monty Python
   :wrapped: |-
-    No, no, it’s spelled Raymond Luxury Yacht, but it’s
-    pronounced Throatwobbler Mangrove.   [Monty Python]
+    No, no, it’s spelled Raymond Luxury Yacht,
+    but it’s pronounced Throatwobbler Mangrove.
+                                 [Monty Python]
 
 # meta-info on multi-line sigs shouldn’t make the last line the longest
 - :text: Clojure Creator Admits Unfortunate Spelling Error in Original Whitepaper
   :meta: Patently False
   :wrapped: |-
-    Clojure Creator Admits Unfortunate Spelling Error
-    in Original Whitepaper           [Patently False]
+    Clojure Creator Admits Unfortunate Spelling Error in Original Whitepaper
+                                                            [Patently False]
 
 # …although ‘bare’ signatures can sport a longest last line
 - :text: It may look like I’m just sitting here doing nothing. But I’m really actively waiting for all my problems to go away.
@@ -70,14 +71,16 @@
 - :text: In fact the kakapo is a bird that in some ways reminds me of the British motorbike industry. It had things its own way for so long that it simply became eccentric.
   :meta: Douglas Adams, Last Chance to See
   :wrapped: |-
-    In fact the kakapo is a bird that in some ways reminds me of the British
-    motorbike industry. It had things its own way for so long that it simply
-    became eccentric.                    [Douglas Adams, Last Chance to See]
+    In fact the kakapo is a bird that in some ways reminds
+    me of the British motorbike industry. It had things its
+    own way for so long that it simply became eccentric.
+                        [Douglas Adams, Last Chance to See]
+
 - :text: The effect was that of walking into a slightly suburban Garden of Eden, as if on the Eighth Day God had suddenly got going again and started creating Flymos, secateurs, and those things I can never remember the name of but which are essentially electrically driven pieces of string.
   :meta: Douglas Adams, Last Chance to See
   :wrapped: |-
-    The effect was that of walking into a slightly suburban Garden
-    of Eden, as if on the Eighth Day God had suddenly got going again
-    and started creating Flymos, secateurs, and those things I can
-    never remember the name of but which are essentially electrically
-    driven pieces of string.      [Douglas Adams, Last Chance to See]
+    The effect was that of walking into a slightly suburban Garden of Eden,
+    as if on the Eighth Day God had suddenly got going again and started
+    creating Flymos, secateurs, and those things I can never remember the
+    name of but which are essentially electrically driven pieces of string.
+                                        [Douglas Adams, Last Chance to See]

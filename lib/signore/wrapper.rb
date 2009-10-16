@@ -6,7 +6,7 @@ module Signore class Wrapper
 
   def initialize text, meta
     @lines = text.split "\n"
-    @lines.last << " [#{meta.tr ' ', NBSP}]" if meta
+    @lines << "[#{meta.tr ' ', NBSP}]" if meta
     @meta = meta ? (meta.size + 2) : nil
   end
 
