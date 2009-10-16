@@ -17,6 +17,12 @@ module Signore class Wrapper
 
   private
 
+  def add_meta
+    @lines << "[#{@meta}]"
+    @lines.map! { |l| l.split "\n" }.flatten!
+    @lines.last.insert 0, ' ' * (@lines.map(&:size).max - @meta.size - 2)
+  end
+
   def find_hangouts wrapped
     # FIXME: make it less ugly
     lines = wrapped.split "\n"
@@ -28,12 +34,6 @@ module Signore class Wrapper
       end
     end
     nil
-  end
-
-  def add_meta
-    @lines << "[#{@meta}]"
-    @lines.map! { |l| l.split "\n" }.flatten!
-    @lines.last.insert 0, ' ' * (@lines.map(&:size).max - @meta.size - 2)
   end
 
   def wrap
