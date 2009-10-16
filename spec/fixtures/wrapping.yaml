@@ -4,7 +4,7 @@
 - :text: Patches are like Free Software love letters.
   :wrapped: Patches are like Free Software love letters.
 
-# meta info on multi-line signatures should be right-aligned
+# meta info should be right-aligned on its own line
 - :text: No, no, it’s spelled Raymond Luxury Yacht, but it’s pronounced Throatwobbler Mangrove.
   :meta: Monty Python
   :wrapped: |-
@@ -12,14 +12,7 @@
     but it’s pronounced Throatwobbler Mangrove.
                                  [Monty Python]
 
-# meta-info on multi-line sigs shouldn’t make the last line the longest
-- :text: Clojure Creator Admits Unfortunate Spelling Error in Original Whitepaper
-  :meta: Patently False
-  :wrapped: |-
-    Clojure Creator Admits Unfortunate Spelling Error in Original Whitepaper
-                                                            [Patently False]
-
-# …although ‘bare’ signatures can sport a longest last line
+# ‘bare’ signatures can sport a longest last line
 - :text: It may look like I’m just sitting here doing nothing. But I’m really actively waiting for all my problems to go away.
   :wrapped: |-
     It may look like I’m just sitting here doing nothing. But
