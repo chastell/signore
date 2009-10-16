@@ -5,7 +5,7 @@ module Signore class Wrapper
   NBSP = ' '
 
   def initialize text, meta
-    @lines = text.split "\n"
+    @lines = text.gsub(/ (.) /, " \\1#{NBSP}").split "\n"
     @meta  = meta
     @seen  = Set[]
   end

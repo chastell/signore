@@ -85,3 +85,11 @@
     If the human mind was simple enough to
     understand, we’d be too simple to understand it.
                                       [Emerson Pugh]
+
+# wrapping shouldn’t left one-letter words at the end of lines
+- :text: I’ve been trying for some time to develop a lifestyle that doesn’t require my presence.
+  :meta: Gary Trudeau
+  :wrapped: |-
+    I’ve been trying for some time to develop
+    a lifestyle that doesn’t require my presence.
+                                   [Gary Trudeau]
