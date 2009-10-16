@@ -34,9 +34,7 @@ module Signore class Wrapper
   def right_align_meta
     return unless @meta_size
     @lines.map! { |l| l.split "\n" }.flatten!
-    lenghts = @lines.map(&:size)
-    last_line = @lines.pop
-    @lines << ' ' * (lenghts.max - @meta_size) + last_line
+    @lines.last.insert 0, ' ' * (@lines.map(&:size).max - @meta_size)
   end
 
   def wrap
