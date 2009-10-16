@@ -35,13 +35,8 @@ module Signore class Wrapper
     return unless @meta_size
     @lines.map! { |l| l.split "\n" }.flatten!
     lenghts = @lines.map(&:size)
-    if lenghts.size > 1 and lenghts.last == lenghts.max and lenghts.count(lenghts.last) == 1 and lenghts.last != @meta_size
-      last = @lines.pop
-      @lines << last[0...-@meta_size-1]
-      @lines << last[-@meta_size..-1]
-    end
-    width = @lines.map(&:size).max
-    @lines.last.insert(-@meta_size - 1, ' ' * (width - @lines.last.size))
+    last_line = @lines.pop
+    @lines << ' ' * (lenghts.max - @meta_size) + last_line
   end
 
   def wrap
