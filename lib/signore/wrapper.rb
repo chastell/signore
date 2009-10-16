@@ -39,7 +39,9 @@ module Signore class Wrapper
   def wrap
     @lines.map! do |line|
       wrapped = wrap_line line
-      wrapped = wrap_line fixed while fixed = find_hangouts(wrapped)
+      while fixed = find_hangouts(wrapped)
+        wrapped = wrap_line fixed
+      end
       wrapped
     end
   end
