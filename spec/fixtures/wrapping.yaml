@@ -77,3 +77,11 @@
     creating Flymos, secateurs, and those things I can never remember the
     name of but which are essentially electrically driven pieces of string.
                                         [Douglas Adams, Last Chance to See]
+
+# signatures shouldn’t be left in a non-wrappable state
+- :text: If the human mind was simple enough to understand, we’d be too simple to understand it.
+  :meta: Emerson Pugh
+  :wrapped: |-
+    If the human mind was simple enough to
+    understand, we’d be too simple to understand it.
+                                      [Emerson Pugh]

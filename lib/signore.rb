@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'set'
 require 'sequel'
 require 'sequel/extensions/migration'
 require 'trollop'

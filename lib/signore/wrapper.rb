@@ -7,6 +7,7 @@ module Signore class Wrapper
   def initialize text, meta
     @lines = text.split "\n"
     @meta  = meta
+    @seen  = Set[]
   end
 
   def display
@@ -30,7 +31,10 @@ module Signore class Wrapper
       next unless line.include? ' '
       if (nr > 0 and line.rindex(' ') >= lines[nr - 1].size) or (nr < lines.size - 2 and line.rindex(' ') >= lines[nr + 1].size)
         lines[nr] << NBSP
-        return lines.join(' ').gsub("#{NBSP} ", NBSP).rstrip
+        fixed = lines.join(' ').gsub("#{NBSP} ", NBSP).rstrip
+        next if @seen.include? fixed
+        @seen << fixed
+        return fixed
       end
     end
     nil
