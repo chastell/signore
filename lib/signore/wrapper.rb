@@ -26,7 +26,7 @@ module Signore class Wrapper
 
   def find_hangouts wrapped
     # FIXME: make it less ugly
-    lines = wrapped.split "\n"
+    lines = wrapped.tr(NBSP, ' ').split "\n"
     lines.each_with_index do |line, nr|
       next unless line.include? ' '
       if (nr > 0 and line.rindex(' ') >= lines[nr - 1].size) or (nr < lines.size - 2 and line.rindex(' ') >= lines[nr + 1].size)
