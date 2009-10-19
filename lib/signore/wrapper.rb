@@ -5,7 +5,7 @@ module Signore class Wrapper
   NBSP = ' '
 
   def initialize text, meta
-    @lines = text.gsub(/ (.) /, " \\1#{NBSP}").split "\n"
+    @lines = text.split "\n"
     @meta  = meta
     @seen  = Set[]
   end
@@ -51,6 +51,7 @@ module Signore class Wrapper
   end
 
   def wrap_line line
+    line.gsub!(/ (.) /, " \\1#{NBSP}")
     best_wrap = line.gsub(/(.{1,80})( |$\n?)/, "\\1\n")
     79.downto 1 do |size|
       new_wrap = line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")

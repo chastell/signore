@@ -102,3 +102,15 @@
     And if he can’t be bothered to learn to fish and starves
     to death, that’s a good enough outcome for me.
                                          [Steve VanDevender]
+
+# …but keep one-letter words away from line endings
+- :text: 'Once upon a time a young rabbinical student went to hear three lectures by a famous rabbi. Afterwards he told his friends: ‘The first talk was brilliant, clear and simple. I understood every word. The second was even better, deep and subtle. I didn’t understand much, but the rabbi understood all of it. The third was by far the finest, a great and unforgettable experience. I understood nothing and the rabbi didn’t understand much either.’'
+  :meta: Niels Bohr
+  :wrapped: |-
+    Once upon a time a young rabbinical student went to hear three lectures by
+    a famous rabbi. Afterwards he told his friends: ‘The first talk was brilliant,
+    clear and simple. I understood every word. The second was even better, deep
+    and subtle. I didn’t understand much, but the rabbi understood all of it.
+    The third was by far the finest, a great and unforgettable experience.
+    I understood nothing and the rabbi didn’t understand much either.’
+                                                                      [Niels Bohr]
