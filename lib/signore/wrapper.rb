@@ -12,7 +12,7 @@ module Signore class Wrapper
   def display
     wrap
     add_meta if @meta
-    @lines.join("\n").tr NBSP, ' '
+    @lines.join "\n"
   end
 
   private
@@ -41,7 +41,6 @@ module Signore class Wrapper
   end
 
   def wrap_line line
-    line.gsub!(/ (.) /, " \\1#{NBSP}")
     best_wrap = wrap_line_to line, 80
     79.downto 1 do |size|
       new_wrap = wrap_line_to line, size
@@ -52,14 +51,15 @@ module Signore class Wrapper
   end
 
   def wrap_line_to line, size
+    line = line.gsub(/ (.) /, " \\1#{NBSP}")
     line = line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")
     if hangout = find_hangout(line)
       lines = line.split "\n"
       lines[hangout] << NBSP
-      line = lines.join(' ').gsub("#{NBSP} ", NBSP).rstrip
+      line = lines.join(' ').gsub("#{NBSP} ", NBSP)
       line = wrap_line_to line, size
     end
-    line
+    line.tr NBSP, ' '
   end
 
 end end
