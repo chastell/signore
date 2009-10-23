@@ -7,7 +7,6 @@ module Signore class Wrapper
   def initialize text, meta
     @lines = text.split "\n"
     @meta  = meta
-    @seen  = Set[]
   end
 
   def display
@@ -24,29 +23,20 @@ module Signore class Wrapper
     @lines.last.insert 0, ' ' * (@lines.map(&:size).max - @meta.size - 2)
   end
 
-  def find_hangouts wrapped
-    # FIXME: make it less ugly
-    lines = wrapped.tr(NBSP, ' ').split "\n"
+  def find_hangout wrapped
+    lines = wrapped.split "\n"
     lines.each_with_index do |line, nr|
-      next unless line.include? ' '
-      if (nr > 0 and line.rindex(' ') >= lines[nr - 1].size) or (nr < lines.size - 2 and line.rindex(' ') >= lines[nr + 1].size)
-        lines[nr] << NBSP
-        fixed = lines.join(' ').gsub("#{NBSP} ", NBSP).rstrip
-        next if @seen.include? fixed
-        @seen << fixed
-        return fixed
-      end
+      space = line.rindex /[ #{NBSP}]/
+      next unless space and nr < lines.size - 1
+      return nr if nr > 0              and space >= lines[nr - 1].size
+      return nr if nr < lines.size - 2 and space >= lines[nr + 1].size
     end
     nil
   end
 
   def wrap
     @lines.map! do |line|
-      wrapped = wrap_line line
-      while fixed = find_hangouts(wrapped)
-        wrapped = wrap_line fixed
-      end
-      wrapped
+      wrap_line line
     end
   end
 
@@ -62,7 +52,14 @@ module Signore class Wrapper
   end
 
   def wrap_line_to line, size
-    line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")
+    line = line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")
+    if hangout = find_hangout(line)
+      lines = line.split "\n"
+      lines[hangout] << NBSP
+      line = lines.join(' ').gsub("#{NBSP} ", NBSP).rstrip
+      line = wrap_line_to line, size
+    end
+    line
   end
 
 end end
