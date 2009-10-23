@@ -30,6 +30,7 @@ module Signore class Wrapper
       next unless space and nr < lines.size - 1
       return nr if nr > 0              and space >= lines[nr - 1].size
       return nr if nr < lines.size - 2 and space >= lines[nr + 1].size
+      return nr if nr < lines.size - 1 and space >= lines[nr + 1].size and lines.size == 2
     end
     nil
   end

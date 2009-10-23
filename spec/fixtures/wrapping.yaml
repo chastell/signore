@@ -114,3 +114,11 @@
     The third was by far the finest, a great and unforgettable experience.
     I understood nothing and the rabbi didn’t understand much either.’
                                                                       [Niels Bohr]
+
+# for two-line signatures, first line should be considered for hangouts
+- :text: Well, the old ones go mmmmmbbbbzzzzttteeeeeep as they start up and the new ones go whupwhupwhupwhooopwhooooopwhooooooommmmmmmmmm.
+  :meta: Graham Reed on subway engines, asr
+  :wrapped: |-
+    Well, the old ones go mmmmmbbbbzzzzttteeeeeep as they start up
+    and the new ones go whupwhupwhupwhooopwhooooopwhooooooommmmmmmmmm.
+                                  [Graham Reed on subway engines, asr]
