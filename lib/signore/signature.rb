@@ -1,6 +1,7 @@
 module Signore class Signature < Sequel::Model
 
   many_to_many :labels
+  plugin       :force_encoding, 'UTF-8'
 
   def self.find_random_by_labels labels
     sigs = labels.empty? ? all : labels.map { |label| Label[:name => label].signatures rescue [] }.inject(:&)
@@ -16,22 +17,19 @@ module Signore class Signature < Sequel::Model
   end
 
   def display
-    # FIXME: figure out how to drop the force_encoding call
-    wrapper = Wrapper.new text.force_encoding('UTF-8'), meta
+    wrapper = Wrapper.new text, meta
     wrapper.display
   end
 
   private
 
   def meta
-    # FIXME: figure out how to drop the force_encoding call
     auth = subject ? "#{author} #{subject}" : author
     meta = case
            when author && source then "#{auth}, #{source}"
            when author           then "#{auth}"
            when source           then "#{source}"
            end
-    meta.force_encoding 'UTF-8' if meta
   end
 
 end end

@@ -10,7 +10,7 @@ module Signore describe Signature do
     srand 1981
     Signature.find_random_by_labels(['tech']).text.should == '// sometimes I believe compiler ignores all my comments'
     srand 1979
-    Signature.find_random_by_labels(['tech']).text.force_encoding('UTF-8').should == 'Bruce Schneier knows Alice and Bob’s shared secret.'
+    Signature.find_random_by_labels(['tech']).text.should == 'Bruce Schneier knows Alice and Bob’s shared secret.'
     srand
   end
 
