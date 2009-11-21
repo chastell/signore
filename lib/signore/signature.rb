@@ -23,12 +23,13 @@ module Signore class Signature < Sequel::Model
   private
 
   def meta
-    auth = subject ? "#{author} #{subject}" : author
-    meta = case
-           when author && source then "#{auth}, #{source}"
-           when author           then "#{auth}"
-           when source           then "#{source}"
-           end
+    case
+    when author && subject && source then "#{author} #{subject}, #{source}"
+    when author && subject           then "#{author} #{subject}"
+    when author && source            then "#{author}, #{source}"
+    when author                      then "#{author}"
+    when source                      then "#{source}"
+    end
   end
 
 end end
