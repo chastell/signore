@@ -17,8 +17,7 @@ module Signore class Signature < Sequel::Model
   end
 
   def display
-    wrapper = Wrapper.new text, meta
-    wrapper.display
+    Wrapper.new(text, meta).display
   end
 
   private
