@@ -3,12 +3,11 @@
 module Signore describe Executable do
 
   before do
-    @orig_stderr = $stderr
     $stderr = StringIO.new
   end
 
   after do
-    $stderr = @orig_stderr
+    $stderr = STDERR
   end
 
   def stderr
