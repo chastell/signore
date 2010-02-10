@@ -3,8 +3,9 @@ module Signore class Signature < Sequel::Model
   many_to_many :labels
   plugin       :force_encoding, 'UTF-8'
 
-  def self.find_random_by_labels labels
-    sigs = labels.empty? ? all : labels.map { |label| Label[:name => label].signatures rescue [] }.inject(:&)
+  def self.find_random_by_labels required, forbidden = []
+    sigs = required.empty? ? all : required.map { |label| Label[:name => label].signatures rescue [] }.inject(:&)
+    sigs -= forbidden.map { |label| Label[:name => label].signatures }.flatten
     sigs.sort_by { rand }.first
   end
 

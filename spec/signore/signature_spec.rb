@@ -14,6 +14,10 @@ module Signore describe Signature do
     srand
   end
 
+  it 'should return a proper random signature based on forbidden labels' do
+    Signature.find_random_by_labels(['tech'], ['programming', 'security']).text.should == 'You do have to be mad to work here, but it doesn’t help.'
+  end
+
   it 'should properly display signatures with (and without) author/source' do
     Signature[1].display.should == '// sometimes I believe compiler ignores all my comments'
     Signature[2].display.should == "stay-at-home executives vs. wallstreet dads\n                                     [kodz]"
