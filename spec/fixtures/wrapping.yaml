@@ -122,3 +122,13 @@
     Well, the old ones go mmmmmbbbbzzzzttteeeeeep as they start up
     and the new ones go whupwhupwhupwhooopwhooooopwhooooooommmmmmmmmm.
                                   [Graham Reed on subway engines, asr]
+
+# wrapping should not eat any (in particular, consecutive) spaces
+- :text: |-
+    . <- the point                                your article -> .
+    |------------------------- a long way ------------------------|
+  :meta: Cristophe Rhodes, ucam.chat
+  :wrapped: |-
+    . <- the point                                your article -> .
+    |------------------------- a long way ------------------------|
+                                      [Cristophe Rhodes, ucam.chat]

@@ -52,7 +52,7 @@ module Signore class Wrapper
   end
 
   def wrap_line_to line, size
-    line = line.gsub(/ (.) /, " \\1#{NBSP}")
+    line = line.gsub(/ ([^ ]) /, " \\1#{NBSP}")
     line = line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")
     if hangout = find_hangout(line)
       lines = line.split "\n"
