@@ -22,6 +22,11 @@ module Signore describe Executable do
       stderr.should match /usage: signore prego\|pronto \[label, …\]/
     end
 
+    it 'prints usage if a bogus command is given' do
+      lambda { Executable.new(['bogus']) }.should raise_error SystemExit
+      stderr.should match /usage: signore prego\|pronto \[label, …\]/
+    end
+
   end
 
 end end
