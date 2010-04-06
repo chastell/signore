@@ -27,6 +27,11 @@ module Signore describe Executable do
       stderr.should match /usage: signore prego\|pronto \[label, …\]/
     end
 
+    it 'loads the signature database from the specified location' do
+      Signore.should_receive(:load_db).with 'signatures.yml'
+      Executable.new ['-d', 'signatures.yml', 'prego']
+    end
+
   end
 
 end end
