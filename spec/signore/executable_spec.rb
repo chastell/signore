@@ -51,4 +51,16 @@ module Signore describe Executable do
 
   end
 
+  context '#run' do
+
+    it 'prints a signature tagged with the provided tags' do
+      sig = mock Signature, :display => '// sometimes I believe compiler ignores all my comments'
+      Signature.should_receive(:find).with({:tags => ['tech', 'programming']}).and_return sig
+      Executable.new(['prego', 'tech', 'programming']).run output = StringIO.new
+      output.rewind
+      output.read.should == "// sometimes I believe compiler ignores all my comments\n"
+    end
+
+  end
+
 end end

@@ -8,6 +8,12 @@ module Signore class Executable
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
     Signore.load_db opts[:database]
+    args.shift
+    @tags = args
+  end
+
+  def run output
+    output.puts Signature.find(:tags => @tags).display
   end
 
 end end
