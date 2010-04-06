@@ -1,5 +1,9 @@
 ---
 - !ruby/struct:Signore::Signature
   :text: // sometimes I believe compiler ignores all my comments
+  :tags:
+  - programming
 - !ruby/struct:Signore::Signature
   :text: You do have to be mad to work here, but it doesn’t help.
+  :tags:
+  - work
