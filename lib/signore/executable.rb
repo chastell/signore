@@ -9,11 +9,12 @@ module Signore class Executable
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
     Signore.load_db opts[:database]
     args.shift
-    @tags = args
+    @no_tags, @tags = args.partition { |tag| tag[0] == '~' }
+    @no_tags.map! { |tag| tag[1..-1] }
   end
 
   def run output
-    output.puts Signature.find(:tags => @tags).display
+    output.puts Signature.find(:tags => @tags, :no_tags => @no_tags).display
   end
 
 end end
