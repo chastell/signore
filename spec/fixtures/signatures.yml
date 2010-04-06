@@ -14,3 +14,5 @@
   :tags:
   - security
   - tech
+- !ruby/struct:Signore::Signature
+  :text: stay-at-home executives vs. wallstreet dads
