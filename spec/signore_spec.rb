@@ -1,5 +1,15 @@
 describe Signore do
 
+  context '.db' do
+
+    it 'returns the signature database loaded by .load_db' do
+      db = "#{Dir.tmpdir}/#{rand}/signatures.yml"
+      Signore.load_db db
+      Signore.db.should == []
+    end
+
+  end
+
   context '.load_db' do
 
     it 'creates an empty signature database if it does not exist' do
