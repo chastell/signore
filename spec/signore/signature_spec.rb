@@ -16,6 +16,11 @@ module Signore describe Signature do
       Signature.find.text.should == 'You do have to be mad to work here, but it doesn’t help.'
     end
 
+    it 'returns a random signature if the tags are empty' do
+      srand 1981
+      Signature.find(:tags => []).text.should == '// sometimes I believe compiler ignores all my comments'
+    end
+
     it 'returns a random signature based on provided tags' do
       Signature.find(:tags => ['programming']).text.should == '// sometimes I believe compiler ignores all my comments'
       Signature.find(:tags => ['work']).text.should        == 'You do have to be mad to work here, but it doesn’t help.'
