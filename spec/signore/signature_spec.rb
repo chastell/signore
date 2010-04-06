@@ -26,6 +26,10 @@ module Signore describe Signature do
       Signature.find(:tags => ['work']).text.should        == 'You do have to be mad to work here, but it doesn’t help.'
     end
 
+    it 'returns a random signature based on required and forbidden tags' do
+      Signature.find(:tags => ['tech'], :no_tags => ['programming', 'security']).text.should == 'You do have to be mad to work here, but it doesn’t help.'
+    end
+
   end
 
 end end

@@ -3,7 +3,14 @@
   :text: // sometimes I believe compiler ignores all my comments
   :tags:
   - programming
+  - tech
+- !ruby/struct:Signore::Signature
+  :text: Bruce Schneier knows Alice and Bob’s shared secret.
+  :tags:
+  - security
+  - tech
 - !ruby/struct:Signore::Signature
   :text: You do have to be mad to work here, but it doesn’t help.
   :tags:
+  - tech
   - work
