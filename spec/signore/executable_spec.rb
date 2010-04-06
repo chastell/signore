@@ -32,6 +32,11 @@ module Signore describe Executable do
       Executable.new ['-d', 'signatures.yml', 'prego']
     end
 
+    it 'loads the signature database from ~/.config/signore/signatures.yml if no location specified' do
+      Signore.should_receive(:load_db).with File.expand_path '~/.config/signore/signatures.yml'
+      Executable.new ['prego']
+    end
+
   end
 
 end end
