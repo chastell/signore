@@ -1,3 +1,4 @@
 --colour
 --diff unified
+--require tmpdir
 --require lib/signore
