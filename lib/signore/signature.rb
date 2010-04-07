@@ -12,6 +12,10 @@ module Signore class Signature < Struct.new :text, :author, :source, :subject, :
     meta ? "#{text}\n#{' ' * (text.size - meta.size - 2)}[#{meta}]" : text
   end
 
+  def tagged_with? tag
+    tags and tags.include? tag
+  end
+
   private
 
   def meta

@@ -44,4 +44,18 @@ module Signore describe Signature do
 
   end
 
+  context '#tagged_with?' do
+
+    it 'says whether a tagged signature is tagged with a given tag' do
+      Signore.db[2].should_not be_tagged_with 'fnord'
+      Signore.db[2].should     be_tagged_with 'programming'
+      Signore.db[2].should     be_tagged_with 'tech'
+    end
+
+    it 'says that an untagged signature is not tagged with any tag' do
+      Signore.db[4].should_not be_tagged_with 'fnord'
+    end
+
+  end
+
 end end
