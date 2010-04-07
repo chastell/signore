@@ -2,22 +2,22 @@
 
 module Signore describe Signature do
 
-  context '.find' do
+  before do
+    srand
+    Signore.load_db 'spec/fixtures/signatures.yml'
+  end
 
-    before do
-      srand
-      Signore.load_db 'spec/fixtures/signatures.yml'
-    end
+  context '.find' do
 
     it 'returns a random signature by default' do
       srand 1981
-      Signature.find.text.should == '// sometimes I believe compiler ignores all my comments'
+      Signature.find.text.should == 'stay-at-home executives vs. wallstreet dads'
       srand 1979
-      Signature.find.text.should == 'You do have to be mad to work here, but it doesn’t help.'
+      Signature.find.text.should == '// sometimes I believe compiler ignores all my comments'
     end
 
     it 'returns a random signature if the tags are empty' do
-      srand 1981
+      srand 2009
       Signature.find(:tags => []).text.should == '// sometimes I believe compiler ignores all my comments'
     end
 
@@ -28,6 +28,18 @@ module Signore describe Signature do
 
     it 'returns a random signature based on required and forbidden tags' do
       Signature.find(:tags => ['tech'], :no_tags => ['programming', 'security']).text.should == 'You do have to be mad to work here, but it doesn’t help.'
+    end
+
+  end
+
+  context '#display' do
+
+    it 'returns a signature formatted with meta information (if available)' do
+      Signore.db[2].display.should == '// sometimes I believe compiler ignores all my comments'
+      Signore.db[4].display.should == "stay-at-home executives vs. wallstreet dads\n                                     [kodz]"
+      Signore.db[1].display.should == "You do have to be mad to work here, but it doesn’t help.\n                                      [Gary Barnes, asr]"
+      Signore.db[3].display.should == "Bruce Schneier knows Alice and Bob’s shared secret.\n                             [Bruce Schneier Facts]"
+      Signore.db[0].display.should == "She was good at playing abstract confusion in the same way a midget is good at being short.\n                                                            [Clive James on Marilyn Monroe]"
     end
 
   end
