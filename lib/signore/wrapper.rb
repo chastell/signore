@@ -28,14 +28,18 @@ module Signore class Wrapper
 
   def wrap
     @lines.map! do |line|
-      best_wrap = line.gsub(/ ([^ ]) /, " \\1#{NBSP}").gsub(/(.{1,80})( |$\n?)/, "\\1\n").tr NBSP, ' '
+      best_wrap = wrap_line_to line, 80
       79.downto 1 do |size|
-        new_wrap = line.gsub(/ ([^ ]) /, " \\1#{NBSP}").gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n").tr NBSP, ' '
+        new_wrap = wrap_line_to line, size
         break if new_wrap.count("\n") > best_wrap.count("\n")
         best_wrap = new_wrap
       end
       best_wrap.chomp
     end
+  end
+
+  def wrap_line_to line, size
+    line.gsub(/ ([^ ]) /, " \\1#{NBSP}").gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n").tr NBSP, ' '
   end
 
 end end
