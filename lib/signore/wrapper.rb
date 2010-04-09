@@ -1,11 +1,19 @@
 module Signore class Wrapper
 
   def initialize text, meta
-    @text, @meta = text, meta
+    @lines = text.split "\n"
+    @meta  = meta
   end
 
   def display
-    @meta ? "#{@text}\n#{' ' * (@text.size - @meta.size - 2)}[#{@meta}]" : @text
+    add_meta if @meta
+    @lines.join "\n"
+  end
+
+  private
+
+  def add_meta
+    @lines << ' ' * (@lines.map(&:size).max - @meta.size - 2) + "[#{@meta}]"
   end
 
 end end
