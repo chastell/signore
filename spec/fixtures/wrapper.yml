@@ -24,3 +24,16 @@
     No, no, it’s spelled Raymond Luxury Yacht,
     but it’s pronounced Throatwobbler Mangrove.
                                  [Monty Python]
+
+# multi-line signatures should be wrapped on a line-by-line basis
+- :text: |-
+      ‘The Ruby community should proceed with all deliberate speed towards ISO standardization of the language.’
+      ‘Yeah, look what it did to Forth.’
+      ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
+  :meta: M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk
+  :wrapped: |-
+    ‘The Ruby community should proceed with all deliberate
+    speed towards ISO standardization of the language.’
+    ‘Yeah, look what it did to Forth.’
+    ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
+                [M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]
