@@ -3,17 +3,17 @@
 module Signore describe Database do
 
   before do
-    @db = "#{Dir.tmpdir}/#{rand}/signatures.yml"
+    @path = "#{Dir.tmpdir}/#{rand}/signatures.yml"
   end
 
   after do
-    FileUtils.rmtree File.dirname @db
+    FileUtils.rmtree File.dirname @path
   end
 
   context '.db' do
 
     it 'returns the signature database loaded by .load' do
-      Database.load @db
+      Database.load @path
       Database.db.should == []
     end
 
@@ -52,9 +52,9 @@ module Signore describe Database do
   context '.load' do
 
     it 'creates an empty signature database if it does not exist' do
-      File.exists?(@db).should be_false
-      Database.load @db
-      File.read(@db).should == [].to_yaml
+      File.exists?(@path).should be_false
+      Database.load @path
+      File.read(@path).should == [].to_yaml
     end
 
   end
