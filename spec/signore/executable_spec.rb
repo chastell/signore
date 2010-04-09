@@ -78,13 +78,20 @@ module Signore describe Executable do
     end
 
     it 'asks about signature parts and saves given signature with provided labels' do
-      input = StringIO.new "The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\nMark Pilgrim\n\n\n"
+      input = StringIO.new "The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n\nMark Pilgrim\n\n\n\n"
       Executable.new(['-d', @path, 'pronto', 'Wikipedia', 'ADHD']).run output = StringIO.new, input
       output.rewind
-      output.read.should == "text? author? subject? source? The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
+      output.read.should == "text?\nauthor?\nsubject?\nsource?\nThe Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
       Executable.new(['-d', @path, 'prego', 'Wikipedia', 'ADHD']).run output = StringIO.new
       output.rewind
       output.read.should == "The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
+    end
+
+    it 'handles multi-line signatures' do
+      input = StringIO.new "‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n\nSimon Burr, Kyle Hearn\n\n\n\n"
+      Executable.new(['-d', @path, 'pronto']).run output = StringIO.new, input
+      output.rewind
+      output.read.should == "text?\nauthor?\nsubject?\nsource?\n‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n                                               [Simon Burr, Kyle Hearn]\n"
     end
 
   end

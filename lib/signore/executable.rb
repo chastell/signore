@@ -20,8 +20,10 @@ module Signore class Executable
     when 'pronto'
       params = {:tags => @tags}
       [:text, :author, :subject, :source].each do |elem|
-        output << "#{elem}? "
-        params[elem] = input.gets.chomp
+        output.puts "#{elem}?"
+        params[elem] = ''
+        params[elem] << input.gets until params[elem].lines.to_a.last == "\n"
+        params[elem].rstrip!
       end
       params.delete_if { |key, value| value.empty? }
       sig = Signature.new params[:text], params[:author], params[:source], params[:subject], params[:tags]
