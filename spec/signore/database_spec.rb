@@ -1,4 +1,4 @@
-describe Signore do
+module Signore describe Database do
 
   before do
     @db = "#{Dir.tmpdir}/#{rand}/signatures.yml"
@@ -11,8 +11,8 @@ describe Signore do
   context '.db' do
 
     it 'returns the signature database loaded by .load_db' do
-      Signore.load_db @db
-      Signore.db.should == []
+      Database.load_db @db
+      Database.db.should == []
     end
 
   end
@@ -21,10 +21,10 @@ describe Signore do
 
     it 'creates an empty signature database if it does not exist' do
       File.exists?(@db).should be_false
-      Signore.load_db @db
+      Database.load_db @db
       File.read(@db).should == [].to_yaml
     end
 
   end
 
-end
+end end

@@ -2,7 +2,7 @@ module Signore class Signature < Struct.new :text, :author, :source, :subject, :
 
   def self.find opts = {}
     opts = {:tags => [], :no_tags => []}.merge opts
-    Signore.db
+    Database.db
       .select { |sig| opts[:tags].all?    { |tag| sig.tagged_with? tag } }
       .reject { |sig| opts[:no_tags].any? { |tag| sig.tagged_with? tag } }
       .shuffle.first
