@@ -8,13 +8,26 @@ module Signore class Executable
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
     Database.load opts[:database]
-    args.shift
+    @action = args.shift
     @no_tags, @tags = args.partition { |tag| tag[0] == '~' }
     @no_tags.map! { |tag| tag[1..-1] }
   end
 
-  def run output = $stdout
-    output.puts Database.find(:tags => @tags, :no_tags => @no_tags).display
+  def run output = $stdout, input = $stdin
+    case @action
+    when 'prego'
+      output.puts Database.find(:tags => @tags, :no_tags => @no_tags).display
+    when 'pronto'
+      params = {:tags => @tags}
+      [:text, :author, :subject, :source].each do |elem|
+        output << "#{elem}? "
+        params[elem] = input.gets.chomp
+      end
+      params.delete_if { |key, value| value.empty? }
+      sig = Signature.new params[:text], params[:author], params[:source], params[:subject], params[:tags]
+      Database.save sig
+      output.puts sig.display
+    end
   end
 
 end end

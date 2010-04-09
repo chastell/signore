@@ -53,6 +53,14 @@ module Signore describe Executable do
 
   context '#run' do
 
+    before do
+      @path = "#{Dir.tmpdir}/#{rand}/signatures.yml"
+    end
+
+    after do
+      FileUtils.rmtree File.dirname @path
+    end
+
     it 'prints a signature tagged with the provided tags' do
       sig = mock Signature, :display => '// sometimes I believe compiler ignores all my comments'
       Database.should_receive(:find).with({:tags => ['tech', 'programming'], :no_tags => []}).and_return sig
@@ -67,6 +75,16 @@ module Signore describe Executable do
       Executable.new(['prego', '~programming', 'tech', '~security']).run output = StringIO.new
       output.rewind
       output.read.should == "You do have to be mad to work here, but it doesn’t help.\n"
+    end
+
+    it 'asks about signature parts and saves given signature with provided labels' do
+      input = StringIO.new "The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\nMark Pilgrim\n\n\n"
+      Executable.new(['-d', @path, 'pronto', 'Wikipedia', 'ADHD']).run output = StringIO.new, input
+      output.rewind
+      output.read.should == "text? author? subject? source? The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
+      Executable.new(['-d', @path, 'prego', 'Wikipedia', 'ADHD']).run output = StringIO.new
+      output.rewind
+      output.read.should == "The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
     end
 
   end
