@@ -4,7 +4,7 @@ module Signore class Database
     @db
   end
 
-  def self.load_db path
+  def self.load path
     FileUtils.mkpath File.dirname path                 unless File.exists? path
     File.open(path, 'w') { |file| YAML.dump [], file } unless File.exists? path
     @db = YAML.load_file path

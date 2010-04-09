@@ -4,7 +4,7 @@ module Signore describe Signature do
 
   before do
     srand
-    Database.load_db 'spec/fixtures/signatures.yml'
+    Database.load 'spec/fixtures/signatures.yml'
   end
 
   context '.find' do

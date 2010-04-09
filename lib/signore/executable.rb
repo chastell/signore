@@ -7,7 +7,7 @@ module Signore class Executable
       opt :database, 'Location of the signature database', :default => (ENV['XDG_CONFIG_HOME'] or File.expand_path '~/.config') + '/signore/signatures.yml'
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
-    Database.load_db opts[:database]
+    Database.load opts[:database]
     args.shift
     @no_tags, @tags = args.partition { |tag| tag[0] == '~' }
     @no_tags.map! { |tag| tag[1..-1] }

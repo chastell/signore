@@ -10,18 +10,18 @@ module Signore describe Database do
 
   context '.db' do
 
-    it 'returns the signature database loaded by .load_db' do
-      Database.load_db @db
+    it 'returns the signature database loaded by .load' do
+      Database.load @db
       Database.db.should == []
     end
 
   end
 
-  context '.load_db' do
+  context '.load' do
 
     it 'creates an empty signature database if it does not exist' do
       File.exists?(@db).should be_false
-      Database.load_db @db
+      Database.load @db
       File.read(@db).should == [].to_yaml
     end
 
