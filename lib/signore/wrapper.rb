@@ -14,6 +14,7 @@ module Signore class Wrapper
   private
 
   def add_meta
+    @lines.map! { |line| line.split "\n" }.flatten!
     @lines << ' ' * (@lines.map(&:size).max - @meta.size - 2) + "[#{@meta}]"
   end
 

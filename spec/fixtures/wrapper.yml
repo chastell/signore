@@ -16,3 +16,11 @@
   :wrapped: |-
     It may look like I’m just sitting here doing nothing. But
     I’m really actively waiting for all my problems to go away.
+
+# meta info should be right-aligned to the longest line
+- :text: No, no, it’s spelled Raymond Luxury Yacht, but it’s pronounced Throatwobbler Mangrove.
+  :meta: Monty Python
+  :wrapped: |-
+    No, no, it’s spelled Raymond Luxury Yacht,
+    but it’s pronounced Throatwobbler Mangrove.
+                                 [Monty Python]
