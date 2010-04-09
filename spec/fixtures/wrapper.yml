@@ -1,0 +1,12 @@
+---
+
+# wrapping shouldn’t affect one-liners
+- :text: Patches are like Free Software love letters.
+  :wrapped: Patches are like Free Software love letters.
+
+# meta info should be right-aligned on its own line
+- :text: I have a fever and it’s not disco related.
+  :meta: opi
+  :wrapped: |-
+    I have a fever and it’s not disco related.
+                                         [opi]
