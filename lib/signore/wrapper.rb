@@ -22,6 +22,17 @@ module Signore class Wrapper
     @lines.last.insert 0, ' ' * (width - @meta.size - 2)
   end
 
+  def find_hangout wrapped
+    lines = wrapped.split "\n"
+    lines.each_with_index do |line, nr|
+      space = line.rindex /[ #{NBSP}]/
+      next unless space and nr < lines.size - 1
+      return nr if nr > 0              and space >= lines[nr - 1].size
+      return nr if nr < lines.size - 2 and space >= lines[nr + 1].size
+    end
+    nil
+  end
+
   def width
     @lines.map { |line| line.split "\n" }.flatten.map(&:size).max
   end
@@ -39,7 +50,15 @@ module Signore class Wrapper
   end
 
   def wrap_line_to line, size
-    line.gsub(/ ([^ ]) /, " \\1#{NBSP}").gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n").tr NBSP, ' '
+    line = line.gsub(/ ([^ ]) /, " \\1#{NBSP}")
+    line = line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")
+    if hangout = find_hangout(line)
+      lines = line.split "\n"
+      lines[hangout] << NBSP
+      line = lines.join(' ').gsub("#{NBSP} ", NBSP)
+      line = wrap_line_to line, size
+    end
+    line.tr NBSP, ' '
   end
 
 end end
