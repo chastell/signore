@@ -13,14 +13,13 @@ module Signore class Database
   end
 
   def self.load path
-    FileUtils.mkpath File.dirname path                 unless File.exists? path
-    File.open(path, 'w') { |file| YAML.dump [], file } unless File.exists? path
-    @db = YAML.load_file path
     @path = path
+    @db = File.exists?(@path) ? YAML.load_file(@path) : []
   end
 
   def self.save sig
     @db << sig
+    FileUtils.mkpath File.dirname @path
     File.open(@path, 'w') { |file| YAML.dump @db, file }
   end
 

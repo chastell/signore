@@ -51,10 +51,11 @@ module Signore describe Database do
 
   context '.load' do
 
-    it 'creates an empty signature database if it does not exist' do
+    it 'creates an empty signature database if it does not exist, but does not save it' do
       File.exists?(@path).should be_false
       Database.load @path
-      File.read(@path).should == [].to_yaml
+      Database.db.should == []
+      File.exists?(@path).should be_false
     end
 
   end
