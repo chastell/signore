@@ -14,8 +14,12 @@ module Signore class Wrapper
   private
 
   def add_meta
-    @lines.map! { |line| line.split "\n" }.flatten!
-    @lines << ' ' * (@lines.map(&:size).max - @meta.size - 2) + "[#{@meta}]"
+    @lines << "[#{@meta}]"
+    @lines.last.insert 0, ' ' * (width - @meta.size - 2)
+  end
+
+  def width
+    @lines.map { |line| line.split "\n" }.flatten.map(&:size).max
   end
 
   def wrap
