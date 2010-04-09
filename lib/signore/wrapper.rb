@@ -1,4 +1,8 @@
+# encoding: UTF-8
+
 module Signore class Wrapper
+
+  NBSP = ' '
 
   def initialize text, meta
     @lines = text.split "\n"
@@ -24,9 +28,9 @@ module Signore class Wrapper
 
   def wrap
     @lines.map! do |line|
-      best_wrap = line.gsub(/(.{1,80})( |$\n?)/, "\\1\n")
+      best_wrap = line.gsub(/ ([^ ]) /, " \\1#{NBSP}").gsub(/(.{1,80})( |$\n?)/, "\\1\n").tr NBSP, ' '
       79.downto 1 do |size|
-        new_wrap = line.gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n")
+        new_wrap = line.gsub(/ ([^ ]) /, " \\1#{NBSP}").gsub(/(.{1,#{size}})( |$\n?)/, "\\1\n").tr NBSP, ' '
         break if new_wrap.count("\n") > best_wrap.count("\n")
         best_wrap = new_wrap
       end

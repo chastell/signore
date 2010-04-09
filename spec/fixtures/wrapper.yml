@@ -55,3 +55,11 @@
     that attack and a lookalike was substituted.’
     ‘You mean we were governed all those years by an ACTOR!’
     [Spehro Pefhany, CyberCypher, Jess Askin, don groves, alt.usage.english]
+
+# wrapping shouldn’t left one-letter words at the end of lines
+- :text: I’ve been trying for some time to develop a lifestyle that doesn’t require my presence.
+  :meta: Gary Trudeau
+  :wrapped: |-
+    I’ve been trying for some time to develop
+    a lifestyle that doesn’t require my presence.
+                                   [Gary Trudeau]
