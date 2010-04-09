@@ -9,7 +9,7 @@ module Signore class Signature < Struct.new :text, :author, :source, :subject, :
   end
 
   def display
-    meta ? "#{text}\n#{' ' * (text.size - meta.size - 2)}[#{meta}]" : text
+    Wrapper.new(text, meta).display
   end
 
   def tagged_with? tag

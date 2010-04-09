@@ -3,6 +3,7 @@ require 'yaml'
 
 require_relative 'signore/executable'
 require_relative 'signore/signature'
+require_relative 'signore/wrapper'
 
 module Signore
 
