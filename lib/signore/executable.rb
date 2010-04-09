@@ -18,15 +18,13 @@ module Signore class Executable
     when 'prego'
       output.puts Database.find(:tags => @tags, :no_tags => @no_tags).display
     when 'pronto'
-      params = {:tags => @tags}
-      [:text, :author, :subject, :source].each do |elem|
+      params = Hash[[:text, :author, :subject, :source].map do |elem|
         output.puts "#{elem}?"
-        params[elem] = ''
-        params[elem] << input.gets until params[elem].lines.to_a.last == "\n"
-        params[elem].rstrip!
-      end
-      params.delete_if { |key, value| value.empty? }
-      sig = Signature.new params[:text], params[:author], params[:source], params[:subject], params[:tags]
+        value = ''
+        value << input.gets until value.lines.to_a.last == "\n"
+        [elem, value.rstrip]
+      end].delete_if { |elem, value| value.empty? }
+      sig = Signature.new params[:text], params[:author], params[:source], params[:subject], @tags
       Database.save sig
       output.puts sig.display
     end
