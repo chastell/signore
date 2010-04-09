@@ -1,23 +1,23 @@
 ---
 
-# wrapping shouldn’t affect one-liners
+# wrapping doesn’t affect one-liners
 - :text: Patches are like Free Software love letters.
   :wrapped: Patches are like Free Software love letters.
 
-# meta info should be right-aligned on its own line
+# meta info is right-aligned on its own line
 - :text: I have a fever and it’s not disco related.
   :meta: opi
   :wrapped: |-
     I have a fever and it’s not disco related.
                                          [opi]
 
-# more-than-80-column signatures should be wrapped, with the result being as short as possible
+# more-than-80-column signatures are be wrapped, with the result being as short as possible
 - :text: It may look like I’m just sitting here doing nothing. But I’m really actively waiting for all my problems to go away.
   :wrapped: |-
     It may look like I’m just sitting here doing nothing. But
     I’m really actively waiting for all my problems to go away.
 
-# meta info should be right-aligned to the longest line
+# meta info is right-aligned to the longest line
 - :text: No, no, it’s spelled Raymond Luxury Yacht, but it’s pronounced Throatwobbler Mangrove.
   :meta: Monty Python
   :wrapped: |-
@@ -25,7 +25,7 @@
     but it’s pronounced Throatwobbler Mangrove.
                                  [Monty Python]
 
-# multi-line signatures should be wrapped on a line-by-line basis
+# multi-line signatures are wrapped on a line-by-line basis
 - :text: |-
       ‘The Ruby community should proceed with all deliberate speed towards ISO standardization of the language.’
       ‘Yeah, look what it did to Forth.’
@@ -38,7 +38,7 @@
     ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
                 [M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]
 
-# long meta info should be flushed left
+# long meta info is flushed left
 - :text: |-
       ‘The Guardian also had a pre-election column, in which an allegedly “ironic joke” was open to other interpretations: “John Wilkes Booth, Lee Harvey Oswald, John Hinckley Jr., where are you now that we need you?” They removed the column from on-line access and apologized.’
       ‘They should have. Hinckley missed the vital spot, so who needs him?’
@@ -56,7 +56,7 @@
     ‘You mean we were governed all those years by an ACTOR!’
     [Spehro Pefhany, CyberCypher, Jess Askin, don groves, alt.usage.english]
 
-# wrapping shouldn’t left one-letter words at the end of lines
+# wrapping doesn’t left one-letter words at the end of lines
 - :text: I’ve been trying for some time to develop a lifestyle that doesn’t require my presence.
   :meta: Gary Trudeau
   :wrapped: |-
@@ -64,7 +64,7 @@
     a lifestyle that doesn’t require my presence.
                                    [Gary Trudeau]
 
-# there should be no hangouts
+# there are no hangouts
 - :text: Better to teach a man to fish than to give him a fish. And if he can’t be bothered to learn to fish and starves to death, that’s a good enough outcome for me.
   :meta: Steve VanDevender
   :wrapped: |-
@@ -73,7 +73,7 @@
     to death, that’s a good enough outcome for me.
                                          [Steve VanDevender]
 
-# for two-line signatures, first line should be considered for hangouts
+# for two-line signatures, first line is considered for hangouts
 - :text: Well, the old ones go mmmmmbbbbzzzzttteeeeeep as they start up and the new ones go whupwhupwhupwhooopwhooooopwhooooooommmmmmmmmm.
   :meta: Graham Reed on subway engines, asr
   :wrapped: |-
