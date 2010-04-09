@@ -1,13 +1,5 @@
 module Signore class Signature < Struct.new :text, :author, :source, :subject, :tags
 
-  def self.find opts = {}
-    opts = {:tags => [], :no_tags => []}.merge opts
-    Database.db
-      .select { |sig| opts[:tags].all?    { |tag| sig.tagged_with? tag } }
-      .reject { |sig| opts[:no_tags].any? { |tag| sig.tagged_with? tag } }
-      .shuffle.first
-  end
-
   def display
     Wrapper.new(text, meta).display
   end

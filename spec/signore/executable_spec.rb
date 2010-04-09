@@ -55,7 +55,7 @@ module Signore describe Executable do
 
     it 'prints a signature tagged with the provided tags' do
       sig = mock Signature, :display => '// sometimes I believe compiler ignores all my comments'
-      Signature.should_receive(:find).with({:tags => ['tech', 'programming'], :no_tags => []}).and_return sig
+      Database.should_receive(:find).with({:tags => ['tech', 'programming'], :no_tags => []}).and_return sig
       Executable.new(['prego', 'tech', 'programming']).run output = StringIO.new
       output.rewind
       output.read.should == "// sometimes I believe compiler ignores all my comments\n"
@@ -63,7 +63,7 @@ module Signore describe Executable do
 
     it 'prints a signature based on allowed and forbidden tags' do
       sig = mock Signature, :display => 'You do have to be mad to work here, but it doesn’t help.'
-      Signature.should_receive(:find).with({:tags => ['tech'], :no_tags => ['programming', 'security']}).and_return sig
+      Database.should_receive(:find).with({:tags => ['tech'], :no_tags => ['programming', 'security']}).and_return sig
       Executable.new(['prego', '~programming', 'tech', '~security']).run output = StringIO.new
       output.rewind
       output.read.should == "You do have to be mad to work here, but it doesn’t help.\n"

@@ -14,7 +14,7 @@ module Signore class Executable
   end
 
   def run output = $stdout
-    output.puts Signature.find(:tags => @tags, :no_tags => @no_tags).display
+    output.puts Database.find(:tags => @tags, :no_tags => @no_tags).display
   end
 
 end end
