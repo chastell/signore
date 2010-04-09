@@ -2,7 +2,7 @@
 
 module Signore class Executable
 
-  def initialize args
+  def initialize args = ARGV
     opts = Trollop.options args do
       opt :database, 'Location of the signature database', :default => (ENV['XDG_CONFIG_HOME'] or File.expand_path '~/.config') + '/signore/signatures.yml'
     end
@@ -13,7 +13,7 @@ module Signore class Executable
     @no_tags.map! { |tag| tag[1..-1] }
   end
 
-  def run output
+  def run output = $stdout
     output.puts Signature.find(:tags => @tags, :no_tags => @no_tags).display
   end
 

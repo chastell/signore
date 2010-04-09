@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'trollop'
 require 'yaml'
 
