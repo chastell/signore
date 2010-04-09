@@ -10,3 +10,9 @@
   :wrapped: |-
     I have a fever and it’s not disco related.
                                          [opi]
+
+# more-than-80-column signatures should be wrapped, with the result being as short as possible
+- :text: It may look like I’m just sitting here doing nothing. But I’m really actively waiting for all my problems to go away.
+  :wrapped: |-
+    It may look like I’m just sitting here doing nothing. But
+    I’m really actively waiting for all my problems to go away.
