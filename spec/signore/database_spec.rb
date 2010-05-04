@@ -74,7 +74,7 @@ module Signore describe Database do
       Database.load @path
       sig = Signature.new 'Normaliser Unix c’est comme pasteuriser le camembert.'
       Database.save sig
-      File.read(@path).should == [sig].to_yaml
+      File.read(@path).should == "---\n- !ruby/struct:Signore::Signature\n  :text: Normaliser Unix c’est comme pasteuriser le camembert.\n"
     end
 
   end

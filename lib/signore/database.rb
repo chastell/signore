@@ -36,7 +36,7 @@ module Signore class Database
   def self.save sig
     @db << sig
     FileUtils.mkpath File.dirname @path
-    File.open(@path, 'w') { |file| YAML.dump @db, file }
+    File.open(@path, 'w') { |file| file << self.min_yaml }
   end
 
   private
