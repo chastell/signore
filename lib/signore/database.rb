@@ -19,10 +19,34 @@ module Signore class Database
     @db = File.exists?(@path) ? YAML.load_file(@path) : []
   end
 
+  def self.min_yaml
+    [
+      '---',
+      @db.map do |sig|
+        yaml = ['- !ruby/struct:Signore::Signature']
+        [:text, :author, :subject, :source].map { |e| [e, sig[e]] }.select(&:last).each do |elem, string|
+          yaml << "  :#{elem}: #{self.yamlify(string)}"
+        end
+        yaml << "  :tags: [#{sig.tags.join ', '}]" if sig.tags
+        yaml
+      end,
+    ].join("\n") + "\n"
+  end
+
   def self.save sig
     @db << sig
     FileUtils.mkpath File.dirname @path
     File.open(@path, 'w') { |file| YAML.dump @db, file }
+  end
+
+  private
+
+  def self.yamlify string
+    case
+    when string.include?("\n") then "|-\n" + string.gsub(/^/, '    ')
+    when string.include?(': ') then "\"#{string.gsub '"', '\"'}\""
+    else string
+    end
   end
 
 end end

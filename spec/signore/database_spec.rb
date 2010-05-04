@@ -79,4 +79,13 @@ module Signore describe Database do
 
   end
 
+  context '.min_yaml' do
+
+    it 'returns the minimal YAML representation of the signature database' do
+      Database.load 'spec/fixtures/min_yaml.yml'
+      Database.min_yaml.should == File.read('spec/fixtures/min_yaml.yml')
+    end
+
+  end
+
 end end

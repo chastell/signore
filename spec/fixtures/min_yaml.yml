@@ -1,0 +1,20 @@
+---
+- !ruby/struct:Signore::Signature
+  :text: Patches are like Free Software love letters.
+- !ruby/struct:Signore::Signature
+  :text: It’s 8:21 AM, do you know where your process is? Call 0-800-GREP to find out more how YOU can prevent zombification.
+  :author: opi
+  :tags: [programming, Unix]
+- !ruby/struct:Signore::Signature
+  :text: |-
+    ‘Humor. It is a difficult concept: It is not logical.’
+    ‘We learn by doing.’
+  :source: "Star Trek: The Wrath of Khan"
+- !ruby/struct:Signore::Signature
+  :text: In 1940 he summarized his work in an influential book, ‘Punched Card Methods in Scientific Computation’.
+  :author: Paul E. Ceruzzi
+  :subject: on Wallace Eckert
+  :source: A History of Modern Computing
+- !ruby/struct:Signore::Signature
+  :text: "Microsoft: \"You've got problems. We've got dancing paperclips.\""
+  :author: thelaocoon
