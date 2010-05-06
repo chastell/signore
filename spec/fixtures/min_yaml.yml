@@ -21,3 +21,6 @@
 - !ruby/struct:Signore::Signature
   :text: 'The #1 lesson I learned on my one and only trip to the Caribbean is that society will not actually collapse if you walk down a public street with a beer in your hand. Who woulda thunk?'
   :author: J.D. Baldwin
+- !ruby/struct:Signore::Signature
+  :text: '3:10'
+  :author: Elmore Leonard
