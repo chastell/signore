@@ -16,8 +16,8 @@
   :subject: on Wallace Eckert
   :source: A History of Modern Computing
 - !ruby/struct:Signore::Signature
-  :text: 'Microsoft: "You''ve got problems. We''ve got dancing paperclips."'
-  :author: thelaocoon
+  :text: 'Idea: A James Cameron-directed prequel entitled ''T\0: The Null Terminator''.'
+  :author: Matthew Baldwin
 - !ruby/struct:Signore::Signature
   :text: 'The #1 lesson I learned on my one and only trip to the Caribbean is that society will not actually collapse if you walk down a public street with a beer in your hand. Who woulda thunk?'
   :author: J.D. Baldwin
