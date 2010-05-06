@@ -44,7 +44,7 @@ module Signore class Database
   def self.yamlify string
     case
     when string.include?("\n") then "|-\n" + string.gsub(/^/, '    ')
-    when string.include?(': ') then "\"#{string.gsub '"', '\"'}\""
+    when string.include?(': ') then "'#{string.gsub "'", "''"}'"
     else string
     end
   end
