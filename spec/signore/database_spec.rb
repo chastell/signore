@@ -62,14 +62,6 @@ module Signore describe Database do
 
   context '.save' do
 
-    before do
-      @path = "#{Dir.tmpdir}/#{rand}/signatures.yml"
-    end
-
-    after do
-      FileUtils.rmtree File.dirname @path
-    end
-
     it 'saves the provided signature to disk' do
       Database.load @path
       sig = Signature.new 'Normaliser Unix c’est comme pasteuriser le camembert.'
