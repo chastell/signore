@@ -78,6 +78,14 @@ module Signore describe Database do
       Database.min_yaml.should == File.read('spec/fixtures/min_yaml.yml')
     end
 
+    it 'escapes initial spaces in multi-line signatures' do
+      tng = "   ← space\nthe final\nfrontier"
+      Database.load @path
+      Database.save Signature.new tng
+      Database.load @path
+      Database.find.display.should == tng
+    end
+
   end
 
 end end

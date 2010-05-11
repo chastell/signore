@@ -43,7 +43,7 @@ module Signore class Database
 
   def self.yamlify string
     case string
-    when /\n/                                 then "|-\n" + string.gsub(/^/, '    ')
+    when /\n/                                 then "|-\n" + string.gsub(/^ +/) { |s| ' ' * s.size }.gsub(/^/, '    ')
     when /: /, /^\s*\d*:\d*\s*$/, / #/, /^\s/ then "'#{string.gsub "'", "''"}'"
     else string
     end
