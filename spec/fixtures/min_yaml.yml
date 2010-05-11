@@ -24,3 +24,5 @@
 - !ruby/struct:Signore::Signature
   :text: '3:10'
   :author: Elmore Leonard
+- !ruby/struct:Signore::Signature
+  :text: ' ← space, the final frontier'
