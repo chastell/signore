@@ -26,3 +26,7 @@
   :author: Elmore Leonard
 - !ruby/struct:Signore::Signature
   :text: ' ← space, the final frontier'
+- !ruby/struct:Signore::Signature
+  :text: Just got another wonderful request from the client… you’re going to lie this one.
+  :author: Chris Ivens
+  :source: '#civicrm'
