@@ -28,9 +28,9 @@ module Signore describe Database do
 
     it 'returns a random signature by default' do
       srand 1981
-      Database.find.text.should == 'stay-at-home executives vs. wallstreet dads'
+      Database.find.text.should == 'Amateur fighter pilot ignores orders, listens to the voices in his head and slaughters thousands.'
       srand 1979
-      Database.find.text.should == '// sometimes I believe compiler ignores all my comments'
+      Database.find.text.should == 'stay-at-home executives vs. wallstreet dads'
     end
 
     it 'returns a random signature if the tags are empty' do

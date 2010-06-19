@@ -17,6 +17,7 @@ module Signore class Signature < Struct.new :text, :author, :source, :subject, :
     when author && source            then "#{author}, #{source}"
     when author                      then "#{author}"
     when source                      then "#{source}"
+    when subject                     then "#{subject}"
     end
   end
 
