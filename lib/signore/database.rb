@@ -21,13 +21,12 @@ module Signore class Database
 
   def self.min_yaml
     [
-      '---',
       @db.map do |sig|
         yaml = ['- !ruby/struct:Signore::Signature']
         [:text, :author, :subject, :source].map { |e| [e, sig[e]] }.select(&:last).each do |elem, string|
-          yaml << "  :#{elem}: #{self.yamlify(string)}"
+          yaml << "  #{elem}: #{self.yamlify(string)}"
         end
-        yaml << "  :tags: [#{sig.tags.join ', '}]" if sig.tags
+        yaml << "  tags: [#{sig.tags.join ', '}]" if sig.tags
         yaml
       end,
     ].join("\n") + "\n"

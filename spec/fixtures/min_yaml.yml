@@ -1,32 +1,31 @@
----
 - !ruby/struct:Signore::Signature
-  :text: Patches are like Free Software love letters.
+  text: Patches are like Free Software love letters.
 - !ruby/struct:Signore::Signature
-  :text: It’s 8:21 AM, do you know where your process is? Call 0-800-GREP to find out more how YOU can prevent zombification.
-  :author: opi
-  :tags: [programming, Unix]
+  text: It’s 8:21 AM, do you know where your process is? Call 0-800-GREP to find out more how YOU can prevent zombification.
+  author: opi
+  tags: [programming, Unix]
 - !ruby/struct:Signore::Signature
-  :text: |-
+  text: |-
     ‘Humor. It is a difficult concept: It is not logical.’
     ‘We learn by doing.’
-  :source: 'Star Trek: The Wrath of Khan'
+  source: 'Star Trek: The Wrath of Khan'
 - !ruby/struct:Signore::Signature
-  :text: In 1940 he summarized his work in an influential book, ‘Punched Card Methods in Scientific Computation’.
-  :author: Paul E. Ceruzzi
-  :subject: on Wallace Eckert
-  :source: A History of Modern Computing
+  text: In 1940 he summarized his work in an influential book, ‘Punched Card Methods in Scientific Computation’.
+  author: Paul E. Ceruzzi
+  subject: on Wallace Eckert
+  source: A History of Modern Computing
 - !ruby/struct:Signore::Signature
-  :text: 'Idea: A James Cameron-directed prequel entitled ''T\0: The Null Terminator''.'
-  :author: Matthew Baldwin
+  text: 'Idea: A James Cameron-directed prequel entitled ''T\0: The Null Terminator''.'
+  author: Matthew Baldwin
 - !ruby/struct:Signore::Signature
-  :text: 'The #1 lesson I learned on my one and only trip to the Caribbean is that society will not actually collapse if you walk down a public street with a beer in your hand. Who woulda thunk?'
-  :author: J.D. Baldwin
+  text: 'The #1 lesson I learned on my one and only trip to the Caribbean is that society will not actually collapse if you walk down a public street with a beer in your hand. Who woulda thunk?'
+  author: J.D. Baldwin
 - !ruby/struct:Signore::Signature
-  :text: '3:10'
-  :author: Elmore Leonard
+  text: '3:10'
+  author: Elmore Leonard
 - !ruby/struct:Signore::Signature
-  :text: ' ← space, the final frontier'
+  text: ' ← space, the final frontier'
 - !ruby/struct:Signore::Signature
-  :text: Just got another wonderful request from the client… you’re going to lie this one.
-  :author: Chris Ivens
-  :source: '#civicrm'
+  text: Just got another wonderful request from the client… you’re going to lie this one.
+  author: Chris Ivens
+  source: '#civicrm'
