@@ -14,6 +14,24 @@ signore lets you store email signatures, tag them, and retrieve them based on th
     You do have to be mad to work here, but it doesn’t help.
                                           [Gary Barnes, asr]
 
+Storing signatures is also quite simple; the tags can be provided as the parameters to the `pronto` command, and signore asks you about the various parts of the signature you might want to store:
+
+    $ signore pronto literature
+    text?
+    Transported to a surreal landscape, a young girl kills the first person she meets and then teams up with three strangers to kill again.
+    
+    author?
+    Rick Polito
+    
+    subject?
+    on The Wonderful Wizard of Oz
+    
+    source?
+    
+    Transported to a surreal landscape, a young girl kills the first
+    person she meets and then teams up with three strangers to kill again.
+                               [Rick Polito on The Wonderful Wizard of Oz]
+
 ---
 
 © MMIX-MMX Piotr Szotkowski <chastell@chastell.net>, licensed under AGPL 3 (see LICENCE)
