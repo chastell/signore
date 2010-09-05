@@ -32,6 +32,11 @@ Storing signatures is also quite simple; the tags can be provided as the paramet
     person she meets and then teams up with three strangers to kill again.
                                [Rick Polito on The Wonderful Wizard of Oz]
 
+Storage
+-------
+
+signore stores the signatures in a YAML file (for ease of editing, if such a need arises) in `$XDG_CONFIG_HOME/signore/signatures.yml` (where `$XDG_CONFIG_HOME` is usually `~/.config`).
+
 ---
 
 © MMIX-MMX Piotr Szotkowski <chastell@chastell.net>, licensed under AGPL 3 (see LICENCE)
