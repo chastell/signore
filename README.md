@@ -6,7 +6,9 @@ Email signature manager/randomiser.
 Usage
 -----
 
-signore lets you store email signatures, tag them, and retrieve them based on the provided tags (picking a signature randomly if more than one matches):
+signore has two subcommands – `prego` and `pronto`, allowing you to retrieve and store them (respectively).
+
+Retrieving signatures is done with `signore prego` and picks a signature at random based on the provided tags:
 
     $ signore prego tech
     // sometimes I believe compiler ignores all my comments
@@ -14,7 +16,7 @@ signore lets you store email signatures, tag them, and retrieve them based on th
     You do have to be mad to work here, but it doesn’t help.
                                           [Gary Barnes, asr]
 
-Storing signatures is also quite simple; the tags can be provided as the parameters to the `pronto` command, and signore asks you about the various parts of the signature you might want to store:
+Storing signatures is also quite simple; the tags can be provided as the parameters to the `signore pronto` command, and signore asks you about the various parts of the signature you might want to store:
 
     $ signore pronto literature
     text?
