@@ -16,7 +16,7 @@ Retrieving signatures is done with `signore prego` and picks a signature at rand
     You do have to be mad to work here, but it doesn’t help.
                                           [Gary Barnes, asr]
 
-Storing signatures is also quite simple; the tags can be provided as the parameters to the `signore pronto` command, and signore asks you about the various parts of the signature you might want to store:
+Storing signatures is also quite simple; the tags can be provided as the parameters to the `signore pronto` command, and signore asks you about the various parts of the signature you might want to store (the source in this example is omitted); the signature is then displayed (formatted the way it will be when fetched with `signore prego`):
 
     $ signore pronto literature
     text?
