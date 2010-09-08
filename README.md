@@ -39,6 +39,11 @@ Storage
 
 signore stores the signatures in a YAML file (for ease of editing, if such a need arises) in `$XDG_CONFIG_HOME/signore/signatures.yml` (where `$XDG_CONFIG_HOME` is usually `~/.config`).
 
+Requirements
+------------
+
+signore requires Ruby 1.9 and works best with Ruby 1.9.2 compiled with Psych (for sanity when hand-editing the YAML file, if it happens to sport non-US-ASCII characters).
+
 ---
 
 © MMIX-MMX Piotr Szotkowski <chastell@chastell.net>, licensed under AGPL 3 (see LICENCE)
