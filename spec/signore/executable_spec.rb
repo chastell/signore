@@ -32,20 +32,20 @@ module Signore describe Executable do
       Executable.new ['-d', 'signatures.yml', 'prego']
     end
 
-    it 'loads the signature database from ~/.config/signore/signatures.yml if no location specified' do
-      pending if ENV['XDG_CONFIG_HOME']
-      Database.should_receive(:load).with File.expand_path '~/.config/signore/signatures.yml'
+    it 'loads the signature database from ~/.local/share/signore/signatures.yml if no location specified' do
+      pending if ENV['XDG_DATA_HOME']
+      Database.should_receive(:load).with File.expand_path '~/.local/share/signore/signatures.yml'
       Executable.new ['prego']
     end
 
-    it 'loads the signature database from $XDG_CONFIG_HOME/signore/signatures.yml if $XDG_CONFIG_HOME is set' do
+    it 'loads the signature database from $XDG_DATA_HOME/signore/signatures.yml if $XDG_DATA_HOME is set' do
       begin
-        orig_config_home = ENV.delete 'XDG_CONFIG_HOME'
-        ENV['XDG_CONFIG_HOME'] = Dir.tmpdir
-        Database.should_receive(:load).with "#{ENV['XDG_CONFIG_HOME']}/signore/signatures.yml"
+        orig_data_home = ENV.delete 'XDG_DATA_HOME'
+        ENV['XDG_DATA_HOME'] = Dir.tmpdir
+        Database.should_receive(:load).with "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
         Executable.new ['prego']
       ensure
-        orig_config_home ? ENV['XDG_CONFIG_HOME'] = orig_config_home : ENV.delete('XDG_CONFIG_HOME')
+        orig_data_home ? ENV['XDG_DATA_HOME'] = orig_data_home : ENV.delete('XDG_DATA_HOME')
       end
     end
 

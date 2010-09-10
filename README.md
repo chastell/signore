@@ -47,7 +47,7 @@ Storing signatures is also quite simple; the tags can be provided as the paramet
 Storage
 -------
 
-signore stores the signatures in a YAML file (for ease of editing, if such a need arises) in `$XDG_CONFIG_HOME/signore/signatures.yml` (where `$XDG_CONFIG_HOME` is usually `~/.config`).
+signore stores the signatures in a YAML file (for ease of editing, if such a need arises) in `$XDG_DATA_HOME/signore/signatures.yml` (where `$XDG_DATA_HOME` is usually `~/.local/share`).
 
 
 
