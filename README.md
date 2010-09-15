@@ -20,7 +20,7 @@ Retrieving signatures is done with `signore prego` and picks a signature at rand
 
 A tilde (`~`) before a tag means that the returned signature cannot be tagged with the given tag:
 
-    $ signore prego tech ~work
+    $ signore prego tech ~work ~programming
     Bruce Schneier knows Alice and Bob’s shared secret.
                                  [Bruce Schneier Facts]
 
