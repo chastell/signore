@@ -18,7 +18,7 @@ Retrieving signatures is done with `signore prego` and picks a signature at rand
     You do have to be mad to work here, but it doesn’t help.
                                           [Gary Barnes, asr]
 
-A tilde (`~`) before a tag means that the returned signature cannot be tagged with the given tag:
+A tilde (`~`) before a tag means tag negation – i.e., it means that the returned signature cannot be tagged with the given tag:
 
     $ signore prego tech ~work ~programming
     Bruce Schneier knows Alice and Bob’s shared secret.
