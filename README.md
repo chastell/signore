@@ -44,6 +44,13 @@ Storing signatures is also quite simple; the tags can be provided as the paramet
 
 
 
+Properties
+----------
+
+Most `Signature`s have `text` and `tags`, some also have `author`, `source` and `subject`. Currently `tags` are used to query the sig database, while `author`, `source` and `subject` are combined into meta information displayed below the actual signature (right aligned and and in square brackets).
+
+
+
 Storage
 -------
 
