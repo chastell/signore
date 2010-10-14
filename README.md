@@ -44,6 +44,15 @@ Storing signatures is also quite simple; the tags can be provided as the paramet
 
 
 
+Application
+-----------
+
+One of the ways to use signore is teaching your old email editor new tricks. If you happen to be a [Vim](http://www.vim.org/) user, the following will delete the current signature and replace it with a random one on every `,ss` sequence:
+
+    map ,ss  G?^-- $<CR><Down>dG:r! signore prego<CR>Go<CR><CR><Esc>
+
+
+
 Properties
 ----------
 
