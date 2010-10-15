@@ -51,6 +51,10 @@ One of the ways to use signore is teaching your old email editor new tricks. If 
 
     map ,ss  G?^-- $<CR><Down>dG:r! signore prego<CR>Go<CR><CR><Esc>
 
+Of course you can pass any tags to the command – so if you’re often writing emails to a technical mailing list, you might want to be able to use, say, `,stt` to get a signature tagged with ‘tech’:
+
+    map ,stt G?^-- $<CR><Down>dG:r! signore prego tech<CR>Go<CR><CR><Esc>
+
 
 
 Properties
