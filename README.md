@@ -55,10 +55,14 @@ Of course you can pass any tags to the command – so if you’re often writing 
 
     map ,stt G?^-- $<CR><Down>dG:r! signore prego tech<CR>Go<CR><CR><Esc>
 
-This can be helpful if you happen to send emails in different languages and want the signature to be actually readable by the recipient. If you tag all your signatures with the right language, the following will allow you to press `,sp` to get a signature in Polish and `,se` a signature in English:
+This can be helpful if you happen to send emails in different languages and want the signature to be actually readable by the recipient. If you tag all your signatures with the right language, the following will allow you to press `,sp` to get a signature in Polish and `,se` to get a signature in English:
 
     map ,sp  G?^-- $<CR><Down>dG:r! signore prego pl<CR>Go<CR><CR><Esc>
     map ,se  G?^-- $<CR><Down>dG:r! signore prego en<CR>Go<CR><CR><Esc>
+
+Finally, remember that tags can be combined and negated – and so if you often write to non-technical people who prefer Polish, the following will make sure that `,slp` will generate a proper signature (assuming all your Polish signatures are tagged with ‘pl’ and all your technical ones are tagged with ‘tech’):
+
+    map ,slp G?^-- $<CR><Down>dG:r! signore prego pl ~tech<CR>Go<CR><CR><Esc>
 
 
 
