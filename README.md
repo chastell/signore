@@ -66,6 +66,13 @@ Finally, remember that tags can be combined and negated – and so if you often 
 
 
 
+Options
+-------
+
+signore supports a single option, `--database` (or `-d` for short), which can be used to use a non-default signature database location.
+
+
+
 Properties
 ----------
 
