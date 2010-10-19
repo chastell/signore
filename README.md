@@ -69,7 +69,12 @@ Finally, remember that tags can be combined and negated – and so if you often 
 Options
 -------
 
-signore supports a single option, `--database` (or `-d` for short), which can be used to use a non-default signature database location.
+signore supports a single option, `--database` (or `-d` for short), which can be used to use a non-default signature database location:
+
+    $ signore prego -d spec/fixtures/signatures.yml
+    Amateur fighter pilot ignores orders, listens to
+    the voices in his head and slaughters thousands.
+                        [Star Wars ending explained]
 
 
 
