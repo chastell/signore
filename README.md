@@ -64,6 +64,8 @@ Finally, remember that tags can be combined and negated – and so if you often 
 
     map ,slp G?^-- $<CR><Down>dG:r! signore prego pl ~tech<CR>Go<CR><CR><Esc>
 
+Another aproach would be to create a named pipe that your email program reads from, and run `signore prego` on every read.
+
 
 
 Options
