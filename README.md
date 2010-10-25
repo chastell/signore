@@ -85,7 +85,7 @@ Properties
 
 Most `Signature`s have `text` and `tags`, some also have `author`, `source` and `subject`. Currently `tags` are used to query the sig database, while `author`, `source` and `subject` are combined into meta information displayed below the actual signature (right aligned and and in square brackets).
 
-The `text` of the `Signature`s is wrapped to 80 characters or fewer upon display (separately for every line).
+The `text` of the `Signature`s is wrapped to 80 characters or fewer upon display (separately for every line). Additionally, if the result is two lines, signore attempts to make them roughly the same length.
 
 
 
