@@ -6,9 +6,9 @@ Gem::Specification.new do |gem|
   gem.author   = 'Piotr Szotkowski'
   gem.email    = 'chastell@chastell.net'
 
-  gem.files            = `git ls-files -z`.split "\0"
-  gem.extra_rdoc_files = ['README.md']
-  gem.test_files       = Dir['spec/**/*.rb']
+  gem.files       = `git ls-files -z`.split "\0"
+  gem.executables = Dir['bin/*'].map { |d| d.split '/' }.map &:last
+  gem.test_files  = Dir['spec/**/*.rb']
 
   gem.add_dependency 'trollop'
   gem.add_development_dependency 'diff-lcs'
