@@ -11,6 +11,5 @@ Gem::Specification.new do |gem|
   gem.test_files  = Dir['spec/**/*.rb']
 
   gem.add_dependency 'trollop'
-  gem.add_development_dependency 'diff-lcs'
   gem.add_development_dependency 'rspec'
 end
