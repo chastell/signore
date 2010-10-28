@@ -1,3 +1,3 @@
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 
-Spec::Rake::SpecTask.new :spec
+RSpec::Core::RakeTask.new :spec
