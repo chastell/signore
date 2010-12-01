@@ -4,7 +4,7 @@ module Signore class Executable
 
   def initialize args = ARGV
     opts = Trollop.options args do
-      opt :database, 'Location of the signature database', :default => (ENV['XDG_DATA_HOME'] or File.expand_path '~/.local/share') + '/signore/signatures.yml'
+      opt :database, 'Location of the signature database', default: (ENV['XDG_DATA_HOME'] or File.expand_path '~/.local/share') + '/signore/signatures.yml'
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
     Database.load opts[:database]
@@ -16,7 +16,7 @@ module Signore class Executable
   def run output = STDOUT, input = STDIN
     case @action
     when 'prego'
-      output.puts Database.find(:tags => @tags, :no_tags => @no_tags).display
+      output.puts Database.find(tags: @tags, no_tags: @no_tags).display
     when 'pronto'
       params = Hash[[:text, :author, :subject, :source].map do |elem|
         output.puts "#{elem}?"

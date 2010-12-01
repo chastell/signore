@@ -7,7 +7,7 @@ module Signore class Database
   end
 
   def self.find opts = {}
-    opts = {:tags => [], :no_tags => []}.merge opts
+    opts = {tags: [], no_tags: []}.merge opts
     @db
       .select { |sig| opts[:tags].all?    { |tag| sig.tagged_with? tag } }
       .reject { |sig| opts[:no_tags].any? { |tag| sig.tagged_with? tag } }
