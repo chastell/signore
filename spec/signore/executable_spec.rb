@@ -2,7 +2,7 @@
 
 module Signore describe Executable do
 
-  context '#initialize' do
+  describe '#initialize' do
 
     before do
       $stderr = StringIO.new
@@ -51,9 +51,9 @@ module Signore describe Executable do
 
   end
 
-  context '#run' do
+  describe '#run' do
 
-    context 'prego' do
+    describe 'prego' do
 
       it 'prints a signature tagged with the provided tags' do
         sig = mock Signature, display: '// sometimes I believe compiler ignores all my comments'
@@ -73,7 +73,7 @@ module Signore describe Executable do
 
     end
 
-    context 'pronto' do
+    describe 'pronto' do
 
       before do
         @path = "#{Dir.tmpdir}/#{rand}/signatures.yml"

@@ -10,7 +10,7 @@ module Signore describe Database do
     FileUtils.rmtree File.dirname @path
   end
 
-  context '.db' do
+  describe '.db' do
 
     it 'returns the signature database loaded by .load' do
       Database.load @path
@@ -19,7 +19,7 @@ module Signore describe Database do
 
   end
 
-  context '.find' do
+  describe '.find' do
 
     before do
       srand
@@ -49,7 +49,7 @@ module Signore describe Database do
 
   end
 
-  context '.load' do
+  describe '.load' do
 
     it 'creates an empty signature database if it does not exist, but does not save it' do
       File.exists?(@path).should be_false
@@ -60,7 +60,7 @@ module Signore describe Database do
 
   end
 
-  context '.save' do
+  describe '.save' do
 
     it 'saves the provided signature to disk' do
       Database.load @path
@@ -71,7 +71,7 @@ module Signore describe Database do
 
   end
 
-  context '.min_yaml' do
+  describe '.min_yaml' do
 
     it 'returns the minimal YAML representation of the signature database' do
       Database.load 'spec/fixtures/min_yaml.yml'

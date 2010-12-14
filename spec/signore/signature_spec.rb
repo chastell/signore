@@ -6,7 +6,7 @@ module Signore describe Signature do
     Database.load 'spec/fixtures/signatures.yml'
   end
 
-  context '#display' do
+  describe '#display' do
 
     it 'returns a signature formatted with meta information (if available)' do
       Database.db[2].display.should == '// sometimes I believe compiler ignores all my comments'
@@ -19,7 +19,7 @@ module Signore describe Signature do
 
   end
 
-  context '#tagged_with?' do
+  describe '#tagged_with?' do
 
     it 'says whether a tagged signature is tagged with a given tag' do
       Database.db[2].should_not be_tagged_with 'fnord'
