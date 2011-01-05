@@ -105,4 +105,4 @@ signore requires Ruby 1.9 and works best with Ruby 1.9.2 compiled with Psych (fo
 
 ---
 
-© MMIX-MMX Piotr Szotkowski <chastell@chastell.net>, licensed under AGPL 3 (see LICENCE)
+© MMIX-MMXI Piotr Szotkowski <chastell@chastell.net>, licensed under AGPL 3 (see LICENCE)
