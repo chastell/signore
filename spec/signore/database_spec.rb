@@ -52,10 +52,10 @@ module Signore describe Database do
   describe '.load' do
 
     it 'creates an empty signature database if it does not exist, but does not save it' do
-      File.exists?(@path).should be_false
+      Pathname(@path).should_not exist
       Database.load @path
       Database.db.should == []
-      File.exists?(@path).should be_false
+      Pathname(@path).should_not exist
     end
 
   end
