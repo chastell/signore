@@ -11,5 +11,6 @@ Gem::Specification.new do |gem|
   gem.test_files  = Dir['spec/**/*.rb']
 
   gem.add_dependency 'trollop'
+  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec', '>= 2'
 end
