@@ -1,3 +1,9 @@
+require 'rake/testtask'
+
+Rake::TestTask.new do |task|
+  task.test_files = FileList['test/**/*_spec.rb']
+end
+
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new :spec
