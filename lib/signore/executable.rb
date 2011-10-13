@@ -2,12 +2,12 @@
 
 module Signore class Executable
 
-  def initialize args = ARGV
+  def initialize args = ARGV, db = Database
     opts = Trollop.options args do
       opt :database, 'Location of the signature database', default: (ENV['XDG_DATA_HOME'] or File.expand_path '~/.local/share') + '/signore/signatures.yml'
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
-    Database.load opts[:database]
+    db.load opts[:database]
     @action = args.shift
     @no_tags, @tags = args.partition { |tag| tag[0] == '~' }
     @no_tags.map! { |tag| tag[1..-1] }
