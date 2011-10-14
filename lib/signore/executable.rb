@@ -27,12 +27,16 @@ module Signore class Executable
 
   private
 
+  def get_param param, input
+    puts "#{param}?"
+    value = ''
+    value << input.gets until value.lines.to_a.last == "\n"
+    value.strip
+  end
+
   def get_params input
     Hash[[:text, :author, :subject, :source].map do |elem|
-      puts "#{elem}?"
-      value = ''
-      value << input.gets until value.lines.to_a.last == "\n"
-      [elem, value.rstrip]
+      [elem, get_param(elem, input)]
     end].delete_if { |elem, value| value.empty? }
   end
 
