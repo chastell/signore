@@ -53,15 +53,15 @@ module Signore describe Executable do
     describe 'prego' do
 
       it 'prints a signature tagged with the provided tags' do
-        Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', 'tech', 'programming']).run output = StringIO.new
-        output.rewind
-        output.read.must_equal "// sometimes I believe compiler ignores all my comments\n"
+        capture_io do
+          Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', 'tech', 'programming']).run
+        end.first.must_equal "// sometimes I believe compiler ignores all my comments\n"
       end
 
       it 'prints a signature based on allowed and forbidden tags' do
-        Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', '~programming', 'tech', '~security']).run output = StringIO.new
-        output.rewind
-        output.read.must_equal "You do have to be mad to work here, but it doesn’t help.\n                                      [Gary Barnes, asr]\n"
+        capture_io do
+          Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', '~programming', 'tech', '~security']).run
+        end.first.must_include 'You do have to be mad to work here, but it doesn’t help.'
       end
 
     end
@@ -78,19 +78,22 @@ module Signore describe Executable do
 
       it 'asks about signature parts and saves given signature with provided labels' do
         input = StringIO.new "The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n\nMark Pilgrim\n\n\n\n"
-        Executable.new(['-d', @path, 'pronto', 'Wikipedia', 'ADHD']).run output = StringIO.new, input
-        output.rewind
-        output.read.must_equal "text?\nauthor?\nsubject?\nsource?\nThe Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
-        Executable.new(['-d', @path, 'prego', 'Wikipedia', 'ADHD']).run output = StringIO.new
-        output.rewind
-        output.read.must_equal "The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
+
+        capture_io do
+          Executable.new(['-d', @path, 'pronto', 'Wikipedia', 'ADHD']).run $stdout, input
+        end.first.must_equal "text?\nauthor?\nsubject?\nsource?\nThe Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
+
+        capture_io do
+          Executable.new(['-d', @path, 'prego', 'Wikipedia', 'ADHD']).run
+        end.first.must_equal "The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n                                                      [Mark Pilgrim]\n"
       end
 
       it 'handles multi-line signatures' do
         input = StringIO.new "‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n\nSimon Burr, Kyle Hearn\n\n\n\n"
-        Executable.new(['-d', @path, 'pronto']).run output = StringIO.new, input
-        output.rewind
-        output.read.must_equal "text?\nauthor?\nsubject?\nsource?\n‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n                                               [Simon Burr, Kyle Hearn]\n"
+
+        capture_io do
+          Executable.new(['-d', @path, 'pronto']).run $stdout, input
+        end.first.must_equal "text?\nauthor?\nsubject?\nsource?\n‘I’ve gone through over-stressed to physical exhaustion – what’s next?’\n‘Tuesday.’\n                                               [Simon Burr, Kyle Hearn]\n"
       end
 
     end
