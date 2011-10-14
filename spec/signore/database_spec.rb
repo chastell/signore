@@ -5,17 +5,13 @@ require_relative '../spec_helper'
 module Signore describe Database do
 
   before do
-    @path = "#{Dir.tmpdir}/#{rand}/signatures.yml"
-  end
-
-  after do
-    FileUtils.rmtree File.dirname @path
+    @file = Tempfile.new ''
   end
 
   describe '.db' do
 
     it 'returns the signature database loaded by .load' do
-      Database.load @path
+      Database.load @file.path
       Database.db.must_equal []
     end
 
@@ -54,10 +50,11 @@ module Signore describe Database do
   describe '.load' do
 
     it 'creates an empty signature database if it does not exist, but does not save it' do
-      refute Pathname(@path).exist?
-      Database.load @path
+      missing = @file.path + rand.to_s
+      refute Pathname(missing).exist?
+      Database.load missing
       Database.db.must_equal []
-      refute Pathname(@path).exist?
+      refute Pathname(missing).exist?
     end
 
   end
@@ -65,10 +62,10 @@ module Signore describe Database do
   describe '.save' do
 
     it 'saves the provided signature to disk' do
-      Database.load @path
+      Database.load @file.path
       sig = Signature.new 'Normaliser Unix c’est comme pasteuriser le camembert.'
       Database.save sig
-      File.read(@path).must_equal "---\n- !ruby/struct:Signore::Signature\n  text: Normaliser Unix c’est comme pasteuriser le camembert.\n"
+      File.read(@file.path).must_equal "---\n- !ruby/struct:Signore::Signature\n  text: Normaliser Unix c’est comme pasteuriser le camembert.\n"
     end
 
   end
@@ -82,9 +79,9 @@ module Signore describe Database do
 
     it 'escapes initial spaces in multi-line signatures' do
       tng = "   ← space\nthe final\nfrontier"
-      Database.load @path
+      Database.load @file.path
       Database.save Signature.new tng
-      Database.load @path
+      Database.load @file.path
       Database.find.display.must_equal tng
     end
 
