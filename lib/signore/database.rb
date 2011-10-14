@@ -16,7 +16,8 @@ module Signore class Database
 
   def self.load path
     @path = path
-    @db = File.exists?(@path) ? YAML.load_file(@path) : []
+    @db = YAML.load_file(@path) rescue nil
+    @db ||= []
   end
 
   def self.min_yaml
