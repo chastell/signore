@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Signore describe Signature do
 
   before do
-    @confusion, @mad, @compiler, @bruce, @dads, @starwars = YAML.load_file 'spec/fixtures/signatures.yml'
+    @confusion, @mad, @compiler, @bruce, @dads, @starwars = YAML.load_file('spec/fixtures/signatures.yml')['signatures']
   end
 
   describe '#display' do

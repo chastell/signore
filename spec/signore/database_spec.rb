@@ -67,6 +67,7 @@ module Signore describe Database do
       Database.save sig
       File.read(@file.path).must_equal <<-END.dedent
         ---
+        signatures:
         - !ruby/struct:Signore::Signature
           text: Normaliser Unix c’est comme pasteuriser le camembert.
           author: !!null 

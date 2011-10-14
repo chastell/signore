@@ -1,8 +1,7 @@
 require 'fileutils'
 require 'trollop'
-require 'yaml'
-
-YAML::ENGINE.yamler = 'psych' if defined? Psych
+require 'psych'
+require 'yaml/store'
 
 require_relative 'signore/database'
 require_relative 'signore/executable'
