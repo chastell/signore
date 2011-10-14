@@ -13,7 +13,7 @@ module Signore class Executable
     @no_tags.map! { |tag| tag[1..-1] }
   end
 
-  def run output = STDOUT, input = STDIN
+  def run output = $stdout, input = $stdin
     case @action
     when 'prego'
       output.puts Database.find(tags: @tags, no_tags: @no_tags).display
