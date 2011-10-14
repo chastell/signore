@@ -9,14 +9,14 @@ module Signore class Executable
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
     @db = db_class.new opts[:database]
     @action = args.shift
-    @no_tags, @tags = args.partition { |tag| tag[0] == '~' }
+    @no_tags, @tags = args.partition { |tag| tag.start_with? '~' }
     @no_tags.map! { |tag| tag[1..-1] }
   end
 
   def run input = $stdin
     case @action
     when 'prego'
-      puts @db.find(tags: @tags, no_tags: @no_tags).display
+      sig = @db.find tags: @tags, no_tags: @no_tags
     when 'pronto'
       params = Hash[[:text, :author, :subject, :source].map do |elem|
         puts "#{elem}?"
@@ -26,8 +26,8 @@ module Signore class Executable
       end].delete_if { |elem, value| value.empty? }
       sig = Signature.new params[:text], params[:author], params[:source], params[:subject], @tags
       @db << sig
-      puts sig.display
     end
+    puts sig.display
   end
 
 end end
