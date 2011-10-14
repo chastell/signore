@@ -6,27 +6,16 @@ module Signore describe Executable do
 
   describe '#initialize' do
 
-    before do
-      $stderr = StringIO.new
-    end
-
-    after do
-      $stderr = STDERR
-    end
-
-    def stderr
-      $stderr.rewind
-      $stderr.read
-    end
-
     it 'prints usage if no command is given' do
-      lambda { Executable.new([]) }.must_raise SystemExit
-      stderr.must_match /usage: signore prego\|pronto \[label, …\]/
+      capture_io do
+        -> { Executable.new [] }.must_raise SystemExit
+      end.last.must_include 'usage: signore prego|pronto [label, …]'
     end
 
     it 'prints usage if a bogus command is given' do
-      lambda { Executable.new(['bogus']) }.must_raise SystemExit
-      stderr.must_match /usage: signore prego\|pronto \[label, …\]/
+      capture_io do
+        -> { Executable.new ['bogus'] }.must_raise SystemExit
+      end.last.must_include 'usage: signore prego|pronto [label, …]'
     end
 
     it 'loads the signature database from the specified location' do
