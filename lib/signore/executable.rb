@@ -13,20 +13,20 @@ module Signore class Executable
     @no_tags.map! { |tag| tag[1..-1] }
   end
 
-  def run output = $stdout, input = $stdin
+  def run input = $stdin
     case @action
     when 'prego'
-      output.puts Database.find(tags: @tags, no_tags: @no_tags).display
+      puts Database.find(tags: @tags, no_tags: @no_tags).display
     when 'pronto'
       params = Hash[[:text, :author, :subject, :source].map do |elem|
-        output.puts "#{elem}?"
+        puts "#{elem}?"
         value = ''
         value << input.gets until value.lines.to_a.last == "\n"
         [elem, value.rstrip]
       end].delete_if { |elem, value| value.empty? }
       sig = Signature.new params[:text], params[:author], params[:source], params[:subject], @tags
       Database.save sig
-      output.puts sig.display
+      puts sig.display
     end
   end
 

@@ -83,7 +83,7 @@ module Signore describe Executable do
           Mark Pilgrim\n\n\n
         END
 
-        stdout = capture_io { Executable.new(['-d', @path, 'pronto', 'Wikipedia', 'ADHD']).run $stdout, input }.first
+        stdout = capture_io { Executable.new(['-d', @path, 'pronto', 'Wikipedia', 'ADHD']).run input }.first
         stdout.must_equal <<-END.unindent
           text?
           author?
@@ -107,7 +107,7 @@ module Signore describe Executable do
           Simon Burr, Kyle Hearn\n\n\n
         END
 
-        stdout = capture_io { Executable.new(['-d', @path, 'pronto']).run $stdout, input }.first
+        stdout = capture_io { Executable.new(['-d', @path, 'pronto']).run input }.first
         stdout.must_equal <<-END.unindent
           text?
           author?
