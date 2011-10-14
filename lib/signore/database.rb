@@ -20,14 +20,10 @@ module Signore class Database
     @db ||= []
   end
 
-  def self.min_yaml
-    @db.to_yaml.gsub /^  (author|source|subject|tags): !!null \n/, ''
-  end
-
   def self.save sig
     @db << sig
     FileUtils.mkpath File.dirname @path
-    File.open(@path, 'w') { |file| file << self.min_yaml }
+    File.open(@path, 'w') { |file| file << @db.to_yaml }
   end
 
 end end

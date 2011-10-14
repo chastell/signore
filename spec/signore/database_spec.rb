@@ -65,16 +65,15 @@ module Signore describe Database do
       Database.load @file.path
       sig = Signature.new 'Normaliser Unix c’est comme pasteuriser le camembert.'
       Database.save sig
-      File.read(@file.path).must_equal "---\n- !ruby/struct:Signore::Signature\n  text: Normaliser Unix c’est comme pasteuriser le camembert.\n"
-    end
-
-  end
-
-  describe '.min_yaml' do
-
-    it 'returns the minimal YAML representation of the signature database' do
-      Database.load 'spec/fixtures/min_yaml.yml'
-      Database.min_yaml.must_equal File.read('spec/fixtures/min_yaml.yml')
+      File.read(@file.path).must_equal <<-END.dedent
+        ---
+        - !ruby/struct:Signore::Signature
+          text: Normaliser Unix c’est comme pasteuriser le camembert.
+          author: !!null 
+          source: !!null 
+          subject: !!null 
+          tags: !!null 
+      END
     end
 
     it 'escapes initial spaces in multi-line signatures' do
