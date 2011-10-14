@@ -4,10 +4,6 @@ require_relative '../spec_helper'
 
 module Signore describe Database do
 
-  before do
-    @file = Tempfile.new ''
-  end
-
   describe '#find' do
 
     before do
@@ -41,10 +37,13 @@ module Signore describe Database do
   describe '#save' do
 
     it 'saves the provided signature to disk' do
-      db = Database.new @file.path
-      sig = Signature.new 'Normaliser Unix c’est comme pasteuriser le camembert.'
+      file = Tempfile.new ''
+      db   = Database.new file.path
+      sig  = Signature.new 'Normaliser Unix c’est comme pasteuriser le camembert.'
+
       db << sig
-      File.read(@file.path).must_equal <<-END.dedent
+
+      file.read.must_equal <<-END.dedent
         ---
         signatures:
         - !ruby/struct:Signore::Signature
@@ -54,14 +53,6 @@ module Signore describe Database do
           subject: !!null 
           tags: !!null 
       END
-    end
-
-    it 'escapes initial spaces in multi-line signatures' do
-      tng = "   ← space\nthe final\nfrontier"
-      db = Database.new @file.path
-      db << Signature.new(tng)
-      db = Database.new @file.path
-      db.find.display.must_equal tng
     end
 
   end
