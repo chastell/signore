@@ -53,7 +53,7 @@ module Signore describe Signature do
 
   describe '#tagged_with?' do
 
-    it 'says whether a tagged signatura is tagged with a given tag' do
+    it 'says whether a tagged signature is tagged with a given tag' do
       refute @compiler.tagged_with? 'fnord'
       assert @compiler.tagged_with? 'programming'
       assert @compiler.tagged_with? 'tech'
