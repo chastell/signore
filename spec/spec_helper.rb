@@ -7,7 +7,7 @@ require 'tmpdir'
 require_relative '../lib/signore'
 
 class String
-  def unindent
+  def dedent
     gsub /^#{self[/\A\s*/]}/, ''
   end
 end

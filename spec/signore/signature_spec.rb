@@ -11,32 +11,32 @@ module Signore describe Signature do
   describe '#display' do
 
     it 'returns a signature formatted with meta information (if available)' do
-      @compiler.display.must_equal <<-END.unindent.strip
+      @compiler.display.must_equal <<-END.dedent.strip
         // sometimes I believe compiler ignores all my comments
       END
 
-      @dads.display.must_equal <<-END.unindent.strip
+      @dads.display.must_equal <<-END.dedent.strip
         stay-at-home executives vs. wallstreet dads
                                              [kodz]
       END
 
-      @mad.display.must_equal <<-END.unindent.strip
+      @mad.display.must_equal <<-END.dedent.strip
         You do have to be mad to work here, but it doesn’t help.
                                               [Gary Barnes, asr]
       END
 
-      @bruce.display.must_equal <<-END.unindent.strip
+      @bruce.display.must_equal <<-END.dedent.strip
         Bruce Schneier knows Alice and Bob’s shared secret.
                                      [Bruce Schneier Facts]
       END
 
-      @confusion.display.must_equal <<-END.unindent.strip
+      @confusion.display.must_equal <<-END.dedent.strip
         She was good at playing abstract confusion in
         the same way a midget is good at being short.
                       [Clive James on Marilyn Monroe]
       END
 
-      @starwars.display.must_equal <<-END.unindent.strip
+      @starwars.display.must_equal <<-END.dedent.strip
         Amateur fighter pilot ignores orders, listens to
         the voices in his head and slaughters thousands.
                             [Star Wars ending explained]
