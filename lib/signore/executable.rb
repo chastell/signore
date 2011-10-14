@@ -7,8 +7,11 @@ module Signore class Executable
       opt :database, 'Location of the signature database', default: (ENV['XDG_DATA_HOME'] or File.expand_path '~/.local/share') + '/signore/signatures.yml'
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
+
     @db = db_class.new opts[:database]
+
     @action = args.shift
+
     @no_tags, @tags = args.partition { |tag| tag.start_with? '~' }
     @no_tags.map! { |tag| tag[1..-1] }
   end
@@ -22,6 +25,7 @@ module Signore class Executable
       sig = Signature.new params[:text], params[:author], params[:source], params[:subject], @tags
       @db << sig
     end
+
     puts sig.display
   end
 
