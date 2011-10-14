@@ -2,6 +2,13 @@
 
 module Signore class Database
 
+  def self.<< sig
+    @store.transaction do
+      @store['signatures'] ||= []
+      @store['signatures'] << sig
+    end
+  end
+
   def self.find opts = {}
     opts = {tags: [], no_tags: []}.merge opts
 
@@ -15,13 +22,6 @@ module Signore class Database
 
   def self.load path
     @store = YAML::Store.new path
-  end
-
-  def self.save sig
-    @store.transaction do
-      @store['signatures'] ||= []
-      @store['signatures'] << sig
-    end
   end
 
 end end

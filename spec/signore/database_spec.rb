@@ -54,7 +54,7 @@ module Signore describe Database do
     it 'saves the provided signature to disk' do
       Database.load @file.path
       sig = Signature.new 'Normaliser Unix c’est comme pasteuriser le camembert.'
-      Database.save sig
+      Database << sig
       File.read(@file.path).must_equal <<-END.dedent
         ---
         signatures:
@@ -70,7 +70,7 @@ module Signore describe Database do
     it 'escapes initial spaces in multi-line signatures' do
       tng = "   ← space\nthe final\nfrontier"
       Database.load @file.path
-      Database.save Signature.new tng
+      Database << Signature.new(tng)
       Database.load @file.path
       Database.find.display.must_equal tng
     end

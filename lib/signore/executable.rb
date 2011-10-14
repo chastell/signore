@@ -25,7 +25,7 @@ module Signore class Executable
         [elem, value.rstrip]
       end].delete_if { |elem, value| value.empty? }
       sig = Signature.new params[:text], params[:author], params[:source], params[:subject], @tags
-      Database.save sig
+      Database << sig
       puts sig.display
     end
   end
