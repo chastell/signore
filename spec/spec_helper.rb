@@ -5,3 +5,9 @@ require 'pathname'
 require 'tmpdir'
 
 require_relative '../lib/signore'
+
+class String
+  def unindent
+    gsub(/^#{self[/\A\s*/]}/, '').strip
+  end
+end

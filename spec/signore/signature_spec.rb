@@ -2,12 +2,6 @@
 
 require_relative '../spec_helper'
 
-class String
-  def unindent
-    gsub(/^#{self[/\A\s*/]}/, '').strip
-  end
-end
-
 module Signore describe Signature do
 
   before do
