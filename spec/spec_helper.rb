@@ -8,6 +8,6 @@ require_relative '../lib/signore'
 
 class String
   def unindent
-    gsub(/^#{self[/\A\s*/]}/, '').strip
+    gsub /^#{self[/\A\s*/]}/, ''
   end
 end
