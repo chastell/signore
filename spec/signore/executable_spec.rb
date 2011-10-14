@@ -70,11 +70,7 @@ module Signore describe Executable do
     describe 'pronto' do
 
       before do
-        @path = "#{Dir.tmpdir}/#{rand}/signatures.yml"
-      end
-
-      after do
-        FileUtils.rmtree File.dirname @path
+        @file = Tempfile.new ''
       end
 
       it 'asks about signature parts and saves given signature with provided labels' do
@@ -83,7 +79,7 @@ module Signore describe Executable do
           Mark Pilgrim\n\n\n
         END
 
-        stdout = capture_io { Executable.new(['-d', @path, 'pronto', 'Wikipedia', 'ADHD']).run input }.first
+        stdout = capture_io { Executable.new(['-d', @file.path, 'pronto', 'Wikipedia', 'ADHD']).run input }.first
         stdout.must_equal <<-END.dedent
           text?
           author?
@@ -93,7 +89,7 @@ module Signore describe Executable do
                                                                 [Mark Pilgrim]
         END
 
-        stdout = capture_io { Executable.new(['-d', @path, 'prego', 'Wikipedia', 'ADHD']).run }.first
+        stdout = capture_io { Executable.new(['-d', @file.path, 'prego', 'Wikipedia', 'ADHD']).run }.first
         stdout.must_equal <<-END.dedent
           The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                 [Mark Pilgrim]
@@ -107,7 +103,7 @@ module Signore describe Executable do
           Simon Burr, Kyle Hearn\n\n\n
         END
 
-        stdout = capture_io { Executable.new(['-d', @path, 'pronto']).run input }.first
+        stdout = capture_io { Executable.new(['-d', @file.path, 'pronto']).run input }.first
         stdout.must_equal <<-END.dedent
           text?
           author?
