@@ -18,16 +18,22 @@ module Signore class Executable
     when 'prego'
       sig = @db.find tags: @tags, no_tags: @no_tags
     when 'pronto'
-      params = Hash[[:text, :author, :subject, :source].map do |elem|
-        puts "#{elem}?"
-        value = ''
-        value << input.gets until value.lines.to_a.last == "\n"
-        [elem, value.rstrip]
-      end].delete_if { |elem, value| value.empty? }
+      params = get_params input
       sig = Signature.new params[:text], params[:author], params[:source], params[:subject], @tags
       @db << sig
     end
     puts sig.display
+  end
+
+  private
+
+  def get_params input
+    Hash[[:text, :author, :subject, :source].map do |elem|
+      puts "#{elem}?"
+      value = ''
+      value << input.gets until value.lines.to_a.last == "\n"
+      [elem, value.rstrip]
+    end].delete_if { |elem, value| value.empty? }
   end
 
 end end
