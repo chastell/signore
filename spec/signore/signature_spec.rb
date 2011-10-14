@@ -2,6 +2,12 @@
 
 require_relative '../spec_helper'
 
+class String
+  def unindent
+    gsub(/^#{self[/\A\s*/]}/, '').strip
+  end
+end
+
 module Signore describe Signature do
 
   before do
@@ -11,12 +17,36 @@ module Signore describe Signature do
   describe '#display' do
 
     it 'returns a signature formatted with meta information (if available)' do
-      @compiler.display.must_equal '// sometimes I believe compiler ignores all my comments'
-      @dads.display.must_equal "stay-at-home executives vs. wallstreet dads\n                                     [kodz]"
-      @mad.display.must_equal "You do have to be mad to work here, but it doesn’t help.\n                                      [Gary Barnes, asr]"
-      @bruce.display.must_equal "Bruce Schneier knows Alice and Bob’s shared secret.\n                             [Bruce Schneier Facts]"
-      @confusion.display.must_equal "She was good at playing abstract confusion in\nthe same way a midget is good at being short.\n              [Clive James on Marilyn Monroe]"
-      @starwars.display.must_equal "Amateur fighter pilot ignores orders, listens to\nthe voices in his head and slaughters thousands.\n                    [Star Wars ending explained]"
+      @compiler.display.must_equal <<-END.unindent
+        // sometimes I believe compiler ignores all my comments
+      END
+
+      @dads.display.must_equal <<-END.unindent
+        stay-at-home executives vs. wallstreet dads
+                                             [kodz]
+      END
+
+      @mad.display.must_equal <<-END.unindent
+        You do have to be mad to work here, but it doesn’t help.
+                                              [Gary Barnes, asr]
+      END
+
+      @bruce.display.must_equal <<-END.unindent
+        Bruce Schneier knows Alice and Bob’s shared secret.
+                                     [Bruce Schneier Facts]
+      END
+
+      @confusion.display.must_equal <<-END.unindent
+        She was good at playing abstract confusion in
+        the same way a midget is good at being short.
+                      [Clive James on Marilyn Monroe]
+      END
+
+      @starwars.display.must_equal <<-END.unindent
+        Amateur fighter pilot ignores orders, listens to
+        the voices in his head and slaughters thousands.
+                            [Star Wars ending explained]
+      END
     end
 
   end
