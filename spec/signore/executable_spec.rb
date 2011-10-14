@@ -18,7 +18,7 @@ module Signore describe Executable do
 
     it 'loads the signature database from the specified location' do
       db = MiniTest::Mock.new
-      db.expect :load, nil, ['signatures.yml']
+      db.expect :new, nil, ['signatures.yml']
       Executable.new ['-d', 'signatures.yml', 'prego'], db
       db.verify
     end
@@ -26,7 +26,7 @@ module Signore describe Executable do
     it 'loads the signature database from ~/.local/share/signore/signatures.yml if no location specified' do
       pending if ENV['XDG_DATA_HOME']
       db = MiniTest::Mock.new
-      db.expect :load, nil, [File.expand_path('~/.local/share/signore/signatures.yml')]
+      db.expect :new, nil, [File.expand_path('~/.local/share/signore/signatures.yml')]
       Executable.new ['prego'], db
       db.verify
     end
@@ -36,7 +36,7 @@ module Signore describe Executable do
         orig_data_home = ENV.delete 'XDG_DATA_HOME'
         ENV['XDG_DATA_HOME'] = Dir.tmpdir
         db = MiniTest::Mock.new
-        db.expect :load, nil, ["#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"]
+        db.expect :new, nil, ["#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"]
         Executable.new ['prego'], db
         db.verify
       ensure

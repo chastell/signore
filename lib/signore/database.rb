@@ -2,15 +2,19 @@
 
 module Signore class Database
 
-  def self.<< sig
+  def initialize path
+    @store = YAML::Store.new path
+  end
+
+  def << sig
     @store.transaction do
       @store['signatures'] ||= []
       @store['signatures'] << sig
     end
   end
 
-  def self.find opts = {}
-    opts = {tags: [], no_tags: []}.merge opts
+  def find opts = {}
+    opts = { tags: [], no_tags: [] }.merge opts
 
     @store.transaction true do
       @store['signatures']
@@ -18,10 +22,6 @@ module Signore class Database
         .reject { |sig| opts[:no_tags].any? { |tag| sig.tagged_with? tag } }
         .shuffle.first
     end
-  end
-
-  def self.load path
-    @store = YAML::Store.new path
   end
 
 end end
