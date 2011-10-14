@@ -8,15 +8,6 @@ module Signore describe Database do
     @file = Tempfile.new ''
   end
 
-  describe '.db' do
-
-    it 'returns the signature database loaded by .load' do
-      Database.load @file.path
-      Database.db.must_equal []
-    end
-
-  end
-
   describe '.find' do
 
     before do
@@ -53,7 +44,6 @@ module Signore describe Database do
       missing = @file.path + rand.to_s
       refute Pathname(missing).exist?
       Database.load missing
-      Database.db.must_equal []
       refute Pathname(missing).exist?
     end
 
