@@ -35,9 +35,9 @@ module Signore class Executable
   end
 
   def get_params input
-    Hash[[:text, :author, :subject, :source].map do |elem|
-      [elem, get_param(elem, input)]
-    end].delete_if { |elem, value| value.empty? }
+    Hash[[:text, :author, :subject, :source].map do |param|
+      [param, get_param(param, input)]
+    end].reject { |_, value| value.empty? }
   end
 
 end end
