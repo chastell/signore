@@ -4,7 +4,7 @@ module Signore class Executable
 
   def initialize args = ARGV, db_class = Database
     opts = Trollop.options args do
-      opt :database, 'Location of the signature database', default: (ENV['XDG_DATA_HOME'] or File.expand_path '~/.local/share') + '/signore/signatures.yml'
+      opt :database, 'Location of the signature database', default: ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' } + '/signore/signatures.yml'
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
 
