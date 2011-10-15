@@ -1,6 +1,10 @@
 module Signore class Signature < Struct.new :text, :author, :source, :subject, :tags
 
-  def display
+  def tagged_with? tag
+    tags and tags.include? tag
+  end
+
+  def to_s
     lines = text.split("\n").map { |line| LovelyRufus::Wrapper.new(line).wrapped 80 }
 
     if meta
@@ -10,10 +14,6 @@ module Signore class Signature < Struct.new :text, :author, :source, :subject, :
     end
 
     lines.join "\n"
-  end
-
-  def tagged_with? tag
-    tags and tags.include? tag
   end
 
   private

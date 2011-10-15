@@ -26,7 +26,7 @@ module Signore class Executable
       @db << sig
     end
 
-    puts sig.display
+    puts sig.to_s
   end
 
   private
