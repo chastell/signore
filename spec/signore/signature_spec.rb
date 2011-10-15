@@ -43,6 +43,18 @@ module Signore describe Signature do
       END
     end
 
+    it 'handles edge cases properly' do
+      class SignatureWithMeta < Signature
+        attr_accessor :meta
+      end
+
+      YAML.load_file('spec/fixtures/wrapper.yml').each do |sample|
+        sig = SignatureWithMeta.new sample[:text]
+        sig.meta = sample[:meta]
+        sig.display.must_equal sample[:wrapped]
+      end
+    end
+
   end
 
   describe '#tagged_with?' do
