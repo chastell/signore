@@ -6,26 +6,18 @@ module Signore class Wrapper
   end
 
   def display
-    wrap
-    add_meta if @meta
+    @lines.map! { |line| LovelyRufus::Wrapper.new(line).wrapped 80 }
+
+    @lines << "[#{@meta}]"                               if @meta
+    @lines.last.insert 0, ' ' * (width - @meta.size - 2) if @meta
+
     @lines.join "\n"
   end
 
   private
 
-  def add_meta
-    @lines << "[#{@meta}]"
-    @lines.last.insert 0, ' ' * (width - @meta.size - 2)
-  end
-
   def width
     @lines.map { |line| line.split "\n" }.flatten.map(&:size).max
-  end
-
-  def wrap
-    @lines.map! do |line|
-      LovelyRufus::Wrapper.new(line).wrapped 80
-    end
   end
 
 end end
