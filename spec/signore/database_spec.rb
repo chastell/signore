@@ -43,7 +43,7 @@ module Signore describe Database do
 
       db << sig
 
-      file.read.must_equal <<-END.dedent
+      file.read.must_equal <<-end.dedent
         ---
         signatures:
         - !ruby/struct:Signore::Signature
@@ -52,7 +52,7 @@ module Signore describe Database do
           source: !!null 
           subject: !!null 
           tags: !!null 
-      END
+      end
     end
 
   end

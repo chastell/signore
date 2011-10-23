@@ -52,17 +52,17 @@ module Signore describe Executable do
 
       it 'prints a signature tagged with the provided tags' do
         stdout = capture_io { Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', 'tech', 'programming']).run }.first
-        stdout.must_equal <<-END.dedent
+        stdout.must_equal <<-end.dedent
           // sometimes I believe compiler ignores all my comments
-        END
+        end
       end
 
       it 'prints a signature based on allowed and forbidden tags' do
         stdout = capture_io { Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', '~programming', 'tech', '~security']).run }.first
-        stdout.must_equal <<-END.dedent
+        stdout.must_equal <<-end.dedent
           You do have to be mad to work here, but it doesn’t help.
                                                 [Gary Barnes, asr]
-        END
+        end
       end
 
     end
@@ -74,37 +74,37 @@ module Signore describe Executable do
       end
 
       it 'asks about signature parts and saves given signature with provided labels' do
-        input = StringIO.new <<-END.dedent
+        input = StringIO.new <<-end.dedent
           The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n
           Mark Pilgrim\n\n\n
-        END
+        end
 
         stdout = capture_io { Executable.new(['-d', @file.path, 'pronto', 'Wikipedia', 'ADHD']).run input }.first
-        stdout.must_equal <<-END.dedent
+        stdout.must_equal <<-end.dedent
           text?
           author?
           subject?
           source?
           The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                 [Mark Pilgrim]
-        END
+        end
 
         stdout = capture_io { Executable.new(['-d', @file.path, 'prego', 'Wikipedia', 'ADHD']).run }.first
-        stdout.must_equal <<-END.dedent
+        stdout.must_equal <<-end.dedent
           The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                 [Mark Pilgrim]
-        END
+        end
       end
 
       it 'handles multi-line signatures' do
-        input = StringIO.new <<-END.dedent
+        input = StringIO.new <<-end.dedent
           ‘I’ve gone through over-stressed to physical exhaustion – what’s next?’
           ‘Tuesday.’\n
           Simon Burr, Kyle Hearn\n\n\n
-        END
+        end
 
         stdout = capture_io { Executable.new(['-d', @file.path, 'pronto']).run input }.first
-        stdout.must_equal <<-END.dedent
+        stdout.must_equal <<-end.dedent
           text?
           author?
           subject?
@@ -112,7 +112,7 @@ module Signore describe Executable do
           ‘I’ve gone through over-stressed to physical exhaustion – what’s next?’
           ‘Tuesday.’
                                                          [Simon Burr, Kyle Hearn]
-        END
+        end
       end
 
     end

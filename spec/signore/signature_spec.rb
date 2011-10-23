@@ -25,36 +25,36 @@ module Signore describe Signature do
   describe '#to_s' do
 
     it 'returns a signature formatted with meta information (if available)' do
-      @compiler.to_s.must_equal <<-END.dedent.strip
+      @compiler.to_s.must_equal <<-end.dedent.strip
         // sometimes I believe compiler ignores all my comments
-      END
+      end
 
-      @dads.to_s.must_equal <<-END.dedent.strip
+      @dads.to_s.must_equal <<-end.dedent.strip
         stay-at-home executives vs. wallstreet dads
                                              [kodz]
-      END
+      end
 
-      @mad.to_s.must_equal <<-END.dedent.strip
+      @mad.to_s.must_equal <<-end.dedent.strip
         You do have to be mad to work here, but it doesn’t help.
                                               [Gary Barnes, asr]
-      END
+      end
 
-      @bruce.to_s.must_equal <<-END.dedent.strip
+      @bruce.to_s.must_equal <<-end.dedent.strip
         Bruce Schneier knows Alice and Bob’s shared secret.
                                      [Bruce Schneier Facts]
-      END
+      end
 
-      @confusion.to_s.must_equal <<-END.dedent.strip
+      @confusion.to_s.must_equal <<-end.dedent.strip
         She was good at playing abstract confusion in
         the same way a midget is good at being short.
                       [Clive James on Marilyn Monroe]
-      END
+      end
 
-      @starwars.to_s.must_equal <<-END.dedent.strip
+      @starwars.to_s.must_equal <<-end.dedent.strip
         Amateur fighter pilot ignores orders, listens to
         the voices in his head and slaughters thousands.
                             [Star Wars ending explained]
-      END
+      end
     end
 
     it 'handles edge cases properly' do
