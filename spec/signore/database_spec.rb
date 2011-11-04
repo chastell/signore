@@ -48,10 +48,10 @@ module Signore describe Database do
         signatures:
         - !ruby/struct:Signore::Signature
           text: Normaliser Unix c’est comme pasteuriser le camembert.
-          author: !!null 
-          source: !!null 
-          subject: !!null 
-          tags: !!null 
+          author: 
+          source: 
+          subject: 
+          tags: 
       end
     end
 
