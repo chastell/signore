@@ -10,8 +10,8 @@ Gem::Specification.new do |gem|
   gem.executables = Dir['bin/*'].map { |d| d.split '/' }.map &:last
   gem.test_files  = Dir['spec/**/*.rb']
 
-  gem.add_dependency 'lovely-rufus'
+  gem.add_dependency 'lovely-rufus', '>= 0.0.1'
   gem.add_dependency 'trollop'
-  gem.add_development_dependency 'minitest', '>= 2.3'
+  gem.add_development_dependency 'minitest', '>= 2.11.1'
   gem.add_development_dependency 'rake'
 end

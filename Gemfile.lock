@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     signore (0.1.0)
-      lovely-rufus
+      lovely-rufus (>= 0.0.1)
       trollop
 
 GEM
@@ -17,6 +17,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  minitest (>= 2.3)
+  minitest (>= 2.11.1)
   rake
   signore!
