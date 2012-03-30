@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name     = 'signore'
-  gem.version  = '0.1.1'
+  gem.version  = '0.1.2'
   gem.summary  = 'signore: an email signature manager/randomiser'
   gem.homepage = 'http://github.com/chastell/signore'
   gem.author   = 'Piotr Szotkowski'
