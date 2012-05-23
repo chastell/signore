@@ -7,8 +7,8 @@ Gem::Specification.new do |gem|
   gem.email    = 'chastell@chastell.net'
 
   gem.files       = `git ls-files -z`.split "\0"
-  gem.executables = Dir['bin/*'].map { |d| d.split '/' }.map &:last
-  gem.test_files  = Dir['spec/**/*.rb']
+  gem.executables = gem.files.grep(%r{^bin/}).map { |path| File.basename path }
+  gem.test_files  = gem.files.grep %r{^spec/.*\.rb$}
 
   gem.add_dependency 'lovely-rufus', '>= 0.0.2'
   gem.add_dependency 'trollop'
