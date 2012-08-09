@@ -12,6 +12,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'lovely-rufus', '>= 0.0.2'
   gem.add_dependency 'trollop'
-  gem.add_development_dependency 'minitest', '>= 2.12'
+  gem.add_development_dependency 'minitest', '~> 3.0'
   gem.add_development_dependency 'rake'
 end

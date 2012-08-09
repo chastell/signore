@@ -17,6 +17,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  minitest (>= 2.12)
+  minitest (~> 3.0)
   rake
   signore!
