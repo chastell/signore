@@ -1,7 +1,6 @@
 # encoding: UTF-8
 
 module Signore class Executable
-
   def initialize args = ARGV, db_class = Database
     opts = Trollop.options args do
       opt :database, 'Location of the signature database', default: ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' } + '/signore/signatures.yml'
@@ -17,19 +16,21 @@ module Signore class Executable
   end
 
   def run input = $stdin
-    case @action
+    case action
     when 'prego'
-      sig = @db.find tags: @tags, no_tags: @no_tags
+      sig = db.find tags: tags, no_tags: no_tags
     when 'pronto'
       params = get_params input
-      sig = Signature.new params[:text], params[:author], params[:source], params[:subject], @tags
-      @db << sig
+      sig = Signature.new params[:text], params[:author], params[:source], params[:subject], tags
+      db << sig
     end
 
     puts sig.to_s
   end
 
   private
+
+  attr_reader :action, :db, :no_tags, :tags
 
   def get_param param, input
     puts "#{param}?"
@@ -43,5 +44,4 @@ module Signore class Executable
       [param, get_param(param, input)]
     end].reject { |_, value| value.empty? }
   end
-
 end end
