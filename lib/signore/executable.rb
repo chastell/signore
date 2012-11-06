@@ -28,9 +28,10 @@ module Signore class Executable
     puts sig.to_s
   end
 
-  private
-
   attr_reader :action, :db, :no_tags, :tags
+  private     :action, :db, :no_tags, :tags
+
+  private
 
   def get_param param, input
     puts "#{param}?"

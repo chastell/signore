@@ -23,7 +23,6 @@ module Signore class Database
     end
   end
 
-  private
-
   attr_reader :store
+  private     :store
 end end
