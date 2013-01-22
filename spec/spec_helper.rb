@@ -1,11 +1,10 @@
-gem 'minitest'
+require 'bundler/setup'
 require 'minitest/autorun'
-
 require 'pathname'
 require 'tempfile'
 require 'tmpdir'
 
-require_relative '../lib/signore'
+require 'signore'
 
 class String
   def dedent
