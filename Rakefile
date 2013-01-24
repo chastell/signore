@@ -5,13 +5,4 @@ Rake::TestTask.new :spec do |task|
   task.warning    = true
 end
 
-desc 'Run signore console'
-task :console do
-  require 'irb'
-  require_relative 'lib/signore'
-  include Signore
-  ARGV.clear
-  IRB.start
-end
-
 task default: :spec
