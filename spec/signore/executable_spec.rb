@@ -3,9 +3,7 @@
 require_relative '../spec_helper'
 
 module Signore describe Executable do
-
   describe '#initialize' do
-
     it 'prints usage if no command is given' do
       stderr = capture_io { -> { Executable.new [] }.must_raise SystemExit }.last
       stderr.must_include 'usage: signore prego|pronto [label, …]'
@@ -43,13 +41,10 @@ module Signore describe Executable do
         orig_data_home ? ENV['XDG_DATA_HOME'] = orig_data_home : ENV.delete('XDG_DATA_HOME')
       end
     end
-
   end
 
   describe '#run' do
-
     describe 'prego' do
-
       it 'prints a signature tagged with the provided tags' do
         stdout = capture_io { Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', 'tech', 'programming']).run }.first
         stdout.must_equal <<-end.dedent
@@ -64,11 +59,9 @@ module Signore describe Executable do
                                                 [Gary Barnes, asr]
         end
       end
-
     end
 
     describe 'pronto' do
-
       before do
         @file = Tempfile.new ''
       end
@@ -114,9 +107,6 @@ module Signore describe Executable do
                                                          [Simon Burr, Kyle Hearn]
         end
       end
-
     end
-
   end
-
 end end

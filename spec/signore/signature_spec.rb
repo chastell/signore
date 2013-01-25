@@ -3,13 +3,11 @@
 require_relative '../spec_helper'
 
 module Signore describe Signature do
-
   before do
     @confusion, @mad, @compiler, @bruce, @dads, @starwars = YAML.load_file('spec/fixtures/signatures.yml')['signatures']
   end
 
   describe '#tagged_with?' do
-
     it 'says whether a tagged signature is tagged with a given tag' do
       refute @compiler.tagged_with? 'fnord'
       assert @compiler.tagged_with? 'programming'
@@ -19,11 +17,9 @@ module Signore describe Signature do
     it 'says that an untagged signature is not tagged with any tag' do
       refute @dads.tagged_with? 'fnord'
     end
-
   end
 
   describe '#to_s' do
-
     it 'returns a signature formatted with meta information (if available)' do
       @compiler.to_s.must_equal <<-end.dedent.strip
         // sometimes I believe compiler ignores all my comments
@@ -68,7 +64,5 @@ module Signore describe Signature do
         sig.to_s.must_equal sample[:wrapped]
       end
     end
-
   end
-
 end end

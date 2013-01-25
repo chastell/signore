@@ -3,9 +3,7 @@
 require_relative '../spec_helper'
 
 module Signore describe Database do
-
   describe '#find' do
-
     before do
       srand
       @db = Database.new 'spec/fixtures/signatures.yml'
@@ -31,11 +29,9 @@ module Signore describe Database do
     it 'returns a random signature based on required and forbidden tags' do
       @db.find(tags: ['tech'], no_tags: ['programming', 'security']).text.must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
-
   end
 
   describe '#save' do
-
     it 'saves the provided signature to disk' do
       file = Tempfile.new ''
       db   = Database.new file.path
@@ -54,7 +50,5 @@ module Signore describe Database do
           tags: 
       end
     end
-
   end
-
 end end
