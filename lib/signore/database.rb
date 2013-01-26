@@ -13,12 +13,13 @@ module Signore class Database
   end
 
   def find opts = {}
-    opts = { tags: [], no_tags: [] }.merge opts
+    required  = opts.fetch(:tags)    { [] }
+    forbidden = opts.fetch(:no_tags) { [] }
 
     store.transaction true do
       store['signatures']
-        .select { |sig| opts[:tags].all?    { |tag| sig.tagged_with? tag } }
-        .reject { |sig| opts[:no_tags].any? { |tag| sig.tagged_with? tag } }
+        .select { |sig| required.all?  { |tag| sig.tagged_with? tag } }
+        .reject { |sig| forbidden.any? { |tag| sig.tagged_with? tag } }
         .shuffle.first
     end
   end
