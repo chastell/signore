@@ -29,24 +29,12 @@ module Signore describe Database do
     end
   end
 
-  describe '#save' do
+  describe '#<<' do
     it 'saves the provided signature to disk' do
       file = Tempfile.new ''
       db   = Database.new file.path
-      sig  = Signature.new 'Normaliser Unix c’est comme pasteuriser le camembert.'
-
-      db << sig
-
-      file.read.must_equal <<-end.dedent
-        ---
-        signatures:
-        - !ruby/struct:Signore::Signature
-          text: Normaliser Unix c’est comme pasteuriser le camembert.
-          author: 
-          source: 
-          subject: 
-          tags: 
-      end
+      db  << Signature.new('Normaliser Unix c’est comme pasteuriser le camembert.')
+      file.read.must_include 'Normaliser Unix c’est comme pasteuriser le camembert.'
     end
   end
 end end
