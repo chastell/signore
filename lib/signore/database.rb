@@ -21,7 +21,7 @@ module Signore class Database
       store['signatures']
         .select { |sig| required.all?  { |tag| sig.tagged_with? tag } }
         .reject { |sig| forbidden.any? { |tag| sig.tagged_with? tag } }
-        .shuffle(random: random).first
+        .sample random: random
     end
   end
 
