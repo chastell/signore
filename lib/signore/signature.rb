@@ -1,11 +1,11 @@
-module Signore class Signature < Struct.new :text, :author, :source, :subject, :tags
-
+module Signore Signature = Struct.new :text, :author, :source, :subject, :tags do
   def tagged_with? tag
     tags and tags.include? tag
   end
 
   def to_s
-    wrapped = LovelyRufus::Wrapper.new(text.gsub("\n", "\n\n")).wrapped(80).gsub("\n\n", "\n")
+    wrapper = LovelyRufus::Wrapper.new text.gsub("\n", "\n\n")
+    wrapped = wrapper.wrapped(80).gsub "\n\n", "\n"
     wrapped + meta_for(wrapped)
   end
 
@@ -30,5 +30,4 @@ module Signore class Signature < Struct.new :text, :author, :source, :subject, :
 
     "\n#{spaces}[#{meta}]"
   end
-
 end end
