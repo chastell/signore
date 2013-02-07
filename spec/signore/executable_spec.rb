@@ -15,8 +15,7 @@ module Signore describe Executable do
     end
 
     it 'loads the signature database from the specified location' do
-      db_class = MiniTest::Mock.new
-      db_class.expect :new, nil, ['signatures.yml']
+      db_class = MiniTest::Mock.new.expect :new, nil, ['signatures.yml']
       Executable.new ['-d', 'signatures.yml', 'prego'], db_class
       db_class.verify
     end
@@ -46,15 +45,17 @@ module Signore describe Executable do
   describe '#run' do
     describe 'prego' do
       it 'prints a signature tagged with the provided tags' do
-        stdout = capture_io { Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', 'tech', 'programming']).run }.first
-        stdout.must_equal <<-end.dedent
+        capture_io do
+          Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', 'tech', 'programming']).run
+        end.first.must_equal <<-end.dedent
           // sometimes I believe compiler ignores all my comments
         end
       end
 
       it 'prints a signature based on allowed and forbidden tags' do
-        stdout = capture_io { Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', '~programming', 'tech', '~security']).run }.first
-        stdout.must_equal <<-end.dedent
+        capture_io do
+          Executable.new(['-d', 'spec/fixtures/signatures.yml', 'prego', '~programming', 'tech', '~security']).run
+        end.first.must_equal <<-end.dedent
           You do have to be mad to work here, but it doesn’t help.
                                                 [Gary Barnes, asr]
         end
@@ -72,8 +73,9 @@ module Signore describe Executable do
           Mark Pilgrim\n\n\n
         end
 
-        stdout = capture_io { Executable.new(['-d', @file.path, 'pronto', 'Wikipedia', 'ADHD']).run input }.first
-        stdout.must_equal <<-end.dedent
+        capture_io do
+          Executable.new(['-d', @file.path, 'pronto', 'Wikipedia', 'ADHD']).run input
+        end.first.must_equal <<-end.dedent
           text?
           author?
           subject?
@@ -82,8 +84,9 @@ module Signore describe Executable do
                                                                 [Mark Pilgrim]
         end
 
-        stdout = capture_io { Executable.new(['-d', @file.path, 'prego', 'Wikipedia', 'ADHD']).run }.first
-        stdout.must_equal <<-end.dedent
+        capture_io do
+          Executable.new(['-d', @file.path, 'prego', 'Wikipedia', 'ADHD']).run
+        end.first.must_equal <<-end.dedent
           The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                 [Mark Pilgrim]
         end
@@ -96,8 +99,9 @@ module Signore describe Executable do
           Simon Burr, Kyle Hearn\n\n\n
         end
 
-        stdout = capture_io { Executable.new(['-d', @file.path, 'pronto']).run input }.first
-        stdout.must_equal <<-end.dedent
+        capture_io do
+          Executable.new(['-d', @file.path, 'pronto']).run input
+        end.first.must_equal <<-end.dedent
           text?
           author?
           subject?
