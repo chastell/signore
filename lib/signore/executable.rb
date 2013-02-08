@@ -1,13 +1,14 @@
 # encoding: UTF-8
 
 module Signore class Executable
-  def initialize args = ARGV, db_class = Database
+  def initialize args = ARGV, options = {}
     opts = Trollop.options args do
       opt :database, 'Location of the signature database', default: ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' } + '/signore/signatures.yml'
     end
     Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
 
-    @db = db_class.new opts[:database]
+    database_factory = options.fetch(:database_factory) { Database }
+    @db = database_factory.new opts[:database]
 
     @action = args.shift
 
