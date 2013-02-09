@@ -2,13 +2,17 @@
 
 module Signore class Executable
   def initialize args = ARGV, options = {}
-    opts = Trollop.options args do
-      opt :database, 'Location of the signature database', default: ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' } + '/signore/signatures.yml'
-    end
-    Trollop.die 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
+    database_dir  = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
+    database_path = "#{database_dir}/signore/signatures.yml"
+    OptionParser.new do |opts|
+      opts.on '-d', '--database PATH', "Location of the signature database (default: #{database_path})" do |path|
+        database_path = path
+      end
+    end.parse! args
+    abort 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
 
     database_factory = options.fetch(:database_factory) { Database }
-    @db = database_factory.new opts[:database]
+    @db = database_factory.new database_path
 
     @action = args.shift
 

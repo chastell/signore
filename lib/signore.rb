@@ -1,6 +1,6 @@
 require 'fileutils'
 require 'lovely-rufus'
-require 'trollop'
+require 'optparse'
 require 'psych'
 require 'yaml/store'
 
