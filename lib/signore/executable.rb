@@ -1,18 +1,11 @@
 # encoding: UTF-8
 
 module Signore class Executable
-  def initialize args = ARGV, options = {}
-    database_dir  = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
-    database_path = "#{database_dir}/signore/signatures.yml"
-    OptionParser.new do |opts|
-      opts.on '-d', '--database PATH', "Location of the signature database (default: #{database_path})" do |path|
-        database_path = path
-      end
-    end.parse! args
-    abort 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
+  def initialize args = ARGV, opts = {}
+    options = options_from args
 
-    database_factory = options.fetch(:database_factory) { Database }
-    @db = database_factory.new database_path
+    db_factory = opts.fetch(:database_factory) { Database }
+    @db = db_factory.new options.db_path
 
     @action = args.shift
 
@@ -49,5 +42,18 @@ module Signore class Executable
     Hash[[:text, :author, :subject, :source].map do |param|
       [param, get_param(param, input)]
     end].reject { |_, value| value.empty? }
+  end
+
+  def options_from args
+    OpenStruct.new.tap do |options|
+      db_dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
+      options.db_path = "#{db_dir}/signore/signatures.yml"
+      OptionParser.new do |opts|
+        opts.on '-d', '--database PATH', "Location of the signature database (default: #{options.db_path})" do |path|
+          options.db_path = path
+        end
+      end.parse! args
+      abort 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
+    end
   end
 end end

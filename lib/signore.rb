@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'lovely-rufus'
 require 'optparse'
+require 'ostruct'
 require 'psych'
 require 'yaml/store'
 
