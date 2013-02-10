@@ -4,7 +4,7 @@ module Signore class Executable
   def initialize args = ARGV, opts = {}
     options = options_from args
 
-    db_factory = opts.fetch(:database_factory) { Database }
+    db_factory = opts.fetch(:db_factory) { Database }
     @db = db_factory.new options.db_path
 
     @action = args.shift
