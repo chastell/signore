@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/guard/listen.git
-  revision: ac93c7dfffa0400c49d24b13ad0a61981b081f59
+  revision: af4d62bad3425f1f2a57958fa455bfd532d959fc
   specs:
     listen (0.7.2)
 
