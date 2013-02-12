@@ -18,8 +18,8 @@ module Signore class Executable
     when 'prego'
       sig = db.find tags: tags, no_tags: no_tags
     when 'pronto'
-      params = get_params input
-      sig = Signature.new params[:text], params[:author], params[:source], params[:subject], tags
+      params = params_from input
+      sig = Signature.new params.text, params.author, params.source, params.subject, tags
       db << sig
     end
 
@@ -38,8 +38,8 @@ module Signore class Executable
     value.strip
   end
 
-  def get_params input
-    Hash[[:text, :author, :subject, :source].map do |param|
+  def params_from input
+    OpenStruct.new Hash[[:text, :author, :subject, :source].map do |param|
       [param, get_param(param, input)]
     end].reject { |_, value| value.empty? }
   end
