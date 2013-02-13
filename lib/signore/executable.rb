@@ -4,13 +4,10 @@ module Signore class Executable
   def initialize args = ARGV, opts = {}
     options = options_from args
 
-    db_factory = opts.fetch(:db_factory) { Database }
-    @db = db_factory.new options.db_path
-
-    @action = args.shift
-
-    @no_tags, @tags = args.partition { |tag| tag.start_with? '~' }
-    @no_tags.map! { |tag| tag[1..-1] }
+    @db      = opts.fetch(:db_factory) { Database }.new options.db_path
+    @action  = options.action
+    @no_tags = options.no_tags
+    @tags    = options.tags
   end
 
   def run input = $stdin
@@ -53,7 +50,10 @@ module Signore class Executable
           options.db_path = path
         end
       end.parse! args
-      abort 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? args.first
+      options.action = args.shift
+      options.no_tags, options.tags = args.partition { |tag| tag.start_with? '~' }
+      options.no_tags.map! { |tag| tag[1..-1] }
+      abort 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? options.action
     end
   end
 end end
