@@ -2,29 +2,28 @@
 
 module Signore class Executable
   def initialize args = ARGV, opts = {}
-    options = options_from args
-
-    @db      = opts.fetch(:db_factory) { Database }.new options.db_path
-    @action  = options.action
-    @no_tags = options.no_tags
-    @tags    = options.tags
+    options   = options_from args
+    @db       = opts.fetch(:db_factory) { Database }.new options.db_path
+    @action   = options.action
+    @must_tag = options.must_tag
+    @wont_tag = options.wont_tag
   end
 
   def run input = $stdin
     case action
     when 'prego'
-      sig = db.find tags: tags, no_tags: no_tags
+      sig = db.find tags: must_tag, no_tags: wont_tag
     when 'pronto'
       params = params_from input
-      sig = Signature.new params.text, params.author, params.source, params.subject, tags
+      sig = Signature.new params.text, params.author, params.source, params.subject, must_tag
       db << sig
     end
 
     puts sig.to_s
   end
 
-  attr_reader :action, :db, :no_tags, :tags
-  private     :action, :db, :no_tags, :tags
+  attr_reader :action, :db, :must_tag, :wont_tag
+  private     :action, :db, :must_tag, :wont_tag
 
   private
 
@@ -51,8 +50,8 @@ module Signore class Executable
         end
       end.parse! args
       options.action = args.shift
-      options.no_tags, options.tags = args.partition { |tag| tag.start_with? '~' }
-      options.no_tags.map! { |tag| tag[1..-1] }
+      options.wont_tag, options.must_tag = args.partition { |tag| tag.start_with? '~' }
+      options.wont_tag.map! { |tag| tag[1..-1] }
       abort 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? options.action
     end
   end
