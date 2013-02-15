@@ -34,25 +34,29 @@ module Signore class Executable
     value.strip
   end
 
+  def options_from args
+    OpenStruct.new.tap do |options|
+      db_dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
+      options.db_path = "#{db_dir}/signore/signatures.yml"
+      parse_options args, options
+      options.action = args.shift
+      options.wont_tag, options.must_tag = args.partition { |tag| tag.start_with? '~' }
+      options.wont_tag.map! { |tag| tag[1..-1] }
+      abort 'usage: signore prego|pronto [tag, …]' unless ['prego', 'pronto'].include? options.action
+    end
+  end
+
   def params_from input
     OpenStruct.new Hash[[:text, :author, :subject, :source].map do |param|
       [param, get_param(param, input)]
     end].reject { |_, value| value.empty? }
   end
 
-  def options_from args
-    OpenStruct.new.tap do |options|
-      db_dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
-      options.db_path = "#{db_dir}/signore/signatures.yml"
-      OptionParser.new do |opts|
-        opts.on '-d', '--database PATH', "Location of the signature database (default: #{options.db_path})" do |path|
-          options.db_path = path
-        end
-      end.parse! args
-      options.action = args.shift
-      options.wont_tag, options.must_tag = args.partition { |tag| tag.start_with? '~' }
-      options.wont_tag.map! { |tag| tag[1..-1] }
-      abort 'usage: signore prego|pronto [label, …]' unless ['prego', 'pronto'].include? options.action
-    end
+  def parse_options args, options
+    OptionParser.new do |opts|
+      opts.on '-d', '--database PATH', "Location of the signature database (default: #{options.db_path})" do |path|
+        options.db_path = path
+      end
+    end.parse! args
   end
 end end

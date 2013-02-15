@@ -6,12 +6,12 @@ module Signore describe Executable do
   describe '#initialize' do
     it 'prints usage if no command is given' do
       stderr = capture_io { -> { Executable.new [] }.must_raise SystemExit }.last
-      stderr.must_include 'usage: signore prego|pronto [label, …]'
+      stderr.must_include 'usage: signore prego|pronto [tag, …]'
     end
 
     it 'prints usage if a bogus command is given' do
       stderr = capture_io { -> { Executable.new ['bogus'] }.must_raise SystemExit }.last
-      stderr.must_include 'usage: signore prego|pronto [label, …]'
+      stderr.must_include 'usage: signore prego|pronto [tag, …]'
     end
 
     it 'loads the signature database from the specified location' do
@@ -67,7 +67,7 @@ module Signore describe Executable do
         @file = Tempfile.new ''
       end
 
-      it 'asks about signature parts and saves given signature with provided labels' do
+      it 'asks about signature parts and saves given signature with provided tags' do
         input = StringIO.new <<-end.dedent
           The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n
           Mark Pilgrim\n\n\n
