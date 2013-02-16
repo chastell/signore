@@ -2,28 +2,30 @@
 
 module Signore class Executable
   def initialize args = ARGV, opts = {}
-    options   = options_from args
-    @db       = opts.fetch(:db_factory) { Database }.new options.db_path
-    @action   = options.action
-    @must_tag = options.must_tag
-    @wont_tag = options.wont_tag
+    options = options_from args
+
+    @db     = opts.fetch(:db_factory) { Database }.new options.db_path
+    @action = options.action
+
+    @required_tags  = options.required_tags
+    @forbidden_tags = options.forbidden_tags
   end
 
   def run input = $stdin
     case action
     when 'prego'
-      sig = db.find tags: must_tag, no_tags: wont_tag
+      sig = db.find tags: required_tags, no_tags: forbidden_tags
     when 'pronto'
       params = params_from input
-      sig = Signature.new params.text, params.author, params.source, params.subject, must_tag
+      sig = Signature.new params.text, params.author, params.source, params.subject, required_tags
       db << sig
     end
 
     puts sig.to_s
   end
 
-  attr_reader :action, :db, :must_tag, :wont_tag
-  private     :action, :db, :must_tag, :wont_tag
+  attr_reader :action, :db, :forbidden_tags, :required_tags
+  private     :action, :db, :forbidden_tags, :required_tags
 
   private
 
@@ -40,8 +42,8 @@ module Signore class Executable
       options.db_path = "#{db_dir}/signore/signatures.yml"
       parse_options args, options
       options.action = args.shift
-      options.wont_tag, options.must_tag = args.partition { |tag| tag.start_with? '~' }
-      options.wont_tag.map! { |tag| tag[1..-1] }
+      options.forbidden_tags, options.required_tags = args.partition { |tag| tag.start_with? '~' }
+      options.forbidden_tags.map! { |tag| tag[1..-1] }
       abort 'usage: signore prego|pronto [tag, …]' unless ['prego', 'pronto'].include? options.action
     end
   end
