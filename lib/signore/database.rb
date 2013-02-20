@@ -14,8 +14,8 @@ module Signore class Database
   end
 
   def find opts = {}
-    required  = opts.fetch(:tags)    { [] }
-    forbidden = opts.fetch(:no_tags) { [] }
+    required  = opts.fetch(:required_tags)  { [] }
+    forbidden = opts.fetch(:forbidden_tags) { [] }
 
     store.transaction true do
       store['signatures']

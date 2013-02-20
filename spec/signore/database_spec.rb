@@ -15,19 +15,19 @@ module Signore describe Database do
     end
 
     it 'returns a random signature if the tags are empty' do
-      Database.new(path, random: Random.new(2013)).find(tags: []).text
+      Database.new(path, random: Random.new(2013)).find(required_tags: []).text
         .must_equal 'stay-at-home executives vs. wallstreet dads'
     end
 
     it 'returns a random signature based on provided tags' do
-      db.find(tags: ['programming']).text
+      db.find(required_tags: ['programming']).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
-      db.find(tags: ['work']).text
+      db.find(required_tags: ['work']).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      db.find(tags: ['tech'], no_tags: ['programming', 'security']).text
+      db.find(required_tags: ['tech'], forbidden_tags: ['programming', 'security']).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
   end
