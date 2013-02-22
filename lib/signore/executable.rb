@@ -2,30 +2,25 @@
 
 module Signore class Executable
   def initialize args = ARGV, opts = {}
-    settings = settings_from args
-
-    @db     = opts.fetch(:db_factory) { Database }.new settings.db_path
-    @action = settings.action
-
-    @required_tags  = settings.required_tags
-    @forbidden_tags = settings.forbidden_tags
+    @settings = settings_from args
+    @db       = opts.fetch(:db_factory) { Database }.new settings.db_path
   end
 
   def run input = $stdin
-    case action
+    case settings.action
     when 'prego'
-      sig = db.find required_tags: required_tags, forbidden_tags: forbidden_tags
+      sig = db.find required_tags: settings.required_tags, forbidden_tags: settings.forbidden_tags
     when 'pronto'
       params = params_from input
-      sig = Signature.new params.text, params.author, params.source, params.subject, required_tags
+      sig = Signature.new params.text, params.author, params.source, params.subject, settings.required_tags
       db << sig
     end
 
     puts sig.to_s
   end
 
-  attr_reader :action, :db, :forbidden_tags, :required_tags
-  private     :action, :db, :forbidden_tags, :required_tags
+  attr_reader :db, :settings
+  private     :db, :settings
 
   private
 
