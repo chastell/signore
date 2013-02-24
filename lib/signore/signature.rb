@@ -6,7 +6,7 @@ module Signore Signature = Struct.new :text, :author, :source, :subject, :tags d
   def to_s
     wrapper = LovelyRufus::Wrapper.new text.gsub("\n", "\n\n")
     wrapped = wrapper.wrapped(80).gsub "\n\n", "\n"
-    wrapped + meta_for(wrapped)
+    meta ? wrapped + meta_for(wrapped) : wrapped
   end
 
   private
@@ -23,11 +23,8 @@ module Signore Signature = Struct.new :text, :author, :source, :subject, :tags d
   end
 
   def meta_for wrapped
-    return '' unless meta
-
     indent = wrapped.split("\n").map(&:size).max - meta.size - 2
-    spaces = indent > 0 ? ' ' * indent : ''
-
-    "\n#{spaces}[#{meta}]"
+    indent = 0 if indent < 0
+    "\n#{' ' * indent}[#{meta}]"
   end
 end end
