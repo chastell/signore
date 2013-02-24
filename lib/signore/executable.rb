@@ -9,10 +9,12 @@ module Signore class Executable
   def run input = $stdin
     case settings.action
     when 'prego'
-      sig = db.find required_tags: settings.required_tags, forbidden_tags: settings.forbidden_tags
+      sig = db.find required_tags: settings.required_tags,
+        forbidden_tags: settings.forbidden_tags
     when 'pronto'
       params = params_from input
-      sig = Signature.new params.text, params.author, params.source, params.subject, settings.required_tags
+      sig = Signature.new params.text, params.author, params.source,
+        params.subject, settings.required_tags
       db << sig
     end
 
@@ -37,9 +39,13 @@ module Signore class Executable
       settings.db_path = "#{db_dir}/signore/signatures.yml"
       parse_settings args, settings
       settings.action = args.shift
-      settings.forbidden_tags, settings.required_tags = args.partition { |tag| tag.start_with? '~' }
+      settings.forbidden_tags, settings.required_tags = args.partition do |tag|
+        tag.start_with? '~'
+      end
       settings.forbidden_tags.map! { |tag| tag[1..-1] }
-      abort 'usage: signore prego|pronto [tag, …]' unless ['prego', 'pronto'].include? settings.action
+      unless ['prego', 'pronto'].include? settings.action
+        abort 'usage: signore prego|pronto [tag, …]'
+      end
     end
   end
 
@@ -51,7 +57,7 @@ module Signore class Executable
 
   def parse_settings args, settings
     OptionParser.new do |opts|
-      opts.on '-d', '--database PATH', "Location of the signature database (default: #{settings.db_path})" do |path|
+      opts.on '-d', '--database PATH', 'Database location' do |path|
         settings.db_path = path
       end
     end.parse! args
