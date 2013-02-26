@@ -1,6 +1,6 @@
 module Signore class Database
-  def initialize path, opts = {}
-    @random = opts.fetch(:random) { Random.new }
+  def initialize path, random: Random.new
+    @random = random
     @store  = YAML::Store.new path
   end
 
