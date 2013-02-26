@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Signore class Executable
   def initialize args = ARGV, opts = {}
     @settings = settings_from args

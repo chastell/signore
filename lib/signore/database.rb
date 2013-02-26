@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Signore class Database
   def initialize path, opts = {}
     @random = opts.fetch(:random) { Random.new }
