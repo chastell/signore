@@ -1,7 +1,7 @@
 module Signore class Executable
-  def initialize args = ARGV, opts = {}
+  def initialize args = ARGV, db_factory: Database
     @settings = settings_from args
-    @db       = opts.fetch(:db_factory) { Database }.new settings.db_path
+    @db       = db_factory.new settings.db_path
   end
 
   def run input = $stdin
