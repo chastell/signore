@@ -85,7 +85,7 @@ module Signore describe Executable do
 
         capture_io do
           args = ['-d', @file.path, 'pronto', 'Wikipedia', 'ADHD']
-          Executable.new(args).run input
+          Executable.new(args).run input: input
         end.first.must_equal <<-end.dedent
           text?
           author?
@@ -111,7 +111,7 @@ module Signore describe Executable do
         end
 
         capture_io do
-          Executable.new(['-d', @file.path, 'pronto']).run input
+          Executable.new(['-d', @file.path, 'pronto']).run input: input
         end.first.must_equal <<-end.dedent
           text?
           author?
