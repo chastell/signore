@@ -8,7 +8,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     lovely-rufus (0.0.3)
-    minitest (4.6.1)
+    minitest (4.6.2)
 
 PLATFORMS
   ruby
