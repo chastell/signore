@@ -11,6 +11,11 @@ module Signore Signature = Struct.new :text, :author, :source, :subject, :tags d
 
   private
 
+  def indent_size_for text
+    indent = text.split("\n").map(&:size).max - meta.size - 2
+    indent < 0 ? 0 : indent
+  end
+
   def meta
     case
     when author && subject && source then "#{author} #{subject}, #{source}"
@@ -22,9 +27,7 @@ module Signore Signature = Struct.new :text, :author, :source, :subject, :tags d
     end
   end
 
-  def meta_for wrapped
-    indent = wrapped.split("\n").map(&:size).max - meta.size - 2
-    indent = 0 if indent < 0
-    "\n#{' ' * indent}[#{meta}]"
+  def meta_for text
+    "\n#{' ' * indent_size_for(text)}[#{meta}]"
   end
 end end
