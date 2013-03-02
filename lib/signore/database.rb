@@ -11,14 +11,11 @@ module Signore class Database
     end
   end
 
-  def find opts = {}
-    required  = opts.fetch(:required_tags)  { [] }
-    forbidden = opts.fetch(:forbidden_tags) { [] }
-
+  def find(required_tags: [], forbidden_tags: [])
     store.transaction true do
       store['signatures']
-        .select { |sig| required.all?  { |tag| sig.tagged_with? tag } }
-        .reject { |sig| forbidden.any? { |tag| sig.tagged_with? tag } }
+        .select { |sig| required_tags.all?  { |tag| sig.tagged_with? tag } }
+        .reject { |sig| forbidden_tags.any? { |tag| sig.tagged_with? tag } }
         .sample random: random
     end
   end
