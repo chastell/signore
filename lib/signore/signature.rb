@@ -12,7 +12,7 @@ module Signore Signature = Struct.new :text, :author, :source, :subject, :tags d
   private
 
   def indent_size_for text
-    indent = text.split("\n").map(&:size).max - meta.size - 2
+    indent = text_width(text) - meta.size - 2
     indent < 0 ? 0 : indent
   end
 
@@ -29,5 +29,9 @@ module Signore Signature = Struct.new :text, :author, :source, :subject, :tags d
 
   def meta_for text
     "\n#{' ' * indent_size_for(text)}[#{meta}]"
+  end
+
+  def text_width text
+    text.split("\n").map(&:size).max
   end
 end end
