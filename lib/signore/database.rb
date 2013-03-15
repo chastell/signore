@@ -1,7 +1,6 @@
 module Signore class Database
-  def initialize path, random: Random.new
-    @random = random
-    @store  = YAML::Store.new path
+  def initialize path
+    @store = YAML::Store.new path
   end
 
   def << sig
@@ -11,7 +10,7 @@ module Signore class Database
     end
   end
 
-  def find(required_tags: [], forbidden_tags: [])
+  def find(forbidden_tags: [], random: Random.new, required_tags: [])
     store.transaction true do
       store['signatures']
         .select { |sig| required_tags.all?  { |tag| sig.tagged_with? tag } }
@@ -20,6 +19,6 @@ module Signore class Database
     end
   end
 
-  attr_reader :random, :store
-  private     :random, :store
+  attr_reader :store
+  private     :store
 end end

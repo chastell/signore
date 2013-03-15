@@ -6,14 +6,14 @@ module Signore describe Database do
     let(:path) { 'spec/fixtures/signatures.yml' }
 
     it 'returns a random signature by default' do
-      Database.new(path, random: Random.new(1981)).find.text
+      Database.new(path).find(random: Random.new(1981)).text
         .must_include 'Amateur fighter pilot ignores orders'
-      Database.new(path, random: Random.new(2009)).find.text
+      Database.new(path).find(random: Random.new(2009)).text
         .must_include '// sometimes I believe compiler ignores all my comments'
     end
 
     it 'returns a random signature if the tags are empty' do
-      Database.new(path, random: Random.new(2013)).find(required_tags: []).text
+      Database.new(path).find(required_tags: [], random: Random.new(2013)).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
     end
 
