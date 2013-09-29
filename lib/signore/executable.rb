@@ -41,7 +41,7 @@ module Signore class Executable
         tag.start_with? '~'
       end
       settings.forbidden_tags.map! { |tag| tag[1..-1] }
-      unless ['prego', 'pronto'].include? settings.action
+      unless %w[prego pronto].include? settings.action
         abort 'usage: signore prego|pronto [tag, …]'
       end
     end

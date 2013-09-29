@@ -25,7 +25,7 @@ module Signore describe Database do
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      db.find(required_tags: ['tech'], forbidden_tags: ['programming', 'security']).text
+      db.find(required_tags: ['tech'], forbidden_tags: %w[programming security]).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
   end
