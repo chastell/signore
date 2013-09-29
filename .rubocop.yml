@@ -33,6 +33,3 @@ MethodLength:
 
 RegexpLiteral:
   Enabled: false
-
-WordArray:
-  Enabled: false
