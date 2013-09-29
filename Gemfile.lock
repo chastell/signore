@@ -8,11 +8,11 @@ GEM
   remote: https://rubygems.org/
   specs:
     lovely-rufus (0.0.3)
-    minitest (4.7.4)
+    minitest (5.0.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  minitest (~> 4.0)
+  minitest
   signore!
