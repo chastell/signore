@@ -1,0 +1,38 @@
+AccessControl:
+  Enabled: false
+
+AlignArray:
+  Enabled: false
+
+AlignHash:
+  Enabled: false
+
+AlignParameters:
+  Enabled: false
+
+AndOr:
+  Enabled: false
+
+DefWithoutParentheses:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+EndAlignment:
+  Enabled: false
+
+IndentationWidth:
+  Enabled: false
+
+LineLength:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+RegexpLiteral:
+  Enabled: false
+
+WordArray:
+  Enabled: false
