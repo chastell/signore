@@ -7,8 +7,7 @@ module Signore class Executable
   def run(input: $stdin)
     case settings.action
     when 'prego'
-      sig = db.find required_tags: settings.required_tags,
-        forbidden_tags: settings.forbidden_tags
+      sig = handle_prego settings
     when 'pronto'
       sig = handle_pronto input
     end
@@ -26,6 +25,11 @@ module Signore class Executable
     value = ''
     value << input.gets until value.lines.to_a.last == "\n"
     value.strip
+  end
+
+  def handle_prego settings
+    db.find required_tags: settings.required_tags,
+      forbidden_tags: settings.forbidden_tags
   end
 
   def handle_pronto input
