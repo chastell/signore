@@ -10,10 +10,7 @@ module Signore class Executable
       sig = db.find required_tags: settings.required_tags,
         forbidden_tags: settings.forbidden_tags
     when 'pronto'
-      params = params_from input
-      sig = Signature.new params.text, params.author, params.source,
-        params.subject, settings.required_tags
-      db << sig
+      sig = handle_pronto input
     end
 
     puts sig.to_s
@@ -29,6 +26,14 @@ module Signore class Executable
     value = ''
     value << input.gets until value.lines.to_a.last == "\n"
     value.strip
+  end
+
+  def handle_pronto input
+    params = params_from input
+    sig = Signature.new params.text, params.author, params.source,
+      params.subject, settings.required_tags
+    db << sig
+    sig
   end
 
   def settings_from args
