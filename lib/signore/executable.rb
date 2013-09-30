@@ -5,13 +5,10 @@ module Signore class Executable
   end
 
   def run(input: $stdin)
-    case settings.action
-    when 'prego'
-      sig = handle_prego settings
-    when 'pronto'
-      sig = handle_pronto input
-    end
-
+    sig = case settings.action
+          when 'prego'  then handle_prego settings
+          when 'pronto' then handle_pronto input
+          end
     puts sig.to_s
   end
 
