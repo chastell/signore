@@ -4,7 +4,7 @@ module Signore class Executable
     @db       = db_factory.new settings.db_path
   end
 
-  def run(input: $stdin)
+  def run input: $stdin
     sig = case settings.action
           when 'prego'  then handle_prego settings
           when 'pronto' then handle_pronto input
