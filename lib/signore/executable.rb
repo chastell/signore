@@ -2,6 +2,9 @@ module Signore class Executable
   def initialize args = ARGV, db_factory: Database
     @settings = settings_from args
     @db       = db_factory.new settings.db_path
+    unless %w[prego pronto].include? settings.action
+      abort 'usage: signore prego|pronto [tag, …]'
+    end
   end
 
   def run input: $stdin
@@ -47,9 +50,6 @@ module Signore class Executable
         tag.start_with? '~'
       end
       settings.forbidden_tags.map! { |tag| tag[1..-1] }
-      unless %w[prego pronto].include? settings.action
-        abort 'usage: signore prego|pronto [tag, …]'
-      end
     end
   end
 
