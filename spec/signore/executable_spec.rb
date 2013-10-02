@@ -79,7 +79,8 @@ module Signore describe Executable do
 
       it 'asks about signature parts and saves resulting signature' do
         input = StringIO.new <<-end.dedent
-          The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.\n
+          The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
+
           Mark Pilgrim\n\n\n
         end
 
@@ -105,9 +106,10 @@ module Signore describe Executable do
 
       it 'handles multi-line signatures' do
         input = StringIO.new <<-end.dedent
-          ‘I’ve gone through over-stressed to physical exhaustion – what’s next?’
-          ‘Tuesday.’\n
-          Simon Burr, Kyle Hearn\n\n\n
+          ‘You’ve got an interesting accent. Subtle. I can’t place it.’
+          ‘It’s text-to-speech… I was raised by smartphones.’
+
+          Patrick Ewing\n\n\n
         end
 
         capture_io do
@@ -117,9 +119,9 @@ module Signore describe Executable do
           author?
           subject?
           source?
-          ‘I’ve gone through over-stressed to physical exhaustion – what’s next?’
-          ‘Tuesday.’
-                                                         [Simon Burr, Kyle Hearn]
+          ‘You’ve got an interesting accent. Subtle. I can’t place it.’
+          ‘It’s text-to-speech… I was raised by smartphones.’
+                                                        [Patrick Ewing]
         end
       end
     end
