@@ -16,7 +16,8 @@ module Signore describe Signature do
 
   describe '#to_s' do
     it 'does not show meta if there’s nothing to show' do
-      sig = Signature.new '// sometimes I believe compiler ignores all my comments'
+      text = '// sometimes I believe compiler ignores all my comments'
+      sig  = Signature.new text
       sig.to_s.must_equal <<-end.dedent.strip
         // sometimes I believe compiler ignores all my comments
       end
@@ -31,7 +32,8 @@ module Signore describe Signature do
     end
 
     it 'shows author and source, comma-separated' do
-      sig = Signature.new 'You do have to be mad to work here, but it doesn’t help.', 'Gary Barnes', 'asr'
+      text = 'You do have to be mad to work here, but it doesn’t help.'
+      sig  = Signature.new text, 'Gary Barnes', 'asr'
       sig.to_s.must_equal <<-end.dedent.strip
         You do have to be mad to work here, but it doesn’t help.
                                               [Gary Barnes, asr]
@@ -39,7 +41,8 @@ module Signore describe Signature do
     end
 
     it 'shows source on its own' do
-      sig = Signature.new 'Bruce Schneier knows Alice and Bob’s shared secret.', nil, 'Bruce Schneier Facts'
+      text = 'Bruce Schneier knows Alice and Bob’s shared secret.'
+      sig  = Signature.new text, nil, 'Bruce Schneier Facts'
       sig.to_s.must_equal <<-end.dedent.strip
         Bruce Schneier knows Alice and Bob’s shared secret.
                                      [Bruce Schneier Facts]
@@ -47,9 +50,9 @@ module Signore describe Signature do
     end
 
     it 'shows author and subject, space separated' do
-      sig = Signature.new(
-        'She was good at playing abstract confusion in the same way a midget is good at being short.',
-        'Clive James', nil, 'on Marilyn Monroe')
+      text = 'She was good at playing abstract confusion ' +
+       'in the same way a midget is good at being short.'
+      sig = Signature.new text, 'Clive James', nil, 'on Marilyn Monroe'
       sig.to_s.must_equal <<-end.dedent.strip
         She was good at playing abstract confusion in
         the same way a midget is good at being short.
@@ -58,9 +61,9 @@ module Signore describe Signature do
     end
 
     it 'shows subject on its own' do
-      sig = Signature.new(
-        'Amateur fighter pilot ignores orders, listens to the voices in his head and slaughters thousands.',
-        nil, nil, 'Star Wars ending explained')
+      text = 'Amateur fighter pilot ignores orders, listens ' +
+        'to the voices in his head and slaughters thousands.'
+      sig = Signature.new text, nil, nil, 'Star Wars ending explained'
       sig.to_s.must_equal <<-end.dedent.strip
         Amateur fighter pilot ignores orders, listens to
         the voices in his head and slaughters thousands.
