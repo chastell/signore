@@ -24,6 +24,3 @@ EndAlignment:
 
 IndentationWidth:
   Enabled: false
-
-LineLength:
-  Enabled: false
