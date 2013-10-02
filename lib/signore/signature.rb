@@ -1,4 +1,4 @@
-module Signore Signature = Struct.new :text, :author, :source, :subject, :tags do
+Signore::Signature = Struct.new :text, :author, :source, :subject, :tags do
   def tagged_with? tag
     tags and tags.include? tag
   end
@@ -34,4 +34,4 @@ module Signore Signature = Struct.new :text, :author, :source, :subject, :tags d
   def text_width text
     text.split("\n").map(&:size).max
   end
-end end
+end
