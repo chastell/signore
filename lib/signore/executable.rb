@@ -34,8 +34,8 @@ module Signore class Executable
 
   def handle_pronto input
     params = params_from input
-    sig = Signature.new params.text, params.author, params.source,
-      params.subject, settings.required_tags
+    sig = Signature[params.text, params.author, params.source,
+      params.subject, settings.required_tags]
     db << sig
     sig
   end
