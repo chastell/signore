@@ -1,9 +1,24 @@
 require_relative '../spec_helper'
 
 module Signore describe Signature do
+  describe '.[]' do
+    it 'instantiates Signatures via parameters' do
+      source = 'A History of Modern Computing'
+      text   = 'In 1940 he summarized his work in an influential book, ' +
+        '‘Punched Card Methods in Scientific Computation’.'
+      sig    = Signature[author: 'Paul E. Ceruzzi', source: source,
+        subject: 'on Wallace Eckert', tags: ['punched cards'], text: text]
+      sig.author.must_equal 'Paul E. Ceruzzi'
+      sig.source.must_equal source
+      sig.subject.must_equal 'on Wallace Eckert'
+      sig.tags.must_equal ['punched cards']
+      sig.text.must_equal text
+    end
+  end
+
   describe '#tagged_with?' do
     it 'says whether a tagged signature is tagged with a given tag' do
-      sig = Signature[nil, nil, nil, nil, %w[programming tech]]
+      sig = Signature[tags: %w[programming tech]]
       refute sig.tagged_with? 'fnord'
       assert sig.tagged_with? 'programming'
       assert sig.tagged_with? 'tech'
@@ -17,14 +32,14 @@ module Signore describe Signature do
   describe '#to_s' do
     it 'does not show meta if there’s nothing to show' do
       text = '// sometimes I believe compiler ignores all my comments'
-      sig  = Signature[text]
+      sig  = Signature.new text
       sig.to_s.must_equal <<-end.dedent.strip
         // sometimes I believe compiler ignores all my comments
       end
     end
 
     it 'shows author on its own' do
-      sig = Signature['stay-at-home executives vs. wallstreet dads', 'kodz']
+      sig = Signature.new 'stay-at-home executives vs. wallstreet dads', 'kodz'
       sig.to_s.must_equal <<-end.dedent.strip
         stay-at-home executives vs. wallstreet dads
                                              [kodz]
@@ -33,7 +48,7 @@ module Signore describe Signature do
 
     it 'shows author and source, comma-separated' do
       text = 'You do have to be mad to work here, but it doesn’t help.'
-      sig  = Signature[text, 'Gary Barnes', 'asr']
+      sig  = Signature.new text, 'Gary Barnes', 'asr'
       sig.to_s.must_equal <<-end.dedent.strip
         You do have to be mad to work here, but it doesn’t help.
                                               [Gary Barnes, asr]
@@ -42,7 +57,7 @@ module Signore describe Signature do
 
     it 'shows source on its own' do
       text = 'Bruce Schneier knows Alice and Bob’s shared secret.'
-      sig  = Signature[text, nil, 'Bruce Schneier Facts']
+      sig  = Signature[text: text, source: 'Bruce Schneier Facts']
       sig.to_s.must_equal <<-end.dedent.strip
         Bruce Schneier knows Alice and Bob’s shared secret.
                                      [Bruce Schneier Facts]
@@ -52,7 +67,8 @@ module Signore describe Signature do
     it 'shows author and subject, space separated' do
       text = 'She was good at playing abstract confusion ' +
        'in the same way a midget is good at being short.'
-      sig = Signature[text, 'Clive James', nil, 'on Marilyn Monroe']
+      sig = Signature[text: text, author: 'Clive James',
+        subject: 'on Marilyn Monroe']
       sig.to_s.must_equal <<-end.dedent.strip
         She was good at playing abstract confusion in
         the same way a midget is good at being short.
@@ -63,7 +79,7 @@ module Signore describe Signature do
     it 'shows subject on its own' do
       text = 'Amateur fighter pilot ignores orders, listens ' +
         'to the voices in his head and slaughters thousands.'
-      sig = Signature[text, nil, nil, 'Star Wars ending explained']
+      sig = Signature[text: text, subject: 'Star Wars ending explained']
       sig.to_s.must_equal <<-end.dedent.strip
         Amateur fighter pilot ignores orders, listens to
         the voices in his head and slaughters thousands.

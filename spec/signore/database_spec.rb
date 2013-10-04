@@ -36,7 +36,7 @@ module Signore describe Database do
       text = 'Normaliser Unix c’est comme pasteuriser le camembert.'
       file = Tempfile.new ''
       db   = Database.new file.path
-      db  << Signature[text]
+      db  << Signature.new(text)
       file.read.must_include text
     end
   end
