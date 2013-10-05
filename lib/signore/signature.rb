@@ -1,5 +1,9 @@
 module Signore
   Signature = Struct.new :text, :author, :source, :subject, :tags do
+    class << self
+      undef :[]
+    end
+
     def self.[] author: nil, source: nil, subject: nil, tags: nil, text: nil
       new text, author, source, subject, tags
     end
