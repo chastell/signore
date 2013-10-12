@@ -33,9 +33,7 @@ module Signore describe Signature do
     it 'does not show meta if there’s nothing to show' do
       text = '// sometimes I believe compiler ignores all my comments'
       sig  = Signature.new text
-      sig.to_s.must_equal <<-end.dedent.strip
-        // sometimes I believe compiler ignores all my comments
-      end
+      sig.to_s.must_equal text
     end
 
     it 'shows author on its own' do
