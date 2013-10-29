@@ -7,7 +7,7 @@ module Signore class Executable
     end
   end
 
-  def run input: $stdin
+  def run(input: $stdin)
     sig = case settings.action
           when 'prego'  then handle_prego settings
           when 'pronto' then handle_pronto input

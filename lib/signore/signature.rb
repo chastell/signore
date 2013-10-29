@@ -4,7 +4,7 @@ module Signore
       undef :[]
     end
 
-    def self.[] author: nil, source: nil, subject: nil, tags: nil, text: nil
+    def self.[](author: nil, source: nil, subject: nil, tags: nil, text: nil)
       new text, author, source, subject, tags
     end
 
