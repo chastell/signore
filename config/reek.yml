@@ -1,0 +1,14 @@
+DuplicateMethodCall:
+  exclude:
+  - Signore::Database#find
+
+IrresponsibleModule:
+  enabled: false
+
+NestedIterators:
+  exclude:
+  - Signore::Database#find
+  max_allowed_nesting: 2
+
+UnusedParameters:
+  enabled: false
