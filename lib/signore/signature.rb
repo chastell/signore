@@ -15,7 +15,7 @@ module Signore
     def to_s
       wrapper = LovelyRufus::Wrapper.new text.gsub("\n", "\n\n")
       wrapped = wrapper.wrapped(80).gsub "\n\n", "\n"
-      meta ? wrapped + meta_for(wrapped) : wrapped
+      meta.empty? ? wrapped : wrapped + meta_for(wrapped)
     end
 
     private
@@ -26,14 +26,8 @@ module Signore
     end
 
     def meta
-      case
-      when author && subject && source then "#{author} #{subject}, #{source}"
-      when author && subject           then "#{author} #{subject}"
-      when author && source            then "#{author}, #{source}"
-      when author                      then "#{author}"
-      when source                      then "#{source}"
-      when subject                     then "#{subject}"
-      end
+      stem = [author, subject].compact.join ' '
+      stem.empty? ? "#{source}" : [stem, source].compact.join(', ')
     end
 
     def meta_for text
