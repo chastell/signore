@@ -15,7 +15,7 @@ module Signore
     def to_s
       wrapper = LovelyRufus::Wrapper.new text.gsub("\n", "\n\n")
       wrapped = wrapper.wrapped(80).gsub "\n\n", "\n"
-      meta.empty? ? wrapped : wrapped + meta_for(wrapped)
+      wrapped + meta_for(wrapped)
     end
 
     private
@@ -31,7 +31,7 @@ module Signore
     end
 
     def meta_for text
-      "\n#{' ' * indent_size_for(text)}[#{meta}]"
+      meta.empty? ? '' : "\n#{' ' * indent_size_for(text)}[#{meta}]"
     end
 
     def text_width text
