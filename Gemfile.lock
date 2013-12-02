@@ -19,7 +19,7 @@ GEM
       ruby2ruby (~> 2.0.2)
       ruby_parser (~> 3.2)
       sexp_processor
-    rubocop (0.14.1)
+    rubocop (0.15.0)
       parser (~> 2.0)
       powerpack (~> 0.0.6)
       rainbow (>= 1.1.4)

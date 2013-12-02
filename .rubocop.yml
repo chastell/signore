@@ -1,4 +1,4 @@
-AccessControl:
+AccessModifierIndentation:
   Enabled: false
 
 AlignHash:
