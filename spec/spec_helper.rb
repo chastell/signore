@@ -9,6 +9,6 @@ require 'signore'
 
 class String
   def dedent
-    gsub(%r(^#{self[/\A\s*/]}), '')
+    gsub(/^#{self[/\A\s*/]}/, '')
   end
 end
