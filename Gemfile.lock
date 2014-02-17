@@ -9,7 +9,9 @@ GEM
   specs:
     ast (1.1.0)
     json (1.8.1)
-    lovely-rufus (0.0.3)
+    lovely-rufus (0.0.4)
+      lovely_rufus
+    lovely_rufus (0.1.0)
     minitest (5.2.3)
     parser (2.1.4)
       ast (~> 1.1)
