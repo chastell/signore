@@ -8,21 +8,23 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (1.1.0)
+    json (1.8.1)
     lovely-rufus (0.0.3)
     minitest (5.0.8)
-    parser (2.0.0)
+    parser (2.1.4)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
     powerpack (0.0.9)
-    rainbow (1.1.4)
+    rainbow (2.0.0)
     reek (1.3.4)
       ruby2ruby (~> 2.0.2)
       ruby_parser (~> 3.2)
       sexp_processor
-    rubocop (0.15.0)
-      parser (~> 2.0)
+    rubocop (0.18.1)
+      json (>= 1.7.7, < 2)
+      parser (~> 2.1.3)
       powerpack (~> 0.0.6)
-      rainbow (>= 1.1.4)
+      rainbow (>= 1.99.1, < 3.0)
     ruby2ruby (2.0.6)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
@@ -37,5 +39,5 @@ PLATFORMS
 DEPENDENCIES
   minitest (~> 5.0)
   reek (~> 1.3)
-  rubocop (~> 0.15.0)
+  rubocop (~> 0.18.0)
   signore!
