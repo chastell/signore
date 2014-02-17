@@ -4,7 +4,7 @@ module Signore describe Signature do
   describe '.[]' do
     it 'instantiates Signatures via parameters' do
       source = 'A History of Modern Computing'
-      text   = 'In 1940 he summarized his work in an influential book, ' +
+      text   = 'In 1940 he summarized his work in an influential book, ' \
         '‘Punched Card Methods in Scientific Computation’.'
       sig    = Signature[author: 'Paul E. Ceruzzi', source: source,
         subject: 'on Wallace Eckert', tags: ['punched cards'], text: text]
@@ -63,7 +63,7 @@ module Signore describe Signature do
     end
 
     it 'shows author and subject, space separated' do
-      text = 'She was good at playing abstract confusion ' +
+      text = 'She was good at playing abstract confusion ' \
        'in the same way a midget is good at being short.'
       sig = Signature[text: text, author: 'Clive James',
         subject: 'on Marilyn Monroe']
@@ -75,7 +75,7 @@ module Signore describe Signature do
     end
 
     it 'shows subject on its own' do
-      text = 'Amateur fighter pilot ignores orders, listens ' +
+      text = 'Amateur fighter pilot ignores orders, listens ' \
         'to the voices in his head and slaughters thousands.'
       sig = Signature[text: text, subject: 'Star Wars ending explained']
       sig.to_s.must_equal <<-end.dedent.strip
