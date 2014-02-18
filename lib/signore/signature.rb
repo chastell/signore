@@ -12,9 +12,9 @@ module Signore Signature = Struct.new(*%i[text author source subject tags]) do
   end
 
   def to_s
-    wrapper = LovelyRufus::Wrapper.new text.gsub("\n", "\n\n")
-    wrapped = wrapper.wrapped(80).gsub "\n\n", "\n"
-    wrapped + meta_for(wrapped)
+    wrapped  = LovelyRufus::TextWrapper.wrap text.gsub("\n", "\n\n"), width: 80
+    squeezed = wrapped.gsub("\n\n", "\n").chomp
+    squeezed + meta_for(squeezed)
   end
 
   private

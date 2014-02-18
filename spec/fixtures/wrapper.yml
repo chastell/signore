@@ -77,10 +77,10 @@
     text: Better to teach a man to fish than to give him a fish. And if he can’t be bothered to learn to fish and starves to death, that’s a good enough outcome for me.
     author: Steve VanDevender
   - |-
-    Better to teach a man to fish than to give him a fish.
-    And if he can’t be bothered to learn to fish and starves
-    to death, that’s a good enough outcome for me.
-                                         [Steve VanDevender]
+    Better to teach a man to fish than to give him
+    a fish. And if he can’t be bothered to learn to
+    fish and starves to death, that’s a good enough outcome for me.
+                                                [Steve VanDevender]
 
 # for two-line signatures, first line is considered for hangouts
 - - !ruby/struct:Signore::Signature

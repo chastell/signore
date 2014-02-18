@@ -1,5 +1,5 @@
 require 'fileutils'
-require 'lovely-rufus'
+require 'lovely_rufus'
 require 'optparse'
 require 'ostruct'
 require 'psych'
