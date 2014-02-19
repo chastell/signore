@@ -10,7 +10,7 @@ module Signore class Database
     end
   end
 
-  def find(forbidden_tags: [], random: Random.new, required_tags: [])
+  def find forbidden_tags: [], random: Random.new, required_tags: []
     store.transaction true do
       store['signatures']
         .select { |sig| required_tags.all?  { |tag| sig.tagged_with? tag } }
