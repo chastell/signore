@@ -2,7 +2,6 @@ require 'fileutils'
 require 'lovely_rufus'
 require 'optparse'
 require 'ostruct'
-require 'psych'
 require 'yaml/store'
 
 require_relative 'signore/database'
