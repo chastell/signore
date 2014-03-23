@@ -3,7 +3,7 @@ module Signore Signature = Struct.new(*%i[text author source subject tags]) do
     undef :[]
   end
 
-  def self.[](author: nil, source: nil, subject: nil, tags: nil, text: nil)
+  def self.[] author: nil, source: nil, subject: nil, tags: nil, text: nil
     new text, author, source, subject, tags
   end
 
