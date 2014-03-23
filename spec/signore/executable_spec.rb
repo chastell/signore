@@ -16,7 +16,7 @@ module Signore describe Executable do
 
     it 'loads the signature database from the specified location' do
       db_factory = MiniTest::Mock.new.expect :new, nil, ['signatures.yml']
-      Executable.new %w[-d signatures.yml prego], db_factory: db_factory
+      Executable.new %w(-d signatures.yml prego), db_factory: db_factory
       db_factory.verify
     end
 
@@ -51,7 +51,7 @@ module Signore describe Executable do
   describe '#run' do
     describe 'prego' do
       it 'prints a signature tagged with the provided tags' do
-        args   = %w[-d spec/fixtures/signatures.yml prego tech programming]
+        args   = %w(-d spec/fixtures/signatures.yml prego tech programming)
         output = "// sometimes I believe compiler ignores all my comments\n"
         stdout = capture_io { Executable.new(args).run }.first
         stdout.must_equal output
@@ -59,7 +59,7 @@ module Signore describe Executable do
 
       it 'prints a signature based on allowed and forbidden tags' do
         path = 'spec/fixtures/signatures.yml'
-        args = %W[-d #{path} prego ~programming tech ~security]
+        args = %W(-d #{path} prego ~programming tech ~security)
         out  = capture_io { Executable.new(args).run }.first
         out.must_equal <<-end.dedent
           You do have to be mad to work here, but it doesn’t help.
@@ -81,7 +81,7 @@ module Signore describe Executable do
         end
 
         capture_io do
-          args = %W[-d #{@file.path} pronto Wikipedia ADHD]
+          args = %W(-d #{@file.path} pronto Wikipedia ADHD)
           Executable.new(args).run input: input
         end.first.must_equal <<-end.dedent
           text?
@@ -93,7 +93,7 @@ module Signore describe Executable do
         end
 
         capture_io do
-          Executable.new(%W[-d #{@file.path} prego Wikipedia ADHD]).run
+          Executable.new(%W(-d #{@file.path} prego Wikipedia ADHD)).run
         end.first.must_equal <<-end.dedent
           The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                 [Mark Pilgrim]

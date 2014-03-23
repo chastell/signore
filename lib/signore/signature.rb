@@ -1,4 +1,4 @@
-module Signore Signature = Struct.new(*%i[text author source subject tags]) do
+module Signore Signature = Struct.new(*%i(text author source subject tags)) do
   class << self
     undef :[]
   end

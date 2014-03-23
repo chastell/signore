@@ -19,7 +19,7 @@ module Signore describe Signature do
 
   describe '#tagged_with?' do
     it 'says whether a tagged signature is tagged with a given tag' do
-      sig = Signature[tags: %w[programming tech]]
+      sig = Signature[tags: %w(programming tech)]
       refute sig.tagged_with? 'fnord'
       assert sig.tagged_with? 'programming'
       assert sig.tagged_with? 'tech'

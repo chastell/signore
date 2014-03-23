@@ -2,7 +2,7 @@ module Signore class Executable
   def initialize args = ARGV, db_factory: Database
     @settings = settings_from args
     @db       = db_factory.new settings.db_path
-    unless %w[prego pronto].include? settings.action
+    unless %w(prego pronto).include? settings.action
       abort 'usage: signore prego|pronto [tag, …]'
     end
   end
