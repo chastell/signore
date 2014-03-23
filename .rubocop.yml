@@ -1,12 +1,6 @@
 AccessModifierIndentation:
   Enabled: false
 
-AlignHash:
-  Enabled: false
-
-AlignParameters:
-  Enabled: false
-
 AndOr:
   Enabled: false
 
@@ -20,4 +14,4 @@ IndentationWidth:
   Enabled: false
 
 MethodDefParentheses:
-  Enabled: false
+  EnforcedStyle: require_no_parentheses
