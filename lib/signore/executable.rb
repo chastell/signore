@@ -29,7 +29,7 @@ module Signore class Executable
 
   def handle_prego settings
     db.find required_tags: settings.required_tags,
-      forbidden_tags: settings.forbidden_tags
+            forbidden_tags: settings.forbidden_tags
   end
 
   def handle_pronto input

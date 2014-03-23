@@ -7,7 +7,8 @@ module Signore describe Signature do
       text   = 'In 1940 he summarized his work in an influential book, ' \
         '‘Punched Card Methods in Scientific Computation’.'
       sig    = Signature[author: 'Paul E. Ceruzzi', source: source,
-        subject: 'on Wallace Eckert', tags: ['punched cards'], text: text]
+                         subject: 'on Wallace Eckert', tags: ['punched cards'],
+                         text: text]
       sig.author.must_equal 'Paul E. Ceruzzi'
       sig.source.must_equal source
       sig.subject.must_equal 'on Wallace Eckert'
@@ -66,7 +67,7 @@ module Signore describe Signature do
       text = 'She was good at playing abstract confusion ' \
        'in the same way a midget is good at being short.'
       sig = Signature[text: text, author: 'Clive James',
-        subject: 'on Marilyn Monroe']
+                      subject: 'on Marilyn Monroe']
       sig.to_s.must_equal <<-end.dedent.strip
         She was good at playing abstract confusion in
         the same way a midget is good at being short.
