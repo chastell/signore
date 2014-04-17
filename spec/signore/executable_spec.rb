@@ -1,4 +1,8 @@
+require 'stringio'
+require 'tempfile'
+require 'tmpdir'
 require_relative '../spec_helper'
+require_relative '../../lib/signore/executable'
 
 module Signore describe Executable do
   describe '#initialize' do

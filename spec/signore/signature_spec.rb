@@ -1,4 +1,6 @@
+require 'yaml'
 require_relative '../spec_helper'
+require_relative '../../lib/signore/signature'
 
 module Signore describe Signature do
   describe '.[]' do

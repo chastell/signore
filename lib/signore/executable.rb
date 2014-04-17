@@ -1,3 +1,8 @@
+require 'optparse'
+require 'ostruct'
+require_relative 'database'
+require_relative 'signature'
+
 module Signore class Executable
   def initialize args = ARGV, db_factory: Database
     @settings = settings_from args

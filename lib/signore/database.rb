@@ -1,3 +1,5 @@
+require 'yaml/store'
+
 module Signore class Database
   def initialize path
     @store = YAML::Store.new path

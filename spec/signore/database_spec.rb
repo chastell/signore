@@ -1,4 +1,7 @@
+require 'tempfile'
 require_relative '../spec_helper'
+require_relative '../../lib/signore/database'
+require_relative '../../lib/signore/signature'
 
 module Signore describe Database do
   describe '#find' do
