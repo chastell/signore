@@ -59,7 +59,7 @@ module Signore class Executable
   end
 
   def params_from input
-    OpenStruct.new Hash[[:text, :author, :subject, :source].map do |param|
+    OpenStruct.new Hash[%i(text author subject source).map do |param|
       [param, get_param(param, input)]
     end].reject { |_, value| value.empty? }
   end
