@@ -5,7 +5,7 @@ require_relative 'signature'
 
 module Signore class Executable
   def initialize args = ARGV, db_factory: Database
-    @settings = settings_from args
+    @settings = Settings.new args
     @db       = db_factory.new settings.db_path
     unless %w(prego pronto).include? settings.action
       abort 'usage: signore prego|pronto [tag, …]'
@@ -24,6 +24,29 @@ module Signore class Executable
   private     :db, :settings
 
   private
+
+  Settings = Struct.new(*%i(action db_path forbidden_tags required_tags)) do
+    def initialize args
+      db_dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
+      self.db_path = "#{db_dir}/signore/signatures.yml"
+      parse_settings args, self
+      self.action = args.shift
+      self.forbidden_tags, self.required_tags = args.partition do |tag|
+        tag.start_with? '~'
+      end
+      forbidden_tags.map! { |tag| tag[1..-1] }
+    end
+
+    private
+
+    def parse_settings args, settings
+      OptionParser.new do |opts|
+        opts.on '-d', '--database PATH', 'Database location' do |path|
+          settings.db_path = path
+        end
+      end.parse! args
+    end
+  end
 
   def get_param param, input
     puts "#{param}?"
@@ -45,30 +68,9 @@ module Signore class Executable
     sig
   end
 
-  def settings_from args
-    OpenStruct.new.tap do |settings|
-      db_dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
-      settings.db_path = "#{db_dir}/signore/signatures.yml"
-      parse_settings args, settings
-      settings.action = args.shift
-      settings.forbidden_tags, settings.required_tags = args.partition do |tag|
-        tag.start_with? '~'
-      end
-      settings.forbidden_tags.map! { |tag| tag[1..-1] }
-    end
-  end
-
   def params_from input
     OpenStruct.new Hash[%i(text author subject source).map do |param|
       [param, get_param(param, input)]
     end].reject { |_, value| value.empty? }
-  end
-
-  def parse_settings args, settings
-    OptionParser.new do |opts|
-      opts.on '-d', '--database PATH', 'Database location' do |path|
-        settings.db_path = path
-      end
-    end.parse! args
   end
 end end
