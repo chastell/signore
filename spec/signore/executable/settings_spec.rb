@@ -16,5 +16,9 @@ module Signore class Executable; describe Settings do
         old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
       end
     end
+
+    it 'is parsed from -d/--database PATH' do
+      Settings.new(%w(-d foo)).db_path.must_equal 'foo'
+    end
   end
 end end end
