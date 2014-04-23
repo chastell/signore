@@ -3,6 +3,12 @@ require_relative '../../spec_helper'
 require_relative '../../../lib/signore/executable/settings'
 
 module Signore class Executable; describe Settings do
+  describe '#action' do
+    it 'is defined by the first argument' do
+      Settings.new(['prego']).action.must_equal 'prego'
+    end
+  end
+
   describe '#db_path' do
     it 'defaults to $XDG_DATA_HOME/signore/signatures.yml' do
       begin
