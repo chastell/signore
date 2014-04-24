@@ -27,4 +27,10 @@ module Signore class Executable; describe Settings do
       Settings.new(%w(-d foo)).db_path.must_equal 'foo'
     end
   end
+
+  describe '#required_tags' do
+    it 'returns the tags that were required' do
+      Settings.new(%w(prego tech en)).required_tags.must_equal %w(tech en)
+    end
+  end
 end end end
