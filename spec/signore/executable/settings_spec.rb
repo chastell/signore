@@ -28,6 +28,12 @@ module Signore class Executable; describe Settings do
     end
   end
 
+  describe '#forbidden_tags' do
+    it 'returns the tags that were forbidden' do
+      Settings.new(%w(prego ~tech en)).forbidden_tags.must_equal %w(tech)
+    end
+  end
+
   describe '#required_tags' do
     it 'returns the tags that were required' do
       Settings.new(%w(prego tech en)).required_tags.must_equal %w(tech en)
