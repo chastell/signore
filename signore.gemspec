@@ -1,6 +1,7 @@
 Gem::Specification.new do |gem|
   gem.author      = 'Piotr Szotkowski'
-  gem.description = 'signore helps manage email signatures and select random ones based on their tags'
+  gem.description = 'signore helps manage email signatures and select ' \
+                    'random ones based on their tags'
   gem.email       = 'chastell@chastell.net'
   gem.homepage    = 'http://github.com/chastell/signore'
   gem.license     = 'AGPL-3.0'
