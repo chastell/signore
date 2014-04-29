@@ -1,16 +1,27 @@
 require 'optparse'
 
 module Signore class Executable; class Settings
-  attr_reader :action, :db_path, :forbidden_tags, :required_tags
+  attr_reader :db_path
 
   def initialize args
     @db_path = get_db_path_from args
-    @action  = args.shift
-    @forbidden_tags, @required_tags = args.partition do |tag|
-      tag.start_with? '~'
-    end
-    forbidden_tags.map! { |tag| tag[1..-1] }
+    @args    = args
   end
+
+  def action
+    args.first
+  end
+
+  def forbidden_tags
+    args[1..-1].select { |tag| tag.start_with? '~' }.map { |tag| tag[1..-1] }
+  end
+
+  def required_tags
+    args[1..-1].reject { |tag| tag.start_with? '~' }
+  end
+
+  attr_reader :args
+  private     :args
 
   private
 
