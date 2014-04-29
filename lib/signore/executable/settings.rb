@@ -4,8 +4,8 @@ module Signore class Executable; class Settings
   attr_reader :db_path
 
   def initialize args
-    @db_path = get_db_path_from args
-    @args    = args
+    extract_options_from args
+    @args = args
   end
 
   def action
@@ -29,13 +29,12 @@ module Signore class Executable; class Settings
     ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
   end
 
-  def get_db_path_from args
-    db_path = "#{db_dir}/signore/signatures.yml"
+  def extract_options_from args
+    @db_path = "#{db_dir}/signore/signatures.yml"
     OptionParser.new do |opts|
       opts.on '-d', '--database PATH', 'Database location' do |path|
-        db_path = path
+        @db_path = path
       end
     end.parse! args
-    db_path
   end
 end end end
