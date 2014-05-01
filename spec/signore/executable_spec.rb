@@ -17,39 +17,6 @@ module Signore describe Executable do
         -> { Executable.new ['bogus'] }.must_raise SystemExit
       end.last.must_include 'usage: signore prego|pronto [tag, …]'
     end
-
-    it 'loads the signature database from the specified location' do
-      db_factory = MiniTest::Mock.new.expect :new, nil, ['signatures.yml']
-      Executable.new %w(-d signatures.yml prego), db_factory: db_factory
-      db_factory.verify
-    end
-
-    it 'defaults to ~/.local/share/signore/signatures.yml' do
-      begin
-        orig = ENV.delete 'XDG_DATA_HOME'
-        default_path = File.expand_path '~/.local/share/signore/signatures.yml'
-        db_factory = MiniTest::Mock.new
-        db_factory.expect :new, nil, [default_path]
-        Executable.new ['prego'], db_factory: db_factory
-        db_factory.verify
-      ensure
-        ENV['XDG_DATA_HOME'] = orig if orig
-      end
-    end
-
-    it 'defaults to $XDG_DATA_HOME/signore/signatures.yml' do
-      begin
-        orig = ENV.delete 'XDG_DATA_HOME'
-        ENV['XDG_DATA_HOME'] = Dir.tmpdir
-        default_path = "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
-        db_factory = MiniTest::Mock.new
-        db_factory.expect :new, nil, [default_path]
-        Executable.new ['prego'], db_factory: db_factory
-        db_factory.verify
-      ensure
-        orig ? ENV['XDG_DATA_HOME'] = orig : ENV.delete('XDG_DATA_HOME')
-      end
-    end
   end
 
   describe '#run' do
