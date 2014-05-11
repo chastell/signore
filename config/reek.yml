@@ -2,6 +2,10 @@ DuplicateMethodCall:
   exclude:
   - Signore::Database#find
 
+FeatureEnvy:
+  exclude:
+    - Signore::Executable::Settings#forbidden_tags
+
 IrresponsibleModule:
   enabled: false
 
