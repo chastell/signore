@@ -40,9 +40,7 @@ module Signore describe Executable do
     end
 
     describe 'pronto' do
-      before do
-        @file = Tempfile.new ''
-      end
+      let(:file) { Tempfile.new '' }
 
       it 'asks about signature parts and saves resulting signature' do
         input = StringIO.new <<-end.dedent
@@ -52,7 +50,7 @@ module Signore describe Executable do
         end
 
         capture_io do
-          args = %W(-d #{@file.path} pronto Wikipedia ADHD)
+          args = %W(-d #{file.path} pronto Wikipedia ADHD)
           Executable.new(args).run input: input
         end.first.must_equal <<-end.dedent
           text?
@@ -64,7 +62,7 @@ module Signore describe Executable do
         end
 
         capture_io do
-          Executable.new(%W(-d #{@file.path} prego Wikipedia ADHD)).run
+          Executable.new(%W(-d #{file.path} prego Wikipedia ADHD)).run
         end.first.must_equal <<-end.dedent
           The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                 [Mark Pilgrim]
@@ -80,7 +78,7 @@ module Signore describe Executable do
         end
 
         capture_io do
-          Executable.new(['-d', @file.path, 'pronto']).run input: input
+          Executable.new(['-d', file.path, 'pronto']).run input: input
         end.first.must_equal <<-end.dedent
           text?
           author?
