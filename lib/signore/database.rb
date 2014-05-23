@@ -15,9 +15,9 @@ module Signore class Database
 
   def find forbidden_tags: [], required_tags: []
     store.transaction true do
-      SigFinder.new(random: random).find_random store['signatures'],
-                                                forbidden_tags: forbidden_tags,
-                                                required_tags:  required_tags
+      sig_finder = SigFinder.new(store['signatures'], random: random)
+      sig_finder.find_random forbidden_tags: forbidden_tags,
+                             required_tags:  required_tags
     end
   end
 
@@ -25,18 +25,19 @@ module Signore class Database
   private     :random, :store
 
   class SigFinder
-    def initialize random: Random.new
+    def initialize sigs, random: Random.new
+      @sigs   = sigs
       @random = random
     end
 
-    def find_random sigs, forbidden_tags: [], required_tags: []
+    def find_random forbidden_tags: [], required_tags: []
       sigs
         .select { |sig| required_tags.all?  { |tag| sig.tagged_with? tag } }
         .reject { |sig| forbidden_tags.any? { |tag| sig.tagged_with? tag } }
         .sample random: random
     end
 
-    attr_reader :random
-    private     :random
+    attr_reader :random, :sigs
+    private     :random, :sigs
   end
 end end
