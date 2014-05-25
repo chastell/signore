@@ -32,8 +32,8 @@ module Signore class Executable
   end
 
   def handle_prego settings
-    db.find required_tags: settings.required_tags,
-            forbidden_tags: settings.forbidden_tags
+    db.find required: settings.required_tags,
+            forbidden: settings.forbidden_tags
   end
 
   def handle_pronto input

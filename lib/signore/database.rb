@@ -14,10 +14,10 @@ module Signore class Database
     end
   end
 
-  def find forbidden_tags: [], required_tags: []
+  def find forbidden: [], required: []
     store.transaction true do
       sig_finder = SigFinder.new(store['signatures'], random: random)
-      sig_finder.find_tagged forbidden: forbidden_tags, required: required_tags
+      sig_finder.find_tagged forbidden: forbidden, required: required
     end
   end
 
