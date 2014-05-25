@@ -32,14 +32,13 @@ module Signore class Executable
   end
 
   def handle_prego settings
-    db.find required: settings.required_tags,
-            forbidden: settings.forbidden_tags
+    db.find forbidden: settings.forbidden, required: settings.required
   end
 
   def handle_pronto input
     params = params_from input
     sig = Signature.new params.text, params.author, params.source,
-                        params.subject, settings.required_tags
+                        params.subject, settings.required
     db << sig
     sig
   end

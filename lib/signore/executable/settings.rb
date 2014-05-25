@@ -14,11 +14,11 @@ module Signore class Executable; class Settings
     args.first
   end
 
-  def forbidden_tags
+  def forbidden
     args[1..-1].select { |tag| tag.start_with? '~' }.map { |tag| tag[1..-1] }
   end
 
-  def required_tags
+  def required
     args[1..-1].reject { |tag| tag.start_with? '~' }
   end
 
