@@ -4,10 +4,10 @@ class SigFinder
     @sigs   = sigs
   end
 
-  def find_tagged forbidden_tags: [], required_tags: []
+  def find_tagged forbidden: [], required: []
     sigs
-      .select { |sig| required_tags.all?  { |tag| sig.tagged_with? tag } }
-      .reject { |sig| forbidden_tags.any? { |tag| sig.tagged_with? tag } }
+      .select { |sig| required.all?  { |tag| sig.tagged_with? tag } }
+      .reject { |sig| forbidden.any? { |tag| sig.tagged_with? tag } }
       .sample random: random
   end
 

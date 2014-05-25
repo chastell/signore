@@ -20,22 +20,19 @@ module Signore describe SigFinder do
 
     it 'returns a random signature if the tags are empty' do
       SigFinder.new(sigs, random: Random.new(2013))
-        .find_tagged(forbidden_tags: [], required_tags: []).text
+        .find_tagged(forbidden: [], required: []).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
     end
 
     it 'returns a random signature based on provided tags' do
-      sig_finder.find_tagged(required_tags: %w(programming)).text
+      sig_finder.find_tagged(required: %w(programming)).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
-      sig_finder.find_tagged(required_tags: %w(work)).text
+      sig_finder.find_tagged(required: %w(work)).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      tags = {
-        forbidden_tags: %w(programming security),
-        required_tags:  %w(tech),
-      }
+      tags = { forbidden: %w(programming security), required: %w(tech) }
       sig_finder.find_tagged(tags).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
