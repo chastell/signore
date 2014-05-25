@@ -8,6 +8,8 @@ module Signore describe SigFinder do
     store.transaction(true) { store['signatures'] }
   end
 
+  let(:sig_finder) { SigFinder.new sigs }
+
   describe '#find_tagged' do
     it 'returns a random Signature by default' do
       SigFinder.new(sigs, random: Random.new(1981)).find_tagged.text
@@ -20,6 +22,22 @@ module Signore describe SigFinder do
       SigFinder.new(sigs, random: Random.new(2013))
         .find_tagged(forbidden_tags: [], required_tags: []).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
+    end
+
+    it 'returns a random signature based on provided tags' do
+      sig_finder.find_tagged(required_tags: %w(programming)).text
+        .must_equal '// sometimes I believe compiler ignores all my comments'
+      sig_finder.find_tagged(required_tags: %w(work)).text
+        .must_equal 'You do have to be mad to work here, but it doesn’t help.'
+    end
+
+    it 'returns a random signature based on required and forbidden tags' do
+      tags = {
+        forbidden_tags: %w(programming security),
+        required_tags:  %w(tech),
+      }
+      sig_finder.find_tagged(tags).text
+        .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
   end
 end end
