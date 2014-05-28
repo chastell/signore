@@ -1,4 +1,9 @@
 class SigFinder
+  def self.find sigs, forbidden: [], random: Random.new, required: []
+    sig_finder = new sigs, random: random
+    sig_finder.find_tagged forbidden: forbidden, required: required
+  end
+
   def initialize sigs, random: Random.new
     @random = random
     @sigs   = sigs
