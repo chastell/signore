@@ -3,8 +3,9 @@ require_relative 'sig_finder'
 
 module Signore class Database
   def initialize path, random: Random.new
-    @random = random
-    @store  = YAML::Store.new path
+    @random     = random
+    @store      = YAML::Store.new path
+    @sig_finder = SigFinder.new(sigs, random: random)
   end
 
   def << sig
@@ -15,12 +16,11 @@ module Signore class Database
   end
 
   def find forbidden: [], required: []
-    sig_finder = SigFinder.new sigs, random: random
     sig_finder.find_tagged forbidden: forbidden, required: required
   end
 
-  attr_reader :random, :store
-  private     :random, :store
+  attr_reader :random, :sig_finder, :store
+  private     :random, :sig_finder, :store
 
   private
 
