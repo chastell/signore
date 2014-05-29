@@ -2,10 +2,10 @@ require 'yaml/store'
 require_relative 'sig_finder'
 
 module Signore class Database
-  def initialize path, random: Random.new
+  def initialize path, random: Random.new, sig_finder: SigFinder
     @random     = random
     @store      = YAML::Store.new path
-    @sig_finder = SigFinder
+    @sig_finder = sig_finder
   end
 
   def << sig
