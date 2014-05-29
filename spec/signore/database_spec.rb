@@ -4,6 +4,15 @@ require_relative '../../lib/signore/database'
 require_relative '../../lib/signore/signature'
 
 module Signore describe Database do
+  describe '#<<' do
+    it 'saves the provided signature to disk' do
+      text = 'Normaliser Unix c’est comme pasteuriser le camembert.'
+      file = Tempfile.new ''
+      Database.new(file.path) << Signature.new(text)
+      file.read.must_include text
+    end
+  end
+
   describe '#find' do
     let(:db)   { Database.new path              }
     let(:path) { 'spec/fixtures/signatures.yml' }
@@ -30,15 +39,6 @@ module Signore describe Database do
     it 'returns a random signature based on required and forbidden tags' do
       db.find(required: %w(tech), forbidden: %w(programming security)).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
-    end
-  end
-
-  describe '#<<' do
-    it 'saves the provided signature to disk' do
-      text = 'Normaliser Unix c’est comme pasteuriser le camembert.'
-      file = Tempfile.new ''
-      Database.new(file.path) << Signature.new(text)
-      file.read.must_include text
     end
   end
 end end
