@@ -20,19 +20,14 @@ module Signore describe Database do
     let(:store)      { YAML::Store.new path                            }
 
     it 'returns a random signature by default' do
-      args  = { forbidden: [], random: any(Random), required: [] }
-      stub(sig_finder).find(sigs, args) { sigs.last }
+      stub(sig_finder).find(sigs, forbidden: [], required: []) { sigs.last }
       Database.new(path, sig_finder: sig_finder).find.text
         .must_include 'Amateur fighter pilot ignores orders'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      args  = {
-        forbidden: %w(tech),
-        random:    any(Random),
-        required:  %w(programming security),
-      }
-      stub(sig_finder).find(sigs, args) { sigs.last }
+      tags = { forbidden: %w(tech), required:  %w(programming security) }
+      stub(sig_finder).find(sigs, tags) { sigs.last }
       Database.new(path, sig_finder: sig_finder)
         .find(forbidden: %w(tech), required: %w(programming security)).text
         .must_include 'Amateur fighter pilot ignores orders'
