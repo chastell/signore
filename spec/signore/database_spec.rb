@@ -14,31 +14,42 @@ module Signore describe Database do
   end
 
   describe '#find' do
-    let(:db)   { Database.new path              }
     let(:path) { 'spec/fixtures/signatures.yml' }
 
     it 'returns a random signature by default' do
-      Database.new(path, random: Random.new(1981)).find.text
+      store = YAML::Store.new path
+      sigs  = store.transaction(true) { store['signatures'] }
+      sig_finder = fake :sig_finder, as: :class
+      args  = { forbidden: [], random: any(Random), required: [] }
+      stub(sig_finder).find(sigs, args) { sigs.last }
+      Database.new(path, sig_finder: sig_finder).find.text
         .must_include 'Amateur fighter pilot ignores orders'
-      Database.new(path, random: Random.new(2009)).find.text
-        .must_include '// sometimes I believe compiler ignores all my comments'
     end
 
     it 'returns a random signature if the tags are empty' do
-      Database.new(path, random: Random.new(2013)).find(required: []).text
-        .must_equal '// sometimes I believe compiler ignores all my comments'
-    end
-
-    it 'returns a random signature based on provided tags' do
-      db.find(required: ['programming']).text
-        .must_equal '// sometimes I believe compiler ignores all my comments'
-      db.find(required: ['work']).text
-        .must_equal 'You do have to be mad to work here, but it doesn’t help.'
+      store = YAML::Store.new path
+      sigs  = store.transaction(true) { store['signatures'] }
+      sig_finder = fake :sig_finder, as: :class
+      args  = { forbidden: [], random: any(Random), required: [] }
+      stub(sig_finder).find(sigs, args) { sigs.last }
+      Database.new(path, sig_finder: sig_finder)
+        .find(forbidden: [], required: []).text
+        .must_include 'Amateur fighter pilot ignores orders'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      db.find(required: %w(tech), forbidden: %w(programming security)).text
-        .must_equal 'You do have to be mad to work here, but it doesn’t help.'
+      store = YAML::Store.new path
+      sigs  = store.transaction(true) { store['signatures'] }
+      sig_finder = fake :sig_finder, as: :class
+      args  = {
+        forbidden: %w(tech),
+        random:    any(Random),
+        required:  %w(programming security),
+      }
+      stub(sig_finder).find(sigs, args) { sigs.last }
+      Database.new(path, sig_finder: sig_finder)
+        .find(forbidden: %w(tech), required: %w(programming security)).text
+        .must_include 'Amateur fighter pilot ignores orders'
     end
   end
 end end
