@@ -4,7 +4,7 @@ DuplicateMethodCall:
 
 FeatureEnvy:
   exclude:
-    - Signore::Executable::Settings#forbidden
+    - Signore::Settings#forbidden
 
 IrresponsibleModule:
   enabled: false

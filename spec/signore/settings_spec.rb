@@ -1,8 +1,8 @@
 require 'tmpdir'
-require_relative '../../spec_helper'
-require_relative '../../../lib/signore/executable/settings'
+require_relative '../spec_helper'
+require_relative '../../lib/signore/settings'
 
-module Signore class Executable; describe Settings do
+module Signore describe Settings do
   describe '#action' do
     it 'is defined by the first argument' do
       Settings.new(['prego']).action.must_equal 'prego'
@@ -39,4 +39,4 @@ module Signore class Executable; describe Settings do
       Settings.new(%w(prego tech en)).required.must_equal %w(tech en)
     end
   end
-end end end
+end end

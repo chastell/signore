@@ -1,6 +1,6 @@
 require 'ostruct'
 require_relative 'database'
-require_relative 'executable/settings'
+require_relative 'settings'
 require_relative 'signature'
 
 module Signore class Executable

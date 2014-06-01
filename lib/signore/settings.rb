@@ -1,6 +1,6 @@
 require 'optparse'
 
-module Signore class Executable; class Settings
+module Signore class Settings
   attr_reader :db_path
 
   def initialize args
@@ -34,4 +34,4 @@ module Signore class Executable; class Settings
       end
     end.parse! args
   end
-end end end
+end end
