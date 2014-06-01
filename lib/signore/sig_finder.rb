@@ -1,4 +1,4 @@
-class SigFinder
+module Signore class SigFinder
   def self.find sigs, forbidden: [], random: Random.new, required: []
     sig_finder = new sigs, random: random
     sig_finder.find_tagged forbidden: forbidden, required: required
@@ -18,4 +18,4 @@ class SigFinder
 
   attr_reader :random, :sigs
   private     :random, :sigs
-end
+end end
