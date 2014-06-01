@@ -15,15 +15,10 @@ module Signore class Database
   end
 
   def find forbidden: [], required: []
+    sigs = store.transaction(true) { store['signatures'] }
     sig_finder.find sigs, forbidden: forbidden, required: required
   end
 
   attr_reader :sig_finder, :store
   private     :sig_finder, :store
-
-  private
-
-  def sigs
-    store.transaction(true) { store['signatures'] }
-  end
 end end
