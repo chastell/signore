@@ -1,6 +1,8 @@
 require 'optparse'
 
 module Signore class Settings
+  Tags = Struct.new :forbidden, :required
+
   attr_reader :db_path
 
   def initialize args
@@ -20,6 +22,10 @@ module Signore class Settings
 
   def required
     args[1..-1].reject { |tag| tag.start_with? '~' }
+  end
+
+  def tags
+    Tags.new forbidden, required
   end
 
   attr_reader :args

@@ -39,4 +39,11 @@ module Signore describe Settings do
       Settings.new(%w(prego tech en)).required.must_equal %w(tech en)
     end
   end
+
+  describe '#tags' do
+    it 'returns the forbidden and required tags' do
+      Settings.new(%w(prego ~tech en)).tags
+        .must_equal Settings::Tags.new %w(tech), %w(en)
+    end
+  end
 end end
