@@ -1,4 +1,5 @@
 require 'yaml/store'
+require_relative 'settings'
 require_relative 'sig_finder'
 
 module Signore class Database
@@ -14,9 +15,9 @@ module Signore class Database
     end
   end
 
-  def find forbidden: [], required: []
+  def find tags: Settings::Tags.new
     sigs = store.transaction(true) { store['signatures'] }
-    sig_finder.find sigs, forbidden: forbidden, required: required
+    sig_finder.find sigs, tags: tags
   end
 
   attr_reader :sig_finder, :store

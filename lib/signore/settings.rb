@@ -1,7 +1,12 @@
 require 'optparse'
 
 module Signore class Settings
-  Tags = Struct.new :forbidden, :required
+  Tags = Struct.new :forbidden, :required do
+    def initialize forbidden = [], required = []
+      self.forbidden = forbidden
+      self.required  = required
+    end
+  end
 
   attr_reader :db_path
 
@@ -14,14 +19,6 @@ module Signore class Settings
 
   def action
     args.first
-  end
-
-  def forbidden
-    args[1..-1].select { |tag| tag.start_with? '~' }.map { |tag| tag[1..-1] }
-  end
-
-  def required
-    args[1..-1].reject { |tag| tag.start_with? '~' }
   end
 
   def tags
@@ -39,5 +36,13 @@ module Signore class Settings
         @db_path = path
       end
     end.parse! args
+  end
+
+  def forbidden
+    args[1..-1].select { |tag| tag.start_with? '~' }.map { |tag| tag[1..-1] }
+  end
+
+  def required
+    args[1..-1].reject { |tag| tag.start_with? '~' }
   end
 end end

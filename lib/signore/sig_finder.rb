@@ -1,7 +1,9 @@
+require_relative 'settings'
+
 module Signore class SigFinder
-  def self.find sigs, forbidden: [], random: Random.new, required: []
+  def self.find sigs, random: Random.new, tags: Settings::Tags.new
     sig_finder = new sigs, random: random
-    sig_finder.find_tagged forbidden: forbidden, required: required
+    sig_finder.find_tagged tags: tags
   end
 
   def initialize sigs, random: Random.new
@@ -9,10 +11,10 @@ module Signore class SigFinder
     @sigs   = sigs
   end
 
-  def find_tagged forbidden: [], required: []
+  def find_tagged tags: Settings::Tags.new
     sigs
-      .select { |sig| required.all?  { |tag| sig.tagged_with? tag } }
-      .reject { |sig| forbidden.any? { |tag| sig.tagged_with? tag } }
+      .select { |sig| tags.required.all?  { |tag| sig.tagged_with? tag } }
+      .reject { |sig| tags.forbidden.any? { |tag| sig.tagged_with? tag } }
       .sample random: random
   end
 
