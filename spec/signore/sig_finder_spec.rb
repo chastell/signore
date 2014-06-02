@@ -26,14 +26,16 @@ module Signore describe SigFinder do
     end
 
     it 'returns a random signature based on provided tags' do
-      SigFinder.find(sigs, tags: Settings::Tags.new([], %w(programming))).text
+      SigFinder.find(sigs, tags: Settings::Tags.new(required: %w(programming)))
+        .text
         .must_equal '// sometimes I believe compiler ignores all my comments'
-      SigFinder.find(sigs, tags: Settings::Tags.new([], %w(work))).text
+      SigFinder.find(sigs, tags: Settings::Tags.new(required: %w(work))).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      tags = Settings::Tags.new %w(programming security), %w(tech)
+      tags = Settings::Tags.new forbidden: %w(programming security),
+                                required: %w(tech)
       SigFinder.find(sigs, tags: tags).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
@@ -54,14 +56,16 @@ module Signore describe SigFinder do
     end
 
     it 'returns a random signature based on provided tags' do
-      sig_finder.find_tagged(tags: Settings::Tags.new([], %w(programming))).text
+      tags = Settings::Tags.new required: %w(programming)
+      sig_finder.find_tagged(tags: tags).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
-      sig_finder.find_tagged(tags: Settings::Tags.new([], %w(work))).text
+      sig_finder.find_tagged(tags: Settings::Tags.new(required: %w(work))).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      tags = Settings::Tags.new %w(programming security), %w(tech)
+      tags = Settings::Tags.new forbidden: %w(programming security),
+                                required: %w(tech)
       sig_finder.find_tagged(tags: tags).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end

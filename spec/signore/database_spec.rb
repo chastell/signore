@@ -27,7 +27,8 @@ module Signore describe Database do
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      tags = Settings::Tags.new %w(tech), %w(programming security)
+      tags = Settings::Tags.new forbidden: %w(tech),
+                                required: %w(programming security)
       stub(sig_finder).find(sigs, tags: tags) { sigs.last }
       Database.new(path, sig_finder: sig_finder)
         .find(tags: tags).text

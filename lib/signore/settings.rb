@@ -2,7 +2,7 @@ require 'optparse'
 
 module Signore class Settings
   Tags = Struct.new :forbidden, :required do
-    def initialize forbidden = [], required = []
+    def initialize forbidden: [], required: []
       self.forbidden = forbidden
       self.required  = required
     end
@@ -22,7 +22,7 @@ module Signore class Settings
   end
 
   def tags
-    Tags.new forbidden, required
+    Tags.new forbidden: forbidden, required: required
   end
 
   attr_reader :args
