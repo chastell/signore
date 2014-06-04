@@ -1,6 +1,6 @@
 DuplicateMethodCall:
   exclude:
-  - Signore::Database#find
+  - Signore::SigFinder#find_tagged
 
 FeatureEnvy:
   exclude:
