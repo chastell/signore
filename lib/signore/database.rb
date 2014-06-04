@@ -1,6 +1,6 @@
 require 'yaml/store'
-require_relative 'settings'
 require_relative 'sig_finder'
+require_relative 'tags'
 
 module Signore class Database
   def initialize path, sig_finder: SigFinder
@@ -15,7 +15,7 @@ module Signore class Database
     end
   end
 
-  def find tags: Settings::Tags.new
+  def find tags: Tags.new
     sigs = store.transaction(true) { store['signatures'] }
     sig_finder.find sigs, tags: tags
   end

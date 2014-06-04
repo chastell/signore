@@ -1,7 +1,7 @@
 require 'yaml/store'
 require_relative '../spec_helper'
-require_relative '../../lib/signore/settings'
 require_relative '../../lib/signore/sig_finder'
+require_relative '../../lib/signore/tags'
 
 module Signore describe SigFinder do
   let :sigs do
@@ -20,22 +20,19 @@ module Signore describe SigFinder do
     end
 
     it 'returns a random signature if the tags are empty' do
-      kwargs = { tags: Settings::Tags.new, random: Random.new(2013) }
-      SigFinder.find(sigs, kwargs).text
+      SigFinder.find(sigs, tags: Tags.new, random: Random.new(2013)).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
     end
 
     it 'returns a random signature based on provided tags' do
-      SigFinder.find(sigs, tags: Settings::Tags.new(required: %w(programming)))
-        .text
+      SigFinder.find(sigs, tags: Tags.new(required: %w(programming))).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
-      SigFinder.find(sigs, tags: Settings::Tags.new(required: %w(work))).text
+      SigFinder.find(sigs, tags: Tags.new(required: %w(work))).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      tags = Settings::Tags.new forbidden: %w(programming security),
-                                required: %w(tech)
+      tags = Tags.new forbidden: %w(programming security), required: %w(tech)
       SigFinder.find(sigs, tags: tags).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
@@ -51,21 +48,19 @@ module Signore describe SigFinder do
 
     it 'returns a random signature if the tags are empty' do
       SigFinder.new(sigs, random: Random.new(2013))
-        .find_tagged(tags: Settings::Tags.new).text
+        .find_tagged(tags: Tags.new).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
     end
 
     it 'returns a random signature based on provided tags' do
-      tags = Settings::Tags.new required: %w(programming)
-      sig_finder.find_tagged(tags: tags).text
+      sig_finder.find_tagged(tags: Tags.new(required: %w(programming))).text
         .must_equal '// sometimes I believe compiler ignores all my comments'
-      sig_finder.find_tagged(tags: Settings::Tags.new(required: %w(work))).text
+      sig_finder.find_tagged(tags: Tags.new(required: %w(work))).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      tags = Settings::Tags.new forbidden: %w(programming security),
-                                required: %w(tech)
+      tags = Tags.new forbidden: %w(programming security), required: %w(tech)
       sig_finder.find_tagged(tags: tags).text
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end

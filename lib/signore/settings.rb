@@ -1,13 +1,7 @@
 require 'optparse'
+require_relative 'tags'
 
 module Signore class Settings
-  Tags = Struct.new :forbidden, :required do
-    def initialize forbidden: [], required: []
-      self.forbidden = forbidden
-      self.required  = required
-    end
-  end
-
   attr_reader :db_path
 
   def initialize args

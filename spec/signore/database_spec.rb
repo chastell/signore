@@ -1,8 +1,8 @@
 require 'tempfile'
 require_relative '../spec_helper'
 require_relative '../../lib/signore/database'
-require_relative '../../lib/signore/settings'
 require_relative '../../lib/signore/signature'
+require_relative '../../lib/signore/tags'
 
 module Signore describe Database do
   describe '#<<' do
@@ -21,14 +21,13 @@ module Signore describe Database do
     let(:store)      { YAML::Store.new path                            }
 
     it 'returns a random signature by default' do
-      stub(sig_finder).find(sigs, tags: Settings::Tags.new) { sigs.last }
+      stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
       Database.new(path, sig_finder: sig_finder).find.text
         .must_include 'Amateur fighter pilot ignores orders'
     end
 
     it 'returns a random signature based on required and forbidden tags' do
-      tags = Settings::Tags.new forbidden: %w(tech),
-                                required: %w(programming security)
+      tags = Tags.new forbidden: %w(tech), required: %w(programming security)
       stub(sig_finder).find(sigs, tags: tags) { sigs.last }
       Database.new(path, sig_finder: sig_finder)
         .find(tags: tags).text

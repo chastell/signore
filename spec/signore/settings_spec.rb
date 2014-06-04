@@ -1,6 +1,7 @@
 require 'tmpdir'
 require_relative '../spec_helper'
 require_relative '../../lib/signore/settings'
+require_relative '../../lib/signore/tags'
 
 module Signore describe Settings do
   describe '#action' do
@@ -30,8 +31,8 @@ module Signore describe Settings do
 
   describe '#tags' do
     it 'returns the forbidden and required tags' do
-      Settings.new(%w(prego ~tech en)).tags
-        .must_equal Settings::Tags.new forbidden: %w(tech), required: %w(en)
+      tags = Tags.new forbidden: %w(tech), required: %w(en)
+      Settings.new(%w(prego ~tech en)).tags.must_equal tags
     end
   end
 end end
