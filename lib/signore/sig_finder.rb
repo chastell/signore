@@ -2,8 +2,7 @@ require_relative 'tags'
 
 module Signore class SigFinder
   def self.find sigs, random: Random.new, tags: Tags.new
-    sig_finder = new sigs, random: random
-    sig_finder.find_tagged tags: tags
+    new(sigs, random: random).find_tagged tags: tags
   end
 
   def initialize sigs, random: Random.new
