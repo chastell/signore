@@ -37,32 +37,4 @@ module Signore describe SigFinder do
         .must_equal 'You do have to be mad to work here, but it doesn’t help.'
     end
   end
-
-  describe '#find_tagged' do
-    it 'returns a random Signature by default' do
-      SigFinder.new(sigs, random: Random.new(1981)).find_tagged.text
-        .must_include 'Amateur fighter pilot ignores orders'
-      SigFinder.new(sigs, random: Random.new(2009)).find_tagged.text
-        .must_include '// sometimes I believe compiler ignores all my comments'
-    end
-
-    it 'returns a random signature if the tags are empty' do
-      SigFinder.new(sigs, random: Random.new(2013))
-        .find_tagged(tags: Tags.new).text
-        .must_equal '// sometimes I believe compiler ignores all my comments'
-    end
-
-    it 'returns a random signature based on provided tags' do
-      sig_finder.find_tagged(tags: Tags.new(required: %w(programming))).text
-        .must_equal '// sometimes I believe compiler ignores all my comments'
-      sig_finder.find_tagged(tags: Tags.new(required: %w(work))).text
-        .must_equal 'You do have to be mad to work here, but it doesn’t help.'
-    end
-
-    it 'returns a random signature based on required and forbidden tags' do
-      tags = Tags.new forbidden: %w(programming security), required: %w(tech)
-      sig_finder.find_tagged(tags: tags).text
-        .must_equal 'You do have to be mad to work here, but it doesn’t help.'
-    end
-  end
 end end
