@@ -15,6 +15,7 @@ module Signore describe Database do
   end
 
   describe '#find' do
+    let(:database)   { Database.new(path, sig_finder: sig_finder)      }
     let(:path)       { 'spec/fixtures/signatures.yml'                  }
     let(:sig_finder) { fake :sig_finder, as: :class                    }
     let(:sigs)       { store.transaction(true) { store['signatures'] } }
@@ -22,16 +23,13 @@ module Signore describe Database do
 
     it 'returns a random signature by default' do
       stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
-      Database.new(path, sig_finder: sig_finder).find.text
-        .must_include 'Amateur fighter pilot ignores orders'
+      database.find.must_equal sigs.last
     end
 
     it 'returns a random signature based on required and forbidden tags' do
       tags = Tags.new forbidden: %w(tech), required: %w(programming security)
       stub(sig_finder).find(sigs, tags: tags) { sigs.last }
-      Database.new(path, sig_finder: sig_finder)
-        .find(tags: tags).text
-        .must_include 'Amateur fighter pilot ignores orders'
+      database.find(tags: tags).must_equal sigs.last
     end
   end
 end end
