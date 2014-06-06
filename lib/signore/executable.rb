@@ -13,7 +13,7 @@ module Signore class Executable
 
   def run input: $stdin
     sig = case settings.action
-          when 'prego'  then handle_prego settings
+          when 'prego'  then db.find tags: settings.tags
           when 'pronto' then handle_pronto input
           end
     puts sig.to_s
@@ -29,10 +29,6 @@ module Signore class Executable
     value = ''
     value << input.gets until value.lines.to_a.last == "\n"
     value.strip
-  end
-
-  def handle_prego settings
-    db.find tags: settings.tags
   end
 
   def handle_pronto input
