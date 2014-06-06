@@ -14,7 +14,7 @@ module Signore class Executable
   def run input: $stdin
     sig = case settings.action
           when 'prego'  then db.find tags: settings.tags
-          when 'pronto' then handle_pronto input
+          when 'pronto' then InputParser.save_sig_from db, input, settings
           end
     puts sig.to_s
   end
@@ -22,26 +22,28 @@ module Signore class Executable
   attr_reader :db, :settings
   private     :db, :settings
 
-  private
+  module InputParser
+    module_function
 
-  def get_param param, input
-    puts "#{param}?"
-    value = ''
-    value << input.gets until value.lines.to_a.last == "\n"
-    value.strip
-  end
+    def get_param param, input
+      puts "#{param}?"
+      value = ''
+      value << input.gets until value.lines.to_a.last == "\n"
+      value.strip
+    end
 
-  def handle_pronto input
-    params = params_from input
-    sig = Signature.new params.text, params.author, params.source,
-                        params.subject, settings.tags.required
-    db << sig
-    sig
-  end
+    def params_from input
+      OpenStruct.new Hash[%i(text author subject source).map do |param|
+        [param, get_param(param, input)]
+      end].reject { |_, value| value.empty? }
+    end
 
-  def params_from input
-    OpenStruct.new Hash[%i(text author subject source).map do |param|
-      [param, get_param(param, input)]
-    end].reject { |_, value| value.empty? }
+    def save_sig_from db, input, settings
+      params = params_from input
+      sig = Signature.new params.text, params.author, params.source,
+                          params.subject, settings.tags.required
+      db << sig
+      sig
+    end
   end
 end end
