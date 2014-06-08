@@ -20,6 +20,7 @@ module Signore describe Settings do
         default_path = "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
         Settings.new([]).db_path.must_equal default_path
       ensure
+        FileUtils.rmtree ENV['XDG_DATA_HOME']
         old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
       end
     end
