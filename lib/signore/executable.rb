@@ -14,10 +14,7 @@ module Signore class Executable
   def run input: $stdin
     sig = case settings.action
           when 'prego'  then db.find tags: settings.tags
-          when 'pronto'
-            sig = InputParser.sig_from input, settings
-            db << sig
-            sig
+          when 'pronto' then db << InputParser.sig_from(input, settings)
           end
     puts sig.to_s
   end
