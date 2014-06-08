@@ -13,6 +13,7 @@ module Signore class Database
       store['signatures'] ||= []
       store['signatures'] << sig
     end
+    sig
   end
 
   def find tags: Tags.new

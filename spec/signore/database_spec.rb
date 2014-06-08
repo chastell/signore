@@ -6,11 +6,17 @@ require_relative '../../lib/signore/tags'
 
 module Signore describe Database do
   describe '#<<' do
+    let(:file) { Tempfile.new ''                                         }
+    let(:sig)  { Signature.new text                                      }
+    let(:text) { 'Normaliser Unix c’est comme pasteuriser le camembert.' }
+
     it 'saves the provided signature to disk' do
-      text = 'Normaliser Unix c’est comme pasteuriser le camembert.'
-      file = Tempfile.new ''
-      Database.new(file.path) << Signature.new(text)
+      Database.new(file.path) << sig
       file.read.must_include text
+    end
+
+    it 'returns the saved signature' do
+      Database.new(file.path).<<(sig).must_equal sig
     end
   end
 
