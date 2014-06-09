@@ -24,8 +24,18 @@ module Signore class Executable
   attr_reader :db, :settings
   private     :db, :settings
 
-  module InputParser
-    module_function
+  class InputParser
+    def self.sig_from input, tags: Tags.new
+      new.sig_from input, tags: tags
+    end
+
+    def sig_from input, tags: Tags.new
+      params = params_from input
+      Signature.new params.text, params.author, params.source, params.subject,
+                    tags.required
+    end
+
+    private
 
     def get_param param, input
       puts "#{param}?"
@@ -38,12 +48,6 @@ module Signore class Executable
       OpenStruct.new Hash[%i(text author subject source).map do |param|
         [param, get_param(param, input)]
       end].reject { |_, value| value.empty? }
-    end
-
-    def sig_from input, tags: Tags.new
-      params = params_from input
-      Signature.new params.text, params.author, params.source, params.subject,
-                    tags.required
     end
   end
 end end
