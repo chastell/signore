@@ -13,8 +13,10 @@ module Signore class Executable
 
   def run input: $stdin
     sig = case settings.action
-          when 'prego'  then db.find tags: settings.tags
-          when 'pronto' then db << InputParser.sig_from(input, settings)
+          when 'prego'
+            db.find tags: settings.tags
+          when 'pronto'
+            db << InputParser.sig_from(input, tags: settings.tags)
           end
     puts sig.to_s
   end
@@ -38,10 +40,10 @@ module Signore class Executable
       end].reject { |_, value| value.empty? }
     end
 
-    def sig_from input, settings
+    def sig_from input, tags: Tags.new
       params = params_from input
       Signature.new params.text, params.author, params.source, params.subject,
-                    settings.tags.required
+                    tags.required
     end
   end
 end end
