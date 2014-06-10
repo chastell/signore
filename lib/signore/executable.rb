@@ -26,28 +26,37 @@ module Signore class Executable
 
   class InputParser
     def self.sig_from input, tags: Tags.new
-      new.sig_from input, tags: tags
+      new(input, tags: tags).to_sig
     end
 
-    def sig_from input, tags: Tags.new
-      params = params_from input
+    def initialize input, tags: Tags.new
+      @input = input
+      @tags  = tags
+    end
+
+    def to_sig
       Signature.new params.text, params.author, params.source, params.subject,
                     tags.required
     end
 
+    attr_reader :input, :tags
+    private     :input, :tags
+
     private
 
-    def get_param param, input
+    def get_param param
       puts "#{param}?"
       value = ''
       value << input.gets until value.lines.to_a.last == "\n"
       value.strip
     end
 
-    def params_from input
-      OpenStruct.new Hash[%i(text author subject source).map do |param|
-        [param, get_param(param, input)]
-      end].reject { |_, value| value.empty? }
+    def params
+      @params ||= begin
+        names = %i(text author subject source)
+        hash = names.map { |name| [name, get_param(name)] }.to_h
+        OpenStruct.new hash.reject { |_, value| value.empty? }
+      end
     end
   end
 end end
