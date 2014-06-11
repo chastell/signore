@@ -12,13 +12,11 @@ module Signore class Executable
   end
 
   def run input: $stdin
-    sig = case settings.action
-          when 'prego'
-            db.find tags: settings.tags
-          when 'pronto'
-            db << InputParser.sig_from(input, tags: settings.tags)
-          end
-    puts sig.to_s
+    tags = settings.tags
+    case settings.action
+    when 'prego'  then puts db.find tags: tags
+    when 'pronto' then puts db << InputParser.sig_from(input, tags: tags)
+    end
   end
 
   attr_reader :db, :settings
