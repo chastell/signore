@@ -44,9 +44,9 @@ module Signore class Executable
 
     def get_param param
       puts "#{param}?"
-      value = ''
-      value << input.gets until value.lines.to_a.last == "\n"
-      value.strip
+      ''.tap do |value|
+        value << input.gets until value.lines.to_a.last == "\n"
+      end.strip
     end
 
     def params
