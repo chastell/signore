@@ -15,14 +15,14 @@ module Signore class Executable
     tags = settings.tags
     case settings.action
     when 'prego'  then puts db.find tags: tags
-    when 'pronto' then puts db << InputParser.sig_from(input, tags: tags)
+    when 'pronto' then puts db << SigFromStream.sig_from(input, tags: tags)
     end
   end
 
   attr_reader :db, :settings
   private     :db, :settings
 
-  class InputParser
+  class SigFromStream
     def self.sig_from input, tags: Tags.new
       new(input, tags: tags).to_sig
     end
