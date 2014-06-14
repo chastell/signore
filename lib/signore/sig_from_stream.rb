@@ -1,8 +1,9 @@
-require 'ostruct'
 require_relative 'signature'
 require_relative 'tags'
 
 module Signore class SigFromStream
+  Params = Struct.new(*%i(text author subject source))
+
   def self.sig_from input, tags: Tags.new
     new(input, tags: tags).to_sig
   end
@@ -33,7 +34,8 @@ module Signore class SigFromStream
     @params ||= begin
       names = %i(text author subject source)
       hash = names.map { |name| [name, get_param(name)] }.to_h
-      OpenStruct.new hash.reject { |_, value| value.empty? }
+      hash.reject! { |_, value| value.empty? }
+      Params.new hash[:text], hash[:author], hash[:subject], hash[:source]
     end
   end
 end end
