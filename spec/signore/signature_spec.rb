@@ -19,6 +19,12 @@ module Signore describe Signature do
     end
   end
 
+  describe '.new' do
+    it 'nils empty parameters' do
+      Signature.new('', '', '', '').must_equal Signature.new nil, nil, nil, nil
+    end
+  end
+
   describe '#tagged_with?' do
     it 'says whether a tagged signature is tagged with a given tag' do
       sig = Signature[tags: %w(programming tech)]
