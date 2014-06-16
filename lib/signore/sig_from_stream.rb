@@ -32,8 +32,7 @@ module Signore class SigFromStream
 
   def params
     @params ||= begin
-      names = %i(text author subject source)
-      hash = names.map { |name| [name, get_param(name)] }.to_h
+      hash = Params.members.map { |name| [name, get_param(name)] }.to_h
       Params.new hash[:text], hash[:author], hash[:subject], hash[:source]
     end
   end
