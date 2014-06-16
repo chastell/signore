@@ -34,7 +34,6 @@ module Signore class SigFromStream
     @params ||= begin
       names = %i(text author subject source)
       hash = names.map { |name| [name, get_param(name)] }.to_h
-      hash.reject! { |_, value| value.empty? }
       Params.new hash[:text], hash[:author], hash[:subject], hash[:source]
     end
   end
