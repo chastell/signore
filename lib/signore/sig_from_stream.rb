@@ -31,9 +31,6 @@ module Signore class SigFromStream
   end
 
   def params
-    @params ||= begin
-      hash = Params.members.map { |name| [name, get_param(name)] }.to_h
-      Params.new(*hash.values_at(*Params.members))
-    end
+    @params ||= Params.new(*Params.members.map { |name| get_param(name) })
   end
 end end
