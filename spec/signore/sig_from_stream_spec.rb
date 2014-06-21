@@ -6,9 +6,13 @@ module Signore describe SigFromStream do
   describe '.sig_from' do
     it 'asks about signature parts and returns resulting signature' do
       input = StringIO.new <<-end.dedent
-        The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
+        You do have to be mad to work here, but it doesn’t help.
 
-        Mark Pilgrim\n\n\n
+        Gary Barnes
+
+
+        asr
+
       end
 
       sig = nil
@@ -20,7 +24,8 @@ module Signore describe SigFromStream do
         subject?
         source?
       end
-      sig.must_equal Signature.new 'The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.', 'Mark Pilgrim', '', '', []
+      sig.must_equal Signature.new 'You do have to be mad to work here, ' \
+        'but it doesn’t help.', 'Gary Barnes', 'asr', '', []
     end
 
     it 'handles multi-line signatures' do
@@ -40,7 +45,9 @@ module Signore describe SigFromStream do
         subject?
         source?
       end
-      sig.must_equal Signature.new "‘You’ve got an interesting accent. Subtle. I can’t place it.’\n‘It’s text-to-speech… I was raised by smartphones.’", 'Patrick Ewing', '', '', []
+      sig.must_equal Signature.new '‘You’ve got an interesting accent. ' \
+        "Subtle. I can’t place it.’\n‘It’s text-to-speech… " \
+        'I was raised by smartphones.’', 'Patrick Ewing', '', '', []
     end
   end
 end end
