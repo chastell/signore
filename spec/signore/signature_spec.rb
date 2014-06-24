@@ -21,7 +21,8 @@ module Signore describe Signature do
 
   describe '.new' do
     it 'nils empty parameters' do
-      Signature.new('', '', '', '').must_equal Signature.new nil, nil, nil, nil
+      Signature.new('', '', '', '', [])
+       .must_equal Signature.new nil, nil, nil, nil, nil
     end
   end
 

@@ -10,7 +10,7 @@ module Signore Signature = Struct.new(*%i(text author source subject tags)) do
   end
 
   def initialize *args
-    super(*args.map { |arg| arg == '' ? nil : arg })
+    super(*args.map { |arg| arg && arg.empty? ? nil : arg })
   end
 
   def tagged_with? tag
