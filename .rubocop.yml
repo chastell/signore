@@ -1,16 +1,7 @@
-AccessModifierIndentation:
-  Enabled: false
-
 AndOr:
   Enabled: false
 
 Documentation:
-  Enabled: false
-
-EndAlignment:
-  Enabled: false
-
-IndentationWidth:
   Enabled: false
 
 MethodDefParentheses:
