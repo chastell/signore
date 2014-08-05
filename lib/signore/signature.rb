@@ -6,15 +6,15 @@ module Signore
       undef :[]
     end
 
-    def self.[] author: nil, source: nil, subject: nil, tags: nil, text: nil
+    def self.[](author: nil, source: nil, subject: nil, tags: nil, text: nil)
       new text, author, source, subject, tags
     end
 
-    def initialize *args
+    def initialize(*args)
       super(*args.map { |arg| arg && arg.empty? ? nil : arg })
     end
 
-    def tagged_with? tag
+    def tagged_with?(tag)
       tags and tags.include? tag
     end
 
@@ -26,7 +26,7 @@ module Signore
 
     private
 
-    def indent_size_for text
+    def indent_size_for(text)
       indent = text_width(text) - meta.size - 2
       indent < 0 ? 0 : indent
     end
@@ -36,11 +36,11 @@ module Signore
       stem.empty? ? "#{source}" : [stem, source].compact.join(', ')
     end
 
-    def meta_for text
+    def meta_for(text)
       meta.empty? ? '' : "\n#{' ' * indent_size_for(text)}[#{meta}]"
     end
 
-    def text_width text
+    def text_width(text)
       text.split("\n").map(&:size).max
     end
   end

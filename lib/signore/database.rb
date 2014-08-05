@@ -4,12 +4,12 @@ require_relative 'tags'
 
 module Signore
   class Database
-    def initialize path, sig_finder: SigFinder
+    def initialize(path, sig_finder: SigFinder)
       @sig_finder = sig_finder
       @store      = YAML::Store.new path
     end
 
-    def << sig
+    def <<(sig)
       store.transaction do
         store['signatures'] ||= []
         store['signatures'] << sig
@@ -17,7 +17,7 @@ module Signore
       sig
     end
 
-    def find tags: Tags.new
+    def find(tags: Tags.new)
       sigs = store.transaction(true) { store['signatures'] }
       sig_finder.find sigs, tags: tags
     end
