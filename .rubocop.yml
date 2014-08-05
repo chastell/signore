@@ -4,9 +4,6 @@ AndOr:
 Documentation:
   Enabled: false
 
-MethodDefParentheses:
-  EnforcedStyle: require_no_parentheses
-
 SingleSpaceBeforeFirstArg:
   Enabled: false
 
