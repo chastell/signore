@@ -43,13 +43,13 @@ module Signore
     describe '#to_s' do
       it 'does not show meta if there’s nothing to show' do
         text = '// sometimes I believe compiler ignores all my comments'
-        sig  = Signature.new text
+        sig  = Signature[text: text]
         sig.to_s.must_equal text
       end
 
       it 'shows author on its own' do
-        sig = Signature.new 'stay-at-home executives vs. wallstreet dads',
-                            'kodz'
+        sig = Signature[text: 'stay-at-home executives vs. wallstreet dads',
+                        author: 'kodz']
         sig.to_s.must_equal <<-end.dedent.strip
           stay-at-home executives vs. wallstreet dads
                                                [kodz]
@@ -58,7 +58,7 @@ module Signore
 
       it 'shows author and source, comma-separated' do
         text = 'You do have to be mad to work here, but it doesn’t help.'
-        sig  = Signature.new text, 'Gary Barnes', 'asr'
+        sig  = Signature[text: text, author: 'Gary Barnes', source: 'asr']
         sig.to_s.must_equal <<-end.dedent.strip
           You do have to be mad to work here, but it doesn’t help.
                                                 [Gary Barnes, asr]

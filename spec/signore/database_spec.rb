@@ -8,7 +8,7 @@ module Signore
   describe Database do
     describe '#<<' do
       let(:file) { Tempfile.new ''                                         }
-      let(:sig)  { Signature.new text                                      }
+      let(:sig)  { Signature[text: text]                                   }
       let(:text) { 'Normaliser Unix c’est comme pasteuriser le camembert.' }
 
       it 'saves the provided signature to disk' do
