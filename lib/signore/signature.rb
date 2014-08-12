@@ -12,10 +12,7 @@ module Signore
 
     def initialize(text = '', author: nil, source: nil, subject: nil, tags: nil)
       super text, author, source, subject, tags
-      members.each do |member|
-        value = __send__ member
-        __send__ "#{member}=", nil if value and value.empty?
-      end
+      each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
 
     def tagged_with?(tag)
