@@ -22,8 +22,9 @@ module Signore
 
     describe '.new' do
       it 'nils empty parameters' do
-        Signature.new('', '', '', '', [])
-        .must_equal Signature.new nil, nil, nil, nil, nil
+        new = Signature.new '', author: '', source: '', subject: '', tags: []
+        new.must_equal Signature.new nil, author: nil, source: nil,
+                                          subject: nil, tags: nil
       end
     end
 

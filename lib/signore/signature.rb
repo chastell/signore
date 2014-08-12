@@ -7,11 +7,15 @@ module Signore
     end
 
     def self.[](author: nil, source: nil, subject: nil, tags: nil, text: nil)
-      new text, author, source, subject, tags
+      new text, author: author, source: source, subject: subject, tags: tags
     end
 
-    def initialize(*args)
-      super(*args.map { |arg| arg && arg.empty? ? nil : arg })
+    def initialize(text = '', author: nil, source: nil, subject: nil, tags: nil)
+      super text, author, source, subject, tags
+      members.each do |member|
+        value = __send__ member
+        __send__ "#{member}=", nil if value and value.empty?
+      end
     end
 
     def tagged_with?(tag)
