@@ -27,13 +27,10 @@ module Signore
           asr
 
         end
-
         sig = nil
         capture_io { sig = SigFromStream.sig_from input }
-        sig.must_equal Signature[text: 'You do have to be mad to work here, ' \
-                                       'but it doesn’t help.',
-                                 author: 'Gary Barnes',
-                                 source: 'asr']
+        text = 'You do have to be mad to work here, but it doesn’t help.'
+        sig.must_equal Signature.new text, author: 'Gary Barnes', source: 'asr'
       end
 
       it 'handles multi-line signatures' do
@@ -46,11 +43,11 @@ module Signore
 
         sig = nil
         capture_io { sig = SigFromStream.sig_from input }
-        sig.must_equal Signature[text: '‘You’ve got an interesting accent. ' \
-                                       "Subtle. I can’t place it.’\n"        \
-                                       '‘It’s text-to-speech… '              \
-                                       'I was raised by smartphones.’',
-                                 author: 'Patrick Ewing']
+        text = <<-end.dedent.strip
+          ‘You’ve got an interesting accent. Subtle. I can’t place it.’
+          ‘It’s text-to-speech… I was raised by smartphones.’
+        end
+        sig.must_equal Signature.new text, author: 'Patrick Ewing'
       end
     end
   end
