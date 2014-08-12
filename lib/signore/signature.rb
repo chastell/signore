@@ -10,7 +10,7 @@ module Signore
       new text, author: author, source: source, subject: subject, tags: tags
     end
 
-    def initialize(text = '', author: nil, source: nil, subject: nil, tags: nil)
+    def initialize(text, author: nil, source: nil, subject: nil, tags: nil)
       super text, author, source, subject, tags
       each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
