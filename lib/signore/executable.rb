@@ -4,9 +4,9 @@ require_relative 'sig_from_stream'
 
 module Signore
   class Executable
-    def initialize(args = ARGV, db_factory: Database)
+    def initialize(args = ARGV, db: Database.new)
       @settings    = Settings.new args
-      @db          = db_factory.new path: settings.db_path
+      @db          = db
       valid_action = %w(prego pronto).include? settings.action
       abort 'usage: signore prego|pronto [tag, …]' unless valid_action
     end
