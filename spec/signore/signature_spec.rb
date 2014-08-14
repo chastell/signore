@@ -4,7 +4,7 @@ require_relative '../../lib/signore/signature'
 
 module Signore
   describe Signature do
-    describe '.[]' do
+    describe '.new' do
       it 'instantiates Signatures via parameters' do
         source = 'A History of Modern Computing'
         text   = 'In 1940 he summarized his work in an influential book, ' \
@@ -18,9 +18,7 @@ module Signore
         sig.tags.must_equal ['punched cards']
         sig.text.must_equal text
       end
-    end
 
-    describe '.new' do
       it 'nils empty parameters' do
         new = Signature.new '', author: '', source: '', subject: '', tags: []
         new.must_equal Signature.new nil, author: nil, source: nil,

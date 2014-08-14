@@ -2,14 +2,6 @@ require 'lovely_rufus'
 
 module Signore
   Signature = Struct.new(*%i(text author source subject tags)) do
-    class << self
-      undef :[]
-    end
-
-    def self.[](author: nil, source: nil, subject: nil, tags: nil, text: nil)
-      new text, author: author, source: source, subject: subject, tags: tags
-    end
-
     def initialize(text, author: nil, source: nil, subject: nil, tags: nil)
       super text, author, source, subject, tags
       each_pair { |key, value| self[key] = nil if value and value.empty? }
