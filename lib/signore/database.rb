@@ -5,7 +5,7 @@ require_relative 'tags'
 
 module Signore
   class Database
-    def initialize(path = Settings.new.db_path, sig_finder: SigFinder)
+    def initialize(path: Settings.new.db_path, sig_finder: SigFinder)
       @sig_finder = sig_finder
       @store      = YAML::Store.new path
     end
