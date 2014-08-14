@@ -20,7 +20,7 @@ module Signore
     private
 
     def indent_size_for(text)
-      indent = text_width(text) - meta.size - 2
+      indent = text.split("\n").map(&:size).max - meta.size - 2
       indent < 0 ? 0 : indent
     end
 
@@ -31,10 +31,6 @@ module Signore
 
     def meta_for(text)
       meta.empty? ? '' : "\n#{' ' * indent_size_for(text)}[#{meta}]"
-    end
-
-    def text_width(text)
-      text.split("\n").map(&:size).max
     end
   end
 end
