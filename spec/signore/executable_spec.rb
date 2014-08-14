@@ -22,8 +22,9 @@ module Signore
 
     describe '#run' do
       describe 'prego' do
+        let(:db) { Database.new path: 'spec/fixtures/signatures.yml' }
+
         it 'prints a signature tagged with the provided tags' do
-          db     = Database.new path: 'spec/fixtures/signatures.yml'
           args   = %w(prego tech programming)
           output = "// sometimes I believe compiler ignores all my comments\n"
           stdout = capture_io { Executable.new(args, db: db).run }.first
@@ -31,7 +32,6 @@ module Signore
         end
 
         it 'prints a signature based on allowed and forbidden tags' do
-          db   = Database.new path: 'spec/fixtures/signatures.yml'
           args = %w(prego ~programming tech ~security)
           out  = capture_io { Executable.new(args, db: db).run }.first
           out.must_equal <<-end.dedent
@@ -42,7 +42,7 @@ module Signore
       end
 
       describe 'pronto' do
-        let(:file) { Tempfile.new '' }
+        let(:db) { Database.new path: Tempfile.new('').path }
 
         it 'asks about signature parts and saves resulting signature' do
           input = StringIO.new <<-end.dedent
@@ -52,7 +52,6 @@ module Signore
           end
 
           capture_io do
-            db = Database.new path: file.path
             Executable.new(%w(pronto Wikipedia ADHD), db: db).run input: input
           end.first.must_equal <<-end.dedent
             text?
@@ -64,7 +63,6 @@ module Signore
           end
 
           capture_io do
-            db = Database.new path: file.path
             Executable.new(%w(prego Wikipedia ADHD), db: db).run
           end.first.must_equal <<-end.dedent
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
@@ -81,7 +79,6 @@ module Signore
           end
 
           capture_io do
-            db = Database.new path: file.path
             Executable.new(['pronto'], db: db).run input: input
           end.first.must_equal <<-end.dedent
             text?
