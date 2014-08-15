@@ -49,7 +49,7 @@ GEM
       sexp_processor (~> 4.0)
     ruby_parser (3.6.2)
       sexp_processor (~> 4.1)
-    sexp_processor (4.4.3)
+    sexp_processor (4.4.4)
     slop (3.6.0)
     timers (1.1.0)
 
