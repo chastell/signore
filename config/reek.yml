@@ -1,6 +1,6 @@
 DuplicateMethodCall:
   exclude:
-  - Signore::SigFinder#find_tagged
+    - Signore::SigFinder#find_tagged
 
 FeatureEnvy:
   exclude:
@@ -10,9 +10,4 @@ IrresponsibleModule:
   enabled: false
 
 NestedIterators:
-  exclude:
-  - Signore::Database#find
   max_allowed_nesting: 2
-
-UnusedParameters:
-  enabled: false
