@@ -1,3 +1,4 @@
+require 'pathname'
 require_relative 'tags'
 
 module Signore
@@ -12,7 +13,7 @@ module Signore
 
     def db_path
       db_dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
-      "#{db_dir}/signore/signatures.yml"
+      Pathname.new "#{db_dir}/signore/signatures.yml"
     end
 
     def tags

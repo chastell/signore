@@ -1,3 +1,4 @@
+require 'pathname'
 require 'tmpdir'
 require_relative '../spec_helper'
 require_relative '../../lib/signore/settings'
@@ -17,7 +18,8 @@ module Signore
           old_xdg = ENV.delete 'XDG_DATA_HOME'
           tempdir = Dir.mktmpdir
           ENV['XDG_DATA_HOME'] = tempdir
-          Settings.new.db_path.must_equal "#{tempdir}/signore/signatures.yml"
+          path = "#{tempdir}/signore/signatures.yml"
+          Settings.new.db_path.must_equal Pathname.new path
         ensure
           FileUtils.rmtree tempdir
           old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
@@ -27,8 +29,8 @@ module Signore
       it 'defaults XDG_DATA_HOME to ~/.local/share if it’s not set' do
         begin
           old_xdg = ENV.delete 'XDG_DATA_HOME'
-          path    = '~/.local/share/signore/signatures.yml'
-          Settings.new.db_path.must_equal File.expand_path path
+          path    = File.expand_path '~/.local/share/signore/signatures.yml'
+          Settings.new.db_path.must_equal Pathname.new path
         ensure
           ENV['XDG_DATA_HOME'] = old_xdg if old_xdg
         end
