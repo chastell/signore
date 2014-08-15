@@ -2,16 +2,17 @@ require_relative 'tags'
 
 module Signore
   class Settings
-    attr_reader :db_path
-
     def initialize(args = [])
-      @args  = args
-      db_dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
-      @db_path = "#{db_dir}/signore/signatures.yml"
+      @args = args
     end
 
     def action
       args.first
+    end
+
+    def db_path
+      db_dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path '~/.local/share' }
+      "#{db_dir}/signore/signatures.yml"
     end
 
     def tags
