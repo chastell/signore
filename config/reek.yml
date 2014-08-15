@@ -11,3 +11,7 @@ IrresponsibleModule:
 
 NestedIterators:
   max_allowed_nesting: 2
+
+UtilityFunction:
+  exclude:
+    - Signore::Settings#db_path
