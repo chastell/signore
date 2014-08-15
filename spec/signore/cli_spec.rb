@@ -8,15 +8,13 @@ module Signore
   describe CLI do
     describe '#initialize' do
       it 'prints usage if no command is given' do
-        capture_io do
-          -> { CLI.new [] }.must_raise SystemExit
-        end.last.must_include 'usage: signore prego|pronto [tag, …]'
+        out = capture_io { -> { CLI.new [] }.must_raise SystemExit }.last
+        out.must_include 'usage: signore prego|pronto [tag, …]'
       end
 
       it 'prints usage if a bogus command is given' do
-        capture_io do
-          -> { CLI.new ['bogus'] }.must_raise SystemExit
-        end.last.must_include 'usage: signore prego|pronto [tag, …]'
+        out = capture_io { -> { CLI.new ['bogus'] }.must_raise SystemExit }.last
+        out.must_include 'usage: signore prego|pronto [tag, …]'
       end
     end
 
@@ -25,10 +23,10 @@ module Signore
         let(:db) { Database.new path: 'spec/fixtures/signatures.yml' }
 
         it 'prints a signature tagged with the provided tags' do
-          args   = %w(prego tech programming)
-          output = "// sometimes I believe compiler ignores all my comments\n"
-          stdout = capture_io { CLI.new(args, db: db).run }.first
-          stdout.must_equal output
+          args = %w(prego tech programming)
+          out  = capture_io { CLI.new(args, db: db).run }.first
+          sig  = "// sometimes I believe compiler ignores all my comments\n"
+          out.must_equal sig
         end
 
         it 'prints a signature based on allowed and forbidden tags' do
@@ -50,10 +48,9 @@ module Signore
 
             Mark Pilgrim\n\n\n
           end
-
-          capture_io do
-            CLI.new(%w(pronto Wikipedia ADHD), db: db).run input: input
-          end.first.must_equal <<-end.dedent
+          args = %w(pronto Wikipedia ADHD)
+          out  = capture_io { CLI.new(args, db: db).run input: input }.first
+          out.must_equal <<-end.dedent
             text?
             author?
             subject?
@@ -61,10 +58,9 @@ module Signore
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                   [Mark Pilgrim]
           end
-
-          capture_io do
-            CLI.new(%w(prego Wikipedia ADHD), db: db).run
-          end.first.must_equal <<-end.dedent
+          args = %w(prego Wikipedia ADHD)
+          out  = capture_io { CLI.new(args, db: db).run }.first
+          out.must_equal <<-end.dedent
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                   [Mark Pilgrim]
           end
@@ -77,10 +73,8 @@ module Signore
 
             Patrick Ewing\n\n\n
           end
-
-          capture_io do
-            CLI.new(['pronto'], db: db).run input: input
-          end.first.must_equal <<-end.dedent
+          io = capture_io { CLI.new(['pronto'], db: db).run input: input }
+          io.first.must_equal <<-end.dedent
             text?
             author?
             subject?
