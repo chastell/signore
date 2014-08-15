@@ -1,1 +1,1 @@
-require_relative 'signore/executable'
+require_relative 'signore/cli'

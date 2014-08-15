@@ -2,20 +2,20 @@ require 'stringio'
 require 'tempfile'
 require 'tmpdir'
 require_relative '../spec_helper'
-require_relative '../../lib/signore/executable'
+require_relative '../../lib/signore/cli'
 
 module Signore
-  describe Executable do
+  describe CLI do
     describe '#initialize' do
       it 'prints usage if no command is given' do
         capture_io do
-          -> { Executable.new [] }.must_raise SystemExit
+          -> { CLI.new [] }.must_raise SystemExit
         end.last.must_include 'usage: signore prego|pronto [tag, …]'
       end
 
       it 'prints usage if a bogus command is given' do
         capture_io do
-          -> { Executable.new ['bogus'] }.must_raise SystemExit
+          -> { CLI.new ['bogus'] }.must_raise SystemExit
         end.last.must_include 'usage: signore prego|pronto [tag, …]'
       end
     end
@@ -27,13 +27,13 @@ module Signore
         it 'prints a signature tagged with the provided tags' do
           args   = %w(prego tech programming)
           output = "// sometimes I believe compiler ignores all my comments\n"
-          stdout = capture_io { Executable.new(args, db: db).run }.first
+          stdout = capture_io { CLI.new(args, db: db).run }.first
           stdout.must_equal output
         end
 
         it 'prints a signature based on allowed and forbidden tags' do
           args = %w(prego ~programming tech ~security)
-          out  = capture_io { Executable.new(args, db: db).run }.first
+          out  = capture_io { CLI.new(args, db: db).run }.first
           out.must_equal <<-end.dedent
             You do have to be mad to work here, but it doesn’t help.
                                                   [Gary Barnes, asr]
@@ -52,7 +52,7 @@ module Signore
           end
 
           capture_io do
-            Executable.new(%w(pronto Wikipedia ADHD), db: db).run input: input
+            CLI.new(%w(pronto Wikipedia ADHD), db: db).run input: input
           end.first.must_equal <<-end.dedent
             text?
             author?
@@ -63,7 +63,7 @@ module Signore
           end
 
           capture_io do
-            Executable.new(%w(prego Wikipedia ADHD), db: db).run
+            CLI.new(%w(prego Wikipedia ADHD), db: db).run
           end.first.must_equal <<-end.dedent
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                   [Mark Pilgrim]
@@ -79,7 +79,7 @@ module Signore
           end
 
           capture_io do
-            Executable.new(['pronto'], db: db).run input: input
+            CLI.new(['pronto'], db: db).run input: input
           end.first.must_equal <<-end.dedent
             text?
             author?

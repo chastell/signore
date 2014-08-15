@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/signore'
-Signore::Executable.new.run
+Signore::CLI.new.run

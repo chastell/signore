@@ -3,7 +3,7 @@ require_relative 'settings'
 require_relative 'sig_from_stream'
 
 module Signore
-  class Executable
+  class CLI
     def initialize(args = ARGV, db: Database.new)
       @settings    = Settings.new args
       @db          = db
