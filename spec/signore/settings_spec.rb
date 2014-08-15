@@ -12,17 +12,25 @@ module Signore
     end
 
     describe '#db_path' do
-      it 'defaults to $XDG_DATA_HOME/signore/signatures.yml' do
+      it 'honours XDG_DATA_HOME if it’s set' do
+        begin
+          old_xdg = ENV.delete 'XDG_DATA_HOME'
+          tempdir = Dir.mktmpdir
+          ENV['XDG_DATA_HOME'] = tempdir
+          Settings.new.db_path.must_equal "#{tempdir}/signore/signatures.yml"
+        ensure
+          FileUtils.rmtree tempdir
+          old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
+        end
+      end
+
+      it 'defaults XDG_DATA_HOME to ~/.local/share if it’s not set' do
         begin
           old_xdg = ENV.delete 'XDG_DATA_HOME'
           path    = '~/.local/share/signore/signatures.yml'
-          Settings.new([]).db_path.must_equal File.expand_path path
-          ENV['XDG_DATA_HOME'] = Dir.mktmpdir
-          default_path = "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
-          Settings.new([]).db_path.must_equal default_path
+          Settings.new.db_path.must_equal File.expand_path path
         ensure
-          FileUtils.rmtree ENV['XDG_DATA_HOME']
-          old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
+          ENV['XDG_DATA_HOME'] = old_xdg if old_xdg
         end
       end
     end
