@@ -6,19 +6,19 @@ require_relative '../../lib/signore/cli'
 
 module Signore
   describe CLI do
-    describe '#initialize' do
+    describe '#run' do
       it 'prints usage if no command is given' do
-        out = capture_io { -> { CLI.new [] }.must_raise SystemExit }.last
+        out = capture_io { -> { CLI.new([]).run }.must_raise SystemExit }.last
         out.must_include 'usage: signore prego|pronto [tag, …]'
       end
 
       it 'prints usage if a bogus command is given' do
-        out = capture_io { -> { CLI.new ['bogus'] }.must_raise SystemExit }.last
+        out = capture_io do
+          -> { CLI.new(['bogus']).run }.must_raise SystemExit
+        end.last
         out.must_include 'usage: signore prego|pronto [tag, …]'
       end
-    end
 
-    describe '#run' do
       describe 'prego' do
         let(:db) { Database.new path: 'spec/fixtures/signatures.yml' }
 
