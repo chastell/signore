@@ -5,7 +5,7 @@ require_relative '../../lib/signore/tags'
 
 module Signore
   describe SigFinder do
-    let :sigs do
+    let(:sigs) do
       store = YAML::Store.new 'spec/fixtures/signatures.yml'
       store.transaction(true) { store['signatures'] }
     end
