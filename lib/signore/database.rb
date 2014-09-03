@@ -7,7 +7,7 @@ module Signore
   class Database
     def initialize(path: Settings.new.db_path, sig_finder: SigFinder)
       @sig_finder = sig_finder
-      @store      = YAML::Store.new path
+      @store      = YAML::Store.new(path)
     end
 
     def <<(sig)
@@ -20,7 +20,7 @@ module Signore
 
     def find(tags: Tags.new)
       sigs = store.transaction(true) { store['signatures'] }
-      sig_finder.find sigs, tags: tags
+      sig_finder.find(sigs, tags: tags)
     end
 
     attr_reader :sig_finder, :store

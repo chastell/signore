@@ -8,11 +8,12 @@ module Signore
     end
 
     def tagged_with?(tag)
-      tags and tags.include? tag
+      tags and tags.include?(tag)
     end
 
     def to_s
-      wrapped = LovelyRufus::TextWrapper.wrap text.gsub("\n", "\n\n"), width: 80
+      spaced   = text.gsub("\n", "\n\n")
+      wrapped  = LovelyRufus::TextWrapper.wrap(spaced, width: 80)
       squeezed = wrapped.gsub("\n\n", "\n").chomp
       squeezed + meta_for(squeezed)
     end
@@ -25,7 +26,7 @@ module Signore
     end
 
     def meta
-      stem = [author, subject].compact.join ' '
+      stem = [author, subject].compact.join(' ')
       stem.empty? ? "#{source}" : [stem, source].compact.join(', ')
     end
 
