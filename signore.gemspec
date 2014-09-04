@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.version     = '0.2.2'
 
   gem.files       = `git ls-files -z`.split "\0"
-  gem.executables = gem.files.grep(/^bin\//).map { |path| File.basename path }
+  gem.executables = gem.files.grep(/^bin\//).map { |path| File.basename(path) }
   gem.test_files  = gem.files.grep(/^spec\/.*\.rb$/)
 
   gem.add_dependency 'lovely_rufus', '~> 0.1.2'
