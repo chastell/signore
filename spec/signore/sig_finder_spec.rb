@@ -6,11 +6,11 @@ require_relative '../../lib/signore/tags'
 module Signore
   describe SigFinder do
     let(:sigs) do
-      store = YAML::Store.new 'spec/fixtures/signatures.yml'
+      store = YAML::Store.new('spec/fixtures/signatures.yml')
       store.transaction(true) { store['signatures'] }
     end
 
-    let(:sig_finder) { SigFinder.new sigs }
+    let(:sig_finder) { SigFinder.new(sigs) }
 
     describe '.find' do
       it 'returns a random Signature by default' do
@@ -33,7 +33,7 @@ module Signore
       end
 
       it 'returns a random signature based on required and forbidden tags' do
-        tags = Tags.new forbidden: %w(programming security), required: %w(tech)
+        tags = Tags.new(forbidden: %w(programming security), required: %w(tech))
         SigFinder.find(sigs, tags: tags).text
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end

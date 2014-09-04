@@ -6,7 +6,7 @@ module Signore
   describe SigFromStream do
     describe '.sig_from' do
       it 'asks about signature parts' do
-        input = StringIO.new "\n\n\n\n"
+        input = StringIO.new("\n\n\n\n")
         capture_io do
           SigFromStream.sig_from input
         end.first.must_equal <<-end.dedent
@@ -30,7 +30,7 @@ module Signore
         sig = nil
         capture_io { sig = SigFromStream.sig_from input }
         text = 'You do have to be mad to work here, but it doesn’t help.'
-        sig.must_equal Signature.new text, author: 'Gary Barnes', source: 'asr'
+        sig.must_equal Signature.new(text, author: 'Gary Barnes', source: 'asr')
       end
 
       it 'handles multi-line signatures' do
@@ -47,7 +47,7 @@ module Signore
           ‘You’ve got an interesting accent. Subtle. I can’t place it.’
           ‘It’s text-to-speech… I was raised by smartphones.’
         end
-        sig.must_equal Signature.new text, author: 'Patrick Ewing'
+        sig.must_equal Signature.new(text, author: 'Patrick Ewing')
       end
     end
   end

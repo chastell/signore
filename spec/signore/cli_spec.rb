@@ -20,7 +20,7 @@ module Signore
       end
 
       describe 'prego' do
-        let(:db) { Database.new path: 'spec/fixtures/signatures.yml' }
+        let(:db) { Database.new(path: 'spec/fixtures/signatures.yml') }
 
         it 'prints a signature tagged with the provided tags' do
           args = %w(prego tech programming)
@@ -40,7 +40,7 @@ module Signore
       end
 
       describe 'pronto' do
-        let(:db) { Database.new path: Tempfile.new('').path }
+        let(:db) { Database.new(path: Tempfile.new('').path) }
 
         it 'asks about signature parts and saves resulting signature' do
           input = StringIO.new <<-end.dedent
