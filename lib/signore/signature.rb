@@ -13,7 +13,7 @@ module Signore
 
     def to_s
       spaced   = text.gsub("\n", "\n\n")
-      wrapped  = LovelyRufus::TextWrapper.wrap(spaced, width: 80)
+      wrapped  = LovelyRufus.wrap(spaced, width: 80)
       squeezed = wrapped.gsub("\n\n", "\n").chomp
       squeezed + meta_for(squeezed)
     end
