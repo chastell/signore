@@ -1,5 +1,7 @@
+require 'fileutils'
 require 'pathname'
 require 'tempfile'
+require 'tmpdir'
 require_relative '../spec_helper'
 require_relative '../../lib/signore/database'
 require_relative '../../lib/signore/signature'
@@ -38,6 +40,16 @@ module Signore
         tags = Tags.new(forbidden: %w(tech), required: %w(programming security))
         stub(sig_finder).find(sigs, tags: tags) { sigs.last }
         database.find(tags: tags).must_equal sigs.last
+      end
+
+      it 'doesn’t blow up if the path is missing' do
+        begin
+          tempdir = Dir.mktmpdir
+          path = Pathname.new("#{tempdir}/some_intermediate_dir/sigs.yml")
+          Database.new(path: path).find(tags: Tags.new).must_equal Signature.new
+        ensure
+          FileUtils.rmtree tempdir
+        end
       end
     end
   end
