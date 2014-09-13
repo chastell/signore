@@ -39,7 +39,7 @@ module Signore
       end
 
       it 'returns a null object if there are no results' do
-        SigFinder.find([]).must_equal Signature.new('')
+        SigFinder.find([]).must_equal Signature.new
       end
     end
   end

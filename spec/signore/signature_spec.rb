@@ -35,7 +35,7 @@ module Signore
       end
 
       it 'says that an untagged signature is not tagged with any tag' do
-        refute Signature.new('').tagged_with?('fnord')
+        refute Signature.new.tagged_with?('fnord')
       end
     end
 
