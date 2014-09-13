@@ -15,7 +15,7 @@ module Signore
       sigs
         .select { |sig| tags.required.all?  { |tag| sig.tagged_with?(tag) } }
         .reject { |sig| tags.forbidden.any? { |tag| sig.tagged_with?(tag) } }
-        .sample(random: random)
+        .sample(random: random) or Signature.new('')
     end
 
     attr_reader :random, :sigs

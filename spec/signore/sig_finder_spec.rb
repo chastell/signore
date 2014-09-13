@@ -37,6 +37,10 @@ module Signore
         SigFinder.find(sigs, tags: tags).text
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end
+
+      it 'returns a null object if there are no results' do
+        SigFinder.find([]).must_equal Signature.new('')
+      end
     end
   end
 end
