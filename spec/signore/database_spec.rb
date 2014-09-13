@@ -1,3 +1,4 @@
+require 'pathname'
 require 'tempfile'
 require_relative '../spec_helper'
 require_relative '../../lib/signore/database'
@@ -12,18 +13,18 @@ module Signore
       let(:text) { 'Normaliser Unix c’est comme pasteuriser le camembert.' }
 
       it 'saves the provided signature to disk' do
-        Database.new(path: file.path) << sig
+        Database.new(path: Pathname.new(file.path)) << sig
         file.read.must_include text
       end
 
       it 'returns the saved signature' do
-        Database.new(path: file.path).<<(sig).must_equal sig
+        Database.new(path: Pathname.new(file.path)).<<(sig).must_equal sig
       end
     end
 
     describe '#find' do
       let(:database)   { Database.new(path: path, sig_finder: sig_finder) }
-      let(:path)       { 'spec/fixtures/signatures.yml'                   }
+      let(:path)       { Pathname.new('spec/fixtures/signatures.yml')     }
       let(:sig_finder) { fake(:sig_finder, as: :class)                    }
       let(:sigs)       { store.transaction(true) { store['signatures'] }  }
       let(:store)      { YAML::Store.new(path)                            }
