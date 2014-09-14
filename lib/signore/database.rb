@@ -7,12 +7,8 @@ require_relative 'tags'
 module Signore
   class Database
     def initialize(path: Settings.new.db_path, sig_finder: SigFinder)
-      unless path.exist?
-        FileUtils.mkdir_p path.dirname
-        FileUtils.touch path
-      end
+      @path       = path
       @sig_finder = sig_finder
-      @store      = YAML::Store.new(path)
     end
 
     def <<(sig)
@@ -28,7 +24,19 @@ module Signore
       sig_finder.find(sigs, tags: tags)
     end
 
-    attr_reader :sig_finder, :store
-    private     :sig_finder, :store
+    attr_reader :path, :sig_finder
+    private     :path, :sig_finder
+
+    private
+
+    def store
+      @store ||= begin
+        unless path.exist?
+          FileUtils.mkdir_p path.dirname
+          FileUtils.touch path
+        end
+        YAML::Store.new(path)
+      end
+    end
   end
 end
