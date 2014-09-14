@@ -12,15 +12,12 @@ module Signore
     end
 
     def <<(sig)
-      store.transaction do
-        store['signatures'] ||= []
-        store['signatures'] << sig
-      end
+      store.transaction { store['signatures'] << sig }
       sig
     end
 
     def find(tags: Tags.new)
-      sigs = store.transaction(true) { store['signatures'] } || []
+      sigs = store.transaction(true) { store['signatures'] }
       sig_finder.find(sigs, tags: tags)
     end
 
@@ -31,9 +28,10 @@ module Signore
 
     def store
       @store ||= begin
-        unless path.exist?
+        if path.zero? or not path.exist?
           FileUtils.mkdir_p path.dirname
           FileUtils.touch path
+          YAML::Store.new(path).transaction { |store| store['signatures'] = [] }
         end
         YAML::Store.new(path)
       end
