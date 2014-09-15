@@ -26,15 +26,15 @@ module Signore
 
     private
 
+    def initialise_store
+      FileUtils.mkdir_p path.dirname
+      FileUtils.touch path
+      YAML::Store.new(path).transaction { |store| store['signatures'] = [] }
+    end
+
     def store
-      @store ||= begin
-        if path.zero? or not path.exist?
-          FileUtils.mkdir_p path.dirname
-          FileUtils.touch path
-          YAML::Store.new(path).transaction { |store| store['signatures'] = [] }
-        end
-        YAML::Store.new(path)
-      end
+      initialise_store if path.zero? or not path.exist?
+      @store ||= YAML::Store.new(path)
     end
   end
 end
