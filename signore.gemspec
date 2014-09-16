@@ -15,10 +15,11 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'lovely_rufus', '~> 0.2.0'
 
-  gem.add_development_dependency 'bogus',    '~> 0.1.3'
-  gem.add_development_dependency 'minitest', '~> 5.0'
-  gem.add_development_dependency 'rake',     '~> 10.1'
-  gem.add_development_dependency 'reek',     '~> 1.3'
-  gem.add_development_dependency 'rerun',    '~> 0.10.0'
-  gem.add_development_dependency 'rubocop',  '~> 0.26.0'
+  gem.add_development_dependency 'bogus',          '~> 0.1.3'
+  gem.add_development_dependency 'minitest',       '~> 5.0'
+  gem.add_development_dependency 'minitest-focus', '~> 1.1'
+  gem.add_development_dependency 'rake',           '~> 10.1'
+  gem.add_development_dependency 'reek',           '~> 1.3'
+  gem.add_development_dependency 'rerun',          '~> 0.10.0'
+  gem.add_development_dependency 'rubocop',        '~> 0.26.0'
 end
