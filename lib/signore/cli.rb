@@ -14,7 +14,9 @@ module Signore
       when 'prego'
         puts db.find(tags: settings.tags)
       when 'pronto'
-        puts db << SigFromStream.sig_from(input, tags: settings.tags)
+        sig = SigFromStream.sig_from(input, tags: settings.tags)
+        db << sig
+        puts sig
       else
         abort 'usage: signore prego|pronto [tag, …]'
       end
