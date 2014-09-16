@@ -4,6 +4,9 @@ AndOr:
 Documentation:
   Enabled: false
 
+Not:
+  Enabled: false
+
 SingleSpaceBeforeFirstArg:
   Enabled: false
 
