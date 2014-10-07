@@ -15,7 +15,6 @@ module Signore
 
     def <<(sig)
       store.transaction { store['signatures'] << sig }
-      sig
     end
 
     def find(tags: Tags.new)

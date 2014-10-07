@@ -18,10 +18,6 @@ module Signore
         Database.new(path: path) << sig
         path.read.must_include text
       end
-
-      it 'returns the saved signature' do
-        Database.new(path: path).<<(sig).must_equal sig
-      end
     end
 
     describe '#find' do
