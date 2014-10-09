@@ -42,6 +42,10 @@ module Signore
         tags = Tags.new(forbidden: %w(tech), required: %w(en))
         Settings.new(%w(prego ~tech en)).tags.must_equal tags
       end
+
+      it 'doesn’t blow up on empty args' do
+        Settings.new([]).tags.must_equal Tags.new
+      end
     end
   end
 end

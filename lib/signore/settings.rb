@@ -26,11 +26,15 @@ module Signore
     private
 
     def forbidden
-      args[1..-1].select { |tag| tag.start_with?('~') }.map { |tag| tag[1..-1] }
+      tag_names.select { |tag| tag.start_with?('~') }.map { |tag| tag[1..-1] }
     end
 
     def required
-      args[1..-1].reject { |tag| tag.start_with?('~') }
+      tag_names.reject { |tag| tag.start_with?('~') }
+    end
+
+    def tag_names
+      args[1..-1] or []
     end
   end
 end
