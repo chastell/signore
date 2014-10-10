@@ -10,11 +10,12 @@ module Signore
     end
 
     def run(input: $stdin)
+      tags = settings.tags
       case settings.action
       when 'prego'
-        puts db.find(tags: settings.tags)
+        puts db.find(tags: tags)
       when 'pronto'
-        sig = SigFromStream.sig_from(input, tags: settings.tags)
+        sig = SigFromStream.sig_from(input, tags: tags)
         db << sig
         puts sig
       else
