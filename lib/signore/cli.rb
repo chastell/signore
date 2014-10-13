@@ -1,17 +1,21 @@
+require 'forwardable'
 require_relative 'database'
 require_relative 'settings'
 require_relative 'sig_from_stream'
 
 module Signore
   class CLI
+    extend Forwardable
+
+    delegate %i(action tags) => :settings
+
     def initialize(args = ARGV, db: Database.new)
       @settings = Settings.new(args)
       @db       = db
     end
 
     def run(input: $stdin)
-      tags = settings.tags
-      puts case settings.action
+      puts case action
            when 'prego'
              db.find(tags: tags)
            when 'pronto'
