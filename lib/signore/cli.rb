@@ -16,16 +16,23 @@ module Signore
 
     def run(input: $stdin)
       case action
-      when 'prego'
-        puts db.find(tags: tags)
-      when 'pronto'
-        puts SigFromStream.sig_from(input, tags: tags).tap { |sig| db << sig }
-      else
-        abort 'usage: signore prego|pronto [tag, …]'
+      when 'prego'  then puts retrieve_sig
+      when 'pronto' then puts create_sig_from(input)
+      else abort 'usage: signore prego|pronto [tag, …]'
       end
     end
 
     attr_reader :db, :settings
     private     :db, :settings
+
+    private
+
+    def create_sig_from(input)
+      SigFromStream.sig_from(input, tags: tags).tap { |sig| db << sig }
+    end
+
+    def retrieve_sig
+      db.find(tags: tags)
+    end
   end
 end
