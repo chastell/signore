@@ -39,6 +39,19 @@ module Signore
       end
     end
 
+    describe '#to_h' do
+      it 'returns a Hash representation of the Signature' do
+        text = 'For the sake of topic titles, I’d rather if Monty saved Python.'
+        sig  = Signature.new(text, author: 'Anonymous Coward', source: '/.',
+                                   subject: 'on ‘Monty Wants to Save MySQL’',
+                                   tags: %w(/. MySQL))
+        sig.to_h.must_equal author: 'Anonymous Coward', source: '/.',
+                            subject: 'on ‘Monty Wants to Save MySQL’',
+                            tags: %w(/. MySQL), text: text
+
+      end
+    end
+
     describe '#to_s' do
       it 'does not show meta if there’s nothing to show' do
         text = '// sometimes I believe compiler ignores all my comments'
