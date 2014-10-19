@@ -11,6 +11,10 @@ module Signore
       tags and tags.include?(tag)
     end
 
+    def to_h
+      super.tap { |hash| hash[:text] ||= '' }.keep_if { |_, value| value }
+    end
+
     def to_s
       spaced   = text.gsub("\n", "\n\n")
       wrapped  = LovelyRufus.wrap(spaced, width: 80)

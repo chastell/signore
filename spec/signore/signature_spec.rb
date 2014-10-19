@@ -50,6 +50,10 @@ module Signore
                             tags: %w(/. MySQL), text: text
 
       end
+
+      it 'removes non-existing keys (except for text)' do
+        Signature.new.to_h.must_equal text: ''
+      end
     end
 
     describe '#to_s' do
