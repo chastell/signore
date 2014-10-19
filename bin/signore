@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/signore'
+trap(:INT) { exit }
 Signore::CLI.new.run

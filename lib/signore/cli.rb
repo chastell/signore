@@ -15,7 +15,6 @@ module Signore
     end
 
     def run(input: $stdin)
-      trap(:INT) { exit }
       case action
       when 'prego'  then puts retrieve_sig
       when 'pronto' then puts create_sig_from(input)
