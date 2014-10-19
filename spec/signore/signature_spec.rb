@@ -40,19 +40,19 @@ module Signore
     end
 
     describe '#to_h' do
-      it 'returns a Hash representation of the Signature' do
+      it 'returns a String-keyed Hash representation of the Signature' do
         text = 'For the sake of topic titles, I’d rather if Monty saved Python.'
         sig  = Signature.new(text, author: 'Anonymous Coward', source: '/.',
                                    subject: 'on ‘Monty Wants to Save MySQL’',
                                    tags: %w(/. MySQL))
-        sig.to_h.must_equal author: 'Anonymous Coward', source: '/.',
-                            subject: 'on ‘Monty Wants to Save MySQL’',
-                            tags: %w(/. MySQL), text: text
+        sig.to_h.must_equal 'author' => 'Anonymous Coward', 'source' => '/.',
+                            'subject' => 'on ‘Monty Wants to Save MySQL’',
+                            'tags' => %w(/. MySQL), 'text' => text
 
       end
 
       it 'removes non-existing keys (except for text)' do
-        Signature.new.to_h.must_equal text: ''
+        Signature.new.to_h.must_equal 'text' => ''
       end
     end
 
