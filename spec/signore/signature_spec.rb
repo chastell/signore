@@ -51,8 +51,8 @@ module Signore
 
       end
 
-      it 'removes non-existing keys (except for text)' do
-        Signature.new.to_h.must_equal 'text' => ''
+      it 'removes non-existing keys' do
+        assert Signature.new.to_h.empty?
       end
     end
 

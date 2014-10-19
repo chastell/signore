@@ -12,10 +12,7 @@ module Signore
     end
 
     def to_h
-      super
-        .map { |key, value| [key.to_s, value] }.to_h
-        .tap { |hash| hash['text'] ||= '' }
-        .keep_if { |_, value| value }
+      super.map { |key, val| [key.to_s, val] }.to_h.keep_if { |_, value| value }
     end
 
     def to_s
