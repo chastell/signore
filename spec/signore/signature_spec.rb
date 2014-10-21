@@ -4,6 +4,23 @@ require_relative '../../lib/signore/signature'
 
 module Signore
   describe Signature do
+    describe '.from_h' do
+      it 'creates a Signature from a String-keyed Hash representation' do
+        text = 'For the sake of topic titles, I’d rather if Monty saved Python.'
+        hash = {
+          'author'  => 'Anonymous Coward',
+          'source'  => '/.',
+          'subject' => 'on ‘Monty Wants to Save MySQL’',
+          'tags'    => %w(/. MySQL),
+          'text'    => text,
+        }
+        sig = Signature.new(text, author: 'Anonymous Coward', source: '/.',
+                                  subject: 'on ‘Monty Wants to Save MySQL’',
+                                  tags: %w(/. MySQL))
+        Signature.from_h(hash).must_equal sig
+      end
+    end
+
     describe '.new' do
       it 'instantiates Signatures via parameters' do
         source = 'A History of Modern Computing'
