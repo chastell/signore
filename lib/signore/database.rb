@@ -14,11 +14,13 @@ module Signore
     end
 
     def <<(sig)
-      store.transaction { store['signatures'] << sig }
+      store.transaction { store['signatures'] << sig.to_h }
     end
 
     def find(tags: Tags.new)
-      sigs = store.transaction(true) { store['signatures'] }
+      sigs = store.transaction(true) { store['signatures'] }.map do |hash|
+        Signature.from_h(hash)
+      end
       sig_finder.find(sigs, tags: tags)
     end
 

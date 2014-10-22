@@ -7,7 +7,9 @@ module Signore
   describe SigFinder do
     let(:sigs) do
       store = YAML::Store.new('spec/fixtures/signatures.yml')
-      store.transaction(true) { store['signatures'] }
+      store.transaction(true) { store['signatures'] }.map do |hash|
+        Signature.from_h(hash)
+      end
     end
 
     let(:sig_finder) { SigFinder.new(sigs) }

@@ -23,8 +23,12 @@ module Signore
       let(:database)   { Database.new(path: path, sig_finder: sig_finder) }
       let(:path)       { Pathname.new('spec/fixtures/signatures.yml')     }
       let(:sig_finder) { fake(:sig_finder, as: :class)                    }
-      let(:sigs)       { store.transaction(true) { store['signatures'] }  }
       let(:store)      { YAML::Store.new(path)                            }
+      let(:sigs) do
+        store.transaction(true) { store['signatures'] }.map do |hash|
+          Signature.from_h(hash)
+        end
+      end
 
       it 'returns a random signature by default' do
         stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
