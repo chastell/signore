@@ -12,7 +12,7 @@ module Signore
     describe '#<<' do
       it 'saves the provided signature to disk' do
         text = 'Normaliser Unix c’est comme pasteuriser le camembert.'
-        sig  = Signature.new(text)
+        sig  = Signature.new(text: text)
         path = Pathname.new(Tempfile.new('').path)
         Database.new(path: path) << sig
         path.read.must_include text

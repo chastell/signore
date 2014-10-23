@@ -15,8 +15,9 @@ module Signore
     end
 
     def to_sig
-      Signature.new(params.text, author: params.author, source: params.source,
-                                 subject: params.subject, tags: tags.required)
+      Signature.new(author: params.author, source: params.source,
+                    subject: params.subject, tags: tags.required,
+                    text: params.text)
     end
 
     attr_reader :input, :tags

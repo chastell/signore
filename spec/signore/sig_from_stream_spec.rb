@@ -30,7 +30,8 @@ module Signore
         sig = nil
         capture_io { sig = SigFromStream.sig_from input }
         text = 'You do have to be mad to work here, but it doesn’t help.'
-        sig.must_equal Signature.new(text, author: 'Gary Barnes', source: 'asr')
+        sig.must_equal Signature.new(author: 'Gary Barnes', source: 'asr',
+                                     text: text)
       end
 
       it 'handles multi-line signatures' do
@@ -47,7 +48,7 @@ module Signore
           ‘You’ve got an interesting accent. Subtle. I can’t place it.’
           ‘It’s text-to-speech… I was raised by smartphones.’
         end
-        sig.must_equal Signature.new(text, author: 'Patrick Ewing')
+        sig.must_equal Signature.new(author: 'Patrick Ewing', text: text)
       end
     end
   end

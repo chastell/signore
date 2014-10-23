@@ -3,12 +3,12 @@ require 'lovely_rufus'
 module Signore
   Signature = Struct.new(*%i(text author source subject tags)) do
     def self.from_h(hash)
-      Signature.new(hash['text'], author: hash['author'],
-                                  source: hash['source'],
-                                  subject: hash['subject'], tags: hash['tags'])
+      Signature.new(author: hash['author'], source: hash['source'],
+                    subject: hash['subject'], tags: hash['tags'],
+                    text: hash['text'])
     end
 
-    def initialize(text = '', author: nil, source: nil, subject: nil, tags: nil)
+    def initialize(author: nil, source: nil, subject: nil, tags: nil, text: '')
       super text, author, source, subject, tags
       each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
