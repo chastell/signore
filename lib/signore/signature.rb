@@ -3,9 +3,7 @@ require 'lovely_rufus'
 module Signore
   Signature = Struct.new(*%i(text author source subject tags)) do
     def self.from_h(hash)
-      Signature.new(author: hash['author'], source: hash['source'],
-                    subject: hash['subject'], tags: hash['tags'],
-                    text: hash['text'])
+      Signature.new(hash.map { |key, value| [key.to_sym, value] }.to_h)
     end
 
     def initialize(author: nil, source: nil, subject: nil, tags: nil, text: '')
