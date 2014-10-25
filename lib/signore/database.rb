@@ -18,9 +18,6 @@ module Signore
     end
 
     def find(tags: Tags.new)
-      sigs = store.transaction(true) { store['signatures'] }.map do |hash|
-        Signature.from_h(hash)
-      end
       sig_finder.find(sigs, tags: tags)
     end
 
@@ -33,6 +30,12 @@ module Signore
       FileUtils.mkdir_p path.dirname
       FileUtils.touch path
       YAML::Store.new(path).transaction { |store| store['signatures'] = [] }
+    end
+
+    def sigs
+      @sigs ||= store.transaction(true) { store['signatures'] }.map do |hash|
+        Signature.from_h(hash)
+      end
     end
   end
 end
