@@ -15,7 +15,7 @@ module Signore
 
     def <<(sig)
       sigs << sig
-      store.transaction { store['signatures'] = sigs.map(&:to_h) }
+      persist
     end
 
     def find(tags: Tags.new)
@@ -31,6 +31,10 @@ module Signore
       FileUtils.mkdir_p path.dirname
       FileUtils.touch path
       YAML::Store.new(path).transaction { |store| store['signatures'] = [] }
+    end
+
+    def persist
+      store.transaction { store['signatures'] = sigs.map(&:to_h) }
     end
 
     def sigs
