@@ -14,7 +14,8 @@ module Signore
     end
 
     def <<(sig)
-      store.transaction { store['signatures'] << sig.to_h }
+      sigs << sig
+      store.transaction { store['signatures'] = sigs.map(&:to_h) }
     end
 
     def find(tags: Tags.new)
