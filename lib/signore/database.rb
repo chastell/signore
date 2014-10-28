@@ -38,8 +38,8 @@ module Signore
     end
 
     def sigs
-      @sigs ||= store.transaction(true) { store['signatures'] }.map do |hash|
-        Signature.from_h(hash)
+      @sigs ||= store.transaction(true) { store['signatures'] }.map do |elem|
+        elem.is_a?(Signature) ? elem : Signature.from_h(elem)
       end
     end
   end

@@ -1,0 +1,23 @@
+signatures:
+- !ruby/struct:Signore::Signature
+  text: She was good at playing abstract confusion in the same way a midget is good at being short.
+  author: Clive James
+  subject: on Marilyn Monroe
+- !ruby/struct:Signore::Signature
+  text: You do have to be mad to work here, but it doesn’t help.
+  author: Gary Barnes
+  source: asr
+  tags: [tech, work]
+- !ruby/struct:Signore::Signature
+  text: // sometimes I believe compiler ignores all my comments
+  tags: [programming, tech]
+- !ruby/struct:Signore::Signature
+  text: Bruce Schneier knows Alice and Bob’s shared secret.
+  source: Bruce Schneier Facts
+  tags: [security, tech]
+- !ruby/struct:Signore::Signature
+  text: stay-at-home executives vs. wallstreet dads
+  author: kodz
+- !ruby/struct:Signore::Signature
+  text: Amateur fighter pilot ignores orders, listens to the voices in his head and slaughters thousands.
+  subject: Star Wars ending explained

@@ -50,6 +50,13 @@ module Signore
           FileUtils.rmtree tempdir
         end
       end
+
+      it 'keeps working with legacy YAML files' do
+        path = Pathname.new('spec/fixtures/signatures.legacy.yml')
+        database = Database.new(path: path, sig_finder: sig_finder)
+        stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
+        database.find.must_equal sigs.last
+      end
     end
   end
 end
