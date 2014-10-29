@@ -17,6 +17,15 @@ module Signore
         Database.new(path: path) << sig
         path.read.must_include text
       end
+
+      it 'rewrites legacy YAML files on save' do
+        text = 'Normaliser Unix c’est comme pasteuriser le camembert.'
+        sig  = Signature.new(text: text)
+        path = Pathname.new(Tempfile.new('').path)
+        FileUtils.cp Pathname.new('spec/fixtures/signatures.legacy.yml'), path
+        Database.new(path: path) << sig
+        path.read.wont_include 'Signore::Signature'
+      end
     end
 
     describe '#find' do
