@@ -10,18 +10,16 @@ require_relative '../../lib/signore/tags'
 module Signore
   describe Database do
     describe '#<<' do
+      let(:path) { Pathname.new(Tempfile.new('').path)                     }
+      let(:sig)  { Signature.new(text: text)                               }
+      let(:text) { 'Normaliser Unix c’est comme pasteuriser le camembert.' }
+
       it 'saves the provided signature to disk' do
-        text = 'Normaliser Unix c’est comme pasteuriser le camembert.'
-        sig  = Signature.new(text: text)
-        path = Pathname.new(Tempfile.new('').path)
         Database.new(path: path) << sig
         path.read.must_include text
       end
 
       it 'rewrites legacy YAML files on save' do
-        text = 'Normaliser Unix c’est comme pasteuriser le camembert.'
-        sig  = Signature.new(text: text)
-        path = Pathname.new(Tempfile.new('').path)
         FileUtils.cp Pathname.new('spec/fixtures/signatures.legacy.yml'), path
         Database.new(path: path) << sig
         path.read.wont_include 'Signore::Signature'
