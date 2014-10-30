@@ -23,6 +23,12 @@ module Signore
       sig_finder.find(sigs, tags: tags)
     end
 
+    def sigs
+      @sigs ||= store.transaction(true) { store['signatures'] }.map do |elem|
+        elem.is_a?(Signature) ? elem : Signature.from_h(elem)
+      end
+    end
+
     attr_reader :path, :sig_finder, :store
     private     :path, :sig_finder, :store
 
@@ -36,12 +42,6 @@ module Signore
 
     def persist
       store.transaction { store['signatures'] = sigs.map(&:to_h) }
-    end
-
-    def sigs
-      @sigs ||= store.transaction(true) { store['signatures'] }.map do |elem|
-        elem.is_a?(Signature) ? elem : Signature.from_h(elem)
-      end
     end
   end
 end

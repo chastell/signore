@@ -65,5 +65,15 @@ module Signore
         database.find.must_equal sigs.last
       end
     end
+
+    describe '#sigs' do
+      it 'returns all the Signatures from the Database' do
+        path = Pathname.new('spec/fixtures/signatures.yml')
+        sigs = Database.new(path: path).sigs
+        sigs.size.must_equal 6
+        sigs.first.author.must_equal 'Clive James'
+        sigs.last.subject.must_equal 'Star Wars ending explained'
+      end
+    end
   end
 end
