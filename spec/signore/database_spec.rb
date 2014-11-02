@@ -9,6 +9,23 @@ require_relative '../../lib/signore/tags'
 
 module Signore
   describe Database do
+    describe '.sig_from_hash' do
+      it 'creates a Signature from a String-keyed Hash representation' do
+        text = 'For the sake of topic titles, I’d rather if Monty saved Python.'
+        hash = {
+          'author'  => 'Anonymous Coward',
+          'source'  => '/.',
+          'subject' => 'on ‘Monty Wants to Save MySQL’',
+          'tags'    => %w(/. MySQL),
+          'text'    => text,
+        }
+        sig = Signature.new(author: 'Anonymous Coward', source: '/.',
+                            subject: 'on ‘Monty Wants to Save MySQL’',
+                            tags: %w(/. MySQL), text: text)
+        Database.sig_from_hash(hash).must_equal sig
+      end
+    end
+
     describe '#<<' do
       let(:path) { Pathname.new(Tempfile.new('').path)                     }
       let(:sig)  { Signature.new(text: text)                               }

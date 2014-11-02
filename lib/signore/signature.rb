@@ -2,10 +2,6 @@ require 'lovely_rufus'
 
 module Signore
   Signature = Struct.new(*%i(author source subject tags text)) do
-    def self.from_h(hash)
-      Signature.new(hash.map { |key, value| [key.to_sym, value] }.to_h)
-    end
-
     def initialize(author: nil, source: nil, subject: nil, tags: nil, text: nil)
       super author, source, subject, tags, text
       each_pair { |key, value| self[key] = nil if value and value.empty? }

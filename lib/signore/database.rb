@@ -7,6 +7,10 @@ require_relative 'tags'
 
 module Signore
   class Database
+    def self.sig_from_hash(hash)
+      Signature.new(hash.map { |key, value| [key.to_sym, value] }.to_h)
+    end
+
     def initialize(path: Settings.new.db_path, sig_finder: SigFinder)
       @path       = path
       @sig_finder = sig_finder
@@ -25,7 +29,7 @@ module Signore
 
     def sigs
       @sigs ||= store.transaction(true) { store['signatures'] }.map do |elem|
-        elem.is_a?(Signature) ? elem : Signature.from_h(elem)
+        elem.is_a?(Signature) ? elem : self.class.sig_from_hash(elem)
       end
     end
 
