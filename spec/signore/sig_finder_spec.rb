@@ -6,10 +6,7 @@ require_relative '../../lib/signore/tags'
 module Signore
   describe SigFinder do
     let(:sigs) do
-      store = YAML::Store.new('spec/fixtures/signatures.yml')
-      store.transaction(true) { store['signatures'] }.map do |hash|
-        Signature.from_h(hash)
-      end
+      Database.new(path: Pathname.new('spec/fixtures/signatures.yml')).sigs
     end
 
     let(:sig_finder) { SigFinder.new(sigs) }
