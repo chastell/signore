@@ -4,6 +4,8 @@ DuplicateMethodCall:
 
 FeatureEnvy:
   exclude:
+    - Signore::Mapper#from_h
+    - Signore::Mapper#to_h
     - Signore::Settings#forbidden
 
 IrresponsibleModule:
@@ -14,4 +16,5 @@ NestedIterators:
 
 UtilityFunction:
   exclude:
+    - Signore::Mapper#from_h
     - Signore::Settings#db_path
