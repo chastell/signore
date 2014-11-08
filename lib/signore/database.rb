@@ -42,7 +42,8 @@ module Signore
     end
 
     def persist
-      store.transaction { store['signatures'] = sigs.map(&:to_h) }
+      hashes = sigs.map { |sig| Mapper.to_h(sig) }
+      store.transaction { store['signatures'] = hashes }
     end
   end
 end
