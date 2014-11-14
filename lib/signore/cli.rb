@@ -1,5 +1,5 @@
 require 'forwardable'
-require_relative 'database'
+require_relative 'repo'
 require_relative 'settings'
 require_relative 'sig_from_stream'
 
@@ -9,9 +9,9 @@ module Signore
 
     delegate %i(action tags) => :settings
 
-    def initialize(args = ARGV, db: Database.new)
+    def initialize(args = ARGV, repo: Repo.new)
       @settings = Settings.new(args)
-      @db       = db
+      @repo     = repo
     end
 
     def run(input: $stdin)
@@ -22,17 +22,17 @@ module Signore
       end
     end
 
-    attr_reader :db, :settings
-    private     :db, :settings
+    attr_reader :repo, :settings
+    private     :repo, :settings
 
     private
 
     def create_sig_from(input)
-      SigFromStream.sig_from(input, tags: tags).tap { |sig| db << sig }
+      SigFromStream.sig_from(input, tags: tags).tap { |sig| repo << sig }
     end
 
     def retrieve_sig
-      db.find(tags: tags)
+      repo.find(tags: tags)
     end
   end
 end

@@ -7,7 +7,7 @@ require_relative 'signature'
 require_relative 'tags'
 
 module Signore
-  class Database
+  class Repo
     def initialize(path: Settings.new.db_path, sig_finder: SigFinder)
       @path       = path
       @sig_finder = sig_finder

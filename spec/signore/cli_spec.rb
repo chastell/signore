@@ -21,19 +21,19 @@ module Signore
       end
 
       describe 'prego' do
-        let(:db)   { Database.new(path: path)                     }
+        let(:repo) { Repo.new(path: path)                         }
         let(:path) { Pathname.new('spec/fixtures/signatures.yml') }
 
         it 'prints a signature tagged with the provided tags' do
           args = %w(prego tech programming)
-          out  = capture_io { CLI.new(args, db: db).run }.first
+          out  = capture_io { CLI.new(args, repo: repo).run }.first
           sig  = "// sometimes I believe compiler ignores all my comments\n"
           out.must_equal sig
         end
 
         it 'prints a signature based on allowed and forbidden tags' do
           args = %w(prego ~programming tech ~security)
-          out  = capture_io { CLI.new(args, db: db).run }.first
+          out  = capture_io { CLI.new(args, repo: repo).run }.first
           out.must_equal <<-end.dedent
             You do have to be mad to work here, but it doesn’t help.
                                                   [Gary Barnes, asr]
@@ -42,7 +42,7 @@ module Signore
       end
 
       describe 'pronto' do
-        let(:db) { Database.new(path: Pathname.new(Tempfile.new('').path)) }
+        let(:repo) { Repo.new(path: Pathname.new(Tempfile.new('').path)) }
 
         it 'asks about signature parts and saves resulting signature' do
           input = StringIO.new <<-end.dedent
@@ -51,7 +51,7 @@ module Signore
             Mark Pilgrim\n\n\n
           end
           args = %w(pronto Wikipedia ADHD)
-          out  = capture_io { CLI.new(args, db: db).run input: input }.first
+          out  = capture_io { CLI.new(args, repo: repo).run input: input }.first
           out.must_equal <<-end.dedent
             text?
             author?
@@ -61,7 +61,7 @@ module Signore
                                                                   [Mark Pilgrim]
           end
           args = %w(prego Wikipedia ADHD)
-          out  = capture_io { CLI.new(args, db: db).run }.first
+          out  = capture_io { CLI.new(args, repo: repo).run }.first
           out.must_equal <<-end.dedent
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                   [Mark Pilgrim]
@@ -75,7 +75,7 @@ module Signore
 
             Patrick Ewing\n\n\n
           end
-          io = capture_io { CLI.new(['pronto'], db: db).run input: input }
+          io = capture_io { CLI.new(['pronto'], repo: repo).run input: input }
           io.first.must_equal <<-end.dedent
             text?
             author?

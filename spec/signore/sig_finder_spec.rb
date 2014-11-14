@@ -6,7 +6,7 @@ require_relative '../../lib/signore/tags'
 module Signore
   describe SigFinder do
     let(:sigs) do
-      Database.new(path: Pathname.new('spec/fixtures/signatures.yml')).sigs
+      Repo.new(path: Pathname.new('spec/fixtures/signatures.yml')).sigs
     end
 
     let(:sig_finder) { SigFinder.new(sigs) }
