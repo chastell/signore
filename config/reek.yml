@@ -17,4 +17,4 @@ NestedIterators:
 UtilityFunction:
   exclude:
     - Signore::Mapper#from_h
-    - Signore::Settings#db_path
+    - Signore::Settings#repo_path

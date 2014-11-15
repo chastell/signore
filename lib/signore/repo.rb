@@ -8,7 +8,7 @@ require_relative 'tags'
 
 module Signore
   class Repo
-    def initialize(path: Settings.new.db_path, sig_finder: SigFinder)
+    def initialize(path: Settings.new.repo_path, sig_finder: SigFinder)
       @path       = path
       @sig_finder = sig_finder
       initialise_store if path.zero? or not path.exist?
