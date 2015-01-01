@@ -49,7 +49,6 @@ module Signore
         sig.to_h.must_equal 'author' => 'Anonymous Coward', 'source' => '/.',
                             'subject' => 'on ‘Monty Wants to Save MySQL’',
                             'tags' => %w(/. MySQL), 'text' => text
-
       end
 
       it 'removes non-existing keys' do
