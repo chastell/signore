@@ -1,12 +1,12 @@
 require 'yaml/store'
-require_relative '../spec_helper'
+require_relative '../test_helper'
 require_relative '../../lib/signore/sig_finder'
 require_relative '../../lib/signore/tags'
 
 module Signore
   describe SigFinder do
     let(:sigs) do
-      Repo.new(path: Pathname.new('spec/fixtures/signatures.yml')).sigs
+      Repo.new(path: Pathname.new('test/fixtures/signatures.yml')).sigs
     end
 
     let(:sig_finder) { SigFinder.new(sigs) }

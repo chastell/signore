@@ -2,7 +2,7 @@ require 'pathname'
 require 'stringio'
 require 'tempfile'
 require 'tmpdir'
-require_relative '../spec_helper'
+require_relative '../test_helper'
 require_relative '../../lib/signore/cli'
 
 module Signore
@@ -22,7 +22,7 @@ module Signore
 
       describe 'prego' do
         let(:repo) { Repo.new(path: path)                         }
-        let(:path) { Pathname.new('spec/fixtures/signatures.yml') }
+        let(:path) { Pathname.new('test/fixtures/signatures.yml') }
 
         it 'prints a signature tagged with the provided tags' do
           args = %w(prego tech programming)

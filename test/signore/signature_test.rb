@@ -1,5 +1,5 @@
 require 'yaml'
-require_relative '../spec_helper'
+require_relative '../test_helper'
 require_relative '../../lib/signore/signature'
 
 module Signore
@@ -114,7 +114,7 @@ module Signore
       end
 
       it 'handles edge cases properly' do
-        YAML.load_file('spec/fixtures/wrapper.yml').each do |sig, wrapped|
+        YAML.load_file('test/fixtures/wrapper.yml').each do |sig, wrapped|
           sig.to_s.must_equal wrapped
         end
       end
