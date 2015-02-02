@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.test_files  = gem.files.grep(/^test\/.*\.rb$/)
 
   gem.add_dependency 'lovely_rufus', '~> 0.2.1'
+  gem.add_dependency 'private_attr', '~> 0.1.1'
 
   gem.add_development_dependency 'bogus',          '~> 0.1.3'
   gem.add_development_dependency 'minitest',       '~> 5.0'
