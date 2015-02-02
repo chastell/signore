@@ -7,8 +7,5 @@ Style/Documentation:
 Style/Not:
   Enabled: false
 
-Style/SingleSpaceBeforeFirstArg:
-  Enabled: false
-
 Style/TrailingComma:
   EnforcedStyleForMultiline: comma
