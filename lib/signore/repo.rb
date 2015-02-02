@@ -30,8 +30,7 @@ module Signore
       end
     end
 
-    attr_reader :path, :sig_finder, :store
-    private     :path, :sig_finder, :store
+    private_attr_reader :path, :sig_finder, :store
 
     private
 

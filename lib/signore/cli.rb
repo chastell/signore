@@ -22,8 +22,7 @@ module Signore
       end
     end
 
-    attr_reader :repo, :settings
-    private     :repo, :settings
+    private_attr_reader :repo, :settings
 
     private
 

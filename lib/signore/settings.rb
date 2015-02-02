@@ -20,8 +20,7 @@ module Signore
       Tags.new(forbidden: forbidden, required: required)
     end
 
-    attr_reader :args
-    private     :args
+    private_attr_reader :args
 
     private
 

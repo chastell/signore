@@ -18,7 +18,6 @@ module Signore
         .sample(random: random) or Signature.new
     end
 
-    attr_reader :random, :sigs
-    private     :random, :sigs
+    private_attr_reader :random, :sigs
   end
 end

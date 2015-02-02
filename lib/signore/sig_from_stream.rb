@@ -20,8 +20,7 @@ module Signore
                     text: params.text)
     end
 
-    attr_reader :input, :tags
-    private     :input, :tags
+    private_attr_reader :input, :tags
 
     private
 
