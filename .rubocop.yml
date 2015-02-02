@@ -1,14 +1,14 @@
-AndOr:
+Style/AndOr:
   Enabled: false
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
-Not:
+Style/Not:
   Enabled: false
 
-SingleSpaceBeforeFirstArg:
+Style/SingleSpaceBeforeFirstArg:
   Enabled: false
 
-TrailingComma:
+Style/TrailingComma:
   EnforcedStyleForMultiline: comma
