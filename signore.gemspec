@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.executables = gem.files.grep(/^bin\//).map { |path| File.basename(path) }
   gem.test_files  = gem.files.grep(/^test\/.*\.rb$/)
 
-  gem.add_dependency 'lovely_rufus', '~> 0.2.1'
+  gem.add_dependency 'lovely_rufus', '~> 0.3.0'
   gem.add_dependency 'private_attr', '~> 1.0'
 
   gem.add_development_dependency 'bogus',          '~> 0.1.3'
