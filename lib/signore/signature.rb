@@ -7,6 +7,11 @@ module Signore
       each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
 
+    def matches?(tags)
+      tags.required.all?  { |tag| tagged_with?(tag) } and not
+      tags.forbidden.any? { |tag| tagged_with?(tag) }
+    end
+
     def tagged_with?(tag)
       tags and tags.include?(tag)
     end
