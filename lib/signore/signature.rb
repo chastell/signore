@@ -8,8 +8,8 @@ module Signore
     end
 
     def matches?(tags)
-      tags.required.all?  { |tag| tagged_with?(tag) } and not
-      tags.forbidden.any? { |tag| tagged_with?(tag) }
+      mine = self.tags || []
+      (tags.required & mine) == tags.required and (tags.forbidden & mine).empty?
     end
 
     def tagged_with?(tag)

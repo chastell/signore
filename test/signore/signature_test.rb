@@ -36,6 +36,8 @@ module Signore
         refute sig.matches?(Tags.new(required: %w(programming tech Ruby)))
         refute sig.matches?(Tags.new(forbidden: %w(programming)))
         refute sig.matches?(Tags.new(forbidden: %w(tech), required: %w(tech)))
+        assert Signature.new.matches?(Tags.new)
+        assert Signature.new.matches?(Tags.new(forbidden: %w(fnord)))
       end
     end
 
