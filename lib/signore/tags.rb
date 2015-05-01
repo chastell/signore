@@ -4,9 +4,9 @@ module Signore
       super forbidden, required
     end
 
-    def match?(sig)
-      tags = sig.tags || []
-      (required & tags) == required and (forbidden & tags).empty?
+    def match?(sig_tags)
+      sig_tags ||= []
+      (required & sig_tags) == required and (forbidden & sig_tags).empty?
     end
   end
 end
