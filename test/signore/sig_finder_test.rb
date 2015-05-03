@@ -13,14 +13,14 @@ module Signore
 
     describe '.find' do
       it 'returns a random Signature by default' do
-        SigFinder.find(sigs, random: Random.new(1981)).text
+        SigFinder.find(sigs, random: Random.new(0)).text
           .must_include 'Amateur fighter pilot ignores orders'
-        SigFinder.find(sigs, random: Random.new(2009)).text
+        SigFinder.find(sigs, random: Random.new(1)).text
           .must_equal '// sometimes I believe compiler ignores all my comments'
       end
 
       it 'returns a random signature if the tags are empty' do
-        SigFinder.find(sigs, tags: Tags.new, random: Random.new(2013)).text
+        SigFinder.find(sigs, tags: Tags.new, random: Random.new(1)).text
           .must_equal '// sometimes I believe compiler ignores all my comments'
       end
 

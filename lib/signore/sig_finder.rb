@@ -12,7 +12,7 @@ module Signore
     end
 
     def find_tagged(tags: Tags.new)
-      found = sigs.select { |sig| tags.match?(sig.tags) }.sample(random: random)
+      found = sigs.shuffle(random: random).find { |sig| tags.match?(sig.tags) }
       found or Signature.new
     end
 
