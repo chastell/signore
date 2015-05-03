@@ -12,10 +12,8 @@ module Signore
     end
 
     def find_tagged(tags: Tags.new)
-      sigs
-        .select { |sig| tags.required.all?  { |tag| sig.tagged_with?(tag) } }
-        .reject { |sig| tags.forbidden.any? { |tag| sig.tagged_with?(tag) } }
-        .sample(random: random) or Signature.new
+      found = sigs.select { |sig| tags.match?(sig.tags) }.sample(random: random)
+      found or Signature.new
     end
 
     private_attr_reader :random, :sigs
