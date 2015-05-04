@@ -1,3 +1,4 @@
+require_relative 'signature'
 require_relative 'tags'
 
 module Signore
