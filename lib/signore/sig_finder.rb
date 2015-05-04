@@ -7,15 +7,13 @@ module Signore
     end
 
     def initialize(sigs, random: Random.new)
-      @random = random
-      @sigs   = sigs
+      @sigs = sigs.shuffle(random: random)
     end
 
     def find_tagged(tags: Tags.new)
-      found = sigs.shuffle(random: random).find { |sig| tags.match?(sig.tags) }
-      found or Signature.new
+      sigs.find { |sig| tags.match?(sig.tags) } or Signature.new
     end
 
-    private_attr_reader :random, :sigs
+    private_attr_reader :sigs
   end
 end
