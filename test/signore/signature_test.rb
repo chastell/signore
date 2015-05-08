@@ -27,20 +27,6 @@ module Signore
       end
     end
 
-    describe '#matches?' do
-      it 'is a predicate whether the Signature matches the Tags' do
-        sig = Signature.new(tags: %w(programming tech))
-        assert sig.matches?(Tags.new)
-        assert sig.matches?(Tags.new(required: %w(programming)))
-        assert sig.matches?(Tags.new(required: %w(programming tech)))
-        refute sig.matches?(Tags.new(required: %w(programming tech Ruby)))
-        refute sig.matches?(Tags.new(forbidden: %w(programming)))
-        refute sig.matches?(Tags.new(forbidden: %w(tech), required: %w(tech)))
-        assert Signature.new.matches?(Tags.new)
-        assert Signature.new.matches?(Tags.new(forbidden: %w(fnord)))
-      end
-    end
-
     describe '#tagged_with?' do
       it 'says whether a tagged signature is tagged with a given tag' do
         sig = Signature.new(tags: %w(programming tech), text: '')

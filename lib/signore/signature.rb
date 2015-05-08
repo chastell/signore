@@ -7,11 +7,6 @@ module Signore
       each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
 
-    def matches?(tags)
-      mine = self.tags || []
-      (tags.required & mine) == tags.required and (tags.forbidden & mine).empty?
-    end
-
     def tagged_with?(tag)
       tags and tags.include?(tag)
     end
