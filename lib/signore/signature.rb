@@ -7,10 +7,6 @@ module Signore
       each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
 
-    def tagged_with?(tag)
-      tags and tags.include?(tag)
-    end
-
     def to_h
       super.map { |key, val| [key.to_s, val] }.to_h.keep_if { |_, value| value }
     end

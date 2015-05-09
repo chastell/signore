@@ -27,19 +27,6 @@ module Signore
       end
     end
 
-    describe '#tagged_with?' do
-      it 'says whether a tagged signature is tagged with a given tag' do
-        sig = Signature.new(tags: %w(programming tech), text: '')
-        refute sig.tagged_with?('fnord')
-        assert sig.tagged_with?('programming')
-        assert sig.tagged_with?('tech')
-      end
-
-      it 'says that an untagged signature is not tagged with any tag' do
-        refute Signature.new.tagged_with?('fnord')
-      end
-    end
-
     describe '#to_h' do
       it 'returns a String-keyed Hash representation of the Signature' do
         text = 'For the sake of topic titles, I’d rather if Monty saved Python.'
