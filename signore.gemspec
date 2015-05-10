@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.license     = 'AGPL-3.0'
   gem.name        = 'signore'
   gem.summary     = 'signore: an email signature manager/randomiser'
-  gem.version     = '0.3.3'
+  gem.version     = '0.4.0'
 
   gem.files       = `git ls-files -z`.split "\0"
   gem.executables = gem.files.grep(%r{^bin/}).map { |path| File.basename(path) }
