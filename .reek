@@ -1,20 +1,10 @@
-DuplicateMethodCall:
-  exclude:
-    - Signore::SigFinder#find_tagged
-
 FeatureEnvy:
   exclude:
-    - Signore::Mapper#from_h
-    - Signore::Mapper#to_h
     - Signore::Settings#forbidden
 
 IrresponsibleModule:
   enabled: false
 
-NestedIterators:
-  max_allowed_nesting: 2
-
 UtilityFunction:
   exclude:
-    - Signore::Mapper#from_h
     - Signore::Settings#repo_path
