@@ -1,3 +1,7 @@
+# FIXME: https://github.com/bbatsov/rubocop/pull/1871
+Performance/Sample:
+  Enabled: false
+
 Style/AndOr:
   Enabled: false
 

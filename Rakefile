@@ -15,4 +15,7 @@ end
 
 RuboCop::RakeTask.new do |task|
   task.options << '--display-cop-names'
+  if Gem.loaded_specs['rubocop'].version > Gem::Version.create('0.31.0')
+    fail 'remove Performance/Sample exclusion from .rubocop.yml'
+  end
 end
