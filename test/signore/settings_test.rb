@@ -8,7 +8,7 @@ module Signore
   describe Settings do
     describe '#action' do
       it 'is defined by the first argument' do
-        Settings.new(['prego']).action.must_equal 'prego'
+        _(Settings.new(['prego']).action).must_equal 'prego'
       end
     end
 
@@ -18,7 +18,7 @@ module Signore
           old_xdg = ENV.delete('XDG_DATA_HOME')
           ENV['XDG_DATA_HOME'] = Dir.mktmpdir
           path = "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
-          Settings.new.repo_path.must_equal Pathname.new(path)
+          _(Settings.new.repo_path).must_equal Pathname.new(path)
         ensure
           FileUtils.rmtree ENV['XDG_DATA_HOME']
           old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
@@ -29,7 +29,7 @@ module Signore
         begin
           old_xdg = ENV.delete('XDG_DATA_HOME')
           path    = File.expand_path('~/.local/share/signore/signatures.yml')
-          Settings.new.repo_path.must_equal Pathname.new(path)
+          _(Settings.new.repo_path).must_equal Pathname.new(path)
         ensure
           ENV['XDG_DATA_HOME'] = old_xdg if old_xdg
         end
@@ -39,11 +39,11 @@ module Signore
     describe '#tags' do
       it 'returns the forbidden and required tags' do
         tags = Tags.new(forbidden: %w(tech), required: %w(en))
-        Settings.new(%w(prego ~tech en)).tags.must_equal tags
+        _(Settings.new(%w(prego ~tech en)).tags).must_equal tags
       end
 
       it 'doesn’t blow up on empty args' do
-        Settings.new([]).tags.must_equal Tags.new
+        _(Settings.new([]).tags).must_equal Tags.new
       end
     end
   end
