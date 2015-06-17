@@ -13,32 +13,32 @@ module Signore
 
     describe '.find' do
       it 'returns a random Signature by default' do
-        SigFinder.find(sigs, random: Random.new(0)).text
+        _(SigFinder.find(sigs, random: Random.new(0)).text)
           .must_include 'Amateur fighter pilot ignores orders'
-        SigFinder.find(sigs, random: Random.new(1)).text
+        _(SigFinder.find(sigs, random: Random.new(1)).text)
           .must_equal '// sometimes I believe compiler ignores all my comments'
       end
 
       it 'returns a random signature if the tags are empty' do
-        SigFinder.find(sigs, tags: Tags.new, random: Random.new(1)).text
+        _(SigFinder.find(sigs, tags: Tags.new, random: Random.new(1)).text)
           .must_equal '// sometimes I believe compiler ignores all my comments'
       end
 
       it 'returns a random signature based on provided tags' do
-        SigFinder.find(sigs, tags: Tags.new(required: %w(programming))).text
+        _(SigFinder.find(sigs, tags: Tags.new(required: %w(programming))).text)
           .must_equal '// sometimes I believe compiler ignores all my comments'
-        SigFinder.find(sigs, tags: Tags.new(required: %w(work))).text
+        _(SigFinder.find(sigs, tags: Tags.new(required: %w(work))).text)
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end
 
       it 'returns a random signature based on required and forbidden tags' do
         tags = Tags.new(forbidden: %w(programming security), required: %w(tech))
-        SigFinder.find(sigs, tags: tags).text
+        _(SigFinder.find(sigs, tags: tags).text)
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end
 
       it 'returns a null object if there are no results' do
-        SigFinder.find([]).must_equal Signature.new
+        _(SigFinder.find([])).must_equal Signature.new
       end
     end
   end
