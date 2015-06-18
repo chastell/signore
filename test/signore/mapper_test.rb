@@ -24,13 +24,13 @@ module Signore
 
     describe '.from_h' do
       it 'deserializes a Signature from a Hash' do
-        Mapper.from_h(sig_hash).must_equal signature
+        _(Mapper.from_h(sig_hash)).must_equal signature
       end
     end
 
     describe '.to_h' do
       it 'serialises a Signature to a Hash' do
-        Mapper.to_h(signature).must_equal sig_hash
+        _(Mapper.to_h(signature)).must_equal sig_hash
       end
     end
   end
