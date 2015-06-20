@@ -16,13 +16,13 @@ module Signore
 
       it 'saves the provided signature to disk' do
         Repo.new(path: path) << sig
-        path.read.must_include text
+        _(path.read).must_include text
       end
 
       it 'rewrites legacy YAML files on save' do
         FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
         Repo.new(path: path) << sig
-        path.read.wont_include 'Signore::Signature'
+        _(path.read).wont_include 'Signore::Signature'
       end
     end
 
@@ -35,20 +35,20 @@ module Signore
 
       it 'returns a random signature by default' do
         stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
-        repo.find.must_equal sigs.last
+        _(repo.find).must_equal sigs.last
       end
 
       it 'returns a random signature based on required and forbidden tags' do
         tags = Tags.new(forbidden: %w(tech), required: %w(programming security))
         stub(sig_finder).find(sigs, tags: tags) { sigs.last }
-        repo.find(tags: tags).must_equal sigs.last
+        _(repo.find(tags: tags)).must_equal sigs.last
       end
 
       it 'doesn’t blow up if the path is missing' do
         begin
           tempdir = Dir.mktmpdir
           path = Pathname.new("#{tempdir}/some_intermediate_dir/sigs.yml")
-          Repo.new(path: path).find(tags: Tags.new).must_equal Signature.new
+          _(Repo.new(path: path).find(tags: Tags.new)).must_equal Signature.new
         ensure
           FileUtils.rmtree tempdir
         end
@@ -58,7 +58,7 @@ module Signore
         path = Pathname.new('test/fixtures/signatures.legacy.yml')
         repo = Repo.new(path: path, sig_finder: sig_finder)
         stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
-        repo.find.must_equal sigs.last
+        _(repo.find).must_equal sigs.last
       end
     end
 
@@ -66,9 +66,9 @@ module Signore
       it 'returns all the Signatures from the Repo' do
         path = Pathname.new('test/fixtures/signatures.yml')
         sigs = Repo.new(path: path).sigs
-        sigs.size.must_equal 6
-        sigs.first.author.must_equal 'Clive James'
-        sigs.last.subject.must_equal 'Star Wars ending explained'
+        _(sigs.size).must_equal 6
+        _(sigs.first.author).must_equal 'Clive James'
+        _(sigs.last.subject).must_equal 'Star Wars ending explained'
       end
     end
   end
