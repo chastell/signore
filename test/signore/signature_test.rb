@@ -12,18 +12,18 @@ module Signore
         sig = Signature.new(author: 'Paul E. Ceruzzi', source: source,
                             subject: 'on Wallace Eckert',
                             tags: ['punched cards'], text: text)
-        sig.author.must_equal 'Paul E. Ceruzzi'
-        sig.source.must_equal source
-        sig.subject.must_equal 'on Wallace Eckert'
-        sig.tags.must_equal ['punched cards']
-        sig.text.must_equal text
+        _(sig.author).must_equal 'Paul E. Ceruzzi'
+        _(sig.source).must_equal source
+        _(sig.subject).must_equal 'on Wallace Eckert'
+        _(sig.tags).must_equal ['punched cards']
+        _(sig.text).must_equal text
       end
 
       it 'nils empty parameters' do
         new = Signature.new(author: '', source: '', subject: '', tags: [],
                             text: '')
-        new.must_equal Signature.new(author: nil, source: nil, subject: nil,
-                                     tags: nil, text: nil)
+        _(new).must_equal Signature.new(author: nil, source: nil, subject: nil,
+                                        tags: nil, text: nil)
       end
     end
 
@@ -33,9 +33,9 @@ module Signore
         sig  = Signature.new(author: 'Anonymous Coward', source: '/.',
                              subject: 'on ‘Monty Wants to Save MySQL’',
                              tags: %w(/. MySQL), text: text)
-        sig.to_h.must_equal 'author' => 'Anonymous Coward', 'source' => '/.',
-                            'subject' => 'on ‘Monty Wants to Save MySQL’',
-                            'tags' => %w(/. MySQL), 'text' => text
+        _(sig.to_h).must_equal 'author' => 'Anonymous Coward', 'source' => '/.',
+                               'subject' => 'on ‘Monty Wants to Save MySQL’',
+                               'tags' => %w(/. MySQL), 'text' => text
       end
 
       it 'removes non-existing keys' do
@@ -47,13 +47,13 @@ module Signore
       it 'does not show meta if there’s nothing to show' do
         text = '// sometimes I believe compiler ignores all my comments'
         sig  = Signature.new(text: text)
-        sig.to_s.must_equal text
+        _(sig.to_s).must_equal text
       end
 
       it 'shows author on its own' do
         sig = Signature.new(author: 'kodz',
                             text: 'stay-at-home executives vs. wallstreet dads')
-        sig.to_s.must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<-end.dedent.strip
           stay-at-home executives vs. wallstreet dads
                                                [kodz]
         end
@@ -62,7 +62,7 @@ module Signore
       it 'shows author and source, comma-separated' do
         text = 'You do have to be mad to work here, but it doesn’t help.'
         sig  = Signature.new(author: 'Gary Barnes', source: 'asr', text: text)
-        sig.to_s.must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<-end.dedent.strip
           You do have to be mad to work here, but it doesn’t help.
                                                 [Gary Barnes, asr]
         end
@@ -71,7 +71,7 @@ module Signore
       it 'shows source on its own' do
         text = 'Bruce Schneier knows Alice and Bob’s shared secret.'
         sig  = Signature.new(source: 'Bruce Schneier Facts', text: text)
-        sig.to_s.must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<-end.dedent.strip
           Bruce Schneier knows Alice and Bob’s shared secret.
                                        [Bruce Schneier Facts]
         end
@@ -82,7 +82,7 @@ module Signore
         'in the same way a midget is good at being short.'
         sig = Signature.new(author: 'Clive James', subject: 'on Marilyn Monroe',
                             text: text)
-        sig.to_s.must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<-end.dedent.strip
           She was good at playing abstract confusion in
           the same way a midget is good at being short.
                         [Clive James on Marilyn Monroe]
@@ -93,7 +93,7 @@ module Signore
         text = 'Amateur fighter pilot ignores orders, listens ' \
           'to the voices in his head and slaughters thousands.'
         sig = Signature.new(subject: 'Star Wars ending explained', text: text)
-        sig.to_s.must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<-end.dedent.strip
           Amateur fighter pilot ignores orders, listens to
           the voices in his head and slaughters thousands.
                               [Star Wars ending explained]
@@ -102,7 +102,7 @@ module Signore
 
       it 'handles edge cases properly' do
         YAML.load_file('test/fixtures/wrapper.yml').each do |sig, wrapped|
-          sig.to_s.must_equal wrapped
+          _(sig.to_s).must_equal wrapped
         end
       end
     end
