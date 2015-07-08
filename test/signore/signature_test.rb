@@ -44,6 +44,10 @@ module Signore
     end
 
     describe '#to_s' do
+      it 'is an empty String for an empty Signature' do
+        _(Signature.new.to_s).must_equal ''
+      end
+
       it 'does not show meta if there’s nothing to show' do
         text = '// sometimes I believe compiler ignores all my comments'
         sig  = Signature.new(text: text)

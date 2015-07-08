@@ -7,6 +7,10 @@ module Signore
       each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
 
+    def text
+      self[:text] or ''
+    end
+
     def to_h
       super.map { |key, val| [key.to_s, val] }.to_h.keep_if { |_, value| value }
     end
