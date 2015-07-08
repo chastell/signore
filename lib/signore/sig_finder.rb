@@ -6,8 +6,8 @@ module Signore
     module_function
 
     def find(sigs, random: Random.new, tags: Tags.new)
-      found = sigs.shuffle(random: random).find { |sig| tags.match?(sig.tags) }
-      found or Signature.new
+      shuffled = sigs.shuffle(random: random)
+      shuffled.find(-> { Signature.new }) { |sig| tags.match?(sig.tags) }
     end
   end
 end
