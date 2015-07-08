@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    signore (0.4.0)
+    signore (0.4.1)
       lovely_rufus (~> 0.3.0)
       private_attr (~> 1.1)
 
