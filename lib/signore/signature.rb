@@ -7,6 +7,7 @@ module Signore
       each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
 
+    undef text if defined?(:text)
     def text
       self[:text] or ''
     end
