@@ -1,4 +1,3 @@
-require 'fileutils'
 require 'yaml/store'
 require_relative 'mapper'
 require_relative 'settings'
@@ -35,8 +34,7 @@ module Signore
     private
 
     def initialise_store
-      FileUtils.mkdir_p path.dirname
-      FileUtils.touch path
+      path.dirname.mkpath
       YAML::Store.new(path).transaction { |store| store['signatures'] = [] }
     end
 
