@@ -10,8 +10,6 @@ module Signore
     def initialize(path: Settings.new.repo_path, sig_finder: SigFinder)
       @path       = path
       @sig_finder = sig_finder
-      initialise_store if path.zero? or not path.exist?
-      @store      = YAML::Store.new(path)
     end
 
     def <<(sig)
@@ -30,18 +28,20 @@ module Signore
       end
     end
 
-    private_attr_reader :path, :sig_finder, :store
+    private_attr_reader :path, :sig_finder
 
     private
-
-    def initialise_store
-      path.dirname.mkpath
-      YAML::Store.new(path).transaction { |store| store['signatures'] = [] }
-    end
 
     def persist
       hashes = sigs.map { |sig| Mapper.to_h(sig) }
       store.transaction { store['signatures'] = hashes }
+    end
+
+    def store
+      @store ||= begin
+        path.dirname.mkpath
+        YAML::Store.new(path)
+      end
     end
   end
 end
