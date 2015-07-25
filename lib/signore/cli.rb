@@ -16,7 +16,7 @@ module Signore
 
     def run(input: $stdin)
       case action
-      when 'prego'  then puts retrieve_sig
+      when 'prego'  then prego
       when 'pronto' then puts create_sig_from(input)
       else abort 'usage: signore prego|pronto [tag, …]'
       end
@@ -25,6 +25,15 @@ module Signore
     private_attr_reader :repo, :settings
 
     private
+
+    def prego
+      sig = repo.find(tags: tags)
+      puts case
+           when repo.empty? then 'No signatures found.'
+           when sig.empty?  then "Sadly no signatures are tagged #{tags}."
+           else sig
+           end
+    end
 
     def create_sig_from(input)
       SigFromStream.sig_from(input, tags: tags).tap { |sig| repo << sig }

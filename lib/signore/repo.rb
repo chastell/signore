@@ -30,6 +30,10 @@ module Signore
 
     private_attr_reader :path, :sig_finder
 
+    def empty?
+      sigs.empty?
+    end
+
     private
 
     def persist
