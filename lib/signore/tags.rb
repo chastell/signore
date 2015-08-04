@@ -8,5 +8,9 @@ module Signore
       sig_tags ||= []
       (required & sig_tags) == required and (forbidden & sig_tags).empty?
     end
+
+    def to_s
+      (required + forbidden.collect { |tag| '~' + tag }).join(' ')
+    end
   end
 end

@@ -37,6 +37,22 @@ module Signore
                                                   [Gary Barnes, asr]
           end
         end
+
+        it 'tells the user if no signatures are found' do
+          path = Pathname.new('test/fixtures/nosignatures.yml')
+          repo = Repo.new(path: path)
+          args = %w(prego)
+          out = capture_io { CLI.new(args, repo: repo).run }.first
+          _(out).must_include 'No signatures found.'
+        end
+
+        it 'tells the user if no signatures with selected tag are found' do
+          path = Pathname.new('test/fixtures/signatures.yml')
+          repo = Repo.new(path: path)
+          args = %w(prego esse ~percipi)
+          out = capture_io { CLI.new(args, repo: repo).run }.first
+          _(out).must_include 'Sadly no signatures are tagged esse ~percipi.'
+        end
       end
 
       describe 'pronto' do

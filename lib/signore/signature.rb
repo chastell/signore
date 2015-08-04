@@ -23,6 +23,10 @@ module Signore
       squeezed + meta_for(squeezed)
     end
 
+    def empty?
+      to_s.empty?
+    end
+
     private
 
     def indent_size_for(text)
