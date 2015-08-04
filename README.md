@@ -86,4 +86,4 @@ signore stores the signatures in a YAML file (for ease of editing, if such a nee
 
 ---
 
-© MMIX-MMXIV Piotr Szotkowski <chastell@chastell.net>, licensed under AGPL-3.0 (see LICENCE)
+© MMIX-MMXV Piotr Szotkowski <chastell@chastell.net>, licensed under AGPL-3.0 (see LICENCE)
