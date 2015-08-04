@@ -84,13 +84,6 @@ signore stores the signatures in a YAML file (for ease of editing, if such a nee
 
 
 
-Requirements
-------------
-
-signore requires Ruby 1.9 and works best with Ruby 1.9.2 compiled with Psych (for sanity when hand-editing the YAML file, if it happens to sport non-US-ASCII characters).
-
-
-
 ---
 
 © MMIX-MMXIV Piotr Szotkowski <chastell@chastell.net>, licensed under AGPL-3.0 (see LICENCE)
