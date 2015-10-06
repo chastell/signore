@@ -17,6 +17,10 @@ module Signore
       persist
     end
 
+    def empty?
+      sigs.empty?
+    end
+
     def find(tags: Tags.new)
       sig_finder.find(sigs, tags: tags)
     end
@@ -28,13 +32,9 @@ module Signore
       end
     end
 
-    private_attr_reader :path, :sig_finder
-
-    def empty?
-      sigs.empty?
-    end
-
     private
+
+    private_attr_reader :path, :sig_finder
 
     def persist
       hashes = sigs.map { |sig| Mapper.to_h(sig) }
