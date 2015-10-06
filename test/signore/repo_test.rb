@@ -9,8 +9,9 @@ require_relative '../../lib/signore/tags'
 
 module Signore
   describe Repo do
+    let(:path) { Pathname.new(Tempfile.new('').path) }
+
     describe '#<<' do
-      let(:path) { Pathname.new(Tempfile.new('').path)                     }
       let(:sig)  { Signature.new(text: text)                               }
       let(:text) { 'Normaliser Unix c’est comme pasteuriser le camembert.' }
 
@@ -23,6 +24,17 @@ module Signore
         FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
         Repo.new(path: path) << sig
         _(path.read).wont_include 'Signore::Signature'
+      end
+    end
+
+    describe '#empty?' do
+      it 'is true when a repo is empty' do
+        assert Repo.new(path: path).empty?
+      end
+
+      it 'is false when a repo is not empty' do
+        path = Pathname.new('test/fixtures/signatures.legacy.yml')
+        refute Repo.new(path: path).empty?
       end
     end
 
