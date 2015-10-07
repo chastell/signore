@@ -2,7 +2,7 @@ require 'yaml'
 require_relative '../test_helper'
 require_relative '../../lib/signore/signature'
 
-module Signore
+module Signore # rubocop:disable Metrics/ModuleLength
   describe Signature do
     describe '.new' do
       it 'instantiates Signatures via parameters' do
@@ -24,6 +24,16 @@ module Signore
                             text: '')
         _(new).must_equal Signature.new(author: nil, source: nil, subject: nil,
                                         tags: nil, text: nil)
+      end
+    end
+
+    describe '#empty?' do
+      it 'is true when the Signature is a null object' do
+        assert Signature.new.empty?
+      end
+
+      it 'is false when the Signature has some text' do
+        refute Signature.new(text: 'Node.jk').empty?
       end
     end
 

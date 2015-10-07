@@ -7,6 +7,10 @@ module Signore
       each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
 
+    def empty?
+      to_s.empty?
+    end
+
     undef text if defined?(:text)
     def text
       self[:text] or ''
@@ -21,10 +25,6 @@ module Signore
       wrapped  = LovelyRufus.wrap(spaced, width: 80)
       squeezed = wrapped.gsub("\n\n", "\n").chomp
       squeezed + meta_for(squeezed)
-    end
-
-    def empty?
-      to_s.empty?
     end
 
     private
