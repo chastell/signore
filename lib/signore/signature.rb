@@ -2,9 +2,8 @@ require 'lovely_rufus'
 
 module Signore
   Signature = Struct.new(*%i(text author source subject tags)) do
-    def initialize(author: nil, source: nil, subject: nil, tags: nil, text: nil)
+    def initialize(author: '', source: '', subject: '', tags: [], text: '')
       super text, author, source, subject, tags
-      each_pair { |key, value| self[key] = nil if value and value.empty? }
     end
 
     def empty?
@@ -17,7 +16,9 @@ module Signore
     end
 
     def to_h
-      super.map { |key, val| [key.to_s, val] }.to_h.keep_if { |_, value| value }
+      super.map { |key, val| [key.to_s, val] }.to_h.keep_if do |_, value|
+        value and not value.empty?
+      end
     end
 
     def to_s
@@ -35,8 +36,8 @@ module Signore
     end
 
     def meta
-      stem = [author, subject].compact.join(' ')
-      stem.empty? ? "#{source}" : [stem, source].compact.join(', ')
+      stem = [author, subject].reject(&:empty?).join(' ')
+      stem.empty? ? "#{source}" : [stem, source].reject(&:empty?).join(', ')
     end
 
     def meta_for(text)
