@@ -10,7 +10,7 @@ module Signore
     end
 
     def to_s
-      (required + forbidden.collect { |tag| '~' + tag }).join(' ')
+      (required + forbidden.map { |tag| '~' + tag }).join(' ')
     end
   end
 end

@@ -16,5 +16,15 @@ module Signore
         refute Tags.new(forbidden: %w(tech), required: %w(tech)).match?(tags)
       end
     end
+
+    describe '#to_s' do
+      it 'returns a CLI-like representation of the Tags' do
+        _(Tags.new.to_s).must_equal ''
+        _(Tags.new(required: %w(tech)).to_s).must_equal 'tech'
+        _(Tags.new(forbidden: %w(fnord)).to_s).must_equal '~fnord'
+        _(Tags.new(forbidden: %w(fnord), required: %w(tech)).to_s)
+          .must_equal 'tech ~fnord'
+      end
+    end
   end
 end
