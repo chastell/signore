@@ -37,7 +37,7 @@ module Signore
 
     def meta
       stem = [author, subject].reject(&:empty?).join(' ')
-      stem.empty? ? "#{source}" : [stem, source].reject(&:empty?).join(', ')
+      [stem, source].reject(&:empty?).join(', ')
     end
 
     def meta_for(text)
