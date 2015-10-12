@@ -6,8 +6,8 @@ module Signore
     describe '#match?' do
       it 'is a predicate whether the Tags match the given list of tags' do
         tags = %w(programming tech)
-        assert Tags.new.match?(nil)
-        assert Tags.new(forbidden: %w(fnord)).match?(nil)
+        assert Tags.new.match?([])
+        assert Tags.new(forbidden: %w(fnord)).match?([])
         assert Tags.new.match?(tags)
         assert Tags.new(required: %w(programming)).match?(tags)
         assert Tags.new(required: %w(programming tech)).match?(tags)
