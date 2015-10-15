@@ -51,9 +51,9 @@ module Signore
       end
 
       it 'returns a random signature based on required and forbidden tags' do
-        tags = Tags.new(forbidden: %w(tech), required: %w(programming security))
-        stub(sig_finder).find(sigs, tags: tags) { sigs.last }
-        _(repo.find(tags: tags)).must_equal sigs.last
+        tags = Tags.new(forbidden: %w(programming security), required: %w(tech))
+        stub(sig_finder).find(sigs, tags: tags) { sigs.first }
+        _(repo.find(tags: tags)).must_equal sigs.first
       end
 
       it 'doesn’t blow up if the path is missing' do
@@ -79,7 +79,7 @@ module Signore
         path = Pathname.new('test/fixtures/signatures.yml')
         sigs = Repo.new(path: path).sigs
         _(sigs.size).must_equal 6
-        _(sigs.first.author).must_equal 'Clive James'
+        _(sigs.first.author).must_equal 'Gary Barnes'
         _(sigs.last.subject).must_equal 'Star Wars ending explained'
       end
     end

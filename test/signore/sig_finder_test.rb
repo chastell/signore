@@ -5,6 +5,8 @@ require_relative '../../lib/signore/tags'
 
 module Signore
   describe SigFinder do
+    verify_contract SigFinder
+
     let(:sigs) do
       Repo.new(path: Pathname.new('test/fixtures/signatures.yml')).sigs
     end
@@ -20,8 +22,8 @@ module Signore
       end
 
       it 'returns a random signature if the tags are empty' do
-        _(SigFinder.new(random: Random.new(1)).find(sigs, tags: Tags.new).text)
-          .must_equal '// sometimes I believe compiler ignores all my comments'
+        _(SigFinder.new(random: Random.new(0)).find(sigs, tags: Tags.new).text)
+          .must_include 'Amateur fighter pilot ignores orders'
       end
 
       it 'returns a random signature based on provided tags' do
