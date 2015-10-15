@@ -41,7 +41,7 @@ module Signore
     describe '#find' do
       let(:path)       { Pathname.new('test/fixtures/signatures.yml') }
       let(:repo)       { Repo.new(path: path, sig_finder: sig_finder) }
-      let(:sig_finder) { fake(:sig_finder, as: :class)                }
+      let(:sig_finder) { fake(SigFinder)                              }
       let(:sigs)       { repo.sigs                                    }
       let(:store)      { YAML::Store.new(path)                        }
 
