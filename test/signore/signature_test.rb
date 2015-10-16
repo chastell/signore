@@ -93,14 +93,12 @@ module Signore # rubocop:disable Metrics/ModuleLength
       end
 
       it 'shows author and subject, space separated' do
-        text = 'She was good at playing abstract confusion ' \
-        'in the same way a midget is good at being short.'
-        sig = Signature.new(author: 'Clive James', subject: 'on Marilyn Monroe',
-                            text: text)
+        text = 'More gangland camp than neo-noir.'
+        sig = Signature.new(author: 'Nicholas Christopher',
+                            subject: 'on Pulp Fiction', text: text)
         _(sig.to_s).must_equal <<-end.dedent.strip
-          She was good at playing abstract confusion in
-          the same way a midget is good at being short.
-                        [Clive James on Marilyn Monroe]
+          More gangland camp than neo-noir.
+          [Nicholas Christopher on Pulp Fiction]
         end
       end
 

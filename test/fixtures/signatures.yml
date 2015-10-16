@@ -3,9 +3,9 @@ signatures:
   author: Gary Barnes
   source: asr
   tags: [tech, work]
-- text: She was good at playing abstract confusion in the same way a midget is good at being short.
-  author: Clive James
-  subject: on Marilyn Monroe
+- text: More gangland camp than neo-noir.
+  author: Nicholas Christopher
+  subject: on Pulp Fiction
 - text: // sometimes I believe compiler ignores all my comments
   tags: [programming, tech]
 - text: Bruce Schneier knows Alice and Bob’s shared secret.

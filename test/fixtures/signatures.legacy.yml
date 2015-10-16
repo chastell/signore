@@ -5,9 +5,9 @@ signatures:
   source: asr
   tags: [tech, work]
 - !ruby/struct:Signore::Signature
-  text: She was good at playing abstract confusion in the same way a midget is good at being short.
-  author: Clive James
-  subject: on Marilyn Monroe
+  text: More gangland camp than neo-noir.
+  author: Nicholas Christopher
+  subject: on Pulp Fiction
 - !ruby/struct:Signore::Signature
   text: // sometimes I believe compiler ignores all my comments
   tags: [programming, tech]
