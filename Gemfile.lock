@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     signore (0.4.2)
-      lovely_rufus (~> 0.3.0)
+      lovely_rufus (~> 1.0)
       private_attr (~> 1.1)
 
 GEM
@@ -28,7 +28,7 @@ GEM
     listen (3.0.4)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    lovely_rufus (0.3.2)
+    lovely_rufus (1.0.0)
       private_attr (~> 1.1)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
