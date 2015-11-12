@@ -24,5 +24,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake',           '~> 10.1'
   gem.add_development_dependency 'reek',           '~> 3.1'
   gem.add_development_dependency 'rerun',          '~> 0.11.0'
-  gem.add_development_dependency 'rubocop',        '~> 0.34.0'
+  gem.add_development_dependency 'rubocop',        '~> 0.35.0'
 end
