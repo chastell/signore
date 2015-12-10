@@ -11,6 +11,7 @@ module Signore
       args.first
     end
 
+    # :reek:UtilityFunction
     def repo_path
       dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path('~/.local/share') }
       Pathname.new("#{dir}/signore/signatures.yml")
