@@ -1,10 +1,2 @@
-FeatureEnvy:
-  exclude:
-    - Signore::Settings#forbidden
-
 IrresponsibleModule:
   enabled: false
-
-UtilityFunction:
-  exclude:
-    - Signore::Settings#repo_path
