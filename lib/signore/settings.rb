@@ -17,20 +17,13 @@ module Signore
     end
 
     def tags
-      Tags.new(forbidden: forbidden, required: required)
+      negated, required = tag_names.partition { |name| name.start_with?('~') }
+      Tags.new(forbidden: negated.map { |neg| neg[1..-1] }, required: required)
     end
 
     private_attr_reader :args
 
     private
-
-    def forbidden
-      tag_names.select { |tag| tag.start_with?('~') }.map { |tag| tag[1..-1] }
-    end
-
-    def required
-      tag_names.reject { |tag| tag.start_with?('~') }
-    end
 
     def tag_names
       args[1..-1] or []
