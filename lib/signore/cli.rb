@@ -38,9 +38,5 @@ module Signore
     def create_sig_from(input)
       SigFromStream.sig_from(input, tags: tags).tap { |sig| repo << sig }
     end
-
-    def retrieve_sig
-      repo.find(tags: tags)
-    end
   end
 end
