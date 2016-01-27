@@ -36,7 +36,7 @@ module Signore
 
     private
 
-    private_attr_reader :path, :sig_finder
+    attr_reader :path, :sig_finder
 
     def persist
       hashes = sigs.map { |sig| Mapper.to_h(sig) }

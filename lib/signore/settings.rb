@@ -22,9 +22,9 @@ module Signore
       Tags.new(forbidden: negated.map { |neg| neg[1..-1] }, required: required)
     end
 
-    private_attr_reader :args
-
     private
+
+    attr_reader :args
 
     def tag_names
       args[1..-1] or []

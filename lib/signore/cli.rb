@@ -22,9 +22,9 @@ module Signore
       end
     end
 
-    private_attr_reader :repo, :settings
-
     private
+
+    attr_reader :repo, :settings
 
     def prego
       sig = repo.find(tags: tags)

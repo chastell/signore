@@ -14,6 +14,6 @@ module Signore
 
     private
 
-    private_attr_reader :random
+    attr_reader :random
   end
 end

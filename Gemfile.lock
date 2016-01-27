@@ -3,7 +3,6 @@ PATH
   specs:
     signore (0.4.2)
       lovely_rufus (~> 1.0)
-      private_attr (~> 1.1)
 
 GEM
   remote: https://rubygems.org/

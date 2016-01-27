@@ -20,9 +20,9 @@ module Signore
                     text: params.text)
     end
 
-    private_attr_reader :input, :tags
-
     private
+
+    attr_reader :input, :tags
 
     def get_param(param)
       puts "#{param}?"

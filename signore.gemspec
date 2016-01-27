@@ -24,7 +24,6 @@ Gem::Specification.new do |gem|
   end
 
   gem.add_dependency 'lovely_rufus', '~> 1.0'
-  gem.add_dependency 'private_attr', '~> 1.1'
 
   gem.add_development_dependency 'bogus',          '~> 0.1.3'
   gem.add_development_dependency 'minitest',       '~> 5.6'
