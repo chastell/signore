@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Signore
   Tags = Struct.new(:forbidden, :required) do
     def initialize(forbidden: [], required: [])

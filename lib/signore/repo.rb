@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml/store'
 require_relative 'mapper'
 require_relative 'settings'

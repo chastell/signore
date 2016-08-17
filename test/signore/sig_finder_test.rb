@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml/store'
 require_relative '../test_helper'
 require_relative '../../lib/signore/sig_finder'
