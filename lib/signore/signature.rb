@@ -34,7 +34,7 @@ module Signore
 
     def indent_size_for(text)
       indent = text.split("\n").map(&:size).max - meta.size - 2
-      indent < 0 ? 0 : indent
+      indent.negative? ? 0 : indent
     end
 
     def meta
