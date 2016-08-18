@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'signature'
 require_relative 'tags'
 
@@ -26,9 +28,9 @@ module Signore
 
     def get_param(param)
       puts "#{param}?"
-      ''.tap do |value|
-        value << input.gets until value.lines.to_a.last == "\n"
-      end.strip
+      value = ''
+      value += input.gets until value.lines.to_a.last == "\n"
+      value.strip
     end
 
     def params
