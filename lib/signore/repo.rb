@@ -12,6 +12,7 @@ module Signore
     def initialize(path: Settings.new.repo_path, sig_finder: SigFinder.new)
       @path       = path
       @sig_finder = sig_finder
+      persist if legacy?
     end
 
     def <<(sig)
@@ -39,6 +40,10 @@ module Signore
     private
 
     attr_reader :path, :sig_finder
+
+    def legacy?
+      path.exist? and path.read.include?('Signore::Signature')
+    end
 
     def persist
       hashes = sigs.map { |sig| Mapper.to_h(sig) }

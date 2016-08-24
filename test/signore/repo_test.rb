@@ -13,6 +13,14 @@ module Signore
   describe Repo do
     let(:path) { Pathname.new(Tempfile.new('').path) }
 
+    describe '.new' do
+      it 'rewrites legacy file to hashes on first access' do
+        FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
+        Repo.new(path: path)
+        _(path.read).wont_include 'Signore::Signature'
+      end
+    end
+
     describe '#<<' do
       let(:sig)  { Signature.new(text: text)                               }
       let(:text) { 'Normaliser Unix c’est comme pasteuriser le camembert.' }
@@ -35,7 +43,7 @@ module Signore
       end
 
       it 'is false when a repo is not empty' do
-        path = Pathname.new('test/fixtures/signatures.legacy.yml')
+        FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
         refute Repo.new(path: path).empty?
       end
     end
@@ -69,7 +77,8 @@ module Signore
       end
 
       it 'keeps working with legacy YAML files' do
-        path = Pathname.new('test/fixtures/signatures.legacy.yml')
+        path = Pathname.new(Tempfile.new('').path)
+        FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
         repo = Repo.new(path: path, sig_finder: sig_finder)
         stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
         _(repo.find).must_equal sigs.last
