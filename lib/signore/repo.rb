@@ -16,8 +16,7 @@ module Signore
     end
 
     def <<(sig)
-      sigs << sig
-      persist
+      store.transaction { (store['signatures'] ||= []) << Mapper.to_h(sig) }
     end
 
     def empty?
