@@ -29,10 +29,8 @@ module Signore
 
     def sigs
       @sigs ||= begin
-        elems = store.transaction(true) { store.fetch('signatures', []) }
-        elems.map do |elem|
-          elem.is_a?(Signature) ? Mapper.from_h(elem.to_h) : Mapper.from_h(elem)
-        end
+        hashes = store.transaction(true) { store.fetch('signatures', []) }
+        hashes.map(&Mapper.method(:from_h))
       end
     end
 
