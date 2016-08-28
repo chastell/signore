@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'forwardable'
 require 'yaml/store'
 require_relative 'mapper'
 require_relative 'settings'
@@ -8,6 +9,8 @@ require_relative 'tags'
 
 module Signore
   class Repo
+    extend Forwardable
+
     def initialize(path: Settings.new.repo_path, sig_finder: SigFinder.new)
       @path       = path
       @sig_finder = sig_finder
@@ -18,9 +21,7 @@ module Signore
       store.transaction { (store['signatures'] ||= []) << Mapper.to_h(sig) }
     end
 
-    def empty?
-      sigs.empty?
-    end
+    delegate empty?: :sigs
 
     def find(tags: Tags.new)
       sig_finder.find(sigs, tags: tags)
