@@ -4,7 +4,6 @@ require 'yaml/store'
 require_relative 'mapper'
 require_relative 'settings'
 require_relative 'sig_finder'
-require_relative 'signature'
 require_relative 'tags'
 
 module Signore
