@@ -34,7 +34,7 @@ module Signore
     end
 
     def params
-      @params ||= Params.new(*Params.members.map { |name| get_param(name) })
+      @params ||= Params.new(*Params.members.map(&method(:get_param)))
     end
   end
 end
