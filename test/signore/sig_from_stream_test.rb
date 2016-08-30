@@ -23,9 +23,7 @@ module Signore
 
           Gary Barnes
 
-
           asr
-
         end
         sig = nil
         capture_io { sig = SigFromStream.sig_from input }
@@ -39,9 +37,10 @@ module Signore
           ‘You’ve got an interesting accent. Subtle. I can’t place it.’
           ‘It’s text-to-speech… I was raised by smartphones.’
 
-          Patrick Ewing\n\n\n
-        end
+          Patrick Ewing
 
+
+        end
         sig = nil
         capture_io { sig = SigFromStream.sig_from input }
         text = <<-end.dedent.strip
