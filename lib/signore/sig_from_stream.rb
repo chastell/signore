@@ -28,17 +28,13 @@ module Signore
 
     def get_param(param)
       puts "#{param}?"
-      param == :text ? multiline : oneline
+      param == :text ? multiline : input.gets.strip
     end
 
     def multiline
       value = ''
       value += input.gets until value.lines.to_a.last == "\n"
       value.strip
-    end
-
-    def oneline
-      input.gets.strip
     end
 
     def params
