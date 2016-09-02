@@ -5,8 +5,6 @@ require_relative 'tags'
 
 module Signore
   class SigFromStream
-    Params = Struct.new(*%i(text author subject source))
-
     def self.sig_from(input, tags: Tags.new)
       new(input, tags: tags).to_sig
     end
@@ -25,6 +23,8 @@ module Signore
     private
 
     attr_reader :input, :tags
+
+    Params = Struct.new(*%i(text author subject source))
 
     def get_param(param)
       puts "#{param}?"
