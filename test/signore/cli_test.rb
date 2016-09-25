@@ -70,8 +70,11 @@ module Signore
           out  = capture_io { CLI.new(args, repo: repo).run input: input }.first
           _(out).must_equal <<-end.dedent
             text?
+
             author?
+
             subject?
+
             source?
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                   [Mark Pilgrim]
@@ -94,8 +97,11 @@ module Signore
           io = capture_io { CLI.new(['pronto'], repo: repo).run input: input }
           _(io.first).must_equal <<-end.dedent
             text?
+
             author?
+
             subject?
+
             source?
             ‘You’ve got an interesting accent. Subtle. I can’t place it.’
             ‘It’s text-to-speech… I was raised by smartphones.’

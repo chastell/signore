@@ -11,8 +11,11 @@ module Signore
         io = capture_io { SigFromStream.sig_from StringIO.new("\n\n\n\n") }
         _(io.first).must_equal <<-end.dedent
           text?
+
           author?
+
           subject?
+
           source?
         end
       end

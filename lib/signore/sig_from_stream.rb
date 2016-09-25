@@ -27,6 +27,7 @@ module Signore
     Params = Struct.new(*%i(text author subject source))
 
     def get_param(param)
+      puts unless param == :text
       puts "#{param}?"
       param == :text ? multiline : input.gets.strip
     end
