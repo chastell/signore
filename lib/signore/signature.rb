@@ -3,7 +3,7 @@
 require 'lovely_rufus'
 
 module Signore
-  Signature = Struct.new(*%i(text author source subject tags)) do
+  Signature = Struct.new(:text, :author, :source, :subject, :tags) do
     def initialize(author: '', source: '', subject: '', tags: [], text: '')
       super text, author, source, subject, tags
     end

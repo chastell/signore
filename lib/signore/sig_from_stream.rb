@@ -24,7 +24,7 @@ module Signore
 
     attr_reader :input, :tags
 
-    Params = Struct.new(*%i(text author subject source))
+    Params = Struct.new(:text, :author, :subject, :source)
 
     def get_param(param)
       puts unless param == :text
