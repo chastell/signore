@@ -35,10 +35,6 @@ module Signore
 
     def get_text # rubocop:disable Style/AccessorMethodName
       puts 'text?'
-      multiline
-    end
-
-    def multiline
       value = ''
       value += input.gets until value.lines.to_a.last == "\n"
       value.strip
