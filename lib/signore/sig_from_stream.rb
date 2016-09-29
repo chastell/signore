@@ -33,7 +33,8 @@ module Signore
       input.gets.strip
     end
 
-    def get_text # rubocop:disable Style/AccessorMethodName
+    # :reek:FeatureEnvy
+    def get_text # rubocop:disable AccessorMethodName
       puts 'text?'
       value = ''
       value += input.gets until value.lines.to_a.last == "\n"
