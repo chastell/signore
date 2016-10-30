@@ -38,7 +38,7 @@ module Signore
     end
 
     def create_sig_from(input)
-      SigFromStream.sig_from(input, tags: tags).tap { |sig| repo << sig }
+      SigFromStream.call(input, tags: tags).tap { |sig| repo << sig }
     end
   end
 end

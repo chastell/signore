@@ -5,7 +5,7 @@ require_relative 'tags'
 
 module Signore
   class SigFromStream
-    def self.sig_from(input, tags: Tags.new)
+    def self.call(input, tags: Tags.new)
       new(input, tags: tags).to_sig
     end
 

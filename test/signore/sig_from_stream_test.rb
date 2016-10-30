@@ -6,9 +6,9 @@ require_relative '../../lib/signore/sig_from_stream'
 
 module Signore
   describe SigFromStream do
-    describe '.sig_from' do
+    describe '.call' do
       it 'asks about signature parts' do
-        io = capture_io { SigFromStream.sig_from StringIO.new("\n\n\n\n") }
+        io = capture_io { SigFromStream.call StringIO.new("\n\n\n\n") }
         _(io.first).must_equal <<-end.dedent
           text?
 
@@ -29,7 +29,7 @@ module Signore
           asr
         end
         sig = nil
-        capture_io { sig = SigFromStream.sig_from input }
+        capture_io { sig = SigFromStream.call input }
         text = 'You do have to be mad to work here, but it doesn’t help.'
         _(sig).must_equal Signature.new(author: 'Gary Barnes', source: 'asr',
                                         text: text)
@@ -45,7 +45,7 @@ module Signore
 
         end
         sig = nil
-        capture_io { sig = SigFromStream.sig_from input }
+        capture_io { sig = SigFromStream.call input }
         text = <<-end.dedent.strip
           ‘You’ve got an interesting accent. Subtle. I can’t place it.’
           ‘It’s text-to-speech… I was raised by smartphones.’
