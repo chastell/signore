@@ -6,7 +6,7 @@ require_relative 'tags'
 module Signore
   class SigFromStream
     def self.call(input, tags: Tags.new)
-      new(input, tags: tags).to_sig
+      new(input, tags: tags).call
     end
 
     def initialize(input, tags: Tags.new)
@@ -14,7 +14,7 @@ module Signore
       @tags  = tags
     end
 
-    def to_sig
+    def call
       Signature.new(author: params.author, source: params.source,
                     subject: params.subject, tags: tags.required,
                     text: params.text)
