@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
+require 'procto'
 require_relative 'signature'
 require_relative 'tags'
 
 module Signore
   class SigFromStream
-    def self.call(input, tags: Tags.new)
-      new(input, tags: tags).call
-    end
+    include Procto.call
 
     def initialize(input, tags: Tags.new)
       @input = input
