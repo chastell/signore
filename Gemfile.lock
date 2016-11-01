@@ -14,7 +14,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     bogus (0.1.6)
       dependor (>= 0.0.4)
-    codeclimate-engine-rb (0.3.1)
+    codeclimate-engine-rb (0.4.0)
       virtus (~> 1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -32,8 +32,8 @@ GEM
     powerpack (0.1.1)
     rainbow (2.1.0)
     rake (11.3.0)
-    reek (4.4.2)
-      codeclimate-engine-rb (~> 0.3.1)
+    reek (4.5.1)
+      codeclimate-engine-rb (~> 0.4.0)
       parser (~> 2.3.1, >= 2.3.1.2)
       rainbow (~> 2.0)
     rubocop (0.43.0)
@@ -64,4 +64,4 @@ DEPENDENCIES
   signore!
 
 BUNDLED WITH
-   1.12.1
+   1.13.2
