@@ -3,6 +3,7 @@ PATH
   specs:
     signore (0.6.0)
       lovely_rufus (~> 1.0)
+      procto (~> 0.0.3)
 
 GEM
   remote: https://rubygems.org/
@@ -30,6 +31,7 @@ GEM
     parser (2.3.1.4)
       ast (~> 2.2)
     powerpack (0.1.1)
+    procto (0.0.3)
     rainbow (2.1.0)
     rake (11.3.0)
     reek (4.5.1)
