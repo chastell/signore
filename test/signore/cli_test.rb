@@ -69,6 +69,7 @@ module Signore
           args = %w(pronto Wikipedia ADHD)
           out  = capture_io { CLI.new(args, repo: repo).run input: input }.first
           _(out).must_equal <<-end.dedent
+
             text?
 
             author?
@@ -96,6 +97,7 @@ module Signore
           end
           io = capture_io { CLI.new(['pronto'], repo: repo).run input: input }
           _(io.first).must_equal <<-end.dedent
+
             text?
 
             author?

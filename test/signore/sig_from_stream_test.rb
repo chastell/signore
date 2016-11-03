@@ -10,6 +10,7 @@ module Signore
       it 'asks about signature parts' do
         io = capture_io { SigFromStream.call StringIO.new("\n\n\n\n\n") }
         _(io.first).must_equal <<-end.dedent
+
           text?
 
           author?

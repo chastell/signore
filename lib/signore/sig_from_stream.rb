@@ -26,15 +26,9 @@ module Signore
     Params = Struct.new(:text, :author, :subject, :source)
 
     def get_param(param)
-      return get_text if param == :text
-      puts
-      puts "#{param}?"
-      input.gets.strip
-    end
-
-    def get_text # rubocop:disable AccessorMethodName
-      puts 'text?'
-      input.gets("\n\n").strip
+      puts "\n#{param}?"
+      separator = param == :text ? "\n\n" : "\n"
+      input.gets(separator).strip
     end
 
     def params
