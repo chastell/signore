@@ -29,7 +29,7 @@ module Signore
     attr_reader :args
 
     def tag_names
-      args[1..-1] or []
+      args.empty? ? [] : args[1..-1]
     end
   end
 end
