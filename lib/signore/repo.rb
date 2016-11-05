@@ -17,8 +17,8 @@ module Signore
       convert if legacy?
     end
 
-    def <<(sig)
-      store.transaction { (store['signatures'] ||= []) << Mapper.to_h(sig) }
+    def <<(signature)
+      store.transaction { (store['signatures'] ||= []) << signature.to_h }
     end
 
     delegate empty?: :sigs
