@@ -29,11 +29,5 @@ module Signore
         _(Mapper.from_h(sig_hash)).must_equal signature
       end
     end
-
-    describe '.to_h' do
-      it 'serialises a Signature to a Hash' do
-        _(Mapper.to_h(signature)).must_equal sig_hash
-      end
-    end
   end
 end
