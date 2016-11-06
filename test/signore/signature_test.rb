@@ -7,6 +7,19 @@ require_relative '../../lib/signore/signature'
 
 module Signore # rubocop:disable Metrics/ModuleLength
   describe Signature do
+    describe '.from_h' do
+      it 'deserializes a Signature from a Hash' do
+        text = 'For the sake of topic titles, I’d rather if Monty saved Python.'
+        sig_hash = { 'author' => 'Anonymous Coward', 'source' => '/.',
+                     'subject' => 'on ‘Monty Wants to Save MySQL’',
+                     'tags' => %w(/. MySQL), 'text' => text }
+        signature = Signature.new(author: 'Anonymous Coward', source: '/.',
+                                  subject: 'on ‘Monty Wants to Save MySQL’',
+                                  tags: %w(/. MySQL), text: text)
+        _(Signature.from_h(sig_hash)).must_equal signature
+      end
+    end
+
     describe '.new' do
       it 'instantiates Signatures via parameters' do
         source = 'A History of Modern Computing'
