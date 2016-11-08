@@ -2,7 +2,6 @@
 
 require 'yaml'
 require_relative '../test_helper'
-require_relative '../../lib/signore/mapper'
 require_relative '../../lib/signore/signature'
 
 module Signore # rubocop:disable Metrics/ModuleLength
@@ -130,7 +129,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
 
       it 'handles edge cases properly' do
         YAML.load_file('test/fixtures/wrapper.yml').each do |sig, wrapped|
-          _(Mapper.from_h(sig.to_h).to_s).must_equal wrapped
+          _(Signature.from_h(sig.to_h).to_s).must_equal wrapped
         end
       end
     end

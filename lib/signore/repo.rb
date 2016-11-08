@@ -2,9 +2,9 @@
 
 require 'forwardable'
 require 'yaml/store'
-require_relative 'mapper'
 require_relative 'settings'
 require_relative 'sig_finder'
+require_relative 'signature'
 require_relative 'tags'
 
 module Signore
@@ -30,7 +30,7 @@ module Signore
     def sigs
       @sigs ||= begin
         hashes = store.transaction(true) { store.fetch('signatures', []) }
-        hashes.map(&Mapper.method(:from_h))
+        hashes.map(&Signature.method(:from_h))
       end
     end
 
