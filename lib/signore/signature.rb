@@ -3,6 +3,7 @@
 require 'lovely_rufus'
 
 module Signore
+  # rubocop:disable Metrics/BlockLength
   Signature = Struct.new(:text, :author, :source, :subject, :tags) do
     def self.from_h(hash)
       new(hash.map { |key, value| [key.to_sym, value] }.to_h)
