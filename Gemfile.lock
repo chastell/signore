@@ -28,13 +28,13 @@ GEM
     minitest (5.9.1)
     minitest-focus (1.1.2)
       minitest (>= 4, < 6)
-    parser (2.3.1.4)
+    parser (2.3.2.0)
       ast (~> 2.2)
     powerpack (0.1.1)
     procto (0.0.3)
     rainbow (2.1.0)
     rake (11.3.0)
-    reek (4.5.1)
+    reek (4.5.2)
       codeclimate-engine-rb (~> 0.4.0)
       parser (~> 2.3.1, >= 2.3.1.2)
       rainbow (~> 2.0)
@@ -66,4 +66,4 @@ DEPENDENCIES
   signore!
 
 BUNDLED WITH
-   1.13.2
+   1.13.6
