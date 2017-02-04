@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'forwardable'
 require 'yaml/store'
 require_relative 'settings'

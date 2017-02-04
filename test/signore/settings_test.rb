@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'pathname'
 require 'tmpdir'
 require_relative '../test_helper'

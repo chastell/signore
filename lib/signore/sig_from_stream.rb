@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'procto'
 require_relative 'signature'
 require_relative 'tags'

@@ -11,6 +11,9 @@ Style/Documentation:
 Style/EmptyCaseCondition:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/Not:
   Enabled: false
 
