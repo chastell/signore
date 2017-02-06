@@ -1,3 +1,5 @@
+before_install:
+  - bundle
 cache: bundler
 fast_finish: true
 language: ruby
