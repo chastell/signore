@@ -34,7 +34,7 @@ GEM
     procto (0.0.3)
     rainbow (2.2.1)
     rake (12.0.0)
-    reek (4.5.4)
+    reek (4.5.5)
       codeclimate-engine-rb (~> 0.4.0)
       parser (~> 2.3.1, >= 2.3.1.2)
       rainbow (~> 2.0)
@@ -66,4 +66,4 @@ DEPENDENCIES
   signore!
 
 BUNDLED WITH
-   1.14.3
+   1.14.4
