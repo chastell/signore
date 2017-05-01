@@ -38,8 +38,8 @@ module Signore
 
     describe '#tags' do
       it 'returns the forbidden and required tags' do
-        tags = Tags.new(forbidden: %w(tech), required: %w(en))
-        _(Settings.new(%w(prego ~tech en)).tags).must_equal tags
+        tags = Tags.new(forbidden: %w[tech], required: %w[en])
+        _(Settings.new(%w[prego ~tech en]).tags).must_equal tags
       end
 
       it 'doesn’t blow up on empty args' do

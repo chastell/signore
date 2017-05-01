@@ -9,10 +9,10 @@ module Signore # rubocop:disable Metrics/ModuleLength
         text = 'For the sake of topic titles, I’d rather if Monty saved Python.'
         sig_hash = { 'author' => 'Anonymous Coward', 'source' => '/.',
                      'subject' => 'on ‘Monty Wants to Save MySQL’',
-                     'tags' => %w(/. MySQL), 'text' => text }
+                     'tags' => %w[/. MySQL], 'text' => text }
         signature = Signature.new(author: 'Anonymous Coward', source: '/.',
                                   subject: 'on ‘Monty Wants to Save MySQL’',
-                                  tags: %w(/. MySQL), text: text)
+                                  tags: %w[/. MySQL], text: text)
         _(Signature.from_h(sig_hash)).must_equal signature
       end
     end
@@ -55,10 +55,10 @@ module Signore # rubocop:disable Metrics/ModuleLength
         text = 'For the sake of topic titles, I’d rather if Monty saved Python.'
         sig  = Signature.new(author: 'Anonymous Coward', source: '/.',
                              subject: 'on ‘Monty Wants to Save MySQL’',
-                             tags: %w(/. MySQL), text: text)
+                             tags: %w[/. MySQL], text: text)
         _(sig.to_h).must_equal 'author' => 'Anonymous Coward', 'source' => '/.',
                                'subject' => 'on ‘Monty Wants to Save MySQL’',
-                               'tags' => %w(/. MySQL), 'text' => text
+                               'tags' => %w[/. MySQL], 'text' => text
       end
 
       it 'removes non-existing keys' do

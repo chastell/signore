@@ -7,7 +7,7 @@ module Signore
   class CLI
     extend Forwardable
 
-    delegate %i(action tags) => :settings
+    delegate %i[action tags] => :settings
 
     def initialize(args = ARGV, repo: Repo.new)
       @settings = Settings.new(args)

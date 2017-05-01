@@ -23,14 +23,14 @@ module Signore
         let(:path) { Pathname.new('test/fixtures/signatures.yml') }
 
         it 'prints a signature tagged with the provided tags' do
-          args = %w(prego tech programming)
+          args = %w[prego tech programming]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
           sig  = "// sometimes I believe compiler ignores all my comments\n"
           _(out).must_equal sig
         end
 
         it 'prints a signature based on allowed and forbidden tags' do
-          args = %w(prego ~programming tech ~security)
+          args = %w[prego ~programming tech ~security]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
           _(out).must_equal <<-end.dedent
             You do have to be mad to work here, but it doesn’t help.
@@ -41,7 +41,7 @@ module Signore
         it 'tells the user if no signatures are found' do
           path = Pathname.new('test/fixtures/nosignatures.yml')
           repo = Repo.new(path: path)
-          args = %w(prego)
+          args = %w[prego]
           out = capture_io { CLI.new(args, repo: repo).run }.first
           _(out).must_include 'No signatures found.'
         end
@@ -49,7 +49,7 @@ module Signore
         it 'tells the user if no signatures with selected tag are found' do
           path = Pathname.new('test/fixtures/signatures.yml')
           repo = Repo.new(path: path)
-          args = %w(prego esse ~percipi)
+          args = %w[prego esse ~percipi]
           out = capture_io { CLI.new(args, repo: repo).run }.first
           _(out).must_include 'Sadly no signatures are tagged esse ~percipi.'
         end
@@ -64,7 +64,7 @@ module Signore
 
             Mark Pilgrim\n\n\n
           end
-          args = %w(pronto Wikipedia ADHD)
+          args = %w[pronto Wikipedia ADHD]
           out  = capture_io { CLI.new(args, repo: repo).run input: input }.first
           _(out).must_equal <<-end.dedent
 
@@ -78,7 +78,7 @@ module Signore
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                   [Mark Pilgrim]
           end
-          args = %w(prego Wikipedia ADHD)
+          args = %w[prego Wikipedia ADHD]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
           _(out).must_equal <<-end.dedent
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.

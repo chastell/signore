@@ -27,14 +27,14 @@ module Signore
       end
 
       it 'returns a random signature based on provided tags' do
-        _(sig_finder.find(sigs, tags: Tags.new(required: %w(programming))).text)
+        _(sig_finder.find(sigs, tags: Tags.new(required: %w[programming])).text)
           .must_equal '// sometimes I believe compiler ignores all my comments'
-        _(sig_finder.find(sigs, tags: Tags.new(required: %w(work))).text)
+        _(sig_finder.find(sigs, tags: Tags.new(required: %w[work])).text)
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end
 
       it 'returns a random signature based on required and forbidden tags' do
-        tags = Tags.new(forbidden: %w(programming security), required: %w(tech))
+        tags = Tags.new(forbidden: %w[programming security], required: %w[tech])
         _(sig_finder.find(sigs, tags: tags).text)
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end

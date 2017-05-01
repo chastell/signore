@@ -59,7 +59,7 @@ module Signore
       end
 
       it 'returns a random signature based on required and forbidden tags' do
-        tags = Tags.new(forbidden: %w(programming security), required: %w(tech))
+        tags = Tags.new(forbidden: %w[programming security], required: %w[tech])
         stub(sig_finder).find(sigs, tags: tags) { sigs.first }
         _(repo.find(tags: tags)).must_equal sigs.first
       end
