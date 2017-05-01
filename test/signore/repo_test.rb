@@ -9,7 +9,7 @@ require_relative '../../lib/signore/tags'
 
 module Signore
   describe Repo do
-    let(:path) { Pathname.new(Tempfile.new('').path) }
+    let(:path) { Pathname.new(Tempfile.new.path) }
 
     describe '.new' do
       it 'rewrites legacy file to hashes on first access' do
@@ -75,7 +75,7 @@ module Signore
       end
 
       it 'keeps working with legacy YAML files' do
-        path = Pathname.new(Tempfile.new('').path)
+        path = Pathname.new(Tempfile.new.path)
         FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
         repo = Repo.new(path: path, sig_finder: sig_finder)
         stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }

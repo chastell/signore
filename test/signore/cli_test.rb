@@ -56,7 +56,7 @@ module Signore
       end
 
       describe 'pronto' do
-        let(:repo) { Repo.new(path: Pathname.new(Tempfile.new('').path)) }
+        let(:repo) { Repo.new(path: Pathname.new(Tempfile.new.path)) }
 
         it 'asks about signature parts and saves resulting signature' do
           input = StringIO.new <<-end.dedent
