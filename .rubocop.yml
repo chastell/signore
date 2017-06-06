@@ -16,9 +16,3 @@ Style/FrozenStringLiteralComment:
 
 Style/Not:
   Enabled: false
-
-Style/TrailingCommaInArguments:
-  EnforcedStyleForMultiline: comma
-
-Style/TrailingCommaInLiteral:
-  EnforcedStyleForMultiline: comma
