@@ -1,5 +1,6 @@
 Metrics/BlockLength:
   Exclude:
+    - 'signore.gemspec'
     - 'test/**/*'
 
 Style/AndOr:
