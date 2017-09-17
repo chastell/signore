@@ -21,8 +21,8 @@ module Signore
     end
 
     def to_h
-      super.map { |key, val| [key.to_s, val] }.to_h.keep_if do |_, value|
-        value and not value.empty?
+      super.map { |key, val| [key.to_s, val] }.to_h.reject do |_, value|
+        value.nil? or value.empty?
       end
     end
 

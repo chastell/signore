@@ -20,6 +20,3 @@ Style/FrozenStringLiteralComment:
 
 Style/Not:
   Enabled: false
-
-Style/SafeNavigation:
-  Enabled: false
