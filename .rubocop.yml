@@ -3,6 +3,9 @@ Metrics/BlockLength:
     - 'signore.gemspec'
     - 'test/**/*'
 
+Naming/HeredocDelimiterCase:
+  Enabled: false
+
 Style/AndOr:
   Enabled: false
 
@@ -16,4 +19,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Style/Not:
+  Enabled: false
+
+Style/SafeNavigation:
   Enabled: false
