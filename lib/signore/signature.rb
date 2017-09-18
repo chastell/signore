@@ -21,9 +21,8 @@ module Signore
     end
 
     def to_h
-      super.map { |key, val| [key.to_s, val] }.to_h.reject do |_, value|
-        value.nil? or value.empty?
-      end
+      super.map { |key, val| { key.to_s => val } }.reduce({}, :merge)
+           .compact.reject { |_, val| val.empty? }
     end
 
     def to_s
