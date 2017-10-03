@@ -27,8 +27,7 @@ module Signore
 
     def sigs
       @sigs ||= begin
-        hashes = store.transaction(true) { signatures }
-        hashes.map(&Signature.method(:from_h))
+        signatures.map(&Signature.method(:from_h))
       end
     end
 
@@ -37,9 +36,8 @@ module Signore
     attr_reader :path, :sig_finder
 
     def convert
-      store.transaction do
-        store['signatures'] = signatures.map(&:to_h)
-      end
+      instances = signatures
+      store.transaction { store['signatures'] = instances.map(&:to_h) }
     end
 
     def legacy?
@@ -47,7 +45,7 @@ module Signore
     end
 
     def signatures
-      store.fetch('signatures', [])
+      store.transaction(true) { store.fetch('signatures', []) }
     end
 
     def store
