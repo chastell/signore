@@ -36,8 +36,7 @@ module Signore
     attr_reader :path, :sig_finder
 
     def convert
-      instances = signatures
-      store.transaction { store['signatures'] = instances.map(&:to_h) }
+      self.signatures = signatures.map(&:to_h)
     end
 
     def legacy?
@@ -46,6 +45,10 @@ module Signore
 
     def signatures
       store.transaction(true) { store.fetch('signatures', []) }
+    end
+
+    def signatures=(hashes)
+      store.transaction { store['signatures'] = hashes }
     end
 
     def store
