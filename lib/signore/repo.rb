@@ -26,9 +26,7 @@ module Signore
     end
 
     def sigs
-      @sigs ||= begin
-        signatures.map(&Signature.method(:from_h))
-      end
+      @sigs ||= signatures.map(&Signature.method(:from_h))
     end
 
     private
