@@ -16,7 +16,7 @@ module Signore
     end
 
     def <<(signature)
-      store.transaction { (store['signatures'] ||= []) << signature.to_h }
+      self.signatures = signatures + [signature.to_h]
     end
 
     delegate empty?: :sigs
