@@ -19,7 +19,7 @@ module Signore
       self.signatures = signatures + [signature.to_h]
     end
 
-    delegate empty?: :sigs
+    delegate empty?: :signatures
 
     def find(tags: Tags.new)
       sig_finder.find(sigs, tags: tags)
