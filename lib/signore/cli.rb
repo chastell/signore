@@ -1,6 +1,7 @@
 require 'forwardable'
 require_relative 'repo'
 require_relative 'settings'
+require_relative 'sig_finder'
 require_relative 'sig_from_stream'
 
 module Signore
@@ -27,7 +28,7 @@ module Signore
     attr_reader :repo, :settings
 
     def prego
-      sig = repo.find(tags: tags)
+      sig = SigFinder.new.find(repo.sigs, tags: tags)
       puts case
            when repo.empty? then 'No signatures found.'
            when sig.empty?  then "Sadly no signatures are tagged #{tags}."
