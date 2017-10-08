@@ -63,24 +63,6 @@ module Signore
         stub(sig_finder).find(sigs, tags: tags) { sigs.first }
         _(repo.find(tags: tags)).must_equal sigs.first
       end
-
-      it 'doesn’t blow up if the path is missing' do
-        begin
-          tempdir = Dir.mktmpdir
-          path = Pathname.new("#{tempdir}/some_intermediate_dir/sigs.yml")
-          _(Repo.new(path: path).find(tags: Tags.new)).must_equal Signature.new
-        ensure
-          FileUtils.rmtree tempdir
-        end
-      end
-
-      it 'keeps working with legacy YAML files' do
-        path = Pathname.new(Tempfile.new.path)
-        FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
-        repo = Repo.new(path: path, sig_finder: sig_finder)
-        stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
-        _(repo.find).must_equal sigs.last
-      end
     end
 
     describe '#sigs' do
@@ -90,6 +72,25 @@ module Signore
         _(sigs.size).must_equal 6
         _(sigs.first.author).must_equal 'Gary Barnes'
         _(sigs.last.subject).must_equal 'Star Wars ending explained'
+      end
+
+      it 'keeps working with legacy YAML files' do
+        legacy_path = Pathname.new('test/fixtures/signatures.legacy.yml')
+        temp_path   = Pathname.new(Tempfile.new.path)
+        FileUtils.cp legacy_path, temp_path
+        legacy_repo = Repo.new(path: temp_path)
+        new_repo = Repo.new(path: Pathname.new('test/fixtures/signatures.yml'))
+        _(legacy_repo.sigs).must_equal new_repo.sigs
+      end
+
+      it 'doesn’t blow up if the path is missing' do
+        begin
+          tempdir = Dir.mktmpdir
+          path = Pathname.new("#{tempdir}/some_intermediate_dir/sigs.yml")
+          _(Repo.new(path: path).sigs).must_equal []
+        ensure
+          FileUtils.rmtree tempdir
+        end
       end
     end
   end
