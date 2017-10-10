@@ -21,10 +21,6 @@ module Signore
 
     delegate empty?: :signatures
 
-    def find(tags: Tags.new)
-      sig_finder.find(sigs, tags: tags)
-    end
-
     def sigs
       @sigs ||= signatures.map(&Signature.method(:from_h))
     end

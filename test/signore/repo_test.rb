@@ -46,25 +46,6 @@ module Signore
       end
     end
 
-    describe '#find' do
-      let(:path)       { Pathname.new('test/fixtures/signatures.yml') }
-      let(:repo)       { Repo.new(path: path, sig_finder: sig_finder) }
-      let(:sig_finder) { fake(SigFinder)                              }
-      let(:sigs)       { repo.sigs                                    }
-      let(:store)      { YAML::Store.new(path)                        }
-
-      it 'returns a random signature by default' do
-        stub(sig_finder).find(sigs, tags: Tags.new) { sigs.last }
-        _(repo.find).must_equal sigs.last
-      end
-
-      it 'returns a random signature based on required and forbidden tags' do
-        tags = Tags.new(forbidden: %w[programming security], required: %w[tech])
-        stub(sig_finder).find(sigs, tags: tags) { sigs.first }
-        _(repo.find(tags: tags)).must_equal sigs.first
-      end
-    end
-
     describe '#sigs' do
       it 'returns all the Signatures from the Repo' do
         path = Pathname.new('test/fixtures/signatures.yml')
