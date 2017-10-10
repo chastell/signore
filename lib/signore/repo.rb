@@ -1,7 +1,6 @@
 require 'forwardable'
 require 'yaml/store'
 require_relative 'settings'
-require_relative 'sig_finder'
 require_relative 'signature'
 require_relative 'tags'
 
@@ -9,9 +8,8 @@ module Signore
   class Repo
     extend Forwardable
 
-    def initialize(path: Settings.new.repo_path, sig_finder: SigFinder.new)
-      @path       = path
-      @sig_finder = sig_finder
+    def initialize(path: Settings.new.repo_path)
+      @path = path
       convert if legacy?
     end
 
@@ -27,7 +25,7 @@ module Signore
 
     private
 
-    attr_reader :path, :sig_finder
+    attr_reader :path
 
     def convert
       self.signatures = signatures.map(&:to_h)
