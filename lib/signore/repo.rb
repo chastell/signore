@@ -20,7 +20,7 @@ module Signore
     delegate empty?: :signatures
 
     def sigs
-      @sigs ||= signatures.map(&Signature.method(:from_h))
+      signatures.map(&Signature.method(:from_h))
     end
 
     private
