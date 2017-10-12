@@ -15,14 +15,14 @@ module Signore
 
     describe '#find' do
       it 'returns a random Signature by default' do
-        _(SigFinder.new(random: Random.new(0)).find(sigs).text)
+        _(SigFinder.new.find(sigs, random: Random.new(0)).text)
           .must_include 'Amateur fighter pilot ignores orders'
-        _(SigFinder.new(random: Random.new(1)).find(sigs).text)
+        _(SigFinder.new.find(sigs, random: Random.new(1)).text)
           .must_equal '// sometimes I believe compiler ignores all my comments'
       end
 
       it 'returns a random signature if the tags are empty' do
-        _(SigFinder.new(random: Random.new(0)).find(sigs, tags: Tags.new).text)
+        _(SigFinder.new.find(sigs, random: Random.new(0), tags: Tags.new).text)
           .must_include 'Amateur fighter pilot ignores orders'
       end
 

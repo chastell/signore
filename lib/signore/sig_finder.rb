@@ -3,17 +3,9 @@ require_relative 'tags'
 
 module Signore
   class SigFinder
-    def initialize(random: Random.new)
-      @random = random
-    end
-
-    def find(sigs, tags: Tags.new)
+    def find(sigs, random: Random.new, tags: Tags.new)
       shuffled = sigs.shuffle(random: random)
       shuffled.find(-> { Signature.new }) { |sig| tags.match?(sig.tags) }
     end
-
-    private
-
-    attr_reader :random
   end
 end
