@@ -11,18 +11,18 @@ module Signore
       Repo.new(path: Pathname.new('test/fixtures/signatures.yml')).sigs
     end
 
-    let(:sig_finder) { SigFinder.new }
+    let(:sig_finder) { SigFinder }
 
     describe '#find' do
       it 'returns a random Signature by default' do
-        _(SigFinder.new.find(sigs, random: Random.new(0)).text)
+        _(SigFinder.find(sigs, random: Random.new(0)).text)
           .must_include 'Amateur fighter pilot ignores orders'
-        _(SigFinder.new.find(sigs, random: Random.new(1)).text)
+        _(SigFinder.find(sigs, random: Random.new(1)).text)
           .must_equal '// sometimes I believe compiler ignores all my comments'
       end
 
       it 'returns a random signature if the tags are empty' do
-        _(SigFinder.new.find(sigs, random: Random.new(0), tags: Tags.new).text)
+        _(SigFinder.find(sigs, random: Random.new(0), tags: Tags.new).text)
           .must_include 'Amateur fighter pilot ignores orders'
       end
 

@@ -28,7 +28,7 @@ module Signore
     attr_reader :repo, :settings
 
     def prego
-      sig = SigFinder.new.find(repo.sigs, tags: tags)
+      sig = SigFinder.find(repo.sigs, tags: tags)
       puts case
            when repo.empty? then 'No signatures found.'
            when sig.empty?  then "Sadly no signatures are tagged #{tags}."
