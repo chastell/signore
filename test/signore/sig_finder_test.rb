@@ -1,6 +1,7 @@
 require 'yaml/store'
 require_relative '../test_helper'
 require_relative '../../lib/signore/sig_finder'
+require_relative '../../lib/signore/signature'
 require_relative '../../lib/signore/tags'
 
 module Signore
