@@ -12,8 +12,6 @@ module Signore
       Repo.new(path: Pathname.new('test/fixtures/signatures.yml')).sigs
     end
 
-    let(:sig_finder) { SigFinder }
-
     describe '#find' do
       it 'returns a random Signature by default' do
         _(SigFinder.find(sigs, random: Random.new(0)).text)
@@ -28,20 +26,20 @@ module Signore
       end
 
       it 'returns a random signature based on provided tags' do
-        _(sig_finder.find(sigs, tags: Tags.new(required: %w[programming])).text)
+        _(SigFinder.find(sigs, tags: Tags.new(required: %w[programming])).text)
           .must_equal '// sometimes I believe compiler ignores all my comments'
-        _(sig_finder.find(sigs, tags: Tags.new(required: %w[work])).text)
+        _(SigFinder.find(sigs, tags: Tags.new(required: %w[work])).text)
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end
 
       it 'returns a random signature based on required and forbidden tags' do
         tags = Tags.new(forbidden: %w[programming security], required: %w[tech])
-        _(sig_finder.find(sigs, tags: tags).text)
+        _(SigFinder.find(sigs, tags: tags).text)
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end
 
       it 'returns a null object if there are no results' do
-        _(sig_finder.find([])).must_equal Signature.new
+        _(SigFinder.find([])).must_equal Signature.new
       end
     end
   end
