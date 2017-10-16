@@ -32,7 +32,7 @@ module Signore
         it 'prints a signature based on allowed and forbidden tags' do
           args = %w[prego ~programming tech ~security]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
-          _(out).must_equal <<-end.dedent
+          _(out).must_equal <<~end
             You do have to be mad to work here, but it doesn’t help.
                                                   [Gary Barnes, asr]
           end
@@ -59,14 +59,14 @@ module Signore
         let(:repo) { Repo.new(path: Pathname.new(Tempfile.new.path)) }
 
         it 'asks about signature parts and saves resulting signature' do
-          input = StringIO.new <<-end.dedent
+          input = StringIO.new <<~end
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
 
             Mark Pilgrim\n\n\n
           end
           args = %w[pronto Wikipedia ADHD]
           out  = capture_io { CLI.new(args, repo: repo).run input: input }.first
-          _(out).must_equal <<-end.dedent
+          _(out).must_equal <<~end
 
             text?
 
@@ -80,21 +80,21 @@ module Signore
           end
           args = %w[prego Wikipedia ADHD]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
-          _(out).must_equal <<-end.dedent
+          _(out).must_equal <<~end
             The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
                                                                   [Mark Pilgrim]
           end
         end
 
         it 'handles multi-line signatures' do
-          input = StringIO.new <<-end.dedent
+          input = StringIO.new <<~end
             ‘You’ve got an interesting accent. Subtle. I can’t place it.’
             ‘It’s text-to-speech… I was raised by smartphones.’
 
             Patrick Ewing\n\n\n
           end
           io = capture_io { CLI.new(['pronto'], repo: repo).run input: input }
-          _(io.first).must_equal <<-end.dedent
+          _(io.first).must_equal <<~end
 
             text?
 

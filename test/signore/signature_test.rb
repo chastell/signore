@@ -80,7 +80,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'shows author on its own' do
         sig = Signature.new(author: 'kodz',
                             text: 'stay-at-home executives vs. wallstreet dads')
-        _(sig.to_s).must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<~end.strip
           stay-at-home executives vs. wallstreet dads
                                                [kodz]
         end
@@ -89,7 +89,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'shows author and source, comma-separated' do
         text = 'You do have to be mad to work here, but it doesn’t help.'
         sig  = Signature.new(author: 'Gary Barnes', source: 'asr', text: text)
-        _(sig.to_s).must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<~end.strip
           You do have to be mad to work here, but it doesn’t help.
                                                 [Gary Barnes, asr]
         end
@@ -98,7 +98,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'shows source on its own' do
         text = 'Bruce Schneier knows Alice and Bob’s shared secret.'
         sig  = Signature.new(source: 'Bruce Schneier Facts', text: text)
-        _(sig.to_s).must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<~end.strip
           Bruce Schneier knows Alice and Bob’s shared secret.
                                        [Bruce Schneier Facts]
         end
@@ -108,7 +108,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
         text = 'More gangland camp than neo-noir.'
         sig = Signature.new(author: 'Nicholas Christopher',
                             subject: 'on Pulp Fiction', text: text)
-        _(sig.to_s).must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<~end.strip
           More gangland camp than neo-noir.
           [Nicholas Christopher on Pulp Fiction]
         end
@@ -118,7 +118,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
         text = 'Amateur fighter pilot ignores orders, listens ' \
           'to the voices in his head and slaughters thousands.'
         sig = Signature.new(subject: 'Star Wars ending explained', text: text)
-        _(sig.to_s).must_equal <<-end.dedent.strip
+        _(sig.to_s).must_equal <<~end.strip
           Amateur fighter pilot ignores orders, listens to
           the voices in his head and slaughters thousands.
                               [Star Wars ending explained]
