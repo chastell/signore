@@ -14,13 +14,13 @@ module Signore
     end
 
     def <<(signature)
-      self.signatures = signatures + [signature.to_h]
+      self.hashes = hashes + [signature.to_h]
     end
 
-    delegate empty?: :signatures
+    delegate empty?: :hashes
 
     def sigs
-      signatures.map(&Signature.method(:from_h))
+      hashes.map(&Signature.method(:from_h))
     end
 
     private
@@ -28,18 +28,18 @@ module Signore
     attr_reader :path
 
     def convert
-      self.signatures = signatures.map(&:to_h)
+      self.hashes = hashes.map(&:to_h)
     end
 
     def legacy?
       path.exist? and path.read.include?('Signore::Signature')
     end
 
-    def signatures
+    def hashes
       store.transaction(true) { store.fetch('signatures', []) }
     end
 
-    def signatures=(hashes)
+    def hashes=(hashes)
       store.transaction { store['signatures'] = hashes }
     end
 
