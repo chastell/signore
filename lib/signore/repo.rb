@@ -8,7 +8,7 @@ module Signore
   class Repo
     extend Forwardable
 
-    def initialize(path: Settings.new.repo_path)
+    def initialize(path: default_path)
       @path = path
       convert if legacy?
     end
@@ -29,6 +29,11 @@ module Signore
 
     def convert
       self.hashes = hashes.map(&:to_h)
+    end
+
+    # :reek:UtilityFunction
+    def default_path
+      Settings.new.repo_path
     end
 
     def legacy?
