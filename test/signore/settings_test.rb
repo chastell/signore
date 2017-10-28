@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'pathname'
 require 'tmpdir'
 require_relative '../test_helper'
