@@ -1,6 +1,6 @@
 require 'forwardable'
+require 'pathname'
 require 'yaml/store'
-require_relative 'settings'
 require_relative 'signature'
 require_relative 'tags'
 
@@ -9,7 +9,8 @@ module Signore
     extend Forwardable
 
     def self.default_path
-      Settings.new.repo_path
+      dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path('~/.local/share') }
+      Pathname.new("#{dir}/signore/signatures.yml")
     end
 
     def initialize(path: self.class.default_path)

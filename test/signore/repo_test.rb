@@ -11,6 +11,30 @@ module Signore
   describe Repo do
     let(:path) { Pathname.new(Tempfile.new.path) }
 
+    describe '.default_path' do
+      it 'honours XDG_DATA_HOME if it’s set' do
+        begin
+          old_xdg = ENV.delete('XDG_DATA_HOME')
+          ENV['XDG_DATA_HOME'] = Dir.mktmpdir
+          path = "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
+          _(Repo.default_path).must_equal Pathname.new(path)
+        ensure
+          FileUtils.rmtree ENV['XDG_DATA_HOME']
+          old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
+        end
+      end
+
+      it 'defaults XDG_DATA_HOME to ~/.local/share if it’s not set' do
+        begin
+          old_xdg = ENV.delete('XDG_DATA_HOME')
+          path    = File.expand_path('~/.local/share/signore/signatures.yml')
+          _(Repo.default_path).must_equal Pathname.new(path)
+        ensure
+          ENV['XDG_DATA_HOME'] = old_xdg if old_xdg
+        end
+      end
+    end
+
     describe '.new' do
       it 'rewrites legacy file to hashes on first access' do
         FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
