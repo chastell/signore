@@ -10,7 +10,7 @@ module Signore
 
     def self.default_path
       dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path('~/.local/share') }
-      Pathname.new("#{dir}/signore/signatures.yml")
+      Pathname.new(dir) / 'signore' / 'signatures.yml'
     end
 
     def initialize(path: self.class.default_path)
