@@ -15,11 +15,6 @@ module Signore
       to_s.empty?
     end
 
-    undef text if defined?(:text)
-    def text
-      self[:text] or ''
-    end
-
     def to_h
       super.map { |key, val| { key.to_s => val } }.reduce({}, :merge)
            .compact.reject { |_, val| val.empty? }
