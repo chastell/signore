@@ -7,7 +7,6 @@ module Signore
     describe '.call' do
       it 'asks about signature parts' do
         io = capture_io { SigFromStream.call StringIO.new("\n\n\n\n\n") }
-        # rubocop:disable Layout/IndentHeredoc
         _(io.first).must_equal <<~end
 
           text?
@@ -18,7 +17,6 @@ module Signore
 
           source?
         end
-        # rubocop:enable Layout/IndentHeredoc
       end
 
       it 'asks about signature parts and returns resulting signature' do
@@ -37,7 +35,6 @@ module Signore
       end
 
       it 'handles multi-line signatures' do
-        # rubocop:disable Layout/IndentHeredoc
         input = StringIO.new <<~end
           ‘You’ve got an interesting accent. Subtle. I can’t place it.’
           ‘It’s text-to-speech… I was raised by smartphones.’
@@ -46,7 +43,6 @@ module Signore
 
 
         end
-        # rubocop:enable Layout/IndentHeredoc
         sig = nil
         capture_io { sig = SigFromStream.call input }
         text = <<~end.strip
