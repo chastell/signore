@@ -29,7 +29,7 @@ GEM
     ice_nine (0.11.2)
     iniparse (1.4.4)
     lovely_rufus (1.0.1)
-    minitest (5.10.3)
+    minitest (5.11.1)
     minitest-focus (1.1.2)
       minitest (>= 4, < 6)
     overcommit (0.41.0)
@@ -47,7 +47,7 @@ GEM
       codeclimate-engine-rb (~> 0.4.0)
       parser (>= 2.4.0.0, < 2.5)
       rainbow (~> 2.0)
-    rubocop (0.52.0)
+    rubocop (0.52.1)
       parallel (~> 1.10)
       parser (>= 2.4.0.2, < 3.0)
       powerpack (~> 0.1)
@@ -76,4 +76,4 @@ DEPENDENCIES
   signore!
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
