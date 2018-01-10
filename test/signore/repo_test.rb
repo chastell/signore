@@ -13,25 +13,21 @@ module Signore
 
     describe '.default_path' do
       it 'honours XDG_DATA_HOME if it’s set' do
-        begin
-          old_xdg = ENV.delete('XDG_DATA_HOME')
-          ENV['XDG_DATA_HOME'] = Dir.mktmpdir
-          path = "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
-          _(Repo.default_path).must_equal Pathname.new(path)
-        ensure
-          FileUtils.rmtree ENV['XDG_DATA_HOME']
-          old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
-        end
+        old_xdg = ENV.delete('XDG_DATA_HOME')
+        ENV['XDG_DATA_HOME'] = Dir.mktmpdir
+        path = "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
+        _(Repo.default_path).must_equal Pathname.new(path)
+      ensure
+        FileUtils.rmtree ENV['XDG_DATA_HOME']
+        old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
       end
 
       it 'defaults XDG_DATA_HOME to ~/.local/share if it’s not set' do
-        begin
-          old_xdg = ENV.delete('XDG_DATA_HOME')
-          path    = File.expand_path('~/.local/share/signore/signatures.yml')
-          _(Repo.default_path).must_equal Pathname.new(path)
-        ensure
-          ENV['XDG_DATA_HOME'] = old_xdg if old_xdg
-        end
+        old_xdg = ENV.delete('XDG_DATA_HOME')
+        path    = File.expand_path('~/.local/share/signore/signatures.yml')
+        _(Repo.default_path).must_equal Pathname.new(path)
+      ensure
+        ENV['XDG_DATA_HOME'] = old_xdg if old_xdg
       end
     end
 
@@ -89,13 +85,11 @@ module Signore
       end
 
       it 'doesn’t blow up if the path is missing' do
-        begin
-          tempdir = Dir.mktmpdir
-          path = Pathname.new("#{tempdir}/some_intermediate_dir/sigs.yml")
-          _(Repo.new(path: path).sigs).must_equal []
-        ensure
-          FileUtils.rmtree tempdir
-        end
+        tempdir = Dir.mktmpdir
+        path = Pathname.new("#{tempdir}/some_intermediate_dir/sigs.yml")
+        _(Repo.new(path: path).sigs).must_equal []
+      ensure
+        FileUtils.rmtree tempdir
       end
     end
   end
