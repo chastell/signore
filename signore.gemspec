@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary     = 'signore: an email signature manager/randomiser'
   gem.version     = '0.6.0'
 
-  gem.required_ruby_version = '~> 2.4'
+  gem.required_ruby_version = '~> 2.5'
 
   gem.files       = `git ls-files -z`.split "\0"
   gem.executables = gem.files.grep(%r{^bin/}).map { |path| File.basename(path) }
