@@ -6,12 +6,14 @@ require_relative 'tags'
 
 module Signore
   class Repo
-    extend Forwardable
-
-    def self.default_path
-      dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path('~/.local/share') }
-      Pathname.new(dir) / 'signore' / 'signatures.yml'
+    class << self
+      def default_path
+        dir = ENV.fetch('XDG_DATA_HOME') { File.expand_path('~/.local/share') }
+        Pathname.new(dir) / 'signore' / 'signatures.yml'
+      end
     end
+
+    extend Forwardable
 
     def initialize(path: self.class.default_path)
       @path = path
