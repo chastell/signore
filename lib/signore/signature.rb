@@ -2,8 +2,10 @@ require 'lovely_rufus'
 
 module Signore
   class Signature < Struct.new(:text, :author, :source, :subject, :tags)
-    def self.from_h(hash)
-      new(hash.map { |key, value| [key.to_sym, value] }.to_h)
+    class << self
+      def from_h(hash)
+        new(hash.map { |key, value| [key.to_sym, value] }.to_h)
+      end
     end
 
     def initialize(author: '', source: '', subject: '', tags: [], text: '')
