@@ -36,7 +36,7 @@ GEM
       childprocess (~> 0.6, >= 0.6.3)
       iniparse (~> 1.4)
     parallel (1.12.1)
-    parser (2.5.0.3)
+    parser (2.5.0.4)
       ast (~> 2.4.0)
     powerpack (0.1.1)
     procto (0.0.3)
