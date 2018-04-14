@@ -1,7 +1,7 @@
 Metrics/BlockLength:
   Exclude:
-    - 'signore.gemspec'
-    - 'test/**/*'
+    - signore.gemspec
+    - test/**/*
 
 Naming/HeredocDelimiterCase:
   Enabled: false
