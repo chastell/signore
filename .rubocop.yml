@@ -18,8 +18,8 @@ Style/EmptyCaseCondition:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Style/StructInheritance:
+Style/Not:
   Enabled: false
 
-Style/Not:
+Style/StructInheritance:
   Enabled: false
