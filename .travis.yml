@@ -1,6 +1,7 @@
 before_install:
-  - bundle
   - gem update --system
+  - gem install bundler
+  - bundle
 language: ruby
 matrix:
   allow_failures:
