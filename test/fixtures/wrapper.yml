@@ -16,8 +16,9 @@
 - - !ruby/struct:Signore::Signature
     text: It may look like I’m just sitting here doing nothing. But I’m really actively waiting for all my problems to go away.
   - |-
-    It may look like I’m just sitting here doing nothing. But
-    I’m really actively waiting for all my problems to go away.
+    It may look like I’m just sitting here
+    doing nothing. But I’m really actively
+    waiting for all my problems to go away.
 
 # meta info is right-aligned to the longest line
 - - !ruby/struct:Signore::Signature
@@ -37,11 +38,13 @@
     author: M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown
     source: ruby-talk
   - |-
-    ‘The Ruby community should proceed with all deliberate
-    speed towards ISO standardization of the language.’
+    ‘The Ruby community should proceed
+    with all deliberate speed towards
+    ISO standardization of the language.’
     ‘Yeah, look what it did to Forth.’
-    ‘Don’t just say it, show it. <http://vividpicture.com/aleks/atari/forth.jpg>’
-                [M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]
+    ‘Don’t just say it, show it.
+    <http://vividpicture.com/aleks/atari/forth.jpg>’
+    [M. Edward (Ed) Borasky, Matt Lawrence, Gregory Brown, ruby-talk]
 
 # long meta info is flushed left
 - - !ruby/struct:Signore::Signature
@@ -53,14 +56,18 @@
     author: Spehro Pefhany, CyberCypher, Jess Askin, don groves
     source: alt.usage.english
   - |-
-    ‘The Guardian also had a pre-election column, in which an allegedly
-    “ironic joke” was open to other interpretations: “John Wilkes Booth,
-    Lee Harvey Oswald, John Hinckley Jr., where are you now that we need
-    you?” They removed the column from on-line access and apologized.’
-    ‘They should have. Hinckley missed the vital spot, so who needs him?’
+    ‘The Guardian also had a pre-election column, in
+    which an allegedly “ironic joke” was open to other
+    interpretations: “John Wilkes Booth, Lee Harvey
+    Oswald, John Hinckley Jr., where are you now
+    that we need you?” They removed the column
+    from on-line access and apologized.’
+    ‘They should have. Hinckley missed
+    the vital spot, so who needs him?’
     ‘As everybody knows, Reagan was killed in
     that attack and a lookalike was substituted.’
-    ‘You mean we were governed all those years by an ACTOR!’
+    ‘You mean we were governed
+    all those years by an ACTOR!’
     [Spehro Pefhany, CyberCypher, Jess Askin, don groves, alt.usage.english]
 
 # wrapping doesn’t left one-letter words at the end of lines
@@ -77,10 +84,11 @@
     text: Better to teach a man to fish than to give him a fish. And if he can’t be bothered to learn to fish and starves to death, that’s a good enough outcome for me.
     author: Steve VanDevender
   - |-
-    Better to teach a man to fish than to give him a fish.
-    And if he can’t be bothered to learn to fish and starves
-    to death, that’s a good enough outcome for me.
-                                         [Steve VanDevender]
+    Better to teach a man to fish than to give
+    him a fish. And if he can’t be bothered
+    to learn to fish and starves to death,
+    that’s a good enough outcome for me.
+                           [Steve VanDevender]
 
 # for two-line signatures, first line is considered for hangouts
 - - !ruby/struct:Signore::Signature
@@ -89,6 +97,7 @@
     subject: on subway engines
     source: asr
   - |-
-    Well, the old ones go mmmmmbbbbzzzzttteeeeeep as they start up
-    and the new ones go whupwhupwhupwhooopwhooooopwhooooooommmmmmmmmm.
-                                  [Graham Reed on subway engines, asr]
+    Well, the old ones go mmmmmbbbbzzzzttteeeeeep
+    as they start up and the new ones go
+    whupwhupwhupwhooopwhooooopwhooooooommmmmmmmmm.
+              [Graham Reed on subway engines, asr]

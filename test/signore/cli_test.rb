@@ -25,7 +25,7 @@ module Signore
         it 'prints a signature tagged with the provided tags' do
           args = %w[prego tech programming]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
-          sig  = "// sometimes I believe compiler ignores all my comments\n"
+          sig  = "// sometimes I believe compiler\n// ignores all my comments\n"
           _(out).must_equal sig
         end
 
@@ -33,8 +33,9 @@ module Signore
           args = %w[prego ~programming tech ~security]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
           _(out).must_equal <<~end
-            You do have to be mad to work here, but it doesn’t help.
-                                                  [Gary Barnes, asr]
+            You do have to be mad to work
+            here, but it doesn’t help.
+                       [Gary Barnes, asr]
           end
         end
 
@@ -75,14 +76,16 @@ module Signore
             subject?
 
             source?
-            The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
-                                                                  [Mark Pilgrim]
+            The Wikipedia page on ADHD is like
+            20 pages long. That’s just cruel.
+                                [Mark Pilgrim]
           end
           args = %w[prego Wikipedia ADHD]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
           _(out).must_equal <<~end
-            The Wikipedia page on ADHD is like 20 pages long. That’s just cruel.
-                                                                  [Mark Pilgrim]
+            The Wikipedia page on ADHD is like
+            20 pages long. That’s just cruel.
+                                [Mark Pilgrim]
           end
         end
 
@@ -103,9 +106,11 @@ module Signore
             subject?
 
             source?
-            ‘You’ve got an interesting accent. Subtle. I can’t place it.’
-            ‘It’s text-to-speech… I was raised by smartphones.’
-                                                          [Patrick Ewing]
+            ‘You’ve got an interesting accent.
+            Subtle. I can’t place it.’
+            ‘It’s text-to-speech…
+            I was raised by smartphones.’
+                               [Patrick Ewing]
           end
         end
       end

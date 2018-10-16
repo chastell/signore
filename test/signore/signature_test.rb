@@ -72,7 +72,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       end
 
       it 'does not show meta if there’s nothing to show' do
-        text = '// sometimes I believe compiler ignores all my comments'
+        text = "// sometimes I believe compiler\n// ignores all my comments"
         sig  = Signature.new(text: text)
         _(sig.to_s).must_equal text
       end
@@ -90,8 +90,9 @@ module Signore # rubocop:disable Metrics/ModuleLength
         text = 'You do have to be mad to work here, but it doesn’t help.'
         sig  = Signature.new(author: 'Gary Barnes', source: 'asr', text: text)
         _(sig.to_s).must_equal <<~end.strip
-          You do have to be mad to work here, but it doesn’t help.
-                                                [Gary Barnes, asr]
+          You do have to be mad to work
+          here, but it doesn’t help.
+                     [Gary Barnes, asr]
         end
       end
 
@@ -99,8 +100,9 @@ module Signore # rubocop:disable Metrics/ModuleLength
         text = 'Bruce Schneier knows Alice and Bob’s shared secret.'
         sig  = Signature.new(source: 'Bruce Schneier Facts', text: text)
         _(sig.to_s).must_equal <<~end.strip
-          Bruce Schneier knows Alice and Bob’s shared secret.
-                                       [Bruce Schneier Facts]
+          Bruce Schneier knows Alice
+          and Bob’s shared secret.
+              [Bruce Schneier Facts]
         end
       end
 
