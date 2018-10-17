@@ -41,6 +41,7 @@ GEM
     powerpack (0.1.1)
     procto (0.0.3)
     rainbow (3.0.0)
+    rake (12.3.1)
     reek (4.8.1)
       codeclimate-engine-rb (~> 0.4.0)
       parser (>= 2.5.0.0, < 2.6)
@@ -69,9 +70,10 @@ DEPENDENCIES
   minitest (~> 5.6)
   minitest-focus (~> 1.1)
   overcommit (~> 0.45.0)
+  rake (~> 12.0)
   reek (~> 4.0)
   rubocop (~> 0.55.0)
   signore!
 
 BUNDLED WITH
-   1.16.1
+   1.16.5
