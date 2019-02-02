@@ -8,4 +8,5 @@ matrix:
     - rvm: ruby-head
 rvm:
   - 2.5
+  - 2.6
   - ruby-head
