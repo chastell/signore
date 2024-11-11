@@ -15,10 +15,10 @@ module Signore
       it 'honours XDG_DATA_HOME if it’s set' do
         old_xdg = ENV.delete('XDG_DATA_HOME')
         ENV['XDG_DATA_HOME'] = Dir.mktmpdir
-        path = "#{ENV['XDG_DATA_HOME']}/signore/signatures.yml"
+        path = "#{ENV.fetch('XDG_DATA_HOME')}/signore/signatures.yml"
         _(Repo.default_path).must_equal Pathname.new(path)
       ensure
-        FileUtils.rmtree ENV['XDG_DATA_HOME']
+        FileUtils.rmtree ENV.fetch('XDG_DATA_HOME')
         old_xdg ? ENV['XDG_DATA_HOME'] = old_xdg : ENV.delete('XDG_DATA_HOME')
       end
 
