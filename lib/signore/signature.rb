@@ -9,7 +9,7 @@ module Signore
     end
 
     def initialize(author: '', source: '', subject: '', tags: [], text: '')
-      super text, author, source, subject, tags
+      super(text, author, source, subject, tags)
     end
 
     def empty?
