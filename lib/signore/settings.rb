@@ -13,7 +13,7 @@ module Signore
 
     def tags
       negated, required = tag_names.partition { |name| name.start_with?('~') }
-      Tags.new(forbidden: negated.map { |neg| neg[1..-1] }, required: required)
+      Tags.new(forbidden: negated.map { |neg| neg[1..] }, required: required)
     end
 
     private
@@ -21,7 +21,7 @@ module Signore
     attr_reader :args
 
     def tag_names
-      args.empty? ? [] : args[1..-1]
+      args.empty? ? [] : args[1..]
     end
   end
 end
