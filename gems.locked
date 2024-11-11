@@ -14,7 +14,7 @@ GEM
     dependor (1.0.1)
     kwalify (0.7.2)
     lovely_rufus (1.0.1)
-    minitest (5.15.0)
+    minitest (5.18.1)
     minitest-focus (1.4.0)
       minitest (>= 4, < 6)
     parallel (1.24.0)
@@ -48,7 +48,7 @@ PLATFORMS
 
 DEPENDENCIES
   bogus (~> 0.1.3)
-  minitest (~> 5.6)
+  minitest (~> 5.6, < 5.19)
   minitest-focus (~> 1.1)
   rake (~> 13.0)
   reek (~> 6.0)
