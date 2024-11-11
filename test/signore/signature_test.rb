@@ -21,7 +21,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'instantiates Signatures via parameters' do
         source = 'A History of Modern Computing'
         text   = 'In 1940 he summarized his work in an influential book, ' \
-          '‘Punched Card Methods in Scientific Computation’.'
+                 '‘Punched Card Methods in Scientific Computation’.'
         sig = Signature.new(author: 'Paul E. Ceruzzi', source: source,
                             subject: 'on Wallace Eckert',
                             tags: ['punched cards'], text: text)
@@ -118,7 +118,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
 
       it 'shows subject on its own' do
         text = 'Amateur fighter pilot ignores orders, listens ' \
-          'to the voices in his head and slaughters thousands.'
+               'to the voices in his head and slaughters thousands.'
         sig = Signature.new(subject: 'Star Wars ending explained', text: text)
         _(sig.to_s).must_equal <<~end.strip
           Amateur fighter pilot ignores orders, listens to
