@@ -9,9 +9,7 @@ Gemspec/DevelopmentDependencies:
   Enabled: false
 
 Metrics/BlockLength:
-  Exclude:
-    - signore.gemspec
-    - test/**/*
+  AllowedMethods: describe
 
 Naming/HeredocDelimiterCase:
   Enabled: false
