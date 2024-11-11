@@ -20,9 +20,6 @@ Naming/HeredocDelimiterNaming:
 Style/Documentation:
   Enabled: false
 
-Style/EmptyCaseCondition:
-  Enabled: false
-
 Style/FrozenStringLiteralComment:
   Enabled: false
 
