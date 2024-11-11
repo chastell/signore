@@ -4,7 +4,7 @@ module Signore
   class Signature < Struct.new(:text, :author, :source, :subject, :tags)
     class << self
       def from_h(hash)
-        new(hash.map { |key, value| [key.to_sym, value] }.to_h)
+        new(hash.transform_keys(&:to_sym))
       end
     end
 
