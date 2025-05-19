@@ -55,7 +55,6 @@ module Signore
       end
 
       it 'handles edge cases' do
-        skip 'broken on Ruby 2.7'
         sig = Signature.new(author: '000___000')
         Repo.new(path: path) << sig
       end
