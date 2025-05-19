@@ -53,6 +53,12 @@ module Signore
         Repo.new(path: path) << sig
         _(path.read).wont_include 'Signore::Signature'
       end
+
+      it 'handles edge cases' do
+        skip 'broken on Ruby 2.7'
+        sig = Signature.new(author: '000___000')
+        Repo.new(path: path) << sig
+      end
     end
 
     describe '#empty?' do
