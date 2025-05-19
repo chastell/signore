@@ -42,11 +42,11 @@ module Signore # rubocop:disable Metrics/ModuleLength
 
     describe '#empty?' do
       it 'is true when the Signature is a null object' do
-        assert Signature.new.empty?
+        assert_predicate Signature.new, :empty?
       end
 
       it 'is false when the Signature has some text' do
-        refute Signature.new(text: 'Node.jk').empty?
+        refute_predicate Signature.new(text: 'Node.jk'), :empty?
       end
     end
 
@@ -62,7 +62,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       end
 
       it 'removes non-existing keys' do
-        assert Signature.new.to_h.empty?
+        assert_predicate Signature.new.to_h, :empty?
       end
     end
 

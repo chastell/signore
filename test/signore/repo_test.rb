@@ -62,12 +62,12 @@ module Signore
 
     describe '#empty?' do
       it 'is true when a repo is empty' do
-        assert Repo.new(path: path).empty?
+        assert_predicate Repo.new(path: path), :empty?
       end
 
       it 'is false when a repo is not empty' do
         FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
-        refute Repo.new(path: path).empty?
+        refute_predicate Repo.new(path: path), :empty?
       end
     end
 
