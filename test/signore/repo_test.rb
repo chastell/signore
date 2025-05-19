@@ -67,6 +67,7 @@ module Signore
 
       it 'is false when a repo is not empty' do
         FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
+
         refute_predicate Repo.new(path: path), :empty?
       end
     end
