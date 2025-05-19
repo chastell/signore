@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    signore (0.7.0)
+    signore (1.0.0)
       lovely_rufus (~> 1.0)
 
 GEM
