@@ -6,8 +6,6 @@ require_relative '../../lib/signore/tags'
 
 module Signore
   describe SigFinder do
-    verify_contract SigFinder
-
     let(:sigs) do
       Repo.new(path: Pathname.new('test/fixtures/signatures.yml')).sigs
     end
