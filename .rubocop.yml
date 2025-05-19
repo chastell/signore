@@ -23,5 +23,8 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/Not:
+  Enabled: false
+
 Style/StructInheritance:
   Enabled: false
