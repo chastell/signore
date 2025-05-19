@@ -18,11 +18,11 @@ module Signore
                     text: params.text)
     end
 
+    Params = Struct.new(:text, :author, :subject, :source)
+
     private
 
     attr_reader :input, :tags
-
-    Params = Struct.new(:text, :author, :subject, :source)
 
     def get_param(param)
       puts "\n#{param}?"
