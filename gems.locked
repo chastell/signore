@@ -13,7 +13,7 @@ GEM
     kwalify (0.7.2)
     language_server-protocol (3.17.0.5)
     lovely_rufus (1.0.1)
-    minitest (5.18.1)
+    minitest (5.25.5)
     minitest-focus (1.4.0)
       minitest (>= 4, < 6)
     parallel (1.27.0)
@@ -50,7 +50,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  minitest (~> 5.6, < 5.19)
+  minitest (~> 5.6)
   minitest-focus (~> 1.1)
   rake (~> 13.0)
   reek (~> 6.0)
