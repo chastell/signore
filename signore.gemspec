@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
                     'random ones based on their tags'
   gem.email       = 'chastell@chastell.net'
   gem.homepage    = 'http://github.com/chastell/signore'
-  gem.license     = 'AGPL-3.0'
+  gem.license     = 'AGPL-3.0-or-later'
   gem.name        = 'signore'
   gem.summary     = 'signore: an email signature manager/randomiser'
   gem.version     = '0.7.0'
