@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.license     = 'AGPL-3.0-or-later'
   gem.name        = 'signore'
   gem.summary     = 'signore: an email signature manager/randomiser'
-  gem.version     = '0.7.0'
+  gem.version     = '1.0.0'
 
   gem.required_ruby_version = '~> 3.2'
 
