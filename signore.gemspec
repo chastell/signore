@@ -19,11 +19,12 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'lovely_rufus', '~> 1.0'
 
-  gem.add_development_dependency 'minitest',       '~> 5.6'
-  gem.add_development_dependency 'minitest-focus', '~> 1.1'
-  gem.add_development_dependency 'rake',           '~> 13.0'
-  gem.add_development_dependency 'reek',           '~> 6.0'
-  gem.add_development_dependency 'rubocop',        '~> 1.0'
+  gem.add_development_dependency 'minitest',         '~> 5.6'
+  gem.add_development_dependency 'minitest-focus',   '~> 1.1'
+  gem.add_development_dependency 'rake',             '~> 13.0'
+  gem.add_development_dependency 'reek',             '~> 6.0'
+  gem.add_development_dependency 'rubocop',          '~> 1.0'
+  gem.add_development_dependency 'rubocop-minitest', '~> 0.38.0'
 
   gem.metadata['rubygems_mfa_required'] = 'true'
 end
