@@ -1,10 +1,11 @@
-require 'procto'
 require_relative 'signature'
 require_relative 'tags'
 
 module Signore
   class SigFromStream
-    include Procto.call
+    def self.call(input, tags: Tags.new)
+      new(input, tags: tags).call
+    end
 
     def initialize(input, tags: Tags.new)
       @input = input
