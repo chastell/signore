@@ -5,7 +5,7 @@ module Signore
     end
 
     def match?(sig_tags)
-      (required & sig_tags) == required and (forbidden & sig_tags).empty?
+      (required & sig_tags) == required and (forbidden & sig_tags).empty? # rubocop:disable Style/BitwisePredicate
     end
 
     def to_s
