@@ -3,6 +3,7 @@ require_relative '../../lib/signore/tags'
 
 module Signore
   describe Tags do
+    # rubocop:disable Minitest/AssertMatch, Minitest/RefuteMatch
     describe '#match?' do
       it 'is a predicate whether the Tags match the given list of tags' do
         tags = %w[programming tech]
@@ -16,6 +17,7 @@ module Signore
         refute Tags.new(forbidden: %w[tech], required: %w[tech]).match?(tags)
       end
     end
+    # rubocop:enable Minitest/AssertMatch, Minitest/RefuteMatch
 
     describe '#to_s' do
       it 'returns a CLI-like representation of the Tags' do
