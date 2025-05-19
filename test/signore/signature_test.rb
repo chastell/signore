@@ -128,7 +128,9 @@ module Signore # rubocop:disable Metrics/ModuleLength
       end
 
       it 'handles edge cases properly' do
-        YAML.load_file('test/fixtures/wrapper.yml').each do |sig, wrapped|
+        wrappings = YAML.load_file('test/fixtures/wrapper.yml',
+                                   permitted_classes: [Signature, Symbol])
+        wrappings.each do |sig, wrapped|
           _(Signature.from_h(sig.to_h).to_s).must_equal wrapped
         end
       end
