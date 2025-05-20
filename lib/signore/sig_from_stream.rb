@@ -3,9 +3,7 @@ require_relative 'tags'
 
 module Signore
   class SigFromStream
-    def self.call(input, tags: Tags.new)
-      new(input, tags: tags).call
-    end
+    def self.call(input, tags: Tags.new) = new(input, tags:).call
 
     def initialize(input, tags: Tags.new)
       @input = input
