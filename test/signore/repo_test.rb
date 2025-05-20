@@ -31,14 +31,6 @@ module Signore
       end
     end
 
-    describe '.new' do
-      it 'rewrites legacy file to hashes on first access' do
-        FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
-        Repo.new(path: path)
-        _(path.read).wont_include 'Signore::Signature'
-      end
-    end
-
     describe '#<<' do
       let(:sig)  { Signature.new(text: text)                               }
       let(:text) { 'Normaliser Unix c’est comme pasteuriser le camembert.' }
@@ -46,12 +38,6 @@ module Signore
       it 'saves the provided signature to disk' do
         Repo.new(path: path) << sig
         _(path.read).must_include text
-      end
-
-      it 'rewrites legacy YAML files on save' do
-        FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
-        Repo.new(path: path) << sig
-        _(path.read).wont_include 'Signore::Signature'
       end
 
       it 'handles edge cases' do
@@ -66,7 +52,7 @@ module Signore
       end
 
       it 'is false when a repo is not empty' do
-        FileUtils.cp Pathname.new('test/fixtures/signatures.legacy.yml'), path
+        FileUtils.cp Pathname.new('test/fixtures/signatures.yml'), path
 
         refute_predicate Repo.new(path: path), :empty?
       end
@@ -79,15 +65,6 @@ module Signore
         _(sigs.size).must_equal 6
         _(sigs.first.author).must_equal 'Gary Barnes'
         _(sigs.last.subject).must_equal 'Star Wars ending explained'
-      end
-
-      it 'keeps working with legacy YAML files' do
-        legacy_path = Pathname.new('test/fixtures/signatures.legacy.yml')
-        temp_path   = Pathname.new(Tempfile.new.path)
-        FileUtils.cp legacy_path, temp_path
-        legacy_repo = Repo.new(path: temp_path)
-        new_repo = Repo.new(path: Pathname.new('test/fixtures/signatures.yml'))
-        _(legacy_repo.sigs).must_equal new_repo.sigs
       end
 
       it 'doesn’t blow up if the path is missing' do

@@ -17,7 +17,6 @@ module Signore
 
     def initialize(path: self.class.default_path)
       @path = path
-      convert if legacy?
     end
 
     def <<(signature)
@@ -33,14 +32,6 @@ module Signore
     private
 
     attr_reader :path
-
-    def convert
-      self.hashes = hashes.map(&:to_h)
-    end
-
-    def legacy?
-      path.exist? and path.read.include?('Signore::Signature')
-    end
 
     def hashes
       store.transaction(true) { store.fetch('signatures', []) }
