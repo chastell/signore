@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.executables = gem.files.grep(%r{^bin/}).map { |path| File.basename(path) }
 
   gem.add_dependency 'lovely_rufus', '~> 1.0'
+  gem.add_dependency 'pstore',       '~> 0.2.0'
 
   gem.add_development_dependency 'minitest',         '~> 5.6'
   gem.add_development_dependency 'minitest-focus',   '~> 1.1'

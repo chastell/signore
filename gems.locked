@@ -3,6 +3,7 @@ PATH
   specs:
     signore (1.0.0)
       lovely_rufus (~> 1.0)
+      pstore (~> 0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -52,6 +53,7 @@ GEM
       ast (~> 2.4.1)
       racc
     prism (1.4.0)
+    pstore (0.2.0)
     racc (1.8.1)
     rainbow (3.1.1)
     rake (13.2.1)
