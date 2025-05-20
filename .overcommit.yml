@@ -1,4 +1,0 @@
-PreCommit:
-  RakeTarget:
-    enabled: true
-    targets: [default]
