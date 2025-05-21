@@ -52,14 +52,17 @@ module Signore
         _(sig).must_equal Signature.new(author: 'Patrick Ewing', text: text)
       end
 
-      it 'replaces apostrophes with proper quotation marks' do
-        simple = "There's no 'i' in 'denial'."
-        author = 'ʎoɟ ʎɹoɔ'
-        input = StringIO.new("#{simple}\n\n#{author}\n\n\n")
-        sig = nil
-        capture_io { sig = SigFromStream.call input }
+      it 'replaces apostrophes and quotation marks with typographic ones' do
+        sng = nil
+        dbl = nil
+        single = "There's no 'i' in 'denial'."
+        double = 'There"s no "i" in "denial".'
+        author = "\n\nʎoɟ ʎɹoɔ\n\n\n"
+        capture_io { sng = SigFromStream.call(StringIO.new(single + author)) }
+        capture_io { dbl = SigFromStream.call(StringIO.new(double + author)) }
         text = 'There’s no ‘i’ in ‘denial’.'
-        _(sig).must_equal Signature.new(author:, text:)
+        _(sng).must_equal Signature.new(author: author.strip, text:)
+        _(dbl).must_equal Signature.new(author: author.strip, text:)
       end
     end
   end

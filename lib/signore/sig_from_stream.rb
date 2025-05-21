@@ -25,7 +25,7 @@ module Signore
     def get_param(param)
       puts "\n#{param}?"
       separator = param == :text ? "\n\n" : "\n"
-      input.gets(separator).strip.gsub(/(?<=\p{L})'/, '’').tr("'", '‘')
+      input.gets(separator).strip.gsub(/(?<=\p{L})['"]/, '’').tr('\'"', '‘')
     end
 
     def params
