@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    signore (1.0.0)
+    signore (1.1.1)
       lovely_rufus (~> 1.0)
       pstore (~> 0.2.0)
 
