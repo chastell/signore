@@ -64,6 +64,14 @@ module Signore
         _(sng).must_equal Signature.new(author: author.strip, text:)
         _(dbl).must_equal Signature.new(author: author.strip, text:)
       end
+
+      it 'replaces hyphens with en dashes' do
+        stream = "355/113 - not π, but an incredible simulation.\n\n\n\n\n"
+        sig = nil
+        capture_io { sig = SigFromStream.call(StringIO.new(stream)) }
+        text = '355/113 – not π, but an incredible simulation.'
+        _(sig).must_equal Signature.new(text:)
+      end
     end
   end
 end
