@@ -32,6 +32,7 @@ module Signore
 
       it 'returns a random signature based on required and forbidden tags' do
         tags = Tags.new(forbidden: %w[programming security], required: %w[tech])
+
         _(SigFinder.find(sigs, tags: tags).text)
           .must_equal 'You do have to be mad to work here, but it doesn’t help.'
       end

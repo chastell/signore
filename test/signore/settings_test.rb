@@ -16,6 +16,7 @@ module Signore
     describe '#tags' do
       it 'returns the forbidden and required tags' do
         tags = Tags.new(forbidden: %w[tech], required: %w[en])
+
         _(Settings.new(%w[prego ~tech en]).tags).must_equal tags
       end
 

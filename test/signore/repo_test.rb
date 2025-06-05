@@ -16,6 +16,7 @@ module Signore
         old_xdg = ENV.delete('XDG_DATA_HOME')
         ENV['XDG_DATA_HOME'] = Dir.mktmpdir
         path = "#{ENV.fetch('XDG_DATA_HOME')}/signore/signatures.yml"
+
         _(Repo.default_path).must_equal Pathname.new(path)
       ensure
         FileUtils.rmtree ENV.fetch('XDG_DATA_HOME')
@@ -25,6 +26,7 @@ module Signore
       it 'defaults XDG_DATA_HOME to ~/.local/share if it’s not set' do
         old_xdg = ENV.delete('XDG_DATA_HOME')
         path    = File.expand_path('~/.local/share/signore/signatures.yml')
+
         _(Repo.default_path).must_equal Pathname.new(path)
       ensure
         ENV['XDG_DATA_HOME'] = old_xdg if old_xdg
@@ -37,6 +39,7 @@ module Signore
 
       it 'saves the provided signature to disk' do
         Repo.new(path: path) << sig
+
         _(path.read).must_include text
       end
 
@@ -62,6 +65,7 @@ module Signore
       it 'returns all the Signatures from the Repo' do
         path = Pathname.new('test/fixtures/signatures.yml')
         sigs = Repo.new(path: path).sigs
+
         _(sigs.size).must_equal 6
         _(sigs.first.author).must_equal 'Gary Barnes'
         _(sigs.last.subject).must_equal 'Star Wars ending explained'
@@ -70,6 +74,7 @@ module Signore
       it 'doesn’t blow up if the path is missing' do
         tempdir = Dir.mktmpdir
         path = Pathname.new("#{tempdir}/some_intermediate_dir/sigs.yml")
+
         _(Repo.new(path: path).sigs).must_equal []
       ensure
         FileUtils.rmtree tempdir

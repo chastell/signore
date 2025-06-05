@@ -7,6 +7,7 @@ module Signore
     describe '.call' do
       it 'asks about signature parts' do
         io = capture_io { SigFromStream.call StringIO.new("\n\n\n\n\n") }
+
         _(io.first).must_equal <<~end
 
           text?
@@ -30,6 +31,7 @@ module Signore
         sig = nil
         capture_io { sig = SigFromStream.call input }
         text = 'You do have to be mad to work here, but it doesn’t help.'
+
         _(sig).must_equal Signature.new(author: 'Gary Barnes', source: 'asr',
                                         text: text)
       end
@@ -61,6 +63,7 @@ module Signore
         capture_io { sng = SigFromStream.call(StringIO.new(single + author)) }
         capture_io { dbl = SigFromStream.call(StringIO.new(double + author)) }
         text = 'There’s no ‘i’ in ‘denial’.'
+
         _(sng).must_equal Signature.new(author: author.strip, text:)
         _(dbl).must_equal Signature.new(author: author.strip, text:)
       end
@@ -70,6 +73,7 @@ module Signore
         sig = nil
         capture_io { sig = SigFromStream.call(StringIO.new(stream)) }
         text = '355/113 – not π, but an incredible simulation.'
+
         _(sig).must_equal Signature.new(text:)
       end
     end

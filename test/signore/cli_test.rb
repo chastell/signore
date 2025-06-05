@@ -10,11 +10,13 @@ module Signore
     describe '#run' do
       it 'prints usage if no command is given' do
         io = capture_io { _(-> { CLI.new([]).run }).must_raise SystemExit }
+
         _(io.last).must_include 'usage: signore prego|pronto [tag, …]'
       end
 
       it 'prints usage if a bogus command is given' do
         io = capture_io { _(-> { CLI.new(['foo']).run }).must_raise SystemExit }
+
         _(io.last).must_include 'usage: signore prego|pronto [tag, …]'
       end
 
@@ -26,12 +28,14 @@ module Signore
           args = %w[prego tech programming]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
           sig  = "// sometimes I believe compiler\n// ignores all my comments\n"
+
           _(out).must_equal sig
         end
 
         it 'prints a signature based on allowed and forbidden tags' do
           args = %w[prego ~programming tech ~security]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
+
           _(out).must_equal <<~end
             You do have to be mad to work
             here, but it doesn’t help.
@@ -44,6 +48,7 @@ module Signore
           repo = Repo.new(path: path)
           args = %w[prego]
           out = capture_io { CLI.new(args, repo: repo).run }.first
+
           _(out).must_include 'No signatures found.'
         end
 
@@ -52,6 +57,7 @@ module Signore
           repo = Repo.new(path: path)
           args = %w[prego esse ~percipi]
           out = capture_io { CLI.new(args, repo: repo).run }.first
+
           _(out).must_include 'Sadly no signatures are tagged esse ~percipi.'
         end
       end
@@ -67,6 +73,7 @@ module Signore
           end
           args = %w[pronto Wikipedia ADHD]
           out  = capture_io { CLI.new(args, repo: repo).run input: input }.first
+
           _(out).must_equal <<~end
 
             text?
@@ -82,6 +89,7 @@ module Signore
           end
           args = %w[prego Wikipedia ADHD]
           out  = capture_io { CLI.new(args, repo: repo).run }.first
+
           _(out).must_equal <<~end
             The Wikipedia page on ADHD is like
             20 pages long. That’s just cruel.
@@ -97,6 +105,7 @@ module Signore
             Patrick Ewing\n\n\n
           end
           io = capture_io { CLI.new(['pronto'], repo: repo).run input: input }
+
           _(io.first).must_equal <<~end
 
             text?

@@ -13,6 +13,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
         signature = Signature.new(author: 'Anonymous Coward', source: '/.',
                                   subject: 'on ‘Monty Wants to Save MySQL’',
                                   tags: %w[/. MySQL], text: text)
+
         _(Signature.from_h(sig_hash)).must_equal signature
       end
     end
@@ -25,6 +26,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
         sig = Signature.new(author: 'Paul E. Ceruzzi', source: source,
                             subject: 'on Wallace Eckert',
                             tags: ['punched cards'], text: text)
+
         _(sig.author).must_equal 'Paul E. Ceruzzi'
         _(sig.source).must_equal source
         _(sig.subject).must_equal 'on Wallace Eckert'
@@ -35,6 +37,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'nils empty parameters' do
         new = Signature.new(author: '', source: '', subject: '', tags: [],
                             text: '')
+
         _(new).must_equal Signature.new(author: '', source: '', subject: '',
                                         tags: [], text: '')
       end
@@ -56,6 +59,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
         sig  = Signature.new(author: 'Anonymous Coward', source: '/.',
                              subject: 'on ‘Monty Wants to Save MySQL’',
                              tags: %w[/. MySQL], text: text)
+
         _(sig.to_h).must_equal 'author' => 'Anonymous Coward', 'source' => '/.',
                                'subject' => 'on ‘Monty Wants to Save MySQL’',
                                'tags' => %w[/. MySQL], 'text' => text
@@ -74,12 +78,14 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'does not show meta if there’s nothing to show' do
         text = "// sometimes I believe compiler\n// ignores all my comments"
         sig  = Signature.new(text: text)
+
         _(sig.to_s).must_equal text
       end
 
       it 'shows author on its own' do
         sig = Signature.new(author: 'kodz',
                             text: 'stay-at-home executives vs. wallstreet dads')
+
         _(sig.to_s).must_equal <<~end.strip
           stay-at-home executives vs. wallstreet dads
                                                [kodz]
@@ -89,6 +95,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'shows author and source, comma-separated' do
         text = 'You do have to be mad to work here, but it doesn’t help.'
         sig  = Signature.new(author: 'Gary Barnes', source: 'asr', text: text)
+
         _(sig.to_s).must_equal <<~end.strip
           You do have to be mad to work
           here, but it doesn’t help.
@@ -99,6 +106,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'shows source on its own' do
         text = 'Bruce Schneier knows Alice and Bob’s shared secret.'
         sig  = Signature.new(source: 'Bruce Schneier Facts', text: text)
+
         _(sig.to_s).must_equal <<~end.strip
           Bruce Schneier knows Alice
           and Bob’s shared secret.
@@ -110,6 +118,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
         text = 'More gangland camp than neo-noir.'
         sig = Signature.new(author: 'Nicholas Christopher',
                             subject: 'on Pulp Fiction', text: text)
+
         _(sig.to_s).must_equal <<~end.strip
           More gangland camp than neo-noir.
           [Nicholas Christopher on Pulp Fiction]
@@ -120,6 +129,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
         text = 'Amateur fighter pilot ignores orders, listens ' \
                'to the voices in his head and slaughters thousands.'
         sig = Signature.new(subject: 'Star Wars ending explained', text: text)
+
         _(sig.to_s).must_equal <<~end.strip
           Amateur fighter pilot ignores orders, listens to
           the voices in his head and slaughters thousands.
@@ -130,6 +140,7 @@ module Signore # rubocop:disable Metrics/ModuleLength
       it 'handles edge cases properly' do
         wrappings = YAML.load_file('test/fixtures/wrapper.yml',
                                    permitted_classes: [Signature, Symbol])
+
         wrappings.each do |sig, wrapped|
           _(Signature.from_h(sig.to_h).to_s).must_equal wrapped
         end
